@@ -1,0 +1,57 @@
+.page-section {
+  font-style: normal;
+  font-weight: inherit;
+}
+
+.page-section h5 {
+  color: $font-color-primary;
+  font-family: Como;
+  font-style: normal;
+  font-weight: bolder;
+  size: 30px;
+  line-height: 35px;
+}
+
+.brand {
+  height: 80vh;
+  background-image: linear-gradient(#0e1f7480, #0e1f7480),
+    url("../images/brand-01.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: $bg-primary;
+  background-position-y: 30%;
+  position: relative;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.brand p {
+  font-family: Como;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 41px;
+
+  color: #ffffff;
+
+  text-shadow: 2px 2px 4px;
+}
+
+.image-wrapper {
+  overflow: hidden;
+}
+
+.profile-image {
+  overflow: hidden;
+  max-width: 176px;
+  height: 176px;
+  border-radius: 50%;
+}
+
+.profile-image img {
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+}

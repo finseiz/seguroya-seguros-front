@@ -1,0 +1,22 @@
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: $bg-gray;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.form-label {
+  color: $dark-blue-2;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.form-check label {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+}

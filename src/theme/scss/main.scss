@@ -1,0 +1,105 @@
+@import "./config.scss";
+@import "./home.scss";
+@import "./life.scss";
+@import "./aside.scss";
+
+@font-face {
+  font-family: "Como";
+  src: url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.eot");
+  src: url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.eot?#iefix")
+      format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.woff2")
+      format("woff2"),
+    url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.woff")
+      format("woff"),
+    url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.ttf")
+      format("truetype"),
+    url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.svg#Como")
+      format("svg");
+}
+
+.page {
+  margin-top: 5rem;
+  min-height: calc(100vh - calc(3.5rem + 1px) - calc(3.5rem + 1px));
+}
+
+.header {
+  /* position: sticky; */
+  top: 0;
+  min-height: 5rem;
+  background-color: $light-gray2;
+}
+
+.footer {
+  left: 0;
+  bottom: 0;
+  min-height: 10vh;
+  overflow: hidden;
+}
+
+.content {
+  padding: 40px 30px;
+  width: 100vw;
+}
+
+.primary-button {
+  background-color: $bg-primary;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border: 0px;
+  border-radius: 10px;
+}
+
+.primary-button:hover {
+  background-color: #0099ba;
+}
+
+.secondary-button {
+  background-color: $bg-gray;
+  color: $font-color-secondary;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  border: 0px;
+  border-radius: 10px;
+}
+
+.bg-dark-blue {
+  background-color: $dark-blue;
+}
+
+.bg-gray {
+  background-color: $bg-gray-2;
+}
+
+.form-control {
+  background-color: #ebebf2;
+  color: #3f4254;
+  border: 1px solid #c4c4c4;
+  box-sizing: border-box;
+  border-radius: 10px;
+  transition: color 0.15s ease, background-color 0.15s ease,
+    border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-control::placeholder {
+  color: #bbb5c6;
+}
+
+.small-icon {
+  height: 50px;
+  width: auto;
+}
+
+.small-icon img {
+  top: 50%;
+}
+
+.font-primary {
+  color: $font-color-primary;
+}
+
+.font-secondary {
+  color: $font-color-secondary;
+}
+
+.custom-card {
+  border-radius: 10px;
+}
