@@ -51,7 +51,11 @@ function LifeForm() {
   });
 
   const handleSubmit = async () => {
-    await getColmenaPlans();
+    //await getColmenaPlans();
+    const config = {
+      method: "GET",
+    };
+    await fetch("http://localhost:3001/api/colmena", config);
   };
 
   const formik = useFormik({
@@ -62,7 +66,7 @@ function LifeForm() {
       setTimeout(async () => {
         dispatch(actions.addClientData(values));
         await handleSubmit();
-        history.push("/select-plan");
+        history.push("/life/select-plan");
         setSubmitting(false);
       }, 1000);
     },

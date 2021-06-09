@@ -1,7 +1,7 @@
 import React from "react";
 import EditIcon from "@material-ui/icons/Edit";
 
-export function Step2({ formik }) {
+export function Step2({ formik, initialValues, cities }) {
   const [displayFields, setDisplayFields] = React.useState();
 
   return (

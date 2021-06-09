@@ -4,7 +4,7 @@ import { toAbsoluteUrl } from "theme/helpers";
 import CardGridContainer from "../UI/CardGridContainer";
 
 function SharedSections() {
-  const allies = [InsuranceLogo.COLMENA];
+  const allies = [InsuranceLogo.COLMENA, InsuranceLogo.BOLIVAR];
 
   const offers = [
     {

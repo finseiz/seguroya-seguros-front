@@ -26,7 +26,7 @@ POST http://localhost:8080/api/segurosbolivar/cotizacion
 "sexoConductor": "M",
 "fecNacConductor": "1979-01-01",
 "placaVeh": "EMR901",
-"numLiquidacion": 29744872842
+"numLiquidacion": 29744875440
 }
 
 https://stg-conecta.segurosbolivar.com

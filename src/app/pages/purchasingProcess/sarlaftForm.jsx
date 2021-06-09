@@ -4,13 +4,15 @@ import * as Yup from "yup";
 import BaseSection from "app/components/UI/baseSection";
 
 const initialValues = {
-  publicly_exposed: "",
-  publicly_exposed_vinculation: "",
-  manages_public_resources: "",
-  question4: "",
-  name_tax_obligation: "",
-  us_tax_resident_or_player: "",
-  tax_obligations_outside_colombia: "",
+  completion_date: "",
+  issue_date: "",
+  city: "",
+  branch_office: "",
+  application_type: "",
+  vinculation_class: "",
+  tomador_asegurado_vinculation: "",
+  tomador_beneficiario_vinculation: "",
+  asegurado_beneficiario_vinculation: "",
 };
 
 function SarlaftForm({ handleSubmit }) {
@@ -36,96 +38,102 @@ function SarlaftForm({ handleSubmit }) {
     },
   ];
 
-  console.log("woefnwoenf");
   return (
     <form onSubmit={formik.handleSubmit}>
       <BaseSection
         title="Formulario SARLAFT - Sistema de Administración del Riesgo de Lavado de Activos y de la Financiación del Terrorismo"
+        description="Razón por la cual hay que llenar este formulario en unas muy breves palabras. Ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.
+
+        Tomará aproximadamente: 5 minutos."
         actions={actionsButton}
         loading={formik.isSubmitting}
       >
-        <h5>0. Datos de vinculación</h5>
-        <div className="form-group">
-          <label htmlFor="address" className="form-label">
-            Fecha Diligenciamiento
-          </label>
-          <input
-            type="date"
-            name="address"
-            className={`form-control ${
-              formik.touched.address
-                ? formik.errors.address
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("address")}
-          />
-          <div className="invalid-feedback">{formik.errors.address}</div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="address" className="form-label">
-            Lugar de expedición
-          </label>
-          <input
-            type="date"
-            name="address"
-            className={`form-control ${
-              formik.touched.address
-                ? formik.errors.address
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("address")}
-          />
-          <div className="invalid-feedback">{formik.errors.address}</div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="address" className="form-label">
-            Sucursal
-          </label>
-          <input
-            type="text"
-            name="address"
-            className={`form-control ${
-              formik.touched.address
-                ? formik.errors.address
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("address")}
-          />
-          <div className="invalid-feedback">{formik.errors.address}</div>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="address" className="form-label">
-            Tipo de Solicitud
-          </label>
-          <input
-            type="text"
-            name="address"
-            className={`form-control ${
-              formik.touched.address
-                ? formik.errors.address
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("address")}
-          />
-          <div className="invalid-feedback">{formik.errors.address}</div>
-        </div>
-
-        <label className="form-label" htmlFor="gender">
-          Clase de vinculación
-        </label>
+        {/* begin :: vinculation data */}
+        <h4>0. Datos de vinculación</h4>
         <div className="form-row">
-          <div className="form-check">
+          <div className="form-group col">
+            <label htmlFor="address" className="form-label">
+              Fecha Diligenciamiento
+            </label>
+            <input
+              type="date"
+              name="address"
+              className={`form-control ${
+                formik.touched.address
+                  ? formik.errors.address
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("address")}
+            />
+            <div className="invalid-feedback">{formik.errors.address}</div>
+          </div>
+
+          <div className="form-group col">
+            <label htmlFor="address" className="form-label">
+              Lugar de expedición
+            </label>
+            <input
+              type="text"
+              name="address"
+              className={`form-control ${
+                formik.touched.address
+                  ? formik.errors.address
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("address")}
+            />
+            <div className="invalid-feedback">{formik.errors.address}</div>
+          </div>
+
+          <div className="form-group col">
+            <label htmlFor="address" className="form-label">
+              Sucursal
+            </label>
+            <input
+              type="text"
+              name="address"
+              className={`form-control ${
+                formik.touched.address
+                  ? formik.errors.address
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("address")}
+            />
+            <div className="invalid-feedback">{formik.errors.address}</div>
+          </div>
+
+          <div className="form-group col">
+            <label htmlFor="address" className="form-label">
+              Tipo de Solicitud
+            </label>
+            <select
+              type="text"
+              name="address"
+              className={`form-control ${
+                formik.touched.address
+                  ? formik.errors.address
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("address")}
+            >
+              <option value="">Seleccionar</option>
+            </select>
+            <div className="invalid-feedback">{formik.errors.address}</div>
+          </div>
+        </div>
+        <div className="form-row">
+          <div className="col-3">
+            <h5>Clase de vinculación</h5>
+          </div>
+          <div className="form-check col">
             <input
               className="form-check-input"
               type="radio"
@@ -138,7 +146,7 @@ function SarlaftForm({ handleSubmit }) {
               Tomador
             </label>
           </div>
-          <div className="form-check ml-3">
+          <div className="form-check col">
             <input
               className="form-check-input"
               type="radio"
@@ -152,7 +160,7 @@ function SarlaftForm({ handleSubmit }) {
             </label>
           </div>
 
-          <div className="form-check ml-3">
+          <div className="form-check col">
             <input
               className="form-check-input"
               type="radio"
@@ -165,7 +173,7 @@ function SarlaftForm({ handleSubmit }) {
               Beneficiario
             </label>
           </div>
-          <div className="form-check ml-3">
+          <div className="form-check col">
             <input
               className="form-check-input"
               type="radio"
@@ -178,7 +186,7 @@ function SarlaftForm({ handleSubmit }) {
               Afianzado
             </label>
           </div>
-          <div className="form-check ml-3">
+          <div className="form-check col">
             <input
               className="form-check-input"
               type="radio"
@@ -192,15 +200,14 @@ function SarlaftForm({ handleSubmit }) {
             </label>
           </div>
         </div>
-
-        <label className="form-label" htmlFor="gender">
-          Indique los vínculos existentes entre tomador-asegurado
-        </label>
+        <h5>Indique los vínculos existentes entre tomador-asegurado</h5>
         <div className="form-row">
-          <label className="form-label" htmlFor="gender">
-            Tomador - Asegurado
-          </label>
-          <div className="form-check">
+          <div className="col">
+            <label className="form-label" htmlFor="gender">
+              Tomador - Asegurado
+            </label>
+          </div>
+          <div className="form-check col">
             <input
               className="form-check-input"
               type="radio"
@@ -213,7 +220,7 @@ function SarlaftForm({ handleSubmit }) {
               Familiar
             </label>
           </div>
-          <div className="form-check ml-3">
+          <div className="form-check col">
             <input
               className="form-check-input"
               type="radio"
@@ -227,7 +234,7 @@ function SarlaftForm({ handleSubmit }) {
             </label>
           </div>
 
-          <div className="form-check ml-3">
+          <div className="form-check col">
             <input
               className="form-check-input"
               type="radio"
@@ -240,7 +247,7 @@ function SarlaftForm({ handleSubmit }) {
               Laboral
             </label>
           </div>
-          <div className="form-check ml-3">
+          <div className="form-check col">
             <input
               className="form-check-input"
               type="radio"
@@ -254,12 +261,13 @@ function SarlaftForm({ handleSubmit }) {
             </label>
           </div>
         </div>
-
         <div className="form-row">
-          <label className="form-label" htmlFor="gender">
-            Beneficiario - Tomador
-          </label>
-          <div className="form-check">
+          <div className="col">
+            <label className="form-label" htmlFor="gender">
+              Tomador - Beneficiario
+            </label>
+          </div>
+          <div className="form-check col">
             <input
               className="form-check-input"
               type="radio"
@@ -272,7 +280,7 @@ function SarlaftForm({ handleSubmit }) {
               Familiar
             </label>
           </div>
-          <div className="form-check ml-3">
+          <div className="form-check col">
             <input
               className="form-check-input"
               type="radio"
@@ -286,7 +294,7 @@ function SarlaftForm({ handleSubmit }) {
             </label>
           </div>
 
-          <div className="form-check ml-3">
+          <div className="form-check col">
             <input
               className="form-check-input"
               type="radio"
@@ -299,7 +307,7 @@ function SarlaftForm({ handleSubmit }) {
               Laboral
             </label>
           </div>
-          <div className="form-check ml-3">
+          <div className="form-check col">
             <input
               className="form-check-input"
               type="radio"
@@ -313,12 +321,13 @@ function SarlaftForm({ handleSubmit }) {
             </label>
           </div>
         </div>
-
         <div className="form-row">
-          <label className="form-label" htmlFor="gender">
-            Asegurado - Beneficiario
-          </label>
-          <div className="form-check">
+          <div className="col">
+            <label className="form-label" htmlFor="gender">
+              Asegurado - Beneficiario
+            </label>
+          </div>
+          <div className="form-check col">
             <input
               className="form-check-input"
               type="radio"
@@ -331,7 +340,7 @@ function SarlaftForm({ handleSubmit }) {
               Familiar
             </label>
           </div>
-          <div className="form-check ml-3">
+          <div className="form-check col">
             <input
               className="form-check-input"
               type="radio"
@@ -345,7 +354,7 @@ function SarlaftForm({ handleSubmit }) {
             </label>
           </div>
 
-          <div className="form-check ml-3">
+          <div className="form-check col">
             <input
               className="form-check-input"
               type="radio"
@@ -358,7 +367,7 @@ function SarlaftForm({ handleSubmit }) {
               Laboral
             </label>
           </div>
-          <div className="form-check ml-3">
+          <div className="form-check col">
             <input
               className="form-check-input"
               type="radio"
@@ -372,190 +381,358 @@ function SarlaftForm({ handleSubmit }) {
             </label>
           </div>
         </div>
+        {/* end :: vinculation data */}
 
-        <div className="card-body">
-          <div className="form-row">
-            <div className="form-group col-6">
-              <label htmlFor="address" className="form-label">
-                Dirección
-              </label>
-              <input
-                type="text"
-                name="address"
-                className={`form-control ${
-                  formik.touched.address
-                    ? formik.errors.address
-                      ? "is-invalid"
-                      : "is-valid"
-                    : ""
-                }`}
-                {...formik.getFieldProps("address")}
-              />
-              <div className="invalid-feedback">{formik.errors.address}</div>
-            </div>
-            <div className="form-group col-3">
-              <label htmlFor="document_type" className="form-label">
-                Tipo de documento
-              </label>
-              <select
-                type="text"
-                id="document_type"
-                name="document_type"
-                className={`form-control ${
-                  formik.touched.document_type
-                    ? formik.errors.document_type
-                      ? "is-invalid"
-                      : "is-valid"
-                    : ""
-                }`}
-                {...formik.getFieldProps("document_type")}
-              >
-                <option value="">Seleccionar</option>
-                <option value="Cédula de Ciudadanía">
-                  Cédula de Ciudadanía
-                </option>
-              </select>
-              <div className="invalid-feedback">
-                {formik.errors.document_type}
-              </div>
-            </div>
-            <div className="form-group col-3">
-              <label htmlFor="identification" className="form-label">
-                Número de documento
-              </label>
-              <input
-                type="text"
-                name="identification"
-                className={`form-control ${
-                  formik.touched.identification
-                    ? formik.errors.identification
-                      ? "is-invalid"
-                      : "is-valid"
-                    : ""
-                }`}
-                {...formik.getFieldProps("identification")}
-              />
-              <div className="invalid-feedback">
-                {formik.errors.identification}
-              </div>
+        {/* begin :: basic data */}
+        <h4>1. Información básica</h4>
+        <div className="form-row">
+          <div className="form-group col-3">
+            <label htmlFor="address" className="form-label">
+              Primer apellido
+            </label>
+            <input
+              type="text"
+              name="address"
+              className={`form-control ${
+                formik.touched.address
+                  ? formik.errors.address
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("address")}
+            />
+            <div className="invalid-feedback">{formik.errors.address}</div>
+          </div>
+          <div className="form-group col-3">
+            <label htmlFor="address" className="form-label">
+              Segundo apellido
+            </label>
+            <input
+              type="text"
+              name="address"
+              className={`form-control ${
+                formik.touched.address
+                  ? formik.errors.address
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("address")}
+            />
+            <div className="invalid-feedback">{formik.errors.address}</div>
+          </div>
+          <div className="form-group col-6">
+            <label htmlFor="address" className="form-label">
+              Nombres
+            </label>
+            <input
+              type="text"
+              name="address"
+              className={`form-control ${
+                formik.touched.address
+                  ? formik.errors.address
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("address")}
+            />
+            <div className="invalid-feedback">{formik.errors.address}</div>
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group col-3">
+            <label htmlFor="document_type" className="form-label">
+              Tipo de documento
+            </label>
+            <select
+              type="text"
+              id="document_type"
+              name="document_type"
+              className={`form-control ${
+                formik.touched.document_type
+                  ? formik.errors.document_type
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("document_type")}
+            >
+              <option value="">Seleccionar</option>
+              <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
+            </select>
+            <div className="invalid-feedback">
+              {formik.errors.document_type}
             </div>
           </div>
-
-          <div className="form-row">
-            <div className="form-group col-6">
-              <label htmlFor="fullname" className="form-label">
-                Nombre completo
-              </label>
-              <input
-                type="text"
-                name="fullname"
-                className={`form-control ${
-                  formik.touched.fullname
-                    ? formik.errors.fullname
-                      ? "is-invalid"
-                      : "is-valid"
-                    : ""
-                }`}
-                {...formik.getFieldProps("fullname")}
-              />
-              <div className="invalid-feedback">{formik.errors.fullname}</div>
-            </div>
-            <div className="form-group col-6">
-              <label htmlFor="email" className="form-label">
-                Correo Electrónico
-              </label>
-              <input
-                type="email"
-                name="email"
-                className={`form-control ${
-                  formik.touched.email
-                    ? formik.errors.email
-                      ? "is-invalid"
-                      : "is-valid"
-                    : ""
-                }`}
-                {...formik.getFieldProps("email")}
-              />
-              <div className="invalid-feedback">{formik.errors.email}</div>
+          <div className="form-group col-3">
+            <label htmlFor="identification" className="form-label">
+              Número de documento
+            </label>
+            <input
+              type="text"
+              name="identification"
+              className={`form-control ${
+                formik.touched.identification
+                  ? formik.errors.identification
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("identification")}
+            />
+            <div className="invalid-feedback">
+              {formik.errors.identification}
             </div>
           </div>
-
-          <div className="form-row">
-            <div className="form-group col-3">
-              <label htmlFor="issue_date" className="form-label">
-                Fecha de expedición
-              </label>
-              <input
-                type="date"
-                name="issue_date"
-                className={`form-control ${
-                  formik.touched.issue_date
-                    ? formik.errors.issue_date
-                      ? "is-invalid"
-                      : "is-valid"
-                    : ""
-                }`}
-                {...formik.getFieldProps("issue_date")}
-              />
-              <div className="invalid-feedback">{formik.errors.issue_date}</div>
-            </div>
-            <div className="form-group col-3">
-              <label htmlFor="birth_date" className="form-label">
-                Fecha de Nacimiento
-              </label>
-              <input
-                type="date"
-                name="birth_date"
-                className={`form-control ${
-                  formik.touched.birth_date
-                    ? formik.errors.birth_date
-                      ? "is-invalid"
-                      : "is-valid"
-                    : ""
-                }`}
-                {...formik.getFieldProps("birth_date")}
-              />
-              <div className="invalid-feedback">{formik.errors.birth_date}</div>
-            </div>
-            <div className="form-group col-6">
-              <label htmlFor="ocupation" className="form-label">
-                Lugar de nacimiento
-              </label>
-              <input
-                type="text"
-                name="ocupation"
-                className={`form-control ${
-                  formik.touched.ocupation
-                    ? formik.errors.ocupation
-                      ? "is-invalid"
-                      : "is-valid"
-                    : ""
-                }`}
-                {...formik.getFieldProps("ocupation")}
-              />
-              <div className="invalid-feedback">{formik.errors.ocupation}</div>
-            </div>
+          <div className="form-group col-3">
+            <label htmlFor="issue_date" className="form-label">
+              Fecha de expedición
+            </label>
+            <input
+              type="date"
+              name="issue_date"
+              className={`form-control ${
+                formik.touched.issue_date
+                  ? formik.errors.issue_date
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("issue_date")}
+            />
+            <div className="invalid-feedback">{formik.errors.issue_date}</div>
           </div>
+          <div className="form-group col-3">
+            <label htmlFor="ocupation" className="form-label">
+              Lugar de expedición
+            </label>
+            <input
+              type="text"
+              name="ocupation"
+              className={`form-control ${
+                formik.touched.ocupation
+                  ? formik.errors.ocupation
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("ocupation")}
+            />
+            <div className="invalid-feedback">{formik.errors.ocupation}</div>
+          </div>
+        </div>
 
-          <div className="form-row">
-            <div className="form-group col">
-              <label htmlFor="cellphone" className="form-label">
-                Celular
-              </label>
-              <input
-                type="text"
-                name="cellphone"
-                className={`form-control ${
-                  formik.touched.cellphone
-                    ? formik.errors.cellphone
-                      ? "is-invalid"
-                      : "is-valid"
-                    : ""
-                }`}
-                {...formik.getFieldProps("cellphone")}
-              />
-              <div className="invalid-feedback">{formik.errors.cellphone}</div>
-            </div>
+        <div className="form-row">
+          <div className="form-group col">
+            <label htmlFor="birth_date" className="form-label">
+              Fecha de Nacimiento
+            </label>
+            <input
+              type="date"
+              name="birth_date"
+              className={`form-control ${
+                formik.touched.birth_date
+                  ? formik.errors.birth_date
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("birth_date")}
+            />
+            <div className="invalid-feedback">{formik.errors.birth_date}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="ocupation" className="form-label">
+              Lugar de nacimiento
+            </label>
+            <input
+              type="text"
+              name="ocupation"
+              className={`form-control ${
+                formik.touched.ocupation
+                  ? formik.errors.ocupation
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("ocupation")}
+            />
+            <div className="invalid-feedback">{formik.errors.ocupation}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="ocupation" className="form-label">
+              Nacionalidad 1
+            </label>
+            <input
+              type="text"
+              name="ocupation"
+              className={`form-control ${
+                formik.touched.ocupation
+                  ? formik.errors.ocupation
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("ocupation")}
+            />
+            <div className="invalid-feedback">{formik.errors.ocupation}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="ocupation" className="form-label">
+              Nacionalidad 2
+            </label>
+            <input
+              type="text"
+              name="ocupation"
+              className={`form-control ${
+                formik.touched.ocupation
+                  ? formik.errors.ocupation
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("ocupation")}
+            />
+            <div className="invalid-feedback">{formik.errors.ocupation}</div>
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group col">
+            <label htmlFor="email" className="form-label">
+              Correo Electrónico
+            </label>
+            <input
+              type="email"
+              name="email"
+              className={`form-control ${
+                formik.touched.email
+                  ? formik.errors.email
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("email")}
+            />
+            <div className="invalid-feedback">{formik.errors.email}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Dirección (Residencia)
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="address" className="form-label">
+              Departamento
+            </label>
+            <select
+              type="text"
+              name="address"
+              className={`form-control ${
+                formik.touched.address
+                  ? formik.errors.address
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("address")}
+            >
+              <option value="">Seleccionar</option>
+            </select>
+            <div className="invalid-feedback">{formik.errors.address}</div>
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group col">
+            <label htmlFor="email" className="form-label">
+              Ciudad
+            </label>
+            <input
+              type="email"
+              name="email"
+              className={`form-control ${
+                formik.touched.email
+                  ? formik.errors.email
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("email")}
+            />
+            <div className="invalid-feedback">{formik.errors.email}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Teléfono
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Celular
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="address" className="form-label">
+              Actividad principal
+            </label>
+            <select
+              type="text"
+              name="address"
+              className={`form-control ${
+                formik.touched.address
+                  ? formik.errors.address
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("address")}
+            >
+              <option value="">Seleccionar</option>
+            </select>
+            <div className="invalid-feedback">{formik.errors.address}</div>
           </div>
         </div>
 
@@ -577,7 +754,6 @@ function SarlaftForm({ handleSubmit }) {
           />
           <div className="invalid-feedback">{formik.errors.cellphone}</div>
         </div>
-
         <div className="form-group col-6">
           <label htmlFor="cellphone" className="form-label">
             Sector
@@ -615,7 +791,6 @@ function SarlaftForm({ handleSubmit }) {
           />
           <div className="invalid-feedback">{formik.errors.cellphone}</div>
         </div>
-
         <div className="form-group col-6">
           <label htmlFor="cellphone" className="form-label">
             Tipo de actividad
@@ -634,7 +809,6 @@ function SarlaftForm({ handleSubmit }) {
           />
           <div className="invalid-feedback">{formik.errors.cellphone}</div>
         </div>
-
         <div className="form-group col-6">
           <label htmlFor="cellphone" className="form-label">
             Ocupación
@@ -653,7 +827,6 @@ function SarlaftForm({ handleSubmit }) {
           />
           <div className="invalid-feedback">{formik.errors.cellphone}</div>
         </div>
-
         <div className="form-group col-6">
           <label htmlFor="cellphone" className="form-label">
             Cargo
@@ -672,7 +845,6 @@ function SarlaftForm({ handleSubmit }) {
           />
           <div className="invalid-feedback">{formik.errors.cellphone}</div>
         </div>
-
         <div className="form-group col-6">
           <label htmlFor="cellphone" className="form-label">
             Empresa donde trabaja
@@ -691,7 +863,6 @@ function SarlaftForm({ handleSubmit }) {
           />
           <div className="invalid-feedback">{formik.errors.cellphone}</div>
         </div>
-
         <div className="form-group col-6">
           <label htmlFor="cellphone" className="form-label">
             Dirección (oficina)
@@ -710,7 +881,6 @@ function SarlaftForm({ handleSubmit }) {
           />
           <div className="invalid-feedback">{formik.errors.cellphone}</div>
         </div>
-
         <div className="form-group col-6">
           <label htmlFor="cellphone" className="form-label">
             ¿Qué tipo de producto y/o servicio comercializa?

@@ -15,7 +15,7 @@ function TopInsurance({ onSelect, insuranceList }) {
                 src={toAbsoluteUrl(
                   `/media/logos/${InsuranceLogo[plan.insurance_name]}`
                 )}
-                alt="colmena-logo"
+                alt="seguros-logo"
               />
             </div>
             <h4>{plan.title}</h4>

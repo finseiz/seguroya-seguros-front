@@ -1,4 +1,5 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -6,6 +7,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import { CircularProgress } from "@material-ui/core";
 import { Step1, Step2, Step3 } from "./utils";
 import { getBolivarCities } from "../redux/crud";
+import { actions } from "../redux";
 
 const initialValues = {
   license_plate: "",
@@ -23,12 +25,33 @@ const initialValues = {
   data_processing_licence: "",
 };
 
+const carsPlans = (data) => {
+  return {
+    placaVehiculo: "EMR901",
+    tipoDocumentoTomador: "CC",
+    numeroDocumentoTomador: 1026253336,
+    nombresTomador: "Gustavo Emilio",
+    apellidosTomador: "Gomez Rodriguez",
+    fechaNacimientoTomador: "1968-11-26",
+    generoConductor: "M",
+    claveAsesor: 38867,
+    sumaAccesorios: 0,
+    ciudadMovilizacion: 14000,
+    ceroKm: "false",
+    periodoFact: 12,
+    opcionPA: "S",
+  };
+};
+
 function CarsForm() {
   const history = useHistory();
-  const [step, setStep] = React.useState(1);
-  const [cities, setCities] = React.useState([]);
+  const dispatch = useDispatch();
+  const { cities } = useSelector((state) => state.carsInsurance.data);
 
-  const lifeSchema = Yup.object().shape({
+  const [loading, setLoading] = React.useState(false);
+  const [step, setStep] = React.useState(1);
+
+  const carsSchema = Yup.object().shape({
     license_plate: Yup.string().required("Campo requerido"),
     document_type: Yup.string().required("Campo requerido"),
     identification: Yup.string().required("Campo requerido"),
@@ -43,36 +66,37 @@ function CarsForm() {
   const handleSubmit = async () => {
     const config = {
       method: "POST",
-      body: JSON.stringify({
-        placaVehiculo: "EMR901",
-        tipoDocumentoTomador: "CC",
-        numeroDocumentoTomador: 1026253336,
-        nombresTomador: "Gustavo Emilio",
-        apellidosTomador: "Gomez Rodriguez",
-        fechaNacimientoTomador: "1968-11-26",
-        generoConductor: "M",
-        claveAsesor: 38867,
-        sumaAccesorios: 0,
-        ciudadMovilizacion: 14000,
-        ceroKm: "false",
-        periodoFact: 12,
-        opcionPA: "S",
-      }),
+      body: JSON.stringify(carsPlans()),
       headers: new Headers({
         "Content-Type": "application/json",
       }),
     };
-    await fetch("http://localhost:8080/api/segurosbolivar/liquidacion", config);
+    try {
+      let found = false;
+      while (!found) {
+        const response = await fetch(
+          "http://localhost:8080/api/segurosbolivar/liquidacion",
+          config
+        );
+        if (response.ok) {
+          found = true;
+          const plans = await response.json();
+          dispatch(actions.addBolivarPlans(plans));
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const formik = useFormik({
     initialValues,
-    //validationSchema: lifeSchema,
+    //validationSchema: carsSchema,
     onSubmit: (values, { setSubmitting }) => {
       console.log(values);
       setTimeout(async () => {
         await handleSubmit();
-        history.push("/select-plan");
+        history.push("/cars/select-plan");
         setSubmitting(false);
       }, 1000);
     },
@@ -81,19 +105,30 @@ function CarsForm() {
   // Cities init
   React.useEffect(() => {
     async function getCities() {
+      setLoading(true);
       try {
         const res = await getBolivarCities();
-        setCities(res.catalogoDato);
+        dispatch(actions.setDataField(res.catalogoDato, "cities"));
       } catch (err) {
         console.log(err);
+      } finally {
+        setLoading(false);
       }
     }
-    getCities();
+    if (!cities.length) getCities();
   }, []);
 
   React.useEffect(() => console.log(formik.values), [formik.values]);
 
-  return (
+  return loading ? (
+    <div className="container h-100">
+      <div className="row h-100 text-center">
+        <div className="col align-self-center">
+          <CircularProgress className="ml-2" size={50} color="primary" />
+        </div>
+      </div>
+    </div>
+  ) : (
     <section className="w-100 px-5">
       <form onSubmit={formik.handleSubmit}>
         <div className="card custom-card">
@@ -111,7 +146,13 @@ function CarsForm() {
         </div>
         <div className="card custom-card mt-3">
           {step === 1 && <Step1 formik={formik} cities={cities} />}
-          {step === 2 && <Step2 formik={formik} cities={cities} />}
+          {step === 2 && (
+            <Step2
+              formik={formik}
+              cities={cities}
+              initialValues={initialValues}
+            />
+          )}
           {step === 3 && <Step3 formik={formik} />}
         </div>
         <div className="text-center mt-3">
