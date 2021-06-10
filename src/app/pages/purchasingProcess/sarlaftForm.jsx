@@ -736,27 +736,260 @@ function SarlaftForm({ handleSubmit }) {
           </div>
         </div>
 
-        <div className="form-group col-6">
-          <label htmlFor="cellphone" className="form-label">
-            Acitivdad principal
-          </label>
-          <input
-            type="text"
-            name="cellphone"
-            className={`form-control ${
-              formik.touched.cellphone
-                ? formik.errors.cellphone
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("cellphone")}
-          />
-          <div className="invalid-feedback">{formik.errors.cellphone}</div>
+        <div className="form-row">
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Sector
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              CIIU (código)
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="address" className="form-label">
+              Tipo de actividad
+            </label>
+            <select
+              type="text"
+              name="address"
+              className={`form-control ${
+                formik.touched.address
+                  ? formik.errors.address
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("address")}
+            >
+              <option value="">Seleccionar</option>
+            </select>
+            <div className="invalid-feedback">{formik.errors.address}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              ¿Cuál?
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
         </div>
-        <div className="form-group col-6">
+
+        <div className="form-row">
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Ocupación
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Cargo
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Empresa donde trabaja
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Dirección (oficina)
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Ciudad
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="address" className="form-label">
+              Departamento
+            </label>
+            <select
+              type="text"
+              name="address"
+              className={`form-control ${
+                formik.touched.address
+                  ? formik.errors.address
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("address")}
+            >
+              <option value="">Seleccionar</option>
+            </select>
+            <div className="invalid-feedback">{formik.errors.address}</div>
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Teléfono (oficina)
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Actividad secundaria
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              CIIU (código)
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+        </div>
+
+        <div className="form-group">
           <label htmlFor="cellphone" className="form-label">
-            Sector
+            ¿Qué tipo de producto y/o servicio comercializa? (Independiente o
+            Comerciantes)
           </label>
           <input
             type="text"
@@ -773,9 +1006,126 @@ function SarlaftForm({ handleSubmit }) {
           <div className="invalid-feedback">{formik.errors.cellphone}</div>
         </div>
 
-        <div className="form-group col-6">
+        <div className="form-row">
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Ingresos mensuales (Pesos)
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Egresos mensuales (Pesos)
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Activos (Pesos)
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Pasivos (Pesos)
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+        </div>
+
+        <div className="form-row">
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Patrimonio (Activos - Pasivos, Pesos)
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Otros Ingresos (Pesos)
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
+        </div>
+
+        <div className="form-group">
           <label htmlFor="cellphone" className="form-label">
-            CIU (código)
+            Concepto otros ingresos mensuales
           </label>
           <input
             type="text"
@@ -791,113 +1141,162 @@ function SarlaftForm({ handleSubmit }) {
           />
           <div className="invalid-feedback">{formik.errors.cellphone}</div>
         </div>
-        <div className="form-group col-6">
-          <label htmlFor="cellphone" className="form-label">
-            Tipo de actividad
-          </label>
-          <input
-            type="text"
-            name="cellphone"
-            className={`form-control ${
-              formik.touched.cellphone
-                ? formik.errors.cellphone
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("cellphone")}
-          />
-          <div className="invalid-feedback">{formik.errors.cellphone}</div>
+
+        <div className="form-row">
+          <div className="form-group col">
+            <label>¿Es usted una persona públicamente expuesta?</label>
+            <div className="form-row">
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="publicly_exposed"
+                  id="radios1"
+                  value="yes"
+                  onChange={formik.handleChange}
+                />
+                <label className="form-check-label" htmlFor="radios1">
+                  Si
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="publicly_exposed"
+                  id="radios2"
+                  value="no"
+                  onChange={formik.handleChange}
+                />
+                <label className="form-check-label" htmlFor="radios2">
+                  No
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className="form-group col">
+            <label>
+              ¿Existe algún vínculo entre usted y una persona considerada
+              públicamente expuesta?
+            </label>
+            <div className="form-row">
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="publicly_exposed"
+                  id="radios1"
+                  value="yes"
+                  onChange={formik.handleChange}
+                />
+                <label className="form-check-label" htmlFor="radios1">
+                  Si
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="publicly_exposed"
+                  id="radios2"
+                  value="no"
+                  onChange={formik.handleChange}
+                />
+                <label className="form-check-label" htmlFor="radios2">
+                  No
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="form-group col-6">
-          <label htmlFor="cellphone" className="form-label">
-            Ocupación
+
+        <div className="form-group">
+          <label>
+            ¿Por su cargo o actividad, administra recursos públicos?
           </label>
-          <input
-            type="text"
-            name="cellphone"
-            className={`form-control ${
-              formik.touched.cellphone
-                ? formik.errors.cellphone
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("cellphone")}
-          />
-          <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          <div className="form-row">
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="publicly_exposed"
+                id="radios1"
+                value="yes"
+                onChange={formik.handleChange}
+              />
+              <label className="form-check-label" htmlFor="radios1">
+                Si
+              </label>
+            </div>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="publicly_exposed"
+                id="radios2"
+                value="no"
+                onChange={formik.handleChange}
+              />
+              <label className="form-check-label" htmlFor="radios2">
+                No
+              </label>
+            </div>
+          </div>
         </div>
-        <div className="form-group col-6">
-          <label htmlFor="cellphone" className="form-label">
-            Cargo
-          </label>
-          <input
-            type="text"
-            name="cellphone"
-            className={`form-control ${
-              formik.touched.cellphone
-                ? formik.errors.cellphone
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("cellphone")}
-          />
-          <div className="invalid-feedback">{formik.errors.cellphone}</div>
-        </div>
-        <div className="form-group col-6">
-          <label htmlFor="cellphone" className="form-label">
-            Empresa donde trabaja
-          </label>
-          <input
-            type="text"
-            name="cellphone"
-            className={`form-control ${
-              formik.touched.cellphone
-                ? formik.errors.cellphone
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("cellphone")}
-          />
-          <div className="invalid-feedback">{formik.errors.cellphone}</div>
-        </div>
-        <div className="form-group col-6">
-          <label htmlFor="cellphone" className="form-label">
-            Dirección (oficina)
-          </label>
-          <input
-            type="text"
-            name="cellphone"
-            className={`form-control ${
-              formik.touched.cellphone
-                ? formik.errors.cellphone
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("cellphone")}
-          />
-          <div className="invalid-feedback">{formik.errors.cellphone}</div>
-        </div>
-        <div className="form-group col-6">
-          <label htmlFor="cellphone" className="form-label">
-            ¿Qué tipo de producto y/o servicio comercializa?
-          </label>
-          <input
-            type="text"
-            name="cellphone"
-            className={`form-control ${
-              formik.touched.cellphone
-                ? formik.errors.cellphone
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("cellphone")}
-          />
-          <div className="invalid-feedback">{formik.errors.cellphone}</div>
+
+        <div className="form-row">
+          <div className="form-group col">
+            <label>
+              ¿Es usted SUJETO DE OBLIGACIONES TRIBUTARIAS EN OTRO PAÍS O GRUPO
+              DE PAISES?
+            </label>
+            <div className="form-row">
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="publicly_exposed"
+                  id="radios1"
+                  value="yes"
+                  onChange={formik.handleChange}
+                />
+                <label className="form-check-label" htmlFor="radios1">
+                  Si
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="publicly_exposed"
+                  id="radios2"
+                  value="no"
+                  onChange={formik.handleChange}
+                />
+                <label className="form-check-label" htmlFor="radios2">
+                  No
+                </label>
+              </div>
+            </div>
+          </div>
+          <div className="form-group col">
+            <label htmlFor="cellphone" className="form-label">
+              Concepto otros ingresos mensuales
+            </label>
+            <input
+              type="text"
+              name="cellphone"
+              className={`form-control ${
+                formik.touched.cellphone
+                  ? formik.errors.cellphone
+                    ? "is-invalid"
+                    : "is-valid"
+                  : ""
+              }`}
+              {...formik.getFieldProps("cellphone")}
+            />
+            <div className="invalid-feedback">{formik.errors.cellphone}</div>
+          </div>
         </div>
       </BaseSection>
     </form>

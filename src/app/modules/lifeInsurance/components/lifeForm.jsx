@@ -72,8 +72,6 @@ function LifeForm() {
     },
   });
 
-  React.useEffect(() => console.log(formik.values), [formik.values]);
-
   return (
     <section className="w-100 px-5">
       <form onSubmit={formik.handleSubmit}>
