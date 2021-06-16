@@ -14,7 +14,7 @@ const initialValues = {
 };
 
 function MoreInfo({ handleSubmit }) {
-  const lifeSchema = Yup.object().shape({
+  const schema = Yup.object().shape({
     publicly_exposed: Yup.string().required("Campo requerido"),
     publicly_exposed_vinculation: Yup.string().required("Campo requerido"),
     manages_public_resources: Yup.string().required("Campo requerido"),
@@ -25,7 +25,7 @@ function MoreInfo({ handleSubmit }) {
 
   const formik = useFormik({
     initialValues,
-    //validationSchema: lifeSchema,
+    //validationSchema: schema,
     onSubmit: (values, actions) => {
       console.log(values);
       setTimeout(() => {

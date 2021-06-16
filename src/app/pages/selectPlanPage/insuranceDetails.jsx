@@ -25,16 +25,11 @@ const dataInit = {
   taxObligationsOutsideColombia: false,
 };
 
-export default function InsuranceDetails({ insurance }) {
+export default function InsuranceDetails({ insurance, selectPlan }) {
   const history = useHistory();
 
   const handleConfirm = async () => {
-    history.push("/cars-process");
-    // const config = {
-    //   method: "POST",
-    //   body: JSON.stringify(dataInit),
-    // };
-    // await fetch("http://localhost:3001/api/colmena", config);
+    selectPlan();
   };
 
   return (

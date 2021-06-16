@@ -5,6 +5,7 @@ export const URL = MAIN_URL + "/api";
 
 export const InsuranceLogo = {
   COLMENA: "colmena-logo.svg",
+  BOLIVAR: "seguros-bolivar-logo.svg",
 };
 
 export const StepsInsuranceProcess = {

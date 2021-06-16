@@ -1,30 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { lifeFormData } from "app/models";
+import { bolivarPlan } from "../model";
 
 const initialState = {
   clientData: {
-    documentType: "",
+    license_plate: "",
+    document_type: "",
     identification: "",
-    firstName: "",
-    firstLastName: "",
-    birthDepartment: "",
-    brithCity: "",
-    gender: "",
-    residentDepartment: "",
-    residentCity: "",
-    address: "",
-    ocupation: "",
-    cellphone: "",
+    name: "",
+    lastname: "",
     email: "",
-    issueDate: "",
-    bithDate: "",
-    discountCode: "",
+    birth_date: "",
+    cellphone: "",
+    discount_code: "",
     currentInsurance: "",
     knowledgeOfInsuranceCoverage: "",
     searchToProject: "",
     dataProcessingLicence: "",
   },
   plans: [],
+  data: {
+    cities: [],
+  },
 };
 
 const actionTypes = {
@@ -33,34 +29,45 @@ const actionTypes = {
   ADD_CLIENT_DATA: "ADD_CLIENT_DATA",
   SET_PLANS: "SET_PLANS",
   ADD_PLANS: "ADD_PLANS",
+  SET_DATA: "SET_DATA",
 };
 
 const setClientData = (data) => (dispatch) => {
   const action = { type: actionTypes.SET_CLIENT_DATA, data };
-  dispatch(lifeInsuranceSlice.actions.setClientData(action));
+  dispatch(carsInsuranceSlice.actions.setClientData(action));
 };
 
 const setClientDataField = (value, field) => (dispatch) => {
   const action = { type: actionTypes.SET_FIELD_CLIENT_DATA, value, field };
-  dispatch(lifeInsuranceSlice.actions.setClientDataField(action));
+  dispatch(carsInsuranceSlice.actions.setClientDataField(action));
+};
+
+const setDataField = (value, field) => (dispatch) => {
+  const action = { type: actionTypes.SET_DATA, value, field };
+  dispatch(carsInsuranceSlice.actions.setDataField(action));
 };
 
 const addClientData = (data) => (dispatch) => {
-  const action = {
-    type: actionTypes.ADD_CLIENT_DATA,
-    data: lifeFormData(data),
-  };
-  dispatch(lifeInsuranceSlice.actions.addClientData(action));
+  const action = { type: actionTypes.ADD_CLIENT_DATA, data };
+  dispatch(carsInsuranceSlice.actions.addClientData(action));
 };
 
 const setPlans = (data) => (dispatch) => {
   const action = { type: actionTypes.SET_PLANS, data };
-  dispatch(lifeInsuranceSlice.actions.setPlans(action));
+  dispatch(carsInsuranceSlice.actions.setPlans(action));
 };
 
 const addPlans = (data) => (dispatch) => {
   const action = { type: actionTypes.ADD_CLIENT_DATA, data };
-  dispatch(lifeInsuranceSlice.actions.addPlans(action));
+  dispatch(carsInsuranceSlice.actions.addPlans(action));
+};
+
+const addBolivarPlans = (data) => (dispatch) => {
+  const plans = [];
+  data.data.forEach((element) => {
+    plans.push(bolivarPlan(element));
+  });
+  dispatch(addPlans(plans));
 };
 
 export const actions = {
@@ -69,10 +76,12 @@ export const actions = {
   addClientData,
   setPlans,
   addPlans,
+  setDataField,
+  addBolivarPlans,
 };
 
-export const lifeInsuranceSlice = createSlice({
-  name: "lifeInsurance",
+export const carsInsuranceSlice = createSlice({
+  name: "carsInsurance",
   initialState,
   reducers: {
     setClientData: (state, action) => {
@@ -82,6 +91,10 @@ export const lifeInsuranceSlice = createSlice({
     setClientDataField: (state, action) => {
       const { value, field } = action.payload;
       state.clientData[field] = value;
+    },
+    setDataField: (state, action) => {
+      const { value, field } = action.payload;
+      state.data[field] = value;
     },
     addClientData: (state, action) => {
       const { data } = action.payload;

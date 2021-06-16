@@ -3,24 +3,47 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import BaseSection from "app/components/UI/baseSection";
 
-const initialValues = {
-  cardiovascular_disease: "",
-  diagnosed_VIH: "",
-};
+const initialValues = {};
 
-const schema = Yup.object().shape({
-  cardiovascular_disease: Yup.string().required("Campo requerido"),
-  diagnosed_VIH: Yup.string().required("Campo requerido"),
-});
+export default function Schedule() {
+  const handleSubmit = async () => {
+    const config = {
+      method: "POST",
+      body: JSON.stringify({
+        mailTomador: "test@gmail.com",
+        celTomador: "3112223344",
+        dirTomador: "Av El Dorado 68B-31",
+        ciuTomador: 14000,
+        nomConductor: "Juan Perez",
+        sexoConductor: "M",
+        fecNacConductor: "1979-01-01",
+        placaVeh: "EMR901",
+        numLiquidacion: 29744875608,
+      }),
+      headers: new Headers({
+        "Content-Type": "application/json",
+      }),
+    };
+    try {
+      const response = await fetch(
+        "http://localhost:8080/api/segurosbolivar/cotizacion",
+        config
+      );
+      if (response.ok) {
+        const plans = await response.json();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-function InsurabilityInfo({ handleSubmit }) {
   const formik = useFormik({
     initialValues,
     //validationSchema: schema,
     onSubmit: (values, actions) => {
       console.log(values);
-      setTimeout(() => {
-        handleSubmit(values);
+      setTimeout(async () => {
+        await handleSubmit();
         actions.setSubmitting(false);
       }, 1000);
     },
@@ -37,80 +60,50 @@ function InsurabilityInfo({ handleSubmit }) {
   return (
     <form onSubmit={formik.handleSubmit}>
       <BaseSection
-        title="Información de asegurabilidad"
+        title="Agenda tu cita de inspección"
         actions={actionsButton}
         loading={formik.isSubmitting}
       >
         <div className="form-group">
-          <label>
-            ¿Padece o ha padecido enfermedades de tipo cardiovascular o
-            enfermedades como hipertensión arteria, diabetes, infarto o
-            enfermedades de las arterias coronarias, cáncer, leucemia, linfomas,
-            trombosis, derrames o eventos cerebrovasculares, anemias, esclerosis
-            múltiple, cirrosis hepática, insuficiencia renal, tumores malignos,
-            lupus?
-          </label>
+          <label>¿Cómo quieres que sea tu cita de inspección?</label>
           <div className="form-row">
             <div className="form-check">
               <input
                 className="form-check-input"
                 type="radio"
-                name="cardiovascular_disease"
+                name="terms_and_conditions"
                 id="radios1"
                 value="yes"
                 onChange={formik.handleChange}
               />
               <label className="form-check-label" htmlFor="radios1">
-                Si
+                Presencial
               </label>
             </div>
             <div className="form-check">
               <input
                 className="form-check-input"
                 type="radio"
-                name="cardiovascular_disease"
+                name="terms_and_conditions"
                 id="radios2"
                 value="no"
                 onChange={formik.handleChange}
               />
               <label className="form-check-label" htmlFor="radios2">
-                No
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label>
-            ¿Le han detectado la presencia de anticuerpos contra el virus VIH
-            productor del SIDA, ha sido VIH positivo, prueba de Elisa positiva o
-            le han diagnostica SIDA?
-          </label>
-          <div className="form-row">
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="diagnosed_VIH"
-                id="radios1"
-                value="yes"
-                onChange={formik.handleChange}
-              />
-              <label className="form-check-label" htmlFor="radios1">
-                Si
+                Virtual - Tu tomas las fotos y nos las envías
               </label>
             </div>
             <div className="form-check">
               <input
                 className="form-check-input"
                 type="radio"
-                name="diagnosed_VIH"
+                name="terms_and_conditions"
                 id="radios2"
                 value="no"
                 onChange={formik.handleChange}
               />
               <label className="form-check-label" htmlFor="radios2">
-                No
+                Virtual Asistida - Te llamamos para explicarte el proceso
               </label>
             </div>
           </div>
@@ -119,5 +112,3 @@ function InsurabilityInfo({ handleSubmit }) {
     </form>
   );
 }
-
-export default InsurabilityInfo;

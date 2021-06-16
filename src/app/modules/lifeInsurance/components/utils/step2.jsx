@@ -1,8 +1,20 @@
 import React from "react";
 import EditIcon from "@material-ui/icons/Edit";
 
+const getObject = (values) => {
+  let ans = {};
+  for (let key in values) {
+    ans[key] = false;
+  }
+  return ans;
+};
+
 export function Step2({ formik }) {
-  const [displayFields, setDisplayFields] = React.useState();
+  const [displayFields, setDisplayFields] = React.useState(
+    getObject(formik.values)
+  );
+
+  console.log(displayFields);
 
   return (
     <div className="card-body">

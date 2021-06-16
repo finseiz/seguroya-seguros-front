@@ -6,6 +6,8 @@ import { Content } from "theme/layout/utils/content";
 import { BaseAsideProcess } from "app/components/UI/auxComponents";
 import ConfirmationCode from "app/pages/purchasingProcess/confirmationCode";
 import SarlaftForm from "app/pages/purchasingProcess/sarlaftForm";
+import UploadDocuments from "./pages/uploadDocuments";
+import Schedule from "./pages/schedule";
 
 export default function CarsInsuranceRoute() {
   const history = useHistory();
@@ -54,6 +56,14 @@ export default function CarsInsuranceRoute() {
         </Route>
         <Route exact={true} path={`/cars-process/${sarlaft.path}`}>
           <SarlaftForm
+            handleSubmit={(values) => {
+              addData(values);
+              history.push(`${appointment_schedule.path}`);
+            }}
+          />
+        </Route>
+        <Route exact={true} path={`/cars-process/${appointment_schedule.path}`}>
+          <Schedule
             handleSubmit={(values) => {
               addData(values);
             }}
