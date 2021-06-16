@@ -8,6 +8,7 @@ import { CircularProgress } from "@material-ui/core";
 import { Step1, Step2, Step3 } from "./utils";
 import { getBolivarCities } from "../redux/crud";
 import { actions } from "../redux";
+import { bolivarCities, carsPlans } from "../model";
 
 const initialValues = {
   license_plate: "",
@@ -25,24 +26,6 @@ const initialValues = {
   data_processing_licence: "",
 };
 
-const carsPlans = (data) => {
-  return {
-    placaVehiculo: "EMR901",
-    tipoDocumentoTomador: "CC",
-    numeroDocumentoTomador: 1026253336,
-    nombresTomador: "Gustavo Emilio",
-    apellidosTomador: "Gomez Rodriguez",
-    fechaNacimientoTomador: "1968-11-26",
-    generoConductor: "M",
-    claveAsesor: 38867,
-    sumaAccesorios: 0,
-    ciudadMovilizacion: 14000,
-    ceroKm: "false",
-    periodoFact: 12,
-    opcionPA: "S",
-  };
-};
-
 function CarsForm() {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -51,7 +34,7 @@ function CarsForm() {
   const [loading, setLoading] = React.useState(false);
   const [step, setStep] = React.useState(1);
 
-  const carsSchema = Yup.object().shape({
+  const schema = Yup.object().shape({
     license_plate: Yup.string().required("Campo requerido"),
     document_type: Yup.string().required("Campo requerido"),
     identification: Yup.string().required("Campo requerido"),
@@ -63,10 +46,10 @@ function CarsForm() {
     cellphone: Yup.string().required("Campo requerido"),
   });
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (values) => {
     const config = {
       method: "POST",
-      body: JSON.stringify(carsPlans()),
+      body: JSON.stringify(carsPlans(values)),
       headers: new Headers({
         "Content-Type": "application/json",
       }),
@@ -91,11 +74,11 @@ function CarsForm() {
 
   const formik = useFormik({
     initialValues,
-    //validationSchema: carsSchema,
+    //validationSchema: schema,
     onSubmit: (values, { setSubmitting }) => {
       console.log(values);
       setTimeout(async () => {
-        await handleSubmit();
+        await handleSubmit(values);
         history.push("/cars/select-plan");
         setSubmitting(false);
       }, 1000);
@@ -108,7 +91,7 @@ function CarsForm() {
       setLoading(true);
       try {
         const res = await getBolivarCities();
-        dispatch(actions.setDataField(res.catalogoDato, "cities"));
+        dispatch(actions.setDataField(bolivarCities(res), "cities"));
       } catch (err) {
         console.log(err);
       } finally {
@@ -118,7 +101,7 @@ function CarsForm() {
     if (!cities.length) getCities();
   }, []);
 
-  React.useEffect(() => console.log(formik.values), [formik.values]);
+  //React.useEffect(() => console.log(formik.values), [formik.values]);
 
   return loading ? (
     <div className="container h-100">

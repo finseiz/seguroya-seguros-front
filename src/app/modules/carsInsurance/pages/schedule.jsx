@@ -39,7 +39,7 @@ export default function Schedule() {
 
   const formik = useFormik({
     initialValues,
-    //validationSchema: lifeSchema,
+    //validationSchema: schema,
     onSubmit: (values, actions) => {
       console.log(values);
       setTimeout(async () => {

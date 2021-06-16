@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { bolivarPlan } from "../model";
 
 const initialState = {
   clientData: {
@@ -64,26 +65,7 @@ const addPlans = (data) => (dispatch) => {
 const addBolivarPlans = (data) => (dispatch) => {
   const plans = [];
   data.data.forEach((element) => {
-    const {
-      numerodeliquidacion,
-      opcionAutosDescripcion,
-      coberturasCotizacion,
-      deduciblePeridaTotal,
-      totalPrima,
-    } = element.responseData;
-
-    plans.push({
-      insurance_name: "BOLIVAR",
-      title: numerodeliquidacion,
-      rate: 4.0,
-      premium: coberturasCotizacion[0].valorPrima,
-      return_value: deduciblePeridaTotal,
-      anual_price: totalPrima,
-      mensual_price: "",
-      message: "",
-      description: opcionAutosDescripcion,
-      plan: element.responseData,
-    });
+    plans.push(bolivarPlan(element));
   });
   dispatch(addPlans(plans));
 };

@@ -8,7 +8,7 @@ const initialValues = {};
 export default function UploadDocuments() {
   const formik = useFormik({
     initialValues,
-    //validationSchema: lifeSchema,
+    //validationSchema: schema,
     onSubmit: (values, actions) => {
       console.log(values);
       setTimeout(async () => {

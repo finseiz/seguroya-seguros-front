@@ -8,7 +8,7 @@ const initialValues = {
   diagnosed_VIH: "",
 };
 
-const lifeSchema = Yup.object().shape({
+const schema = Yup.object().shape({
   cardiovascular_disease: Yup.string().required("Campo requerido"),
   diagnosed_VIH: Yup.string().required("Campo requerido"),
 });
@@ -16,7 +16,7 @@ const lifeSchema = Yup.object().shape({
 function InsurabilityInfo({ handleSubmit }) {
   const formik = useFormik({
     initialValues,
-    //validationSchema: lifeSchema,
+    //validationSchema: schema,
     onSubmit: (values, actions) => {
       console.log(values);
       setTimeout(() => {

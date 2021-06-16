@@ -4,12 +4,14 @@ import { CircularProgress } from "@material-ui/core";
 function BaseSection({ children, title, description, actions, loading }) {
   return (
     <div className="container-fluid">
-      <div className="card custom-card">
-        <div className="card-body font-weight-bold">{title}</div>
-        <div className="card-body pt-0">
-          <span>{description}</span>
+      {title && (
+        <div className="card custom-card">
+          <div className="card-body font-weight-bold">{title}</div>
+          <div className="card-body pt-0">
+            <span>{description}</span>
+          </div>
         </div>
-      </div>
+      )}
       <div className="card custom-card mt-3">
         <div className="card-body">{children}</div>
       </div>

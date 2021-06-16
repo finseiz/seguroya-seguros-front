@@ -31,7 +31,7 @@ function HealthForm() {
   const [step, setStep] = React.useState(1);
   const { data } = useSelector((state) => state.lifeInsurance);
 
-  const lifeSchema = Yup.object().shape({
+  const schema = Yup.object().shape({
     address: Yup.string().required("Campo requerido"),
     document_type: Yup.string().required("Campo requerido"),
     identification: Yup.string().required("Campo requerido"),
@@ -52,7 +52,7 @@ function HealthForm() {
 
   const formik = useFormik({
     initialValues,
-    //validationSchema: lifeSchema,
+    //validationSchema: schema,
     onSubmit: (values, { setSubmitting }) => {
       console.log(values);
       setTimeout(async () => {

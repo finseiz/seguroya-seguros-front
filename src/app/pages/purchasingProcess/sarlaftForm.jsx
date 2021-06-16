@@ -4,23 +4,24 @@ import * as Yup from "yup";
 import BaseSection from "app/components/UI/baseSection";
 
 const initialValues = {
-  completion_date: "",
   issue_date: "",
-  city: "",
+  issue_place: "",
   branch_office: "",
   application_type: "",
   vinculation_class: "",
+  completion_date: "",
+  city: "",
   tomador_asegurado_vinculation: "",
   tomador_beneficiario_vinculation: "",
   asegurado_beneficiario_vinculation: "",
 };
 
 function SarlaftForm({ handleSubmit }) {
-  const lifeSchema = Yup.object().shape({});
+  const schema = Yup.object().shape({});
 
   const formik = useFormik({
     initialValues,
-    //validationSchema: lifeSchema,
+    //validationSchema: schema,
     onSubmit: (values, actions) => {
       console.log(values);
       setTimeout(() => {
@@ -52,81 +53,85 @@ function SarlaftForm({ handleSubmit }) {
         <h4>0. Datos de vinculación</h4>
         <div className="form-row">
           <div className="form-group col">
-            <label htmlFor="address" className="form-label">
+            <label htmlFor="issue_date" className="form-label">
               Fecha Diligenciamiento
             </label>
             <input
               type="date"
-              name="address"
+              name="issue_date"
               className={`form-control ${
-                formik.touched.address
-                  ? formik.errors.address
+                formik.touched.issue_date
+                  ? formik.errors.issue_date
                     ? "is-invalid"
                     : "is-valid"
                   : ""
               }`}
-              {...formik.getFieldProps("address")}
+              {...formik.getFieldProps("issue_date")}
             />
-            <div className="invalid-feedback">{formik.errors.address}</div>
+            <div className="invalid-feedback">{formik.errors.issue_date}</div>
           </div>
 
           <div className="form-group col">
-            <label htmlFor="address" className="form-label">
+            <label htmlFor="issue_place" className="form-label">
               Lugar de expedición
             </label>
             <input
               type="text"
-              name="address"
+              name="issue_place"
               className={`form-control ${
-                formik.touched.address
-                  ? formik.errors.address
+                formik.touched.issue_place
+                  ? formik.errors.issue_place
                     ? "is-invalid"
                     : "is-valid"
                   : ""
               }`}
-              {...formik.getFieldProps("address")}
+              {...formik.getFieldProps("issue_place")}
             />
-            <div className="invalid-feedback">{formik.errors.address}</div>
+            <div className="invalid-feedback">{formik.errors.issue_place}</div>
           </div>
 
           <div className="form-group col">
-            <label htmlFor="address" className="form-label">
+            <label htmlFor="branch_office" className="form-label">
               Sucursal
             </label>
             <input
               type="text"
-              name="address"
+              name="branch_office"
               className={`form-control ${
-                formik.touched.address
-                  ? formik.errors.address
+                formik.touched.branch_office
+                  ? formik.errors.branch_office
                     ? "is-invalid"
                     : "is-valid"
                   : ""
               }`}
-              {...formik.getFieldProps("address")}
+              {...formik.getFieldProps("branch_office")}
             />
-            <div className="invalid-feedback">{formik.errors.address}</div>
+            <div className="invalid-feedback">
+              {formik.errors.branch_office}
+            </div>
           </div>
 
           <div className="form-group col">
-            <label htmlFor="address" className="form-label">
+            <label htmlFor="application_type" className="form-label">
               Tipo de Solicitud
             </label>
             <select
               type="text"
-              name="address"
+              name="application_type"
               className={`form-control ${
-                formik.touched.address
-                  ? formik.errors.address
+                formik.touched.application_type
+                  ? formik.errors.application_type
                     ? "is-invalid"
                     : "is-valid"
                   : ""
               }`}
-              {...formik.getFieldProps("address")}
+              {...formik.getFieldProps("application_type")}
             >
               <option value="">Seleccionar</option>
             </select>
-            <div className="invalid-feedback">{formik.errors.address}</div>
+            <div className="invalid-feedback">
+              {formik.errors.application_type}
+            </div>
           </div>
         </div>
         <div className="form-row">
@@ -137,7 +142,7 @@ function SarlaftForm({ handleSubmit }) {
             <input
               className="form-check-input"
               type="radio"
-              name="gender"
+              name="vinculation_class"
               id="radios1"
               value="M"
               onChange={formik.handleChange}
@@ -150,7 +155,7 @@ function SarlaftForm({ handleSubmit }) {
             <input
               className="form-check-input"
               type="radio"
-              name="gender"
+              name="vinculation_class"
               id="radios2"
               value="F"
               onChange={formik.handleChange}
@@ -164,7 +169,7 @@ function SarlaftForm({ handleSubmit }) {
             <input
               className="form-check-input"
               type="radio"
-              name="gender"
+              name="vinculation_class"
               id="radios2"
               value="F"
               onChange={formik.handleChange}
@@ -177,7 +182,7 @@ function SarlaftForm({ handleSubmit }) {
             <input
               className="form-check-input"
               type="radio"
-              name="gender"
+              name="vinculation_class"
               id="radios2"
               value="F"
               onChange={formik.handleChange}
@@ -190,7 +195,7 @@ function SarlaftForm({ handleSubmit }) {
             <input
               className="form-check-input"
               type="radio"
-              name="gender"
+              name="vinculation_class"
               id="radios2"
               value="F"
               onChange={formik.handleChange}
@@ -200,10 +205,14 @@ function SarlaftForm({ handleSubmit }) {
             </label>
           </div>
         </div>
+
         <h5>Indique los vínculos existentes entre tomador-asegurado</h5>
         <div className="form-row">
           <div className="col">
-            <label className="form-label" htmlFor="gender">
+            <label
+              className="form-label"
+              htmlFor="tomador_asegurado_vinculation"
+            >
               Tomador - Asegurado
             </label>
           </div>
@@ -211,7 +220,7 @@ function SarlaftForm({ handleSubmit }) {
             <input
               className="form-check-input"
               type="radio"
-              name="gender"
+              name="tomador_asegurado_vinculation"
               id="radios1"
               value="M"
               onChange={formik.handleChange}
@@ -224,7 +233,7 @@ function SarlaftForm({ handleSubmit }) {
             <input
               className="form-check-input"
               type="radio"
-              name="gender"
+              name="tomador_asegurado_vinculation"
               id="radios2"
               value="F"
               onChange={formik.handleChange}
@@ -238,7 +247,7 @@ function SarlaftForm({ handleSubmit }) {
             <input
               className="form-check-input"
               type="radio"
-              name="gender"
+              name="tomador_asegurado_vinculation"
               id="radios2"
               value="F"
               onChange={formik.handleChange}
@@ -251,7 +260,7 @@ function SarlaftForm({ handleSubmit }) {
             <input
               className="form-check-input"
               type="radio"
-              name="gender"
+              name="tomador_asegurado_vinculation"
               id="radios2"
               value="F"
               onChange={formik.handleChange}
@@ -263,7 +272,10 @@ function SarlaftForm({ handleSubmit }) {
         </div>
         <div className="form-row">
           <div className="col">
-            <label className="form-label" htmlFor="gender">
+            <label
+              className="form-label"
+              htmlFor="tomador_beneficiario_vinculation"
+            >
               Tomador - Beneficiario
             </label>
           </div>
@@ -271,7 +283,7 @@ function SarlaftForm({ handleSubmit }) {
             <input
               className="form-check-input"
               type="radio"
-              name="gender"
+              name="tomador_beneficiario_vinculation"
               id="radios1"
               value="M"
               onChange={formik.handleChange}
@@ -284,7 +296,7 @@ function SarlaftForm({ handleSubmit }) {
             <input
               className="form-check-input"
               type="radio"
-              name="gender"
+              name="tomador_beneficiario_vinculation"
               id="radios2"
               value="F"
               onChange={formik.handleChange}
@@ -298,7 +310,7 @@ function SarlaftForm({ handleSubmit }) {
             <input
               className="form-check-input"
               type="radio"
-              name="gender"
+              name="tomador_beneficiario_vinculation"
               id="radios2"
               value="F"
               onChange={formik.handleChange}
@@ -311,7 +323,7 @@ function SarlaftForm({ handleSubmit }) {
             <input
               className="form-check-input"
               type="radio"
-              name="gender"
+              name="tomador_beneficiario_vinculation"
               id="radios2"
               value="F"
               onChange={formik.handleChange}
@@ -323,7 +335,10 @@ function SarlaftForm({ handleSubmit }) {
         </div>
         <div className="form-row">
           <div className="col">
-            <label className="form-label" htmlFor="gender">
+            <label
+              className="form-label"
+              htmlFor="asegurado_beneficiario_vinculation"
+            >
               Asegurado - Beneficiario
             </label>
           </div>
@@ -331,7 +346,7 @@ function SarlaftForm({ handleSubmit }) {
             <input
               className="form-check-input"
               type="radio"
-              name="gender"
+              name="asegurado_beneficiario_vinculation"
               id="radios1"
               value="M"
               onChange={formik.handleChange}
@@ -344,7 +359,7 @@ function SarlaftForm({ handleSubmit }) {
             <input
               className="form-check-input"
               type="radio"
-              name="gender"
+              name="asegurado_beneficiario_vinculation"
               id="radios2"
               value="F"
               onChange={formik.handleChange}
@@ -358,7 +373,7 @@ function SarlaftForm({ handleSubmit }) {
             <input
               className="form-check-input"
               type="radio"
-              name="gender"
+              name="asegurado_beneficiario_vinculation"
               id="radios2"
               value="F"
               onChange={formik.handleChange}
@@ -371,7 +386,7 @@ function SarlaftForm({ handleSubmit }) {
             <input
               className="form-check-input"
               type="radio"
-              name="gender"
+              name="asegurado_beneficiario_vinculation"
               id="radios2"
               value="F"
               onChange={formik.handleChange}
@@ -1298,6 +1313,7 @@ function SarlaftForm({ handleSubmit }) {
             <div className="invalid-feedback">{formik.errors.cellphone}</div>
           </div>
         </div>
+        {/* end :: basic data */}
       </BaseSection>
     </form>
   );
