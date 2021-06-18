@@ -1,5 +1,5 @@
 import SharedSections from "app/components/home/sharedSections";
-import HealthForm from "app/modules/healthInsurance/components/healthForm";
+import HealthForm from "app/modules/healthInsurance/healthForm";
 
 function HealthPage() {
   return (

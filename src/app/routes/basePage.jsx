@@ -34,7 +34,7 @@ function BasePage() {
         <Redirect exact={true} from="/" to="/home" />
         <Route exact={true} path="/home" component={Home} />
         <Route exact={true} path="/life" component={LifePage} />
-        <ContentRoute
+        <Route
           exact={true}
           path="/life/select-plan"
           component={() => (
@@ -46,7 +46,7 @@ function BasePage() {
         />
         <Route exact={true} path="/health" component={HealthPage} />
         <Route exact={true} path="/cars" component={CarsPage} />
-        <ContentRoute
+        <Route
           exact={true}
           path="/cars/select-plan"
           component={() => (
