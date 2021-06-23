@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { BrowserRouter } from "react-router-dom";
 import Routes from "./routes";
+import "react-step-progress-bar/styles.css";
 import "./App.css";
 
 function App({ store, persistor, basename }) {

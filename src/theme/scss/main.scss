@@ -3,6 +3,10 @@
 @import "./life.scss";
 @import "./aside.scss";
 
+@import "./components/step-progress-bar";
+@import "./components/inital-form";
+@import "./components/overview-data";
+
 @font-face {
   font-family: "Como";
   src: url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.eot");
@@ -81,6 +85,14 @@
 
 .form-control::placeholder {
   color: #bbb5c6;
+}
+
+.form-label {
+  color: $dark-blue-2;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
 }
 
 .small-icon {

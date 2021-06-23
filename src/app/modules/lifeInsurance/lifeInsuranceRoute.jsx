@@ -9,6 +9,7 @@ import { BaseAsideProcess } from "app/components/UI/auxComponents";
 import MoreInfo from "app/pages/purchasingProcess/moreInfo";
 import Authorization from "app/pages/purchasingProcess/authorization";
 import ConfirmationCode from "app/pages/purchasingProcess/confirmationCode";
+import SelectPlanPage from "app/pages/selectPlanPage";
 
 const dataInit = {
   documentType: "Cédula de Ciudadanía",
@@ -68,11 +69,19 @@ function LifeInsuranceRoute() {
       )}
     >
       <Switch>
+        
         <Redirect
           exact={true}
           from="/life-process"
           to={`/life-process/${insurability_information.path}`}
         />
+
+        <Route
+          exact={true}
+          path="/life/select-plan"
+          component={ SelectPlanPage }
+        />
+
         <Route
           exact={true}
           path={`/life-process/${insurability_information.path}`}

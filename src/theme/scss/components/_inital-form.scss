@@ -1,0 +1,39 @@
+.insurance-name {
+    color: white;
+    font-family: Como;
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.insurance-desc {
+    color: white;
+    font-family: Como;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.inital-from__title {
+    font-weight: bold;
+    font-size: 16;
+}
+
+.inital-from__box {
+    border: 0 transparent;
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+.inital-from__shadow {
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.initial-form__insurance-name-short {
+    font-weight: bold;
+    font-size: 18px;
+    color: $dark-blue;
+}
+
+.initial-form__insurance-sentense {
+    font-size: 18px;
+    color: black;
+}

@@ -1,0 +1,17 @@
+.ball {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+  font-weight: bold;
+  align-content: center;
+}
+
+.active {
+  background-color: $light-blue;
+  color: white;
+}
+
+.disable {
+  background-color: $bg-gray;
+  
+}

@@ -25,42 +25,39 @@ const initialState = {
     dataProcessingLicence: "",
   },
   plans: [],
-};
-
-const actionTypes = {
-  SET_CLIENT_DATA: "SET_CLIENT_DATA",
-  SET_FIELD_CLIENT_DATA: "SET_FIELD_CLIENT_DATA",
-  ADD_CLIENT_DATA: "ADD_CLIENT_DATA",
-  SET_PLANS: "SET_PLANS",
-  ADD_PLANS: "ADD_PLANS",
+  progress: {
+    initial: 0,
+  }
 };
 
 const setClientData = (data) => (dispatch) => {
-  const action = { type: actionTypes.SET_CLIENT_DATA, data };
+  const action = { data };
   dispatch(lifeInsuranceSlice.actions.setClientData(action));
 };
 
 const setClientDataField = (value, field) => (dispatch) => {
-  const action = { type: actionTypes.SET_FIELD_CLIENT_DATA, value, field };
+  const action = { value, field };
   dispatch(lifeInsuranceSlice.actions.setClientDataField(action));
 };
 
 const addClientData = (data) => (dispatch) => {
-  const action = {
-    type: actionTypes.ADD_CLIENT_DATA,
-    data: lifeFormData(data),
-  };
+  const action = { data: lifeFormData(data), };
   dispatch(lifeInsuranceSlice.actions.addClientData(action));
 };
 
 const setPlans = (data) => (dispatch) => {
-  const action = { type: actionTypes.SET_PLANS, data };
+  const action = { data };
   dispatch(lifeInsuranceSlice.actions.setPlans(action));
 };
 
 const addPlans = (data) => (dispatch) => {
-  const action = { type: actionTypes.ADD_CLIENT_DATA, data };
+  const action = { data };
   dispatch(lifeInsuranceSlice.actions.addPlans(action));
+};
+
+const setInitialProgress = ( progress ) => (dispatch) => {
+  const action = { data: progress };
+  dispatch(lifeInsuranceSlice.actions.setInitialProgress(action));
 };
 
 export const actions = {
@@ -69,6 +66,7 @@ export const actions = {
   addClientData,
   setPlans,
   addPlans,
+  setInitialProgress
 };
 
 export const lifeInsuranceSlice = createSlice({
@@ -94,6 +92,10 @@ export const lifeInsuranceSlice = createSlice({
     addPlans: (state, action) => {
       const { data } = action.payload;
       state.plans = [...state.plans, ...data];
+    },
+    setInitialProgress: (state, action) => {
+      const { data } = action.payload;
+      state.progress.initial = data;
     },
   },
 });

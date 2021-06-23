@@ -1,3 +1,4 @@
+import { LifeHomeRoute } from "app/routes/childs/Life/routes";
 import { NavLink } from "react-router-dom";
 import { toAbsoluteUrl } from "theme/helpers";
 
@@ -31,11 +32,11 @@ function BrandPage() {
                       </NavLink>
                     </div>
                     <div className="col">
-                      <NavLink to="/life">
+                      <NavLink to={ LifeHomeRoute }>
                         <div className="small-icon">
                           <img
                             src={toAbsoluteUrl("/media/icons/healthcare.svg")}
-                            alt="healthcare-icon"
+                            alt="life-icon"
                           />
                         </div>
                         <strong>Vida</strong>

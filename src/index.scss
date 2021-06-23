@@ -1,6 +1,23 @@
 @import "bootstrap/dist/css/bootstrap.css";
 @import "./theme/scss/main.scss";
 
+@font-face {
+  font-family: 'Montserrat';
+  src: 
+    local('Montserrat'), 
+    url('./theme/fonts/Montserrat/Montserrat-Regular.ttf')
+    format('truetype');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: 
+    local('Montserrat'), 
+    url('./theme/fonts/Montserrat/Montserrat-Bold.ttf')
+    format('truetype');
+  font-weight: bold;
+}
+
 body {
   margin: 0;
   background-color: $bg-gray;

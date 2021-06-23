@@ -2,17 +2,12 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { shallowEqual, useSelector } from "react-redux";
 import { Redirect, Switch, Route } from "react-router-dom";
-import { ContentRoute } from "theme/helpers";
-import LifePage from "app/pages/lifePage.jsx";
 import HealthPage from "app/pages/healthPage.jsx";
 import Home from "../pages/home.jsx";
 import SelectPlanPage from "app/pages/selectPlanPage";
 import { LoadingScreen } from "theme/layout";
 import CarsPage from "app/pages/carsPage.jsx";
-
-const LifeInsuranceRoute = React.lazy(() =>
-  import("app/modules/lifeInsurance/lifeInsuranceRoute")
-);
+import { LifeRoutes } from "./childs/Life/LifeRouter.jsx";
 
 const CarsInsuranceRoute = React.lazy(() =>
   import("app/modules/carsInsurance/carsInsuranceRoute")
@@ -20,10 +15,9 @@ const CarsInsuranceRoute = React.lazy(() =>
 
 function BasePage() {
   const history = useHistory();
-  const { carPlans, lifePlans } = useSelector(
-    ({ lifeInsurance, carsInsurance }) => ({
+  const { carPlans } = useSelector(
+    ({ carsInsurance }) => ({
       carPlans: carsInsurance.plans,
-      lifePlans: lifeInsurance.plans,
     }),
     shallowEqual
   );
@@ -33,17 +27,9 @@ function BasePage() {
       <Switch>
         <Redirect exact={true} from="/" to="/home" />
         <Route exact={true} path="/home" component={Home} />
-        <Route exact={true} path="/life" component={LifePage} />
-        <Route
-          exact={true}
-          path="/life/select-plan"
-          component={() => (
-            <SelectPlanPage
-              plans={lifePlans}
-              selectPlan={() => history.push("/life-process")}
-            />
-          )}
-        />
+        
+        <LifeRoutes />
+
         <Route exact={true} path="/health" component={HealthPage} />
         <Route exact={true} path="/cars" component={CarsPage} />
         <Route
@@ -56,7 +42,7 @@ function BasePage() {
             />
           )}
         />
-        <Route path="/life-process" component={LifeInsuranceRoute} />
+        
         <Route path="/cars-process" component={CarsInsuranceRoute} />
         <Redirect to="/error/404" />
       </Switch>
