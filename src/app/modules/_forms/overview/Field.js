@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { toAbsoluteUrl } from 'theme/helpers/AssetsHelpers'
 
-const Field = ({ name, form, formik }) => {
+const Field = ({ name, form, formik, onEdit }) => {
     return (
         <div className="container px-4">
             <div className="d-flex flex-row justify-content-between mb-4" >
@@ -13,7 +13,9 @@ const Field = ({ name, form, formik }) => {
                 </div>
 
                 <div>
-                    <button title="editar" type="button" className="btn">
+                    <button title="editar" type="button" className="btn"
+                        onClick={onEdit}
+                    >
                         <img
                             src={toAbsoluteUrl("/media/icons/edit-Icon.svg")}
                             alt="edit-icon"

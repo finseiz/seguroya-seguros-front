@@ -90,7 +90,7 @@ function LifeForm() {
         {/* Form steps */}
         <div className="container w-100 inital-from__box mt-3">
           {step === 1 && <Step1 formik={formik} />}
-          {step === 2 && <Step2 formik={formik} />}
+          {step === 2 && <Step2 formik={formik} onEdit={backBtnAction} />}
           {step === 3 && <Step3 formik={formik} />}
         </div>
 

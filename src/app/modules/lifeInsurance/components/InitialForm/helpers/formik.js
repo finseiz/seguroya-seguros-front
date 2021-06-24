@@ -30,8 +30,8 @@ export const initialValues = {
     cellphone: "123",
     discount_code: "",
     gender: "f",
-    current_insurance: "",
+    current_insurance: "na",
     knowledge_of_insurance_coverage: "",
-    search_to_project: "",
-    data_processing_licence: "",
+    search_to_project: "edu",
+    data_processing_licence: "yes",
 };
