@@ -9,6 +9,7 @@ import { getColmenaPlans } from "../../redux/crud";
 import { initialSchema, initialValues } from "./helpers/formik";
 import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
 import { ProgressIndicator } from "./components/ProgressIndicator";
+import { LifeProcessSelectPlanRoute } from "app/routes/childs/Life/routes";
 
 function LifeForm() {
   const history = useHistory();
@@ -39,7 +40,7 @@ function LifeForm() {
         dispatch(actions.setInitialProgress(100));
         break;
       case 3:
-        // history.push("/life/select-plan");
+        history.push(LifeProcessSelectPlanRoute);
         break;
       default:
         break;

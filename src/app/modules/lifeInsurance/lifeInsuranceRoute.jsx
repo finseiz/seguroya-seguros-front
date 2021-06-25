@@ -10,6 +10,8 @@ import MoreInfo from "app/pages/purchasingProcess/moreInfo";
 import Authorization from "app/pages/purchasingProcess/authorization";
 import ConfirmationCode from "app/pages/purchasingProcess/confirmationCode";
 import SelectPlanPage from "app/pages/selectPlanPage";
+import { LifeProcessSelectPlanRoute } from "app/routes/childs/Life/routes";
+import { SelectLifePlan } from "./components/ShortProcess/select-plan/SelectLifePlan";
 
 const dataInit = {
   documentType: "Cédula de Ciudadanía",
@@ -57,88 +59,81 @@ function LifeInsuranceRoute() {
     setData((prevState) => ({ ...prevState, ...values }));
   };
 
-  React.useEffect(() => console.log(data), [data]);
-
   return (
-    <Content
-      aside={() => (
-        <BaseAsideProcess
-          title="Compra Seguro de Vida - Colmena"
-          process={process}
+    
+    <Switch>
+
+      <Route exact={true} path={LifeProcessSelectPlanRoute} component={ SelectLifePlan } />
+
+      <Content
+        aside={() => (
+          <BaseAsideProcess
+            title="Compra Seguro de Vida - Colmena"
+            process={process}
+          />
+        )}
+      >
+
+      </Content>
+
+      <Route
+        exact={true}
+        path={`/life-process/${insurability_information.path}`}
+      >
+        <InsurabilityInfo
+          handleSubmit={(values) => {
+            addData(values);
+            history.push(`${beneficiary_enrollment.path}`);
+          }}
         />
-      )}
-    >
-      <Switch>
-        
-        <Redirect
-          exact={true}
-          from="/life-process"
-          to={`/life-process/${insurability_information.path}`}
+      </Route>
+      <Route
+        exact={true}
+        path={`/life-process/${beneficiary_enrollment.path}`}
+      >
+        <BeneficiaryEnrollment
+          handleSubmit={(values) => {
+            addData(values);
+            history.push(`${more_info.path}`);
+          }}
         />
+      </Route>
 
-        <Route
-          exact={true}
-          path="/life/select-plan"
-          component={ SelectPlanPage }
+      <Route exact={true} path={`/life-process/${more_info.path}`}>
+        <MoreInfo
+          handleSubmit={(values) => {
+            addData(values);
+            history.push(`${authorizations.path}`);
+          }}
         />
+      </Route>
 
-        <Route
-          exact={true}
-          path={`/life-process/${insurability_information.path}`}
-        >
-          <InsurabilityInfo
-            handleSubmit={(values) => {
-              addData(values);
-              history.push(`${beneficiary_enrollment.path}`);
-            }}
-          />
-        </Route>
-        <Route
-          exact={true}
-          path={`/life-process/${beneficiary_enrollment.path}`}
-        >
-          <BeneficiaryEnrollment
-            handleSubmit={(values) => {
-              addData(values);
-              history.push(`${more_info.path}`);
-            }}
-          />
-        </Route>
+      <Route exact={true} path={`/life-process/${authorizations.path}`}>
+        <Authorization
+          handleSubmit={async (values) => {
+            addData(values);
+            const config = {
+              method: "POST",
+              headers: new Headers({ "Content-Type": "application/json" }),
+              body: JSON.stringify({ ...clientData, ...data }),
+            };
+            await fetch("http://localhost:3001/api/colmena", config);
+            //history.push(`${confimation_code.path}`);
+          }}
+        />
+      </Route>
 
-        <Route exact={true} path={`/life-process/${more_info.path}`}>
-          <MoreInfo
-            handleSubmit={(values) => {
-              addData(values);
-              history.push(`${authorizations.path}`);
-            }}
-          />
-        </Route>
+      <Route exact={true} path={`/life-process/${confimation_code.path}`}>
+        <ConfirmationCode
+          handleSubmit={async () => {
+            //history.push("select-plan");
+          }}
+        />
+      </Route>
 
-        <Route exact={true} path={`/life-process/${authorizations.path}`}>
-          <Authorization
-            handleSubmit={async (values) => {
-              addData(values);
-              const config = {
-                method: "POST",
-                headers: new Headers({ "Content-Type": "application/json" }),
-                body: JSON.stringify({ ...clientData, ...data }),
-              };
-              await fetch("http://localhost:3001/api/colmena", config);
-              //history.push(`${confimation_code.path}`);
-            }}
-          />
-        </Route>
+      <Redirect to="/error/404" />
 
-        <Route exact={true} path={`/life-process/${confimation_code.path}`}>
-          <ConfirmationCode
-            handleSubmit={async () => {
-              //history.push("select-plan");
-            }}
-          />
-        </Route>
-        <Redirect to="/error/404" />
-      </Switch>
-    </Content>
+    </Switch>
   );
 }
 
