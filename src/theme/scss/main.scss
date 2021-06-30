@@ -7,6 +7,7 @@
 @import "./components/inital-form";
 @import "./components/overview-data";
 @import "./components/whatsapp";
+@import"./components/plans";
 
 @font-face {
   font-family: "Como";
@@ -117,7 +118,26 @@
   border-radius: 10px;
 }
 
-.radio {
+button.radio {
   background-color: transparent;
   border: 0;
+}
+
+.row{
+  margin: 0 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.primary_btn_expand {
+  background-color: $bg-primary;
+  border: 0px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 15px;
+  color: #FFFFFF;
+}
+
+.w-90{
+  width: 90%;
 }

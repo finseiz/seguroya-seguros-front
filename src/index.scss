@@ -5,7 +5,7 @@
   font-family: 'Montserrat';
   src: 
     local('Montserrat'), 
-    url('./theme/fonts/Montserrat/Montserrat-Regular.ttf')
+    // url('./theme/fonts/Montserrat/Montserrat-Regular.ttf'),
     format('truetype');
 }
 
@@ -13,7 +13,7 @@
   font-family: 'Montserrat';
   src: 
     local('Montserrat'), 
-    url('./theme/fonts/Montserrat/Montserrat-Bold.ttf')
+    // url('./theme/fonts/Montserrat/Montserrat-Bold.ttf'),
     format('truetype');
   font-weight: bold;
 }

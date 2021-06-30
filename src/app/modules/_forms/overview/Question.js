@@ -20,7 +20,7 @@ const Question = ({ question, options, formik, ...others }) => {
                 <div className="row justify-content-center">
                     {
                         options.map( ( option, i ) => (
-                            <div key={i} className="row align-items-center mx-2 mt-2">
+                            <div key={i} className="row align-items-center mt-2">
                                 <Radio 
                                     active={ formik.values[option.formikValue] === option.value }
                                     onClick={ () => formik.setFieldValue(option.formikValue, option.value) }
