@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { WhatsAppContainer } from 'app/components/process/WhatsAppContainer'
 import { toAbsoluteUrl } from 'theme/helpers/AssetsHelpers'
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Qualification from 'app/components/process/Qualification';
 import { parseCurrency } from 'app/const/parse-currency';
 import Comments from "./../../../../../components/process/Comments";
+import { LifeProcessInsurabilityRoute } from 'app/routes/childs/Life/routes';
 
 
 export const PlanDetails = () => {
@@ -13,6 +14,7 @@ export const PlanDetails = () => {
     const { id } = useParams();
     const { plans } = useSelector(state => state.lifeInsurance);
     const [selectPlan, setSelectPlan] = useState();
+    let history = useHistory();
 
     const [benefits, setBenefits] = useState([]);
     const [commets, setCommets] = useState([]);
@@ -53,10 +55,10 @@ export const PlanDetails = () => {
                     selectPlan && (
                         <div className="custom-card bg-white my-4">
 
-                            <div className="row py-4 px-5">
+                            <div className="row plans_sal_container-details">
 
                                 {/** Insurance left */}
-                                <div className="w-75">
+                                <div className="plan-sal_container-desc">
                                     
                                     {/** Insurance Logo */}
                                     <div>
@@ -106,7 +108,7 @@ export const PlanDetails = () => {
                                         <button 
                                             type="button"
                                             className="btn primary_btn_expand w-100"
-                                            onClick={ () => {} }
+                                            onClick={ () => { history.push( LifeProcessInsurabilityRoute ) } }
                                         >
                                             Comprar
                                         </button>

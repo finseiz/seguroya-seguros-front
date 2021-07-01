@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Switch, Route, useHistory } from "react-router-dom";
-import { StepsInsuranceProcess } from "app/const";
+//import { StepsInsuranceProcess } from "app/const";
 import { Content } from "theme/layout/utils/content";
-import { BaseAsideProcess } from "app/components/UI/auxComponents";
+//import { BaseAsideProcess } from "app/components/UI/auxComponents";
 import ConfirmationCode from "app/pages/purchasingProcess/confirmationCode";
 import SarlaftForm from "app/pages/purchasingProcess/sarlaftForm";
 import UploadDocuments from "./pages/uploadDocuments";
@@ -14,19 +14,19 @@ export default function CarsInsuranceRoute() {
   const { clientData } = useSelector((state) => state.lifeInsurance);
   const [data, setData] = React.useState({});
 
-  const {
-    confimation_code,
-    sarlaft,
-    upload_car_documents,
-    appointment_schedule,
-  } = StepsInsuranceProcess;
+  // const {
+  //   confimation_code,
+  //   sarlaft,
+  //   upload_car_documents,
+  //   appointment_schedule,
+  // } = StepsInsuranceProcess;
 
-  const process = [
-    confimation_code,
-    sarlaft,
-    upload_car_documents,
-    appointment_schedule,
-  ];
+  // const process = [
+  //   confimation_code,
+  //   sarlaft,
+  //   upload_car_documents,
+  //   appointment_schedule,
+  // ];
 
   const addData = (values) => {
     setData((prevState) => ({ ...prevState, ...values }));
@@ -36,11 +36,11 @@ export default function CarsInsuranceRoute() {
 
   return (
     <Content
-      aside={() => (
-        <BaseAsideProcess title="Compra Seguro para Autos" process={process} />
-      )}
+      // aside={() => (
+      //   <BaseAsideProcess title="Compra Seguro para Autos" process={process} />
+      // )}
     >
-      <Switch>
+      {/* <Switch>
         <Redirect
           exact={true}
           from="/cars-process"
@@ -70,7 +70,7 @@ export default function CarsInsuranceRoute() {
           />
         </Route>
         <Redirect to="/error/404" />
-      </Switch>
+      </Switch> */}
     </Content>
   );
 }

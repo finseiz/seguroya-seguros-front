@@ -1,17 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Switch, Route, useHistory } from "react-router-dom";
-import { StepsInsuranceProcess } from "app/const";
 import { Content } from "theme/layout/utils/content";
-import InsurabilityInfo from "app/pages/purchasingProcess/insurabilityInfo";
-import BeneficiaryEnrollment from "app/pages/purchasingProcess/beneficiaryEnrollment";
-import { BaseAsideProcess } from "app/components/UI/auxComponents";
-import MoreInfo from "app/pages/purchasingProcess/moreInfo";
-import Authorization from "app/pages/purchasingProcess/authorization";
-import ConfirmationCode from "app/pages/purchasingProcess/confirmationCode";
-import { LifeProcessDetailsPlanRoute, LifeProcessSelectPlanRoute } from "app/routes/childs/Life/routes";
+import { LifeProcessDetailsPlanRoute, LifeProcessInsurabilityRoute, LifeProcessSelectPlanRoute } from "app/routes/childs/Life/routes";
 import { SelectLifePlan } from "./components/ShortProcess/select-plan/SelectLifePlan";
 import { PlanDetails } from "./components/ShortProcess/select-plan/PlanDetails";
+import { insuranceProcessSteps } from "./helpers/process-steps";
+import { AsideProcess } from "./../../components/process/AsideProcess";
+import InsurabilityInfo from "./components/ShortProcess/fill-data/InsurabilityInfo";
 
 const dataInit = {
   documentType: "Cédula de Ciudadanía",
@@ -39,22 +35,6 @@ function LifeInsuranceRoute() {
   const { clientData } = useSelector((state) => state.lifeInsurance);
   const [data, setData] = React.useState({});
 
-  const {
-    insurability_information,
-    beneficiary_enrollment,
-    more_info,
-    authorizations,
-    confimation_code,
-  } = StepsInsuranceProcess;
-
-  const process = [
-    insurability_information,
-    beneficiary_enrollment,
-    more_info,
-    authorizations,
-    confimation_code,
-  ];
-
   const addData = (values) => {
     setData((prevState) => ({ ...prevState, ...values }));
   };
@@ -68,25 +48,15 @@ function LifeInsuranceRoute() {
       <Route exact={true} path={LifeProcessDetailsPlanRoute} component={ PlanDetails } />
 
       <Content
-        aside={() => (
-          <BaseAsideProcess
-            title="Compra Seguro de Vida - Colmena"
-            process={process}
-          />
-        )}
+        aside={ () => <AsideProcess title="Compra Seguro de Vida - Colmena" process={ insuranceProcessSteps } /> }
       >
-
         <Route
           exact={true}
-          path={`/life-process/${insurability_information.path}`}
-        >
-          <InsurabilityInfo
-            handleSubmit={(values) => {
-              addData(values);
-              history.push(`${beneficiary_enrollment.path}`);
-            }}
-          />
-        </Route>
+          path={ LifeProcessInsurabilityRoute }
+          component={ InsurabilityInfo }
+        />
+
+        {/*
         <Route
           exact={true}
           path={`/life-process/${beneficiary_enrollment.path}`}
@@ -129,7 +99,7 @@ function LifeInsuranceRoute() {
               //history.push("select-plan");
             }}
           />
-        </Route>
+        </Route> */}
 
       </Content>
 

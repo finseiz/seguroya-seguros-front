@@ -18,8 +18,8 @@ export const SelectLifePlan = () => {
                 price: 100000,
                 qualification: 3,
                 returnPercent: 85,
-                anualPrice: 100000,
-                share: 100000,
+                anualPrice: 100434000,
+                share: 10430000,
                 shareNumber: 12
             },
             {
@@ -28,8 +28,8 @@ export const SelectLifePlan = () => {
                 price: 233000,
                 qualification: 1,
                 returnPercent: 87,
-                anualPrice: 100000,
-                share: 100000,
+                anualPrice: 100320000,
+                share: 10000230,
                 shareNumber: 12
             },
         ]) )

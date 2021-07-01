@@ -8,7 +8,7 @@ import { actions } from "../../redux";
 import { getColmenaPlans } from "../../redux/crud";
 import { initialSchema, initialValues } from "./helpers/formik";
 import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
-import { ProgressIndicator } from "./components/ProgressIndicator";
+import { ProgressIndicator } from "../../../../components/process/ProgressIndicator";
 import { LifeProcessSelectPlanRoute } from "app/routes/childs/Life/routes";
 
 function LifeForm() {
