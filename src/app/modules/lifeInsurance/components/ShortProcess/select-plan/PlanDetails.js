@@ -5,12 +5,15 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Qualification from 'app/components/process/Qualification';
 import { parseCurrency } from 'app/const/parse-currency';
+import Comments from "./../../../../../components/process/Comments";
+
 
 export const PlanDetails = () => {
 
     const { id } = useParams();
     const { plans } = useSelector(state => state.lifeInsurance);
     const [selectPlan, setSelectPlan] = useState();
+
     const [benefits, setBenefits] = useState([]);
     const [commets, setCommets] = useState([]);
 
@@ -78,30 +81,7 @@ export const PlanDetails = () => {
                                         }
                                     </ul>
 
-                                    {/** Insurance Comments */}
-                                    <p className="plans_sel_plan-comment mt-5"> Comentarios </p>
-                                    {
-                                        commets.map( ( comment, i ) => (
-                                            <div key={i} className="row">
-
-                                                <div className="col-auto">
-                                                    <img 
-                                                        src={toAbsoluteUrl(`/media/images/comment.png`)}
-                                                    />
-                                                </div>
-
-                                                <div className="col">
-                                                    <p className="plans_sel_plan-comment-label mb-0"> {comment.userName} </p>
-                                                    <div className="row">
-                                                        <p className="plans_sel_plan-comment-label my-2"> Calificación: {comment.qualification}/5 </p>
-                                                        <Qualification qualification={comment.qualification} className="mx-2" />
-                                                    </div>
-                                                    <p> {comment.comment} </p>
-                                                </div>
-                                            </div>
-
-                                        ))
-                                    }
+                                    <Comments commentList={commets} />
                                 </div>
 
                                 {/** Insurance Right */}
