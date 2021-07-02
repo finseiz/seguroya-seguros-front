@@ -3,9 +3,20 @@ import AsideNavbar from "../components/asideNavbar";
 
 export function Content({ children, aside }) {
   return (
-    <div className="d-flex flex-row">
-      {aside && <AsideNavbar>{React.createElement(aside)}</AsideNavbar>}
-      <div className={`content ${aside ? "with-aside" : ""}`}>{children}</div>
+    <div className="row">
+
+      { aside && 
+        ( 
+          <AsideNavbar>
+            {React.createElement(aside)}
+          </AsideNavbar>
+        )
+      }
+
+      <div className="col-9" id="main">
+        {children}
+      </div>
+
     </div>
   );
 }

@@ -1,0 +1,78 @@
+  
+.StepProgress {
+    
+    position: relative;
+    padding-left: 45px;
+    list-style: none;
+    
+    &::before {
+      display: inline-block;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 15px;
+      height: 90%;
+      border-left: 4px solid #BDBDBD;
+    }
+    
+    &-item {
+      position: relative;
+      counter-increment: list;
+      
+      &:not(:last-child) {
+        padding-bottom: 25px;
+      }
+      
+      // Fill Line
+      &::before {
+        display: inline-block;
+        content: '';
+        position: absolute;
+        left: -30px;
+        height: 100%;
+      }
+      
+      // Ball
+      &::after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: -37px;
+        width: 12px;
+        border: 10px solid #BDBDBD;
+        border-radius: 50%;
+        background-color: #FFF;
+      }
+      
+      &.is-done {
+          
+        // Line
+        &::before {
+          border-left: 4px solid $light-blue;
+          
+        }
+
+        // Fill Ball
+        &::after {
+          border: 10px solid $light-blue;
+          background-color: $light-blue;
+        }
+      }
+      
+    }
+    
+    .text-done{
+        display: block;
+        color: $light-blue;
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .text-empty{
+        font-size: 16px;
+        line-height: 22px;
+        color: #333333;
+    }
+}

@@ -1,5 +1,4 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Switch, Route, useHistory } from "react-router-dom";
 import { Content } from "theme/layout/utils/content";
 import { LifeProcessDetailsPlanRoute, LifeProcessInsurabilityRoute, LifeProcessSelectPlanRoute } from "app/routes/childs/Life/routes";
@@ -31,13 +30,6 @@ const dataInit = {
 };
 
 function LifeInsuranceRoute() {
-  const history = useHistory();
-  const { clientData } = useSelector((state) => state.lifeInsurance);
-  const [data, setData] = React.useState({});
-
-  const addData = (values) => {
-    setData((prevState) => ({ ...prevState, ...values }));
-  };
 
   return (
     
@@ -48,7 +40,12 @@ function LifeInsuranceRoute() {
       <Route exact={true} path={LifeProcessDetailsPlanRoute} component={ PlanDetails } />
 
       <Content
-        aside={ () => <AsideProcess title="Compra Seguro de Vida - Colmena" process={ insuranceProcessSteps } /> }
+        aside={ () => 
+          <AsideProcess 
+            title="Compra Seguro de Vida - Colmena" 
+            process={ insuranceProcessSteps }
+          /> 
+        }
       >
         <Route
           exact={true}

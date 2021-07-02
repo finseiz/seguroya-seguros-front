@@ -2,16 +2,18 @@ import React, { useEffect, useRef, useState } from 'react'
 import { WhatsAppContainer } from 'app/components/process/WhatsAppContainer'
 import { toAbsoluteUrl } from 'theme/helpers/AssetsHelpers'
 import { useHistory, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Qualification from 'app/components/process/Qualification';
 import { parseCurrency } from 'app/const/parse-currency';
 import Comments from "./../../../../../components/process/Comments";
 import { LifeProcessInsurabilityRoute } from 'app/routes/childs/Life/routes';
+import { actions } from 'app/modules/lifeInsurance/redux';
 
 
 export const PlanDetails = () => {
 
     const { id } = useParams();
+    const dispatch = useDispatch();
     const { plans } = useSelector(state => state.lifeInsurance);
     const [selectPlan, setSelectPlan] = useState();
     let history = useHistory();
@@ -108,7 +110,10 @@ export const PlanDetails = () => {
                                         <button 
                                             type="button"
                                             className="btn primary_btn_expand w-100"
-                                            onClick={ () => { history.push( LifeProcessInsurabilityRoute ) } }
+                                            onClick={ () => { 
+                                                dispatch( actions.setSelectedPlan( plans[id] ) )
+                                                history.push( LifeProcessInsurabilityRoute ) 
+                                            } }
                                         >
                                             Comprar
                                         </button>

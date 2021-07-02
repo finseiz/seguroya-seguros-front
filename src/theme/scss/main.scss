@@ -1,13 +1,14 @@
 @import "./config.scss";
 @import "./home.scss";
 @import "./life.scss";
-@import "./aside.scss";
 
 @import "./components/step-progress-bar";
 @import "./components/inital-form";
 @import "./components/overview-data";
 @import "./components/whatsapp";
-@import"./components/plans";
+@import "./components/plans";
+@import "./components/aside-step-bar";
+@import "./components/process";
 
 @font-face {
   font-family: "Como";

@@ -25,6 +25,7 @@ const initialState = {
     dataProcessingLicence: "",
   },
   plans: [],
+  selectedPlan: {},
   progress: {
     initial: 0,
   }
@@ -60,13 +61,19 @@ const setInitialProgress = ( progress ) => (dispatch) => {
   dispatch(lifeInsuranceSlice.actions.setInitialProgress(action));
 };
 
+const setSelectedPlan = ( plan ) => ( dispatch ) => {
+  const action = { plan };
+  dispatch(lifeInsuranceSlice.actions.setSelectedPlan(action));
+}
+
 export const actions = {
   setClientData,
   setClientDataField,
   addClientData,
   setPlans,
   addPlans,
-  setInitialProgress
+  setInitialProgress,
+  setSelectedPlan
 };
 
 export const lifeInsuranceSlice = createSlice({
@@ -96,6 +103,10 @@ export const lifeInsuranceSlice = createSlice({
     setInitialProgress: (state, action) => {
       const { data } = action.payload;
       state.progress.initial = data;
+    },
+    setSelectedPlan: (state, action) => {
+      const { plan } = action.payload;
+      state.selectedPlan = plan;
     },
   },
 });
