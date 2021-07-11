@@ -28,6 +28,7 @@ const initialState = {
   selectedPlan: {},
   progress: {
     initial: 0,
+    shortProcess: 0,
   }
 };
 
@@ -61,6 +62,11 @@ const setInitialProgress = ( progress ) => (dispatch) => {
   dispatch(lifeInsuranceSlice.actions.setInitialProgress(action));
 };
 
+const setShortProcess = ( progress ) => (dispatch) => {
+  const action = { data: progress };
+  dispatch(lifeInsuranceSlice.actions.setShortProcess(action));
+};
+
 const setSelectedPlan = ( plan ) => ( dispatch ) => {
   const action = { plan };
   dispatch(lifeInsuranceSlice.actions.setSelectedPlan(action));
@@ -73,7 +79,8 @@ export const actions = {
   setPlans,
   addPlans,
   setInitialProgress,
-  setSelectedPlan
+  setSelectedPlan,
+  setShortProcess
 };
 
 export const lifeInsuranceSlice = createSlice({
@@ -103,6 +110,10 @@ export const lifeInsuranceSlice = createSlice({
     setInitialProgress: (state, action) => {
       const { data } = action.payload;
       state.progress.initial = data;
+    },
+    setShortProcess: (state, action) => {
+      const { data } = action.payload;
+      state.progress.shortProcess = data;
     },
     setSelectedPlan: (state, action) => {
       const { plan } = action.payload;

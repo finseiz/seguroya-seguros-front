@@ -11,7 +11,7 @@ function BaseSection({ children, title, description, actions, loading }) {
         title && (
           <div className="custom-card bg-white mt-4">
             <div className="card-body">
-              <p className="process__process-title mb-0"> {title} </p>
+              <p className="process__process-title mb-0 py-2 px-4"> {title} </p>
             </div>
             {
               description && (
@@ -44,6 +44,7 @@ function BaseSection({ children, title, description, actions, loading }) {
                     <button
                       className={ props.className ? props.className : "btn btn-primary" }
                       key={index}
+                      type="button"
                       {...props}
                     >
                       {content ?? (

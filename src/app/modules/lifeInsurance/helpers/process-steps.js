@@ -4,7 +4,7 @@ export const insuranceProcessSteps = [
     title: "Información de asegurabilidad",
   },
   {
-    title: "inscripción de beneficiarios",
+    title: "Inscripción de beneficiarios",
   },
   {
     title: "Preguntas persona expuesta y otros datos",

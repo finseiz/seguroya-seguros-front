@@ -2,18 +2,29 @@ import React, { useState } from "react";
 import BaseSection from "app/components/UI/baseSection";
 import Question from "app/components/process/Question";
 import { useForm } from "app/modules/_forms/useForm";
+import { question1, question2 } from "./../questions-values";
+import { activeRadio, onChangeQuestion } from "./../../../../_forms/forms-actions";
+import { useHistory } from "react-router-dom";
+import { LifeProcessBeneficiariesRoute } from "app/routes/childs/Life/routes";
+import { useDispatch } from "react-redux";
+import { actions } from "app/modules/lifeInsurance/redux";
 
-function InsurabilityInfo({ handleSubmit }) {
+function InsurabilityInfo() {
 
-  const initValues = { "1qst": "", "2qst": "" }
-
-  const [ values, onChange ] = useForm(initValues);
+  const initValues = { [question1.id]: false, [question2.id]: false, }
+  const [values, onChange] = useForm(initValues);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const actionsButton = [
     {
       text: "Continuar",
-      className: "btn btn-primary primary-button",
-      type: "submit",
+      className: "btn btn-primary primary-button process__process-button px-5",
+      type: "button",
+      onClick: () => {
+        dispatch( actions.setShortProcess(1) );
+        history.push(LifeProcessBeneficiariesRoute);
+      },
     },
   ];
 
@@ -22,50 +33,39 @@ function InsurabilityInfo({ handleSubmit }) {
       title="Información de asegurabilidad"
       actions={actionsButton}
     >
-      <Question 
-        question="¿Padece o ha padecido enfermedades de tipo cardiovascular o enfermedades como hipertensión arteria, diabetes, infarto o enfermedades de las arterias coronarias, cáncer, leucemia, linfomas, trombosis, derrames o eventos cerebrovasculares, anemias, esclerosis múltiple, cirrosis hepática, insuficiencia renal, tumores malignos, lupus?"
+      <Question
+        question={question1.question}
         options={[
-          { label: "Si", value: "yes", active: values["1qst"] === "yes", onChange: () => onChange({name: "1qst", value: "yes" }) },
-          { label: "No", value: "no", active: values["1qst"] === "no", onChange: () => onChange({name: "1qst", value: "no" }) }
-        ]}        
+          {
+            ...question1.options[0],
+            active: () => activeRadio(question1, 0, values),
+            onChange: () => onChangeQuestion(question1, 0, onChange)
+          },
+          {
+            ...question1.options[1],
+            active: () => activeRadio(question1, 1, values),
+            onChange: () => onChangeQuestion(question1, 1, onChange)
+          },
+        ]}
       />
-      
 
-      <div className="form-group">
-        <label>
-          ¿Le han detectado la presencia de anticuerpos contra el virus VIH
-          productor del SIDA, ha sido VIH positivo, prueba de Elisa positiva o
-          le han diagnostica SIDA?
-        </label>
-        <div className="form-row">
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="diagnosed_VIH"
-              id="radios1"
-              value="yes"
-              //onChange={formik.handleChange}
-            />
-            <label className="form-check-label" htmlFor="radios1">
-              Si
-            </label>
-          </div>
-          <div className="form-check">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="diagnosed_VIH"
-              id="radios2"
-              value="no"
-              //onChange={formik.handleChange}
-            />
-            <label className="form-check-label" htmlFor="radios2">
-              No
-            </label>
-          </div>
-        </div>
-      </div>
+      <Question
+        question={question2.question}
+        className="mt-4"        
+        options={[
+          {
+            ...question2.options[0],
+            active: () => activeRadio(question2, 0, values),
+            onChange: () => onChangeQuestion(question2, 0, onChange)
+          },
+          {
+            ...question2.options[1],
+            active: () => activeRadio(question2, 1, values),
+            onChange: () => onChangeQuestion(question2, 1, onChange)
+          },
+        ]}
+      />
+
     </BaseSection>
   );
 }

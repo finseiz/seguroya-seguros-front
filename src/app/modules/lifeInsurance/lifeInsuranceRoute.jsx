@@ -1,12 +1,15 @@
 import React from "react";
 import { Redirect, Switch, Route, useHistory } from "react-router-dom";
 import { Content } from "theme/layout/utils/content";
-import { LifeProcessDetailsPlanRoute, LifeProcessInsurabilityRoute, LifeProcessSelectPlanRoute } from "app/routes/childs/Life/routes";
+import { LifeProcessAuthorizationRoute, LifeProcessBeneficiariesRoute, LifeProcessDetailsPlanRoute, LifeProcessInsurabilityRoute, LifeProcessPersonAndMoreDataRoute, LifeProcessSelectPlanRoute } from "app/routes/childs/Life/routes";
 import { SelectLifePlan } from "./components/ShortProcess/select-plan/SelectLifePlan";
 import { PlanDetails } from "./components/ShortProcess/select-plan/PlanDetails";
 import { insuranceProcessSteps } from "./helpers/process-steps";
 import { AsideProcess } from "./../../components/process/AsideProcess";
 import InsurabilityInfo from "./components/ShortProcess/fill-data/InsurabilityInfo";
+import { Beneficiaries } from "./components/ShortProcess/fill-data/beneficiaries/Beneficiaries";
+import { PersonAndOthers } from "./components/ShortProcess/fill-data/person-others/PersonAndOthers";
+import { Authorization } from "./components/ShortProcess/fill-data/Authorization";
 
 const dataInit = {
   documentType: "Cédula de Ciudadanía",
@@ -32,48 +35,46 @@ const dataInit = {
 function LifeInsuranceRoute() {
 
   return (
-    
+
     <Switch>
 
-      <Route exact={true} path={LifeProcessSelectPlanRoute} component={ SelectLifePlan } />
+      <Route exact={true} path={LifeProcessSelectPlanRoute} component={SelectLifePlan} />
 
-      <Route exact={true} path={LifeProcessDetailsPlanRoute} component={ PlanDetails } />
+      <Route exact={true} path={LifeProcessDetailsPlanRoute} component={PlanDetails} />
 
       <Content
-        aside={ () => 
-          <AsideProcess 
-            title="Compra Seguro de Vida - Colmena" 
-            process={ insuranceProcessSteps }
-          /> 
+        aside={() =>
+          <AsideProcess
+            title="Compra Seguro de Vida - Colmena"
+            process={insuranceProcessSteps}
+          />
         }
       >
         <Route
           exact={true}
-          path={ LifeProcessInsurabilityRoute }
-          component={ InsurabilityInfo }
+          path={LifeProcessInsurabilityRoute}
+          component={InsurabilityInfo}
+        />
+
+        <Route
+          exact={true}
+          path={LifeProcessBeneficiariesRoute}
+          component={Beneficiaries}
+        />
+
+        <Route
+          exact={true}
+          path={LifeProcessPersonAndMoreDataRoute}
+          component={PersonAndOthers}
+        />
+
+        <Route
+          exact={true}
+          path={LifeProcessAuthorizationRoute}
+          component={Authorization}
         />
 
         {/*
-        <Route
-          exact={true}
-          path={`/life-process/${beneficiary_enrollment.path}`}
-        >
-          <BeneficiaryEnrollment
-            handleSubmit={(values) => {
-              addData(values);
-              history.push(`${more_info.path}`);
-            }}
-          />
-        </Route>
-
-        <Route exact={true} path={`/life-process/${more_info.path}`}>
-          <MoreInfo
-            handleSubmit={(values) => {
-              addData(values);
-              history.push(`${authorizations.path}`);
-            }}
-          />
-        </Route>
 
         <Route exact={true} path={`/life-process/${authorizations.path}`}>
           <Authorization

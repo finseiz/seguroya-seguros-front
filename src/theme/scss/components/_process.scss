@@ -14,4 +14,76 @@
         line-height: 27px;
     }
 
+    &__option-label{
+        font-weight: bold;
+        font-size: 15px;
+        line-height: 20px;
+        text-align: center;
+        color: #333333;
+    }
+
+    &__question-title{
+        font-size: 15px;
+        line-height: 20px;
+        color: #262828;
+    }
+
+    &__process-button{
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 25px;
+        color: #FFFFFF;
+    }
+
+    &__process-table-message{
+        font-weight: 600;
+        font-size: 18px;
+        line-height: 25px;
+        text-align: center;
+        color: #58585B;
+    }
+
+    &__process-table-btn{
+        font-size: 18px;
+        line-height: 25px;
+        color: #FFFFFF;
+        padding: 0.6rem 3rem;
+        background: #0E1F74;
+        border-radius: 10px;
+    }
+
+    &__beneficiares-title{
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 25px;
+        color: #000000;
+    }
+
+    &__others-lable{
+        font-size: 12px;
+        line-height: 16px;
+        text-align: left;
+        color: #333333;
+    }
+
+    &__others-container{
+        background: #F2F2F2;
+        border-radius: 8px;
+        
+        font-size: 10px;
+        line-height: 12px;
+        color: #333333;
+    }
+
+    &__normal-text{
+        font-size: 16px;
+        line-height: 22px;
+        color: #000000;
+    }
+
+    &__short-container{
+        height: 174px;
+        overflow: auto;
+    }
+
 }

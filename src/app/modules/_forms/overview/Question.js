@@ -9,31 +9,36 @@ import Radio from '../general/Radio'
  * @param {object} options - { formikValue, label, value }
  * @returns 
  */
-const Question = ({ question, options, formik, ...others }) => {
+const Question = ({ question, options, formik, align="center", questionClass="", marginTop="2", radioLabelClass="", ...others }) => {
     return (
         <div {...others} >
-            <p className="inital-from__question">
-                { question }
-            </p>
+            {
+                question &&
+                (
+                    <p className={`inital-from__question ${questionClass}`}>
+                        {question}
+                    </p>
+                )
+            }
 
-            <div className="container" >
-                <div className="row justify-content-center">
+            <div className="container p-0" >
+                <div className={`row justify-content-${align}`}>
                     {
-                        options.map( ( option, i ) => (
-                            <div key={i} className="row align-items-center mt-2">
-                                <Radio 
-                                    active={ formik.values[option.formikValue] === option.value }
-                                    onClick={ () => formik.setFieldValue(option.formikValue, option.value) }
+                        options.map((option, i) => (
+                            <div key={i} className={`row align-items-center mt-${marginTop}`}>
+                                <Radio
+                                    active={formik.values[option.formikValue] === option.value}
+                                    onClick={() => formik.setFieldValue(option.formikValue, option.value)}
                                 />
-                                <label className="inital-from__option ml-2 mb-0">
-                                    { option.label }
+                                <label className={`inital-from__option ml-2 mb-0 ${radioLabelClass}`}>
+                                    {option.label}
                                 </label>
                             </div>
                         ))
                     }
                 </div>
             </div>
-            
+
         </div>
     )
 }

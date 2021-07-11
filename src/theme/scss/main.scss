@@ -76,18 +76,46 @@
   background-color: $bg-gray-2;
 }
 
-.form-control {
+input.form-control {
   background-color: #ebebf2;
-  color: #3f4254;
+  color: black;
   border: 1px solid #c4c4c4;
   box-sizing: border-box;
   border-radius: 10px;
-  transition: color 0.15s ease, background-color 0.15s ease,
-    border-color 0.15s ease, box-shadow 0.15s ease;
+  font-size: 16px;
+  line-height: 22px;
+
+  &:focus {
+    color: black;
+  }
+
 }
 
-.form-control::placeholder {
-  color: #bbb5c6;
+select.form-select {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #ebebf2;
+  background-clip: padding-box;
+  border: 1px solid #c4c4c4;
+  border-radius: 10px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &:focus {
+    color: black;
+    border: 0;
+    outline: none;
+  }
+
+  &:after{
+    outline: none;
+  }
+
 }
 
 .form-label {
@@ -141,4 +169,18 @@ button.radio {
 
 .w-90{
   width: 90%;
+}
+
+.invalid-msj{
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
+
+.radio-label{
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 16px;
+  color: #333333;
 }

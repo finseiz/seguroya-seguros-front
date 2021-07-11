@@ -6,7 +6,7 @@ import { AsideProcessIndicator } from "./AsideProcessIndicator";
 export const AsideProcess = (props) => {
 
     const { title, process } = props;
-    const { selectedPlan } = useSelector((state) => state.lifeInsurance);
+    const { selectedPlan, progress:{shortProcess} } = useSelector((state) => state.lifeInsurance);
 
     return (
         <div className="container my-4">
@@ -24,7 +24,7 @@ export const AsideProcess = (props) => {
             </div>
 
             <div className="mt-4">
-                <AsideProcessIndicator process={process} index={2} />
+                <AsideProcessIndicator process={process} index={shortProcess} />
             </div>
 
         </div>
