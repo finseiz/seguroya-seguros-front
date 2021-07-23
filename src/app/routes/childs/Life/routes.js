@@ -15,3 +15,7 @@ export const LifeProcessBeneficiariesRoute =  LifeProcessRoute + "/beneficiaries
 export const LifeProcessPersonAndMoreDataRoute =  LifeProcessRoute + "/more-data";
 
 export const LifeProcessAuthorizationRoute =  LifeProcessRoute + "/authorization";
+
+export const LifeProcessOTP =  LifeProcessRoute + "/otp";
+
+export const LifeProcessDone =  LifeProcessRoute + "/done";

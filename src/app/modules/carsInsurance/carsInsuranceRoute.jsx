@@ -4,7 +4,7 @@ import { Redirect, Switch, Route, useHistory } from "react-router-dom";
 //import { StepsInsuranceProcess } from "app/const";
 import { Content } from "theme/layout/utils/content";
 //import { BaseAsideProcess } from "app/components/UI/auxComponents";
-import ConfirmationCode from "app/pages/purchasingProcess/confirmationCode";
+import ConfirmationCode from "app/modules/lifeInsurance/components/ShortProcess/fill-data/OTP";
 import SarlaftForm from "app/pages/purchasingProcess/sarlaftForm";
 import UploadDocuments from "./pages/uploadDocuments";
 import Schedule from "./pages/schedule";

@@ -67,7 +67,7 @@
     }
 
     &__others-container{
-        background: #F2F2F2;
+        background: #EBEBF2;
         border-radius: 8px;
         
         font-size: 10px;
@@ -86,4 +86,36 @@
         overflow: auto;
     }
 
+    &__opt_container{
+        height: 300px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        line-height: 25px;
+    }
+
+    &__opt_input{
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    &__otp-width{
+        width: 300px;
+    }
+
+    &__otp-title-modal{
+        font-size: 18px;
+        line-height: 25px;
+    }
+
+
+
+}
+
+input[type='text'].process-input-otp{
+    height: 60px;
+    text-align: center;
+    font-size: 26px;
+    line-height: 35px;
 }

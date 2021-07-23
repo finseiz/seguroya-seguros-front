@@ -5,14 +5,16 @@ import { beneficiariesSchema, beneficiariesValues } from "./formik";
 import FormikInput from "app/modules/_forms/general/FormikInput";
 import FormikSelect from "app/modules/_forms/general/FormikSelect";
 import FormikRadioGroup from "../../../../../_forms/general/FormikRadioGroup";
-import { question3Gender } from "./../../questions-values";
 
 function AddBeneficiary({ open, handleClose, handleSubmit }) {
 
   const formik = useFormik({
     initialValues: beneficiariesValues,
     validationSchema: beneficiariesSchema,
-    onSubmit: handleSubmit,
+    onSubmit: ( values ) => {
+      handleSubmit(values);
+      formik.resetForm();
+    },
   });
 
   return (
@@ -20,7 +22,7 @@ function AddBeneficiary({ open, handleClose, handleSubmit }) {
 
       <form onSubmit={formik.handleSubmit}>
 
-        <p className="process__beneficiares-title">Beneficiario 1</p>
+        <p className="process__beneficiares-title">Beneficiario #</p>
 
         <div className="row">
 
@@ -41,7 +43,6 @@ function AddBeneficiary({ open, handleClose, handleSubmit }) {
             <div className="mt-2">
               <FormikRadioGroup
                 formik={formik}
-                question={question3Gender}
                 field="gender"
                 label="Género"
                 options={[

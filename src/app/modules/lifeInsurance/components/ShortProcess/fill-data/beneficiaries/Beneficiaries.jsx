@@ -34,6 +34,12 @@ export const Beneficiaries = ({}) => {
 
   const handleCloseAddModal = () => setOpenAddModal(false);
 
+  const deleteRow = ( index ) => { 
+    const aux = [...beneficiaries];
+    aux.splice( index, 1 );
+    setBeneficiaries( aux );
+  }
+
   const addData = ( values ) => {
     setBeneficiaries( [...beneficiaries, values] );
   };
@@ -52,14 +58,7 @@ export const Beneficiaries = ({}) => {
           { title: "", field: "tools" }
         ]}
         data={ beneficiaries }
-        deleteRow={ ( index ) => { 
-          console.log( beneficiaries, index );
-          // let aux = [ ...beneficiariesList ];
-          // console.log(aux);
-          // let newList = aux.splice( index, 1 );
-          // console.log(newList, aux);
-          // setBeneficiariesList( newList );
-        } }
+        deleteRow={ deleteRow }
         editRow={ () => {} }
       />
 
@@ -72,16 +71,14 @@ export const Beneficiaries = ({}) => {
         </button>
       </div>
 
-      {openAddModal && (
-        <AddBeneficiary
-          open={openAddModal}
-          handleClose={handleCloseAddModal}
-          handleSubmit={ (values) => {
-            addData(values);
-            handleCloseAddModal();
-          }}
-        />
-      )}
+      <AddBeneficiary
+        open={openAddModal}
+        handleClose={handleCloseAddModal}
+        handleSubmit={ (values) => {
+          addData(values);
+          handleCloseAddModal();
+        }}
+      />
     </BaseSection>
   );
 }

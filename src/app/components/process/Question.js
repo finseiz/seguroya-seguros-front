@@ -3,11 +3,12 @@ import PropTypes from 'prop-types'
 import Radio from "./../../modules/_forms/general/Radio";
 
 /**
+ * 
  * @param {string} question
  * @param {object} options - { label, value, active, onChange }
  * @returns 
  */
-const Question = ({ question, options, ...others }) => {
+const Question = ({ question, options, activeError, showError, ...others }) => {
     return (
         <div {...others} >
             {
@@ -35,6 +36,12 @@ const Question = ({ question, options, ...others }) => {
                     }
                 </div>
             </div>
+
+            {
+                activeError && showError && (
+                    <div className="invalid-msj"> Campo requerido </div>
+                )
+            }
             
         </div>
     )

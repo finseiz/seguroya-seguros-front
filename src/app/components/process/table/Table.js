@@ -5,7 +5,7 @@ import Cell from "./Cell";
 
 const TableProcess = ({ columns, data, deleteRow, editRow }) => {
 
-    const columnsTable = React.useMemo(() => columns.map((col) => ({ Header: col.title, accessor: col.field })), [] );
+    const columnsTable = React.useMemo(() => columns.map((col) => ({ Header: col.title, accessor: col.field })), [data] );
 
     const defaultColumn = { 
         Cell: ( values ) => (

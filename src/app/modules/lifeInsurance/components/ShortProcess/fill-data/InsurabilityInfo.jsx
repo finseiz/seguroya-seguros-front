@@ -3,7 +3,7 @@ import BaseSection from "app/components/UI/baseSection";
 import Question from "app/components/process/Question";
 import { useForm } from "app/modules/_forms/useForm";
 import { question1, question2 } from "./../questions-values";
-import { activeRadio, onChangeQuestion } from "./../../../../_forms/forms-actions";
+import { activeError, activeRadio, canContinue, onChangeQuestion } from "./../../../../_forms/forms-actions";
 import { useHistory } from "react-router-dom";
 import { LifeProcessBeneficiariesRoute } from "app/routes/childs/Life/routes";
 import { useDispatch } from "react-redux";
@@ -11,10 +11,11 @@ import { actions } from "app/modules/lifeInsurance/redux";
 
 function InsurabilityInfo() {
 
-  const initValues = { [question1.id]: false, [question2.id]: false, }
+  const initValues = { [question1.id]: "", [question2.id]: "", }
   const [values, onChange] = useForm(initValues);
   const history = useHistory();
   const dispatch = useDispatch();
+  const [trySubmit, setTrySubmit] = useState(false);
 
   const actionsButton = [
     {
@@ -22,8 +23,11 @@ function InsurabilityInfo() {
       className: "btn btn-primary primary-button process__process-button px-5",
       type: "button",
       onClick: () => {
-        dispatch( actions.setShortProcess(1) );
-        history.push(LifeProcessBeneficiariesRoute);
+        setTrySubmit(true);
+        if ( canContinue( values ) ){
+          dispatch( actions.setShortProcess(1) );
+          history.push(LifeProcessBeneficiariesRoute);
+        }
       },
     },
   ];
@@ -47,6 +51,8 @@ function InsurabilityInfo() {
             onChange: () => onChangeQuestion(question1, 1, onChange)
           },
         ]}
+        activeError={ activeError(question1, values) }
+        showError={trySubmit}
       />
 
       <Question
@@ -64,6 +70,8 @@ function InsurabilityInfo() {
             onChange: () => onChangeQuestion(question2, 1, onChange)
           },
         ]}
+        activeError={ activeError(question2, values) }
+        showError={trySubmit}
       />
 
     </BaseSection>

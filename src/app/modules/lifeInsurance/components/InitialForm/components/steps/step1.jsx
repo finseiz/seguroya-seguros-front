@@ -28,7 +28,7 @@ export function Step1({ formik }) {
             type="text"
             id="document_type"
             name="document_type"
-            className={`form-control ${
+            className={`form-control form-select ${
               formik.touched.document_type
                 ? formik.errors.document_type
                   ? "is-invalid"

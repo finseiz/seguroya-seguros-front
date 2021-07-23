@@ -92,10 +92,6 @@ input.form-control {
 }
 
 select.form-select {
-  display: block;
-  width: 100%;
-  height: calc(1.5em + 0.75rem + 2px);
-  padding: 0.375rem 0.75rem;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -105,17 +101,6 @@ select.form-select {
   border: 1px solid #c4c4c4;
   border-radius: 10px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-
-  &:focus {
-    color: black;
-    border: 0;
-    outline: none;
-  }
-
-  &:after{
-    outline: none;
-  }
-
 }
 
 .form-label {

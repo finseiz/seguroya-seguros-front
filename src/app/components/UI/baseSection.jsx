@@ -34,7 +34,7 @@ function BaseSection({ children, title, description, actions, loading }) {
       {/* Process actions */}
       {
         actions && (
-          <div className="card custom-card mt-3">
+          <div className="card custom-card my-3">
             <div className="card-body text-center">
 
               {
