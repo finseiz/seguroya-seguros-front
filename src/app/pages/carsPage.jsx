@@ -1,3 +1,4 @@
+import SharedSections from "app/components/home/sharedSections";
 import CarsForm from "app/modules/carsInsurance/components/carsForm";
 import React from "react";
 
@@ -9,6 +10,7 @@ export default function CarsPage() {
           <CarsForm />
         </div>
       </div>
+      <SharedSections />
     </div>
   );
 }

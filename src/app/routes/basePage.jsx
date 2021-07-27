@@ -8,42 +8,25 @@ import SelectPlanPage from "app/pages/selectPlanPage";
 import { LoadingScreen } from "theme/layout";
 import CarsPage from "app/pages/carsPage.jsx";
 import { LifeRoutes } from "./childs/Life/LifeRouter.jsx";
-
-const CarsInsuranceRoute = React.lazy(() =>
-  import("app/modules/carsInsurance/carsInsuranceRoute")
-);
+import { CarsRoutes } from "./childs/Cars/CarsRouter";
+import { LifeHomeRoute } from "./childs/Life/routes.js";
+import { CarsHomeRoute } from "./childs/Cars/routes.js";
 
 function BasePage() {
-  const history = useHistory();
-  const { carPlans } = useSelector(
-    ({ carsInsurance }) => ({
-      carPlans: carsInsurance.plans,
-    }),
-    shallowEqual
-  );
 
   return (
     <React.Suspense fallback={<LoadingScreen />}>
       <Switch>
-        <Redirect exact={true} from="/" to="/home" />
-        <Route exact={true} path="/home" component={Home} />
+        <Redirect exact from="/" to="/home" />
+
+        <Route exact path="/home" component={Home} />
         
-        <LifeRoutes />
+        <Route path={LifeHomeRoute} component={LifeRoutes} />
+
+        <Route path={CarsHomeRoute} component={CarsRoutes} />
 
         <Route exact={true} path="/health" component={HealthPage} />
-        <Route exact={true} path="/cars" component={CarsPage} />
-        <Route
-          exact={true}
-          path="/cars/select-plan"
-          component={() => (
-            <SelectPlanPage
-              plans={carPlans}
-              selectPlan={() => history.push("/cars-process")}
-            />
-          )}
-        />
         
-        <Route path="/cars-process" component={CarsInsuranceRoute} />
         <Redirect to="/error/404" />
       </Switch>
     </React.Suspense>

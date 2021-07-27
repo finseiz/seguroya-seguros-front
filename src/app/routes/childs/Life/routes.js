@@ -1,7 +1,7 @@
 
-export const LifeHomeRoute = "/home/life";
+export const LifeHomeRoute = "/life";
 
-export const LifeProcessRoute = "/process/life-process"
+export const LifeProcessRoute = LifeHomeRoute + "/process"
 
 export const LifeProcessSelectPlanRoute =  LifeProcessRoute + "/select-plan";
 

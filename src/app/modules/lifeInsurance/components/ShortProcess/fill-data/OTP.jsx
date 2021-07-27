@@ -14,7 +14,7 @@ export const ConfirmationCode = ({ }) => {
     <BaseSection
       title="Verifica tu identidad"
     >
-      <div className="text-center process__opt_container">
+      <div className="text-center process__opt_container center-flex">
 
         <div>
           <p className="m-1">

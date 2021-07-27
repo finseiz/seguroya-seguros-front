@@ -3,8 +3,6 @@ import { Switch, Route } from "react-router-dom";
 import { LifeHomeRoute, LifeProcessRoute } from './routes'
 import LifePage from 'app/pages/lifePage';
 
-//import LifeInsuranceRoute from 'app/modules/lifeInsurance/lifeInsuranceRoute'
-
 const LifeInsuranceRoute = React.lazy(() =>
   import("app/modules/lifeInsurance/lifeInsuranceRoute")
 );
@@ -17,7 +15,7 @@ export const LifeRoutes = () => {
     return (
         <Switch>
             <Route
-                exact={true} 
+                exact
                 path={ LifeHomeRoute } 
                 component={ LifePage } 
             />

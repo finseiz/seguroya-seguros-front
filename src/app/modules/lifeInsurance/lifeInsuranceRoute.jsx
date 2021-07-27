@@ -88,31 +88,6 @@ function LifeInsuranceRoute() {
           component={ProcessDone}
         />
 
-        {/*
-
-        <Route exact={true} path={`/life-process/${authorizations.path}`}>
-          <Authorization
-            handleSubmit={async (values) => {
-              addData(values);
-              const config = {
-                method: "POST",
-                headers: new Headers({ "Content-Type": "application/json" }),
-                body: JSON.stringify({ ...clientData, ...data }),
-              };
-              await fetch("http://localhost:3001/api/colmena", config);
-              //history.push(`${confimation_code.path}`);
-            }}
-          />
-        </Route>
-
-        <Route exact={true} path={`/life-process/${confimation_code.path}`}>
-          <ConfirmationCode
-            handleSubmit={async () => {
-              //history.push("select-plan");
-            }}
-          />
-        </Route> */}
-
       </Content>
 
       <Redirect to="/error/404" />
