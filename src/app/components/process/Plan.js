@@ -4,12 +4,11 @@ import { toAbsoluteUrl } from 'theme/helpers/AssetsHelpers';
 import Qualification from "./Qualification";
 import { parseCurrency } from "./../../const/parse-currency";
 import { useHistory } from 'react-router-dom';
-import { LifeProcessDetailsPlanRouteFunc } from 'app/routes/childs/Life/routes';
 
-const Plan = ( props ) => {
+const Plan = (props) => {
 
-    const { logoPath, insuranceName, index, qualification, price, returnPercent, 
-    anualPrice, share, shareNumber} = props;
+    const { logoPath, insuranceName, index, qualification, descriptionValues,
+        anualPrice, share, shareNumber, redirect } = props;
 
     const history = useHistory();
 
@@ -22,14 +21,15 @@ const Plan = ( props ) => {
                 <div className="plans_insurance-logo-space">
                     <img
                         className="plans_insurance-logo"
-                        src={toAbsoluteUrl( `/media/logos/${logoPath}` )}
+                        src={toAbsoluteUrl(`/media/logos/${logoPath}`)}
+                        style={{maxWidth: 220}}
                     />
                 </div>
 
                 {/** Insurance Description */}
                 <div className="plans__insurance-desc">
                     <p className="plans_plan-name">
-                        { insuranceName } - Plan { index + 1 }
+                        {insuranceName} { index !== undefined && `- Plan ${index + 1}` }
                     </p>
 
                     <div>
@@ -37,47 +37,46 @@ const Plan = ( props ) => {
                             Calificación de usuarios
                         </p>
                         <div className="row">
-                            <Qualification 
+                            <Qualification
                                 qualification={qualification}
                             />
-                            <p className="plans_plan-qualification mx-3 my-auto"> { qualification } </p>
+                            <p className="plans_plan-qualification mx-3 my-auto"> {qualification} </p>
                         </div>
                     </div>
 
-                    <div>
-                        <p className="plans_plan-label">Prima</p>
-                        <p className="plans_plan-value">
-                            { `${parseCurrency(price)}COP` }
-                        </p>
-                    </div>
+                    {
+                        descriptionValues && 
+                        descriptionValues.map(value => (
+                            <div>
+                                <p className="plans_plan-label"> { value.label } </p>
+                                <p className="plans_plan-value"> { value.value } </p>
+                            </div>
+                        ))
+                    }
 
-                    <div>
-                        <p className="plans_plan-label"> Retorno de prima </p>
-                        <p className="plans_plan-value"> {returnPercent}% </p>
-                    </div>
                 </div>
 
-                <hr/>
+                <hr />
 
                 <div className="plans__insurance-desc">
                     <p className="plans_plan-label"> Valor a pagar anual </p>
-                    <p className="plans_plan-price"> { parseCurrency(anualPrice) } </p>
-                    <p className="plans_plan-value"> { `Hasta ${ parseCurrency(share) } por ${shareNumber} coutas` } </p>
+                    <p className="plans_plan-price"> {parseCurrency(anualPrice)} </p>
+                    <p className="plans_plan-value"> {`Hasta ${parseCurrency(share)} por ${shareNumber} coutas`} </p>
                 </div>
 
                 {/**Insurance Button */}
                 <div className="text-center">
-                    <button 
+                    <button
                         type="button"
                         className="btn primary_btn_expand w-90"
-                        onClick={ () => history.push( LifeProcessDetailsPlanRouteFunc(index) ) }
+                        onClick={() => history.push(redirect(index))}
                     >
                         Comprar
                     </button>
                 </div>
 
             </div>
-            
+
 
 
         </div>
@@ -89,8 +88,7 @@ Plan.propTypes = {
     insuranceName: PropTypes.any,
     index: PropTypes.any,
     qualification: PropTypes.any,
-    price: PropTypes.any,
-    returnPercent: PropTypes.any,
+    descriptionValues: PropTypes.array,
     anualPrice: PropTypes.any,
     share: PropTypes.any,
     shareNumber: PropTypes.any,

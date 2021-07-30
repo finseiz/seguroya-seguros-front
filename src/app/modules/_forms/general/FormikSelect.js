@@ -6,13 +6,13 @@ import PropTypes from 'prop-types'
  * @param {options} { title, value } 
  * @returns 
  */
-const FormikSelect = ({ label, field, formik, options }) => {
+const FormikSelect = ({ label, field, formik, options, labelClass="" }) => {
 
     const hasError = formik.touched[field] && formik.errors[field];
 
     return (
         <>
-            <label htmlFor={field} className="form-label">
+            <label htmlFor={field} className={`form-label ${labelClass}`}>
                 {label}
             </label>
 

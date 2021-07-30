@@ -2,9 +2,9 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { ProgressBar, Step } from "react-step-progress-bar";
 
-export const ProgressIndicator = () => {
+export const ProgressIndicator = ({ insuranceReduxName }) => {
 
-  const { progress: { initial } } = useSelector(state => state.lifeInsurance);
+  const { progress: { initial } } = useSelector(state => state[insuranceReduxName]);
 
   return (
     <div className="w-75" style={{display: "inline-block"}}>

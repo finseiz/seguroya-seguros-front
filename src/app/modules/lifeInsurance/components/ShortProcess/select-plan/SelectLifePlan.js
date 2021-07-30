@@ -1,5 +1,7 @@
 import { WhatsAppContainer } from 'app/components/process/WhatsAppContainer'
+import { colmenaPlan } from 'app/helpers/select-plan';
 import { actions } from 'app/modules/lifeInsurance/redux';
+import { LifeProcessDetailsPlanRouteFunc } from 'app/routes/childs/Life/routes';
 import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import Plan from "./../../../../../components/process/Plan";
@@ -15,22 +17,22 @@ export const SelectLifePlan = () => {
             {
                 logoPath: "colmena-logo.svg", 
                 insuranceName: "Colmena",
-                price: 100000,
                 qualification: 3,
-                returnPercent: 85,
-                anualPrice: 100434000,
-                share: 10430000,
-                shareNumber: 12
+                anualPrice: 5000000,
+                share: 200000,
+                shareNumber: 12,
+                descriptionValues: colmenaPlan(25000, 80),
+                redirect: LifeProcessDetailsPlanRouteFunc
             },
             {
                 logoPath: "colmena-logo.svg", 
                 insuranceName: "Colmena",
-                price: 233000,
                 qualification: 1,
-                returnPercent: 87,
-                anualPrice: 100320000,
-                share: 10000230,
-                shareNumber: 12
+                anualPrice: 2300000,
+                share: 100000,
+                shareNumber: 12,
+                descriptionValues: colmenaPlan(49000, 33),
+                redirect: LifeProcessDetailsPlanRouteFunc
             },
         ]) )
     }, [])
@@ -48,15 +50,8 @@ export const SelectLifePlan = () => {
                         plans.map( ( plan, i ) => (
                             <Fragment key={i}>
                                 <Plan 
-                                    logoPath={plan.logoPath}
                                     index={i}
-                                    insuranceName={plan.insuranceName}
-                                    price={plan.price}
-                                    qualification={plan.qualification}
-                                    returnPercent={plan.returnPercent}
-                                    anualPrice={plan.anualPrice}
-                                    share={plan.share}
-                                    shareNumber={plan.shareNumber}
+                                    { ...plan }
                                 />
                             </Fragment>
                         ))

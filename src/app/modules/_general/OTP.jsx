@@ -3,9 +3,8 @@ import BaseSection from "app/components/UI/baseSection";
 import BaseModal from "app/components/UI/baseModal";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { LifeProcessDone } from "app/routes/childs/Life/routes";
 
-export const ConfirmationCode = ({ }) => {
+export const ConfirmationCode = ({ redirectRoute }) => {
 
   const [openModal, setOpenModal] = useState(false);
   const history = useHistory();
@@ -72,7 +71,7 @@ export const ConfirmationCode = ({ }) => {
                 type="submit"
                 className="col btn btn-primary primary-button ml-2 w-100"
                 onClick={() => {
-                  history.push(LifeProcessDone);
+                  history.push(redirectRoute);
                 }}
               >
                 <b>Continuar</b>

@@ -4,35 +4,14 @@ import { Content } from "theme/layout/utils/content";
 import { LifeProcessAuthorizationRoute, LifeProcessBeneficiariesRoute, LifeProcessDetailsPlanRoute, LifeProcessDone, LifeProcessInsurabilityRoute, LifeProcessOTP, LifeProcessPersonAndMoreDataRoute, LifeProcessSelectPlanRoute } from "app/routes/childs/Life/routes";
 import { SelectLifePlan } from "./components/ShortProcess/select-plan/SelectLifePlan";
 import { PlanDetails } from "./components/ShortProcess/select-plan/PlanDetails";
-import { insuranceProcessSteps } from "./helpers/process-steps";
+import { lifeProcessSteps } from "../../helpers/process-steps";
 import { AsideProcess } from "./../../components/process/AsideProcess";
 import InsurabilityInfo from "./components/ShortProcess/fill-data/InsurabilityInfo";
 import { Beneficiaries } from "./components/ShortProcess/fill-data/beneficiaries/Beneficiaries";
 import { PersonAndOthers } from "./components/ShortProcess/fill-data/person-others/PersonAndOthers";
 import { Authorization } from "./components/ShortProcess/fill-data/Authorization";
-import { ConfirmationCode } from "./components/ShortProcess/fill-data/OTP";
+import { ConfirmationCode } from "../_general/OTP";
 import { ProcessDone } from "../_general/ProcessDone";
-
-const dataInit = {
-  documentType: "Cédula de Ciudadanía",
-  identification: "123456789",
-  firstName: "Jhoan",
-  firstLastName: "Lozano",
-  birthDepartment: "VALLE DEL CAUCA",
-  brithCity: "CALI",
-  gender: "Masculino",
-  residentDepartment: "VALLE DEL CAUCA",
-  residentCity: "CALI",
-  address: "cll 12 13 14",
-  ocupation: "Empleado",
-  cellphone: "3215469878",
-  email: "jhlozano99@gmail.com",
-  publiclyExposed: false,
-  publiclyExposedVinculation: false,
-  taxObligations: false,
-  usTaxResidentOrPlayer: false,
-  taxObligationsOutsideColombia: false,
-};
 
 function LifeInsuranceRoute() {
 
@@ -48,7 +27,9 @@ function LifeInsuranceRoute() {
         aside={() =>
           <AsideProcess
             title="Compra Seguro de Vida - Colmena"
-            process={insuranceProcessSteps}
+            process={lifeProcessSteps}
+            insuranceName="lifeInsurance"
+            processIndicatorName="shortProcess"
           />
         }
       >
@@ -79,7 +60,7 @@ function LifeInsuranceRoute() {
         <Route
           exact={true}
           path={LifeProcessOTP}
-          component={ConfirmationCode}
+          component={ () => <ConfirmationCode redirectRoute={LifeProcessDone} /> }
         />
 
         <Route

@@ -1,12 +1,8 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { shallowEqual, useSelector } from "react-redux";
 import { Redirect, Switch, Route } from "react-router-dom";
 import HealthPage from "app/pages/healthPage.jsx";
 import Home from "../pages/home.jsx";
-import SelectPlanPage from "app/pages/selectPlanPage";
 import { LoadingScreen } from "theme/layout";
-import CarsPage from "app/pages/carsPage.jsx";
 import { LifeRoutes } from "./childs/Life/LifeRouter.jsx";
 import { CarsRoutes } from "./childs/Cars/CarsRouter";
 import { LifeHomeRoute } from "./childs/Life/routes.js";

@@ -38,7 +38,8 @@ export function Step1({ formik }) {
             {...formik.getFieldProps("document_type")}
           >
             <option value="">Seleccionar</option>
-            <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
+            <option value="CC">Cédula de Ciudadanía</option>
+            <option value="PASS">Pasaporte</option>
           </select>
           <div className="invalid-feedback">{formik.errors.document_type}</div>
         </div>

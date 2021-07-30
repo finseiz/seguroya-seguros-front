@@ -11,15 +11,17 @@ function BaseSection({ children, title, description, actions, loading }) {
         title && (
           <div className="custom-card bg-white mt-4">
             <div className="card-body">
+
               <p className="process__process-title mb-0 py-2 px-4"> {title} </p>
+
+              {
+                description && (
+                  <div className="px-4 mt-3">
+                    {description}
+                  </div>
+                )
+              }
             </div>
-            {
-              description && (
-                <div className="pt-0">
-                  <span>{description}</span>
-                </div>
-              )
-            }
           </div>
         )
       }
@@ -34,7 +36,7 @@ function BaseSection({ children, title, description, actions, loading }) {
       {/* Process actions */}
       {
         actions && (
-          <div className="card custom-card my-3">
+          <div className="card custom-card my-3 border-0">
             <div className="card-body text-center">
 
               {
@@ -42,7 +44,7 @@ function BaseSection({ children, title, description, actions, loading }) {
                   const { content, text, ...props } = action;
                   return (
                     <button
-                      className={ props.className ? props.className : "btn btn-primary" }
+                      className={props.className ? props.className : "btn btn-primary"}
                       key={index}
                       type="button"
                       {...props}

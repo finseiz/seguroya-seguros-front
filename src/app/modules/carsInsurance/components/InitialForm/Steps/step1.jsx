@@ -28,7 +28,7 @@ export function Step1({ formik, cities }) {
             type="text"
             id="city"
             name="city"
-            className={`form-control ${
+            className={`form-control form-select ${
               formik.touched.city
                 ? formik.errors.city
                   ? "is-invalid"
@@ -153,7 +153,7 @@ export function Step1({ formik, cities }) {
             type="text"
             id="document_type"
             name="document_type"
-            className={`form-control ${
+            className={`form-control form-select ${
               formik.touched.document_type
                 ? formik.errors.document_type
                   ? "is-invalid"

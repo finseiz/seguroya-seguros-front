@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const FormikInput = ({ label, field, formik, type="text", disable=false }) => {
+const FormikInput = ({ label, field, formik, type="text", disable=false, labelClass="" }) => {
 
     const hasError = formik.touched[field] && formik.errors[field];
 
     return (
         <>
-            <label htmlFor={field} className="form-label">
+            <label htmlFor={field} className={`form-label ${labelClass}`}>
                 {label}
             </label>
             <input

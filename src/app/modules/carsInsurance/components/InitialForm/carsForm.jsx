@@ -1,31 +1,29 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import { CircularProgress } from "@material-ui/core";
-import { Step1, Step2, Step3 } from "./components/steps";
+import { Step1, Step2, Step3 } from "./Steps";
 import { actions } from "../../redux";
-import { initialSchema, initialValues } from "./helpers/formik";
+import { CarsSchema, initialValues } from "./helpers/formik";
 import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
-import { ProgressIndicator } from "../../../../components/process/ProgressIndicator";
-import { LifeProcessSelectPlanRoute } from "app/routes/childs/Life/routes";
+import { ProgressIndicator } from "app/components/process/ProgressIndicator";
+import { CarsProcessSelectPlanRoute } from "app/routes/childs/Cars/routes";
 
-function LifeForm() {
+function CarsForm() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const { cities } = useSelector((state) => state.carsInsurance.data);
   const [step, setStep] = React.useState(1);
-  const { data } = useSelector((state) => state.lifeInsurance);
 
   const formik = useFormik({
     initialValues,
-    validationSchema: initialSchema,
+    validationSchema: CarsSchema,
     onSubmit: (values, { setSubmitting }) => {
-
       dispatch(actions.addClientData(values));
       setStep((prevStep) => prevStep + 1)
       setSubmitting(false);
       dispatch(actions.setInitialProgress(50));
-
     },
   });
 
@@ -39,7 +37,7 @@ function LifeForm() {
         dispatch(actions.setInitialProgress(100));
         break;
       case 3:
-        history.push(LifeProcessSelectPlanRoute);
+        history.push(CarsProcessSelectPlanRoute);
         break;
       default:
         break;
@@ -65,7 +63,7 @@ function LifeForm() {
       <form onSubmit={formik.handleSubmit}>
 
         <div className="text-center">
-            <p className="insurance-name m-0">Seguro de Vida</p>
+            <p className="insurance-name m-0">Seguro de Autos</p>
             <p className="insurance-desc">Buscamos hacer más fácil y cercano el mundo de los seguros siendo tu asesor digital 24/7</p>
         </div>
 
@@ -75,21 +73,21 @@ function LifeForm() {
 
             <div className="small-icon">
               <img
-                src={toAbsoluteUrl("/media/icons/healthcare.svg")}
+                src={toAbsoluteUrl("/media/icons/car.svg")}
                 alt="life-icon"
               />
             </div>
-            <p className="m-1 initial-form__insurance-name-short" >Vida</p>
+            <p className="m-1 initial-form__insurance-name-short" >Seguro para Autos</p>
             <p className="initial-form__insurance-sentense" >Para comenzar, cuéntanos sobre ti...</p>
 
-            <ProgressIndicator insuranceReduxName="lifeInsurance" />
+            <ProgressIndicator insuranceReduxName="carsInsurance" />
 
           </div>
         </div>
 
         {/* Form steps */}
         <div className="container w-100 inital-from__box mt-3">
-          {step === 1 && <Step1 formik={formik} />}
+          {step === 1 && <Step1 formik={formik} cities={cities} />}
           {step === 2 && <Step2 formik={formik} onEdit={backBtnAction} />}
           {step === 3 && <Step3 formik={formik} />}
         </div>
@@ -126,4 +124,4 @@ function LifeForm() {
   );
 }
 
-export default LifeForm;
+export default CarsForm;

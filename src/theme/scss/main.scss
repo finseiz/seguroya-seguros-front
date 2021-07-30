@@ -1,6 +1,5 @@
 @import "./config.scss";
 @import "./home.scss";
-@import "./life.scss";
 
 @import "./components/step-progress-bar";
 @import "./components/inital-form";
@@ -9,6 +8,7 @@
 @import "./components/plans";
 @import "./components/aside-step-bar";
 @import "./components/process";
+@import "./components/sarlaft";
 
 @font-face {
   font-family: "Como";
@@ -174,4 +174,25 @@ button.radio {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.form-check label {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.background-life {
+  background-image: url("../images/life-back.png");
+  background-position: top;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+
+.background-cars {
+  background-image: url("../images/cars-back.png");
+  background-position: top;
+  background-repeat: no-repeat;
+  width: 100%;
 }

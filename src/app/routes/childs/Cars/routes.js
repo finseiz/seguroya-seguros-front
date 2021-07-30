@@ -3,11 +3,12 @@ export const CarsHomeRoute = "/cars";
 
 export const CarsProcessRoute = CarsHomeRoute + "/process"
 
-// export const LifeProcessSelectPlanRoute =  LifeProcessRoute + "/select-plan";
+export const CarsProcessSelectPlanRoute =  CarsProcessRoute + "/select-plan";
 
-// export const LifeProcessDetailsPlanRoute =  LifeProcessRoute + "/:id/details";
-// export const LifeProcessDetailsPlanRouteFunc = (id) => LifeProcessRoute + `/${id}/details`;
+export const CarsProcessDetailsPlanRoute =  CarsProcessRoute + "/:id/details";
+export const CarsProcessDetailsPlanRouteFunc = (id) => CarsProcessRoute + `/${id}/details`;
 
-// export const LifeProcessInsurabilityRoute =  LifeProcessRoute + "/insurability-info";
+export const CarsProcessOtpRoute =  CarsProcessRoute + "/otp";
 
-// export const LifeProcessBeneficiariesRoute =  LifeProcessRoute + "/beneficiaries";
+export const CarsProcessSarlaftRoute =  CarsProcessRoute + "/sarlaft/form";
+

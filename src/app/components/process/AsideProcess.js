@@ -5,9 +5,10 @@ import { AsideProcessIndicator } from "./AsideProcessIndicator";
 
 export const AsideProcess = (props) => {
 
-    const { title, process } = props;
-    const { selectedPlan, progress:{shortProcess} } = useSelector((state) => state.lifeInsurance);
+    const { title, process, insuranceName, processIndicatorName } = props;
+    const { selectedPlan, progress } = useSelector((state) => state[insuranceName]);
 
+    const processIndicator = progress[processIndicatorName]
     return (
         <div className="container my-4">
 
@@ -24,7 +25,7 @@ export const AsideProcess = (props) => {
             </div>
 
             <div className="mt-4">
-                <AsideProcessIndicator process={process} index={shortProcess} />
+                <AsideProcessIndicator process={process} index={processIndicator} />
             </div>
 
         </div>
