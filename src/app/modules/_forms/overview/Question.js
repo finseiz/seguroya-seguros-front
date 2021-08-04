@@ -7,9 +7,10 @@ import Radio from '../general/Radio'
  * @param {string} question
  * @param {object} formik
  * @param {object} options - { formikValue, label, value }
+ * @param {string} optionsClass - "flex-column"
  * @returns 
  */
-const Question = ({ question, options, formik, align="center", questionClass="", marginTop="2", radioLabelClass="", ...others }) => {
+const Question = ({ question, options, formik, align="center", questionClass="", marginTop="2", radioLabelClass="", optionsClass="", ...others }) => {
     return (
         <div {...others} >
             {
@@ -22,7 +23,7 @@ const Question = ({ question, options, formik, align="center", questionClass="",
             }
 
             <div className="container p-0" >
-                <div className={`row justify-content-${align}`}>
+                <div className={`row justify-content-${align} ${optionsClass}`}>
                     {
                         options.map((option, i) => (
                             <div key={i} className={`row align-items-center mt-${marginTop}`}>

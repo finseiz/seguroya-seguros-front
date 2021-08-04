@@ -15,7 +15,7 @@ export const sarlaftInitialValues = {
     firstLastName: "",
     secondLastName: "",
     documentType: "",
-    ducument: "",
+    document: "",
     expeditionDate: "",
     expeditionCity: "",
     birthdate: "",
@@ -40,7 +40,7 @@ export const sarlaftInitialValues = {
     companyDepartment: "",
     companyPhone: "",
     optionalActivity: "",
-    //????????????? companyCiu: "",
+    companyCiu: "",
     productOrService: "",
     income: "",
     expenses: "",
@@ -53,6 +53,7 @@ export const sarlaftInitialValues = {
     tiesPublicExposed: "",
     publicResources: "",
     otherCountyObligations: "",
+    otherCountyObligationsDesc: "",
 
     sourceFunds: "",
 

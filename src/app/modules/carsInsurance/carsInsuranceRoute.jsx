@@ -1,6 +1,6 @@
 import React from "react";
 import { AsideProcess } from "app/components/process/AsideProcess";
-import { CarsHomeRoute, CarsProcessDetailsPlanRoute, CarsProcessOtpRoute, CarsProcessSarlaftRoute, CarsProcessSelectPlanRoute } from "app/routes/childs/Cars/routes";
+import { CarsHomeRoute, CarsProcessDetailsPlanRoute, CarsProcessDoneRoute, CarsProcessOtpRoute, CarsProcessSarlaftRoute, CarsProcessSelectPlanRoute, CarsProcessSheduleAppointmentRoute } from "app/routes/childs/Cars/routes";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { Content } from "theme/layout/utils/content";
 import { SelectCarsPlan } from "./components/Process/select-plan/SelectCarsPlan";
@@ -8,8 +8,14 @@ import { PlanDetails } from "./components/Process/select-plan/PlanDetails";
 import { ConfirmationCode } from "../_general/OTP";
 import { carsProcessSteps } from "app/helpers/process-steps";
 import { SarlaftForm } from "../_general/sarlaft-form/SarlaftForm";
+import { ScheduleAppointment } from "./components/Process/ScheduleAppointment";
+import { useDispatch } from "react-redux";
+import { actions } from "./redux";
+import { ProcessDone } from "../_general/ProcessDone";
 
 export default function CarsInsuranceRoute() {
+
+  const dispatch = useDispatch();
 
   return (
     <Switch>
@@ -37,10 +43,27 @@ export default function CarsInsuranceRoute() {
         <Route
           exact={true}
           path={CarsProcessSarlaftRoute}
-          component={SarlaftForm}
+          component={() => <SarlaftForm
+            redirectRoute={CarsProcessSheduleAppointmentRoute}
+            onLoad={() => {
+              dispatch(actions.setUniqueProgress(1))
+            }}
+          />}
         />
 
+        <Route
+          exact={true}
+          path={CarsProcessSheduleAppointmentRoute}
+          component={ScheduleAppointment}
+        />
 
+        <Route
+          exact={true}
+          path={CarsProcessDoneRoute}
+          component={() => <ProcessDone 
+            bottomMessage="Te llamaremos pronto para concluir el proceso"
+          />}
+        />
 
       </Content>
 

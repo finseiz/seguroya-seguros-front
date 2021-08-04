@@ -12,3 +12,7 @@ export const CarsProcessOtpRoute =  CarsProcessRoute + "/otp";
 
 export const CarsProcessSarlaftRoute =  CarsProcessRoute + "/sarlaft/form";
 
+export const CarsProcessSheduleAppointmentRoute =  CarsProcessRoute + "/schedule-date";
+
+export const CarsProcessDoneRoute =  CarsProcessRoute + "/done";
+

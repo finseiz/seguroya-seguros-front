@@ -26,9 +26,6 @@ export const carsProcessSteps = [
     title: "Llena el SARLAFT",
   },
   {
-    title: "Cargue de documentos (cc/tarj. prop)",
-  },
-  {
     title: "Agenda tu cita de inspección",
   },
 ]

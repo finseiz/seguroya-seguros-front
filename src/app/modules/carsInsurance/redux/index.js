@@ -10,7 +10,7 @@ const initialState = {
   selectedPlan: {},
   progress: {
     initial: 0,
-    /** WARING: If this name change [uniqueProcess] change, most change carsInsaranceRoute.jsx at processIndicatorName="**" */
+    /** WARING: If this name change [uniqueProcess], most change carsInsaranceRoute.jsx at processIndicatorName="**" */
     uniqueProcess: 0
   }
 };
@@ -68,6 +68,11 @@ const setInitialProgress = ( progress ) => (dispatch) => {
   dispatch(carsInsuranceSlice.actions.setInitialProgress(action));
 };
 
+const setUniqueProgress = ( progress ) => (dispatch) => {
+  const action = { data: progress };
+  dispatch(carsInsuranceSlice.actions.setUniqueProgress(action));
+};
+
 const setSelectedPlan = ( plan ) => ( dispatch ) => {
   const action = { plan };
   dispatch(carsInsuranceSlice.actions.setSelectedPlan(action));
@@ -82,7 +87,8 @@ export const actions = {
   addBolivarPlans,
 
   setInitialProgress,
-  setSelectedPlan
+  setSelectedPlan,
+  setUniqueProgress
 };
 
 export const carsInsuranceSlice = createSlice({
@@ -118,6 +124,10 @@ export const carsInsuranceSlice = createSlice({
     setInitialProgress: (state, action) => {
       const { data } = action.payload;
       state.progress.initial = data;
+    },
+    setUniqueProgress: (state, action) => {
+      const { data } = action.payload;
+      state.progress.uniqueProcess = data;
     },
     setSelectedPlan: (state, action) => {
       const { plan } = action.payload;

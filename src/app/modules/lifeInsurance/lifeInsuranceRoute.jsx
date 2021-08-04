@@ -66,7 +66,9 @@ function LifeInsuranceRoute() {
         <Route
           exact={true}
           path={LifeProcessDone}
-          component={ProcessDone}
+          component={() => <ProcessDone 
+            bottomMessage="¡Tu poliza ya está en camino! Pronto la enviaremos a tu correo electrónico"
+          />}
         />
 
       </Content>

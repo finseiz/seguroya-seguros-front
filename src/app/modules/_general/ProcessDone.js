@@ -4,7 +4,7 @@ import BaseSection from "app/components/UI/baseSection";
 import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
 import { HomeRoute } from "app/routes/routes";
 
-export const ProcessDone = () => {
+export const ProcessDone = ({ bottomMessage }) => {
   return (
     <BaseSection>
 
@@ -20,7 +20,7 @@ export const ProcessDone = () => {
           />
           </div>
 
-          <b> <p> ¡Tu poliza ya está en camino! Pronto la enviaremos a tu correo electrónico </p> </b>
+          <b> <p> { bottomMessage } </p> </b>
 
           <Link to={ HomeRoute } >
             <button

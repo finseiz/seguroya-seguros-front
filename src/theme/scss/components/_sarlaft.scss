@@ -15,4 +15,23 @@
         color: #000000;
     }
 
+    &-radio-label{
+        font-weight: bold;
+        text-align: left;
+        font-size: 12px;
+        line-height: 16px;
+        color: #333333;
+    }
+
+    &-radio-option{
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 16px;
+        color: #333333;
+    }
+
+}
+
+li::before.hola{
+    font-weight: bold;
 }
