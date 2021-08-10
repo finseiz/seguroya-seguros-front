@@ -183,16 +183,26 @@ button.radio {
   line-height: 22px;
 }
 
-.background-life {
-  background-image: url("../images/life-back.png");
-  background-position: top;
-  background-repeat: no-repeat;
-  width: 100%;
-}
+.background{
 
-.background-cars {
-  background-image: url("../images/cars-back.png");
-  background-position: top;
-  background-repeat: no-repeat;
-  width: 100%;
+  &-life{
+    background-position: top;
+    background-repeat: no-repeat;
+    width: 100%;
+    background-image: url("../images/life-back.png");
+  }
+
+  &-cars{
+    background-position: top;
+    background-repeat: no-repeat;
+    width: 100%;
+    background-image: url("../images/cars-back.png");
+  }
+
+  &-health{
+    background-position: top;
+    background-repeat: no-repeat;
+    width: 100%;
+    background-image: url("../images/health-back.png");
+  }
 }

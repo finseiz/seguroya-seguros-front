@@ -1,25 +1,49 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  
+  progress: {
+    initial: 0,
+  },
+  plans: [],
+  selectedPlan: {}
 };
 
-const setClientData = (data) => (dispatch) => {
-  const action = { type: actionTypes.SET_CLIENT_DATA, data };
-  dispatch(carsInsuranceSlice.actions.setClientData(action));
+const setPlans = (data) => (dispatch) => {
+  const action = { data };
+  dispatch(healthInsuranceSlice.actions.setPlans(action));
+};
+
+const setSelectedPlan = (plan) => (dispatch) => {
+  const action = { plan };
+  dispatch(healthInsuranceSlice.actions.setSelectedPlan(action));
+}
+
+const setInitialProgress = (progress) => (dispatch) => {
+  const action = { data: progress };
+  dispatch(healthInsuranceSlice.actions.setInitialProgress(action));
 };
 
 export const actions = {
-  setClientData,
+  setInitialProgress,
+  setPlans,
+  setSelectedPlan
 };
 
-export const carsInsuranceSlice = createSlice({
+export const healthInsuranceSlice = createSlice({
   name: "healthInsurance",
   initialState,
   reducers: {
-    addPlans: (state, action) => {
+    setInitialProgress: (state, action) => {
       const { data } = action.payload;
-      state.plans = [...state.plans, ...data];
+      state.progress.initial = data;
+    },
+    setPlans: (state, action) => {
+      const { data } = action.payload;
+      state.plans = data;
+    },
+    setSelectedPlan: (state, action) => {
+      const { plan } = action.payload;
+      state.selectedPlan = plan;
     },
   },
 });

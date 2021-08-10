@@ -1,12 +1,13 @@
 import React from "react";
 import { Redirect, Switch, Route } from "react-router-dom";
-import HealthPage from "app/pages/healthPage.jsx";
 import Home from "../pages/home.jsx";
 import { LoadingScreen } from "theme/layout";
 import { LifeRoutes } from "./childs/Life/LifeRouter.jsx";
 import { CarsRoutes } from "./childs/Cars/CarsRouter";
 import { LifeHomeRoute } from "./childs/Life/routes.js";
 import { CarsHomeRoute } from "./childs/Cars/routes.js";
+import { HealthHomeRoute } from "./childs/Health/routes.js";
+import { HealthRoutes } from "./childs/Health/HealthRoute.js";
 
 function BasePage() {
 
@@ -19,11 +20,12 @@ function BasePage() {
         
         <Route path={LifeHomeRoute} component={LifeRoutes} />
 
-        <Route path={CarsHomeRoute} component={CarsRoutes} />
+        <Route path={HealthHomeRoute} component={HealthRoutes} />
 
-        <Route exact={true} path="/health" component={HealthPage} />
+        <Route path={CarsHomeRoute} component={CarsRoutes} />        
         
         <Redirect to="/error/404" />
+
       </Switch>
     </React.Suspense>
   );

@@ -45,7 +45,7 @@ const Question = ({ question, options, formik, align="center", questionClass="",
 }
 
 Question.propTypes = {
-    question: PropTypes.string.isRequired,
+    question: PropTypes.string,
     options: PropTypes.array.isRequired
 }
 

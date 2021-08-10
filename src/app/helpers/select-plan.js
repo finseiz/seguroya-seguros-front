@@ -13,3 +13,9 @@ export const bolivarPlan = ( price, type ) => {
         {label: "Tipo de cobertura", value: type},
     ]
 }
+
+export const suraPlan = ( type ) => {
+    return [
+        {label: "Tipo de plan", value: type},
+    ]
+}
