@@ -16,3 +16,17 @@ export const CarsProcessSheduleAppointmentRoute =  CarsProcessRoute + "/schedule
 
 export const CarsProcessDoneRoute =  CarsProcessRoute + "/done";
 
+// Kilimeter insurance ----------------------------------------------------------------
+
+export const CarsKmProcessRoute = CarsHomeRoute + "/km/process"
+
+export const CarsKmProcessSelectPlanRoute =  CarsKmProcessRoute + "/select-plan";
+
+export const CarsKmProcessDetailsPlanRoute =  CarsKmProcessRoute + "/:id/details";
+export const CarsKmProcessDetailsPlanRouteFunc = (id) => CarsKmProcessRoute + `/${id}/details`;
+
+export const CarsKmProcessOtpRoute =  CarsKmProcessRoute + "/otp";
+
+export const CarsKmProcessSarlaftRoute =  CarsKmProcessRoute + "/sarlaft/form";
+
+export const CarsKmProcessDoneRoute =  CarsKmProcessRoute + "/done";

@@ -10,7 +10,7 @@ import Radio from '../general/Radio'
  * @param {string} optionsClass - "flex-column"
  * @returns 
  */
-const Question = ({ question, options, formik, align="center", questionClass="", marginTop="2", radioLabelClass="", optionsClass="", ...others }) => {
+const Question = ({ question, options, formik, align="center", questionClass="", marginTop="2", radioLabelClass="", optionsClass="", showError=false, ...others }) => {
     return (
         <div {...others} >
             {
@@ -39,6 +39,12 @@ const Question = ({ question, options, formik, align="center", questionClass="",
                     }
                 </div>
             </div>
+
+            {
+                showError && formik.errors[options[0].formikValue] && (
+                    <div className="invalid-msj"> Campo requerido </div>
+                )
+            }
 
         </div>
     )

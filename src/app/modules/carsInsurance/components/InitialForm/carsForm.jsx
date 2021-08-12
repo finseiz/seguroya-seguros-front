@@ -8,7 +8,7 @@ import { actions } from "../../redux";
 import { CarsSchema, initialValues } from "./helpers/formik";
 import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
 import { ProgressIndicator } from "app/components/process/ProgressIndicator";
-import { CarsProcessSelectPlanRoute } from "app/routes/childs/Cars/routes";
+import { CarsKmProcessSelectPlanRoute, CarsProcessSelectPlanRoute } from "app/routes/childs/Cars/routes";
 
 function CarsForm() {
   const history = useHistory();
@@ -20,10 +20,19 @@ function CarsForm() {
     initialValues,
     validationSchema: CarsSchema,
     onSubmit: (values, { setSubmitting }) => {
-      dispatch(actions.addClientData(values));
-      setStep((prevStep) => prevStep + 1)
-      setSubmitting(false);
-      dispatch(actions.setInitialProgress(50));
+      if (step === 1) {
+        dispatch(actions.addClientData(values));
+        setStep((prevStep) => prevStep + 1)
+        setSubmitting(false);
+        dispatch(actions.setInitialProgress(50));
+        formik.setFieldValue("firstsubmit", true);
+      } else {
+        if ( formik.values.insuranceType === "ar" )
+          history.push(CarsProcessSelectPlanRoute);
+        else
+          history.push(CarsKmProcessSelectPlanRoute);
+      }
+
     },
   });
 
@@ -35,9 +44,12 @@ function CarsForm() {
       case 2:
         setStep((prevStep) => prevStep + 1)
         dispatch(actions.setInitialProgress(100));
+        //formik.setFieldTouched("insuranceType", false)
+        formik.setFieldError("insuranceType", "");
+        formik.setFieldError("data_processing_licence", "");
         break;
       case 3:
-        history.push(CarsProcessSelectPlanRoute);
+        formik.handleSubmit();
         break;
       default:
         break;
@@ -45,13 +57,14 @@ function CarsForm() {
   }
 
   const backBtnAction = () => {
-    setStep((prevStep) => prevStep - 1 );
+    setStep((prevStep) => prevStep - 1);
     switch (step) {
       case 2:
         dispatch(actions.setInitialProgress(0));
+        formik.setFieldValue("firstsubmit", false);
         break;
       case 3:
-        dispatch(actions.setInitialProgress(50));   
+        dispatch(actions.setInitialProgress(50));
         break;
       default:
         break;
@@ -63,11 +76,11 @@ function CarsForm() {
       <form onSubmit={formik.handleSubmit}>
 
         <div className="text-center">
-            <p className="insurance-name m-0">Seguro de Autos</p>
-            <p className="insurance-desc">Buscamos hacer más fácil y cercano el mundo de los seguros siendo tu asesor digital 24/7</p>
+          <p className="insurance-name m-0">Seguro de Autos</p>
+          <p className="insurance-desc">Buscamos hacer más fácil y cercano el mundo de los seguros siendo tu asesor digital 24/7</p>
         </div>
 
-        { /** Step section */ }
+        { /** Step section */}
         <div className="card inital-from__box inital-from__shadow">
           <div className="card-body text-center">
 
@@ -96,20 +109,20 @@ function CarsForm() {
         <div className="text-center mt-3">
 
           {/* Back btn */}
-          { [2,3].includes(step) && (
+          {[2, 3].includes(step) && (
             <button
               type="button"
-              onClick={ backBtnAction }
+              onClick={backBtnAction}
               className="btn btn-primary primary-button mx-3"
             >
               <span>Atras</span>
             </button>
-          ) }
+          )}
 
           {/* Continue btn */}
           <button
             type="button"
-            onClick={ continueBtn }
+            onClick={continueBtn}
             className="btn btn-primary primary-button mx-3"
           >
             <span>Continuar</span>

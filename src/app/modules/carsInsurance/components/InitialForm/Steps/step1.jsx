@@ -1,4 +1,4 @@
-export function Step1({ formik, cities }) {
+export function Step1({ formik }) {
   return (
     <div className="card-body">
       <div className="form-row">
@@ -20,32 +20,26 @@ export function Step1({ formik, cities }) {
           />
           <div className="invalid-feedback">{formik.errors.license_plate}</div>
         </div>
+
         <div className="form-group col-6">
-          <label htmlFor="city" className="form-label">
-            Ciudad de circulación
+          <label htmlFor="email" className="form-label">
+            Correo Electrónico
           </label>
-          <select
-            type="text"
-            id="city"
-            name="city"
-            className={`form-control form-select ${
-              formik.touched.city
-                ? formik.errors.city
+          <input
+            type="email"
+            name="email"
+            className={`form-control ${
+              formik.touched.email
+                ? formik.errors.email
                   ? "is-invalid"
                   : "is-valid"
                 : ""
             }`}
-            {...formik.getFieldProps("city")}
-          >
-            <option value="">Seleccionar</option>
-            {cities.map((value, index) => (
-              <option key={index} value={value.codigo}>
-                {value.valor}
-              </option>
-            ))}
-          </select>
-          <div className="invalid-feedback">{formik.errors.city}</div>
+            {...formik.getFieldProps("email")}
+          />
+          <div className="invalid-feedback">{formik.errors.email}</div>
         </div>
+        
       </div>
 
       <div className="form-row">
@@ -124,24 +118,26 @@ export function Step1({ formik, cities }) {
           />
           <div className="invalid-feedback">{formik.errors.birth_date}</div>
         </div>
+
         <div className="form-group col-6">
-          <label htmlFor="email" className="form-label">
-            Correo Electrónico
+          <label htmlFor="discount_code" className="form-label">
+            Tengo un código de descuento (Opcional)
           </label>
           <input
-            type="email"
-            name="email"
+            type="text"
+            name="discount_code"
             className={`form-control ${
-              formik.touched.email
-                ? formik.errors.email
+              formik.touched.discount_code
+                ? formik.errors.discount_code
                   ? "is-invalid"
                   : "is-valid"
                 : ""
             }`}
-            {...formik.getFieldProps("email")}
+            {...formik.getFieldProps("discount_code")}
           />
-          <div className="invalid-feedback">{formik.errors.email}</div>
+          <div className="invalid-feedback">{formik.errors.discount_code}</div>
         </div>
+        
       </div>
 
       <div className="form-row">
@@ -186,24 +182,6 @@ export function Step1({ formik, cities }) {
           <div className="invalid-feedback">{formik.errors.identification}</div>
         </div>
 
-        <div className="form-group col-6">
-          <label htmlFor="discount_code" className="form-label">
-            Tengo un código de descuento (Opcional)
-          </label>
-          <input
-            type="text"
-            name="discount_code"
-            className={`form-control ${
-              formik.touched.discount_code
-                ? formik.errors.discount_code
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("discount_code")}
-          />
-          <div className="invalid-feedback">{formik.errors.discount_code}</div>
-        </div>
       </div>
     </div>
   );

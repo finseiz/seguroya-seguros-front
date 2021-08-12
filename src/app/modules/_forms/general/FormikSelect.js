@@ -6,12 +6,12 @@ import PropTypes from 'prop-types'
  * @param {options} { title, value } 
  * @returns 
  */
-const FormikSelect = ({ label, field, formik, options, labelClass="" }) => {
+const FormikSelect = ({ label, field, formik, options, labelClass="", className="" }) => {
 
     const hasError = formik.touched[field] && formik.errors[field];
 
     return (
-        <>
+        <div className={`${className}`}>
             <label htmlFor={field} className={`form-label ${labelClass}`}>
                 {label}
             </label>
@@ -28,10 +28,10 @@ const FormikSelect = ({ label, field, formik, options, labelClass="" }) => {
             </select>
             {
                 hasError && (
-                    <div className="invalid-feedback">{formik.errors[field]}</div>
+                    <div className="invalid-msj">{formik.errors[field]}</div>
                 )
             }
-        </>
+        </div>
     )
 }
 

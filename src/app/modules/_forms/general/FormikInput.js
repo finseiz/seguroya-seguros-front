@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const FormikInput = ({ label, field, formik, type="text", disable=false, labelClass="" }) => {
+const FormikInput = ({ label, field, formik, type="text", disable=false, labelClass="", className="" }) => {
 
     const hasError = formik.touched[field] && formik.errors[field];
 
     return (
-        <>
+        <div className={`${className}`}>
             <label htmlFor={field} className={`form-label ${labelClass}`}>
                 {label}
             </label>
@@ -22,7 +22,7 @@ const FormikInput = ({ label, field, formik, type="text", disable=false, labelCl
                     <div className="invalid-feedback">{formik.errors[field]}</div>
                 )
             }
-        </>
+        </div>
     )
 }
 

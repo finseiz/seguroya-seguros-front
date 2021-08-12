@@ -17,7 +17,6 @@ export const lifeProcessSteps = [
   },
 ]
 
-
 export const carsProcessSteps = [
   {
     title: "Verfica tu identidad",
@@ -30,3 +29,12 @@ export const carsProcessSteps = [
   },
 ]
 
+
+export const carsKmProcessSteps = [
+  {
+    title: "Verfica tu identidad",
+  },
+  {
+    title: "Llena el SARLAFT",
+  },
+]
