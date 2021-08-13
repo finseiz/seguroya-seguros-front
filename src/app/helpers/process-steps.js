@@ -38,3 +38,9 @@ export const carsKmProcessSteps = [
     title: "Llena el SARLAFT",
   },
 ]
+
+export const healthProcessSteps = [
+  {
+    title: "Autorizaciones",
+  },
+]

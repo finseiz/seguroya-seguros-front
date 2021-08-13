@@ -9,3 +9,7 @@ export const HealthProcessDetailsPlanRoute =  HealthProcessRoute + "/:id/details
 export const HealthProcessDetailsPlanRouteFunc = (id) => HealthProcessRoute + `/${id}/details`;
 
 export const HealthProcessInsurabilityRoute =  HealthProcessRoute + "/insurability-info";
+
+export const HealthProcessAuthRoute =  HealthProcessRoute + "/auth";
+
+export const HealthProcessDoneRoute =  HealthProcessRoute + "/done";
