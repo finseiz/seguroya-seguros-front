@@ -2,7 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 /**
- * 
+ * <FormikSelect
+ *      formik={formik}
+ *      field="document_type"
+ *      label="Tipo de documento"
+ *      options={[
+ *          { title: "Cédula", value: "CC" },
+ *          { title: "TI", value: "TI" },
+ *          { title: "Pasaporte", value: "PA" },
+ *      ]}
+ *  />
  * @param {options} { title, value } 
  * @returns 
  */

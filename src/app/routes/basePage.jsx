@@ -8,6 +8,8 @@ import { LifeHomeRoute } from "./childs/Life/routes.js";
 import { CarsHomeRoute } from "./childs/Cars/routes.js";
 import { HealthHomeRoute } from "./childs/Health/routes.js";
 import { HealthRoutes } from "./childs/Health/HealthRoute.js";
+import { AuthRoutes } from "./childs/Auth/AuthRoutes.js";
+import { AuthRoute } from "./childs/Auth/routes.js";
 
 function BasePage() {
 
@@ -22,7 +24,9 @@ function BasePage() {
 
         <Route path={HealthHomeRoute} component={HealthRoutes} />
 
-        <Route path={CarsHomeRoute} component={CarsRoutes} />        
+        <Route path={CarsHomeRoute} component={CarsRoutes} />
+
+        <Route path={AuthRoute} component={AuthRoutes} />
         
         <Redirect to="/error/404" />
 

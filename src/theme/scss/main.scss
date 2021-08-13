@@ -9,6 +9,7 @@
 @import "./components/aside-step-bar";
 @import "./components/process";
 @import "./components/sarlaft";
+@import "./components/auth";
 
 @font-face {
   font-family: "Como";
@@ -205,4 +206,8 @@ button.radio {
     width: 100%;
     background-image: url("../images/health-back.png");
   }
+}
+
+.logo{
+  width: 40%;
 }

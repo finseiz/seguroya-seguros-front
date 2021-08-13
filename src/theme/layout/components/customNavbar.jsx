@@ -1,8 +1,13 @@
+import { LoginRoute, RegistryRoute } from "app/routes/childs/Auth/routes";
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import { toAbsoluteUrl } from "../../helpers";
 
 function CustomNavbar() {
+
+  const history = useHistory();
+
   return (
     <Navbar
       bg="white"
@@ -21,10 +26,16 @@ function CustomNavbar() {
         <Nav.Link href="/home">Ofertas</Nav.Link>
         <Nav.Link href="/home">Preguntas Frecuentes</Nav.Link>
       </Nav>
-      <button className="btn btn-secondary secondary-button">
+      <button 
+        className="btn btn-secondary secondary-button"
+        onClick={ () => history.push(LoginRoute) }
+      >
         Iniciar Sesión
       </button>
-      <button className="btn btn-primary primary-button ml-2">
+      <button 
+        className="btn btn-primary primary-button ml-2"
+        onClick={ () => history.push(RegistryRoute) }
+      >
         Registrarse
       </button>
     </Navbar>
