@@ -16,7 +16,6 @@ function CustomNavbar() {
     >
       <Navbar.Brand href="/home">
         <img
-          className="logo"
           src={toAbsoluteUrl("/media/logos/logo_seguroya_dark.svg")}
         />{" "}
       </Navbar.Brand>

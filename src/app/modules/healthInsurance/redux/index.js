@@ -6,7 +6,8 @@ const initialState = {
     sura: 0
   },
   plans: [],
-  selectedPlan: {}
+  selectedPlan: {},
+  beneficiaries: [],
 };
 
 const setPlans = (data) => (dispatch) => {
@@ -29,11 +30,17 @@ const setSuraProgress = (progress) => (dispatch) => {
   dispatch(healthInsuranceSlice.actions.setSuraProgress(action));
 };
 
+const setBeneficiaries = (beneficiaries) => (dispatch) => {
+  const action = { beneficiaries };
+  dispatch(healthInsuranceSlice.actions.setBeneficiaries(action));
+}
+
 export const actions = {
   setInitialProgress,
   setPlans,
   setSelectedPlan,
-  setSuraProgress
+  setSuraProgress,
+  setBeneficiaries
 };
 
 export const healthInsuranceSlice = createSlice({
@@ -46,7 +53,7 @@ export const healthInsuranceSlice = createSlice({
     },
     setSuraProgress: (state, action) => {
       const { data } = action.payload;
-      state.progress.initial = data;
+      state.progress.sura = data;
     },
     setPlans: (state, action) => {
       const { data } = action.payload;
@@ -55,6 +62,10 @@ export const healthInsuranceSlice = createSlice({
     setSelectedPlan: (state, action) => {
       const { plan } = action.payload;
       state.selectedPlan = plan;
+    },
+    setBeneficiaries: (state, action) => {
+      const { beneficiaries } = action.payload;
+      state.beneficiaries = beneficiaries;
     },
   },
 });

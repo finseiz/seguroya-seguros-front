@@ -41,6 +41,15 @@ export const carsKmProcessSteps = [
 
 export const healthProcessSteps = [
   {
+    title: "Agregar beneficiarios"
+  },
+  {
+    title: "Selecciona el plan",
+  },
+  {
+    title: "Información de asegurabilidad",
+  },
+  {
     title: "Autorizaciones",
   },
 ]

@@ -27,11 +27,15 @@ function BaseSection({ children, title, description, actions, loading }) {
       }
 
       {/* Process body */}
-      <div className="custom-card bg-white my-4">
-        <div className="mx-5 py-5">
-          {children}
-        </div>
-      </div>
+      {
+        children && (
+          <div className="custom-card bg-white my-4">
+            <div className="mx-5 py-5">
+              {children}
+            </div>
+          </div>
+        )
+      }
 
       {/* Process actions */}
       {

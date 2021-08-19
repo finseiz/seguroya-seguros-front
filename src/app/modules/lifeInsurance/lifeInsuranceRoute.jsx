@@ -60,7 +60,7 @@ function LifeInsuranceRoute() {
         <Route
           exact={true}
           path={LifeProcessOTP}
-          component={ () => <ConfirmationCode redirectRoute={LifeProcessDone} /> }
+          component={ () => <ConfirmationCode redirectRoute={LifeProcessDone} messageIndex={0} /> }
         />
 
         <Route

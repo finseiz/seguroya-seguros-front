@@ -4,10 +4,14 @@ import BaseModal from "app/components/UI/baseModal";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-export const ConfirmationCode = ({ redirectRoute }) => {
+export const ConfirmationCode = ({ redirectRoute, messageIndex }) => {
 
   const [openModal, setOpenModal] = useState(false);
   const history = useHistory();
+  const message = [
+    "Digita el código que se ha enviado por mensaje de texto a tu celular",
+    "Digita el código que se ha enviado a tu correo electrónico"
+  ]
 
   return (
     <BaseSection
@@ -17,7 +21,7 @@ export const ConfirmationCode = ({ redirectRoute }) => {
 
         <div>
           <p className="m-1">
-            Digita el código que se ha enviado por mensaje de texto a tu celular
+            { message[messageIndex] }
           </p>
           <div className="mb-2">
             <a href="#">Click aquí para re-enviar el mensaje</a>.

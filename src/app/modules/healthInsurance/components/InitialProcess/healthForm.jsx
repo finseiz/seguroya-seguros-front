@@ -7,7 +7,7 @@ import { actions } from "../../redux";
 import { healthSchema, healthInitialValues } from "./formik";
 import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
 import { ProgressIndicator } from "app/components/process/ProgressIndicator";
-import { HealthProcessSelectPlanRoute } from "app/routes/childs/Health/routes";
+import { HealthProcessBeneficiariesRoute } from "app/routes/childs/Health/routes";
 
 function HealthForm() {
  
@@ -34,7 +34,7 @@ function HealthForm() {
         dispatch(actions.setInitialProgress(100));
         break;
       case 3:
-        history.push(HealthProcessSelectPlanRoute);
+        history.push(HealthProcessBeneficiariesRoute);
         break;
       default:
         break;

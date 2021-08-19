@@ -37,7 +37,7 @@ export default function CarsInsuranceKmRoute() {
                 <Route
                     exact={true}
                     path={CarsKmProcessOtpRoute}
-                    component={() => <ConfirmationCode redirectRoute={CarsKmProcessSarlaftRoute} />}
+                    component={() => <ConfirmationCode redirectRoute={CarsKmProcessSarlaftRoute} messageIndex={1} />}
                 />
 
                 <Route

@@ -2,35 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import { lifeFormData } from "app/models";
 
 const initialState = {
-  clientData: {
-    documentType: "",
-    identification: "",
-    firstName: "",
-    firstLastName: "",
-    birthDepartment: "",
-    brithCity: "",
-    gender: "",
-    residentDepartment: "",
-    residentCity: "",
-    address: "",
-    ocupation: "",
-    cellphone: "",
-    email: "",
-    issueDate: "",
-    bithDate: "",
-    discountCode: "",
-    currentInsurance: "",
-    knowledgeOfInsuranceCoverage: "",
-    searchToProject: "",
-    dataProcessingLicence: "",
-  },
+  clientData: {},
   plans: [],
   selectedPlan: {},
   progress: {
     initial: 0,
     /** WARING: If this name change [shortProcess] change, most change lifeInsaranceRoute.jsx at processIndicatorName="**" */
     shortProcess: 0,
-  }
+  },
 };
 
 const setClientData = (data) => (dispatch) => {
@@ -58,17 +37,17 @@ const addPlans = (data) => (dispatch) => {
   dispatch(lifeInsuranceSlice.actions.addPlans(action));
 };
 
-const setInitialProgress = ( progress ) => (dispatch) => {
+const setInitialProgress = (progress) => (dispatch) => {
   const action = { data: progress };
   dispatch(lifeInsuranceSlice.actions.setInitialProgress(action));
 };
 
-const setShortProcess = ( progress ) => (dispatch) => {
+const setShortProcess = (progress) => (dispatch) => {
   const action = { data: progress };
   dispatch(lifeInsuranceSlice.actions.setShortProcess(action));
 };
 
-const setSelectedPlan = ( plan ) => ( dispatch ) => {
+const setSelectedPlan = (plan) => (dispatch) => {
   const action = { plan };
   dispatch(lifeInsuranceSlice.actions.setSelectedPlan(action));
 }
@@ -81,7 +60,7 @@ export const actions = {
   addPlans,
   setInitialProgress,
   setSelectedPlan,
-  setShortProcess
+  setShortProcess,
 };
 
 export const lifeInsuranceSlice = createSlice({
@@ -119,6 +98,6 @@ export const lifeInsuranceSlice = createSlice({
     setSelectedPlan: (state, action) => {
       const { plan } = action.payload;
       state.selectedPlan = plan;
-    },
+    }    
   },
 });

@@ -108,6 +108,21 @@
         line-height: 25px;
     }
 
+    // --------------------------- Insurability information
+
+    &__ins-info-question{
+        font-size: 15px;
+        line-height: 20px;
+        color: #000
+    }
+
+    &__ins-info-userfullname{
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 25px;
+        color: #000000;
+    }
+
 
 
 }

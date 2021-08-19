@@ -7,7 +7,7 @@ import Qualification from 'app/components/process/Qualification';
 import { parseCurrency } from 'app/const/parse-currency';
 import Comments from 'app/components/process/Comments';
 import { actions } from 'app/modules/healthInsurance/redux';
-import { HealthProcessAuthRoute } from 'app/routes/childs/Health/routes';
+import { HealthProcessAuthRoute, HealthProcessInsurabilityRoute } from 'app/routes/childs/Health/routes';
 
 
 export const PlanDetails = () => {
@@ -112,7 +112,7 @@ export const PlanDetails = () => {
                                             className="btn primary_btn_expand w-100"
                                             onClick={ () => { 
                                                 dispatch( actions.setSelectedPlan( plans[id] ) )
-                                                history.push( HealthProcessAuthRoute ) 
+                                                history.push( HealthProcessInsurabilityRoute ) 
                                             } }
                                         >
                                             Comprar

@@ -3,6 +3,8 @@ export const HealthHomeRoute = "/health";
 
 export const HealthProcessRoute = HealthHomeRoute + "/process"
 
+export const HealthProcessBeneficiariesRoute =  HealthProcessRoute + "/beneficiaries";
+
 export const HealthProcessSelectPlanRoute =  HealthProcessRoute + "/select-plan";
 
 export const HealthProcessDetailsPlanRoute =  HealthProcessRoute + "/:id/details";

@@ -3,16 +3,16 @@ import PropTypes from 'prop-types'
 import { useTable } from 'react-table'
 import Cell from "./Cell";
 
-const TableProcess = ({ columns, data, deleteRow, editRow }) => {
+const TableProcess = ({ columns, data, deleteRow, editRow, indexEmptyMessage = 0 }) => {
 
-    const columnsTable = React.useMemo(() => columns.map((col) => ({ Header: col.title, accessor: col.field })), [data] );
+    const columnsTable = React.useMemo(() => columns.map((col) => ({ Header: col.title, accessor: col.field })), [data]);
 
-    const defaultColumn = { 
-        Cell: ( values ) => (
-            <Cell 
-                {...values} 
-                onDelete={ deleteRow }
-                onEdit={ editRow }
+    const defaultColumn = {
+        Cell: (values) => (
+            <Cell
+                {...values}
+                onDelete={deleteRow}
+                onEdit={editRow}
             />
         )
     }
@@ -24,6 +24,26 @@ const TableProcess = ({ columns, data, deleteRow, editRow }) => {
         rows,
         prepareRow,
     } = useTable({ columns: columnsTable, data: data, defaultColumn })
+
+
+    const emptyMessage = [
+        (<div>
+            <p>
+                Aún no has añadido beneficiarios a tu plan
+            </p>
+            <p>
+                Puedes añadir a tu cónyugue, hijos/as, hermanos/as u otros.
+                En caso de que no los quieras añadir manualmente, quedarán
+                como beneficiarios los de ley.
+            </p>
+        </div>),
+        (<div>
+            <p>
+                Aún no has añadido otros asegurados a tu plan. Puedes añadir a tu 
+                cónyugue, hijos/as, hermanos/as u otros.
+            </p>
+        </div>)
+    ]
 
     return (
         <>
@@ -59,14 +79,7 @@ const TableProcess = ({ columns, data, deleteRow, editRow }) => {
             {
                 !data.length && (
                     <div className="container-sm process__process-table-message px-5">
-                        <p>
-                            Aún no has añadido beneficiarios a tu plan
-                        </p>
-                        <p>
-                            Puedes añadir a tu cónyugue, hijos/as, hermanos/as u otros.
-                            En caso de que no los quieras añadir manualmente, quedarán
-                            como beneficiarios los de ley.
-                        </p>
+                        { emptyMessage[indexEmptyMessage] }
                     </div>
                 )
             }
