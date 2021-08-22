@@ -6,6 +6,7 @@ import { actions } from "app/modules/healthInsurance/redux";
 import { useHistory } from "react-router-dom";
 import TableProcess from "../../../../../../components/process/table/Table";
 import { HealthProcessSelectPlanRoute } from "app/routes/childs/Health/routes";
+import { useEffect } from "react";
 
 export const Beneficiaries = ({}) => {
   const [beneficiaries, setBeneficiaries] = useState([]);
@@ -38,6 +39,10 @@ export const Beneficiaries = ({}) => {
   const addData = ( values ) => {
     setBeneficiaries( [...beneficiaries, values] );
   };
+
+  useEffect(() => {
+    dispatch(actions.setSuraProgress(0));
+  }, []);
 
   return (
     <BaseSection

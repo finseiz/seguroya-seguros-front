@@ -1,10 +1,4 @@
 
-export const reducerActions = {
-    addDiseaseToList: "addDiseaseToList",
-    addOtherDisease: "addOtherDisease",
-    addFamilyDisease: "addFamilyDisease"
-}
-
 export const diseaseList = [
     "Valvulopatías",
     "Hipertensión Arterial",

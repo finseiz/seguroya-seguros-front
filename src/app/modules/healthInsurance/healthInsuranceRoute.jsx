@@ -7,7 +7,7 @@ import { Content } from "theme/layout/utils/content";
 import { ProcessDone } from "../_general/ProcessDone";
 import { Authorization } from "./components/SuraProcess/fill-data/Auth/Authorization";
 import { Beneficiaries } from "./components/SuraProcess/fill-data/beneficiaries/Beneficiaries";
-import Insurability from "./components/SuraProcess/fill-data/Insurability/Insurability";
+import InsurabilityInfo from "./components/SuraProcess/fill-data/Insurability/Insurability";
 import { PlanDetails } from "./components/SuraProcess/select-plan/PlanDetails";
 import { SelectSuraHealthPlan } from "./components/SuraProcess/select-plan/SelectHealthPlan";
 
@@ -39,7 +39,7 @@ export default function HealthInsuranceRoute() {
         <Route
           exact={true}
           path={HealthProcessInsurabilityRoute}
-          component={Insurability}
+          component={InsurabilityInfo}
         />
 
         <Route

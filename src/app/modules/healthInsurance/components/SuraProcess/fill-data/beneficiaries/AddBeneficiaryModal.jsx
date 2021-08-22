@@ -69,18 +69,6 @@ function AddBeneficiary({ open, handleClose, handleSubmit }) {
 
         </div>
 
-        <div className="mt-2">
-          <FormikRadioGroup
-            formik={formik}
-            field="onerous"
-            label="¿Es oneroso/a?"
-            options={[
-              { title: "Si", value: true },
-              { title: "No", value: false }
-            ]}
-          />
-        </div>
-
         <div className="text-center mt-5">
           <button
             type="submit"

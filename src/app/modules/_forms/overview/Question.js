@@ -25,17 +25,35 @@ const Question = ({ question, options, formik, align="center", questionClass="",
             <div className="container p-0" >
                 <div className={`row justify-content-${align} ${optionsClass}`}>
                     {
-                        options.map((option, i) => (
-                            <div key={i} className={`row align-items-center mt-${marginTop}`}>
-                                <Radio
-                                    active={formik.values[option.formikValue] === option.value}
-                                    onClick={() => formik.setFieldValue(option.formikValue, option.value)}
-                                />
-                                <label className={`inital-from__option ml-2 mb-0 ${radioLabelClass}`}>
-                                    {option.label}
-                                </label>
-                            </div>
-                        ))
+                        options.map((option, i) => {
+                            let isActive = true;
+                            if ( option.formikValue.includes(".") ){
+                                const [position, field] = option.formikValue.split(".")
+                                isActive = formik.values[position][field] === option.value
+                            }else{
+                                isActive = formik.values[option.formikValue] === option.value;
+                            }
+                            return (
+                                <div key={i} className={`row align-items-center mt-${marginTop}`}>
+                                    <Radio
+                                        active={isActive}
+                                        onClick={() => {
+                                            if ( option.formikValue.includes(".") ){
+                                                const [position, field] = option.formikValue.split(".")
+                                                let values = formik.values;
+                                                values[position][field] = option.value;
+                                                formik.setValues(values)
+                                            }else{
+                                                formik.setFieldValue(option.formikValue, option.value)
+                                            }
+                                        }}
+                                    />
+                                    <label className={`inital-from__option ml-2 mb-0 ${radioLabelClass}`}>
+                                        {option.label}
+                                    </label>
+                                </div>
+                            )
+                        })
                     }
                 </div>
             </div>

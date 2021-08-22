@@ -1,37 +1,41 @@
 import BaseSection from 'app/components/UI/baseSection'
-import React, { useReducer, useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
-import { reducerActions } from '../beneficiaries/constants'
 import BeneficiaryForm from './BeneficiaryForm'
+import { useFormik } from 'formik'
+import { initialValues } from './formik'
+import { actions } from "app/modules/healthInsurance/redux";
+import { HealthProcessAuthRoute, HealthProcessSelectPlanRoute } from 'app/routes/childs/Health/routes'
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-const Insurability = () => {
+const InsurabilityInfo = () => {
 
     const { beneficiaries } = useSelector(state => state.healthInsurance)
-    // { diseaseList: [], otherDisease: "", familyDisease: [] }
-    // payload= { index: 0, value: "" }
-    
-    function reducer(state, action) {
-        const stateCopy = [...state];
-        switch (action.type) {
-            case reducerActions.addDiseaseToList:
-                let userDiseaseList = stateCopy[action.payload.index].diseaseList;
-                userDiseaseList.add(action.payload.value);
-                stateCopy[action.payload.index].diseaseList = userDiseaseList;
-                return stateCopy;
-            case reducerActions.addOtherDisease:
-                stateCopy[action.payload.index].otherDisease = action.payload.value;
-                return stateCopy;
-            case reducerActions.addFamilyDisease:
-                let familyDiseaseList = stateCopy[action.payload.index].familyDisease;
-                familyDiseaseList.add(action.payload.value);
-                stateCopy[action.payload.index].familyDisease = familyDiseaseList;
-                return stateCopy;
-            default:
-                throw new Error();
-        }
-    }
+    const dispatch = useDispatch();
+    const history = useHistory();
 
-    const [state, dispatch] = useReducer(reducer, new Array(beneficiaries.length).fill({diseaseList: [], otherDisease: "", familyDisease: []}) )
+    const formik = useFormik({
+        initialValues: initialValues(beneficiaries),
+    });
+
+    const actionsButton = [
+        {
+            text: "Atras",
+            className: "btn btn-primary primary-button process__process-button px-5 mx-3",
+            onClick: () => {
+              history.push(HealthProcessSelectPlanRoute);
+            },
+        },
+        {
+          text: "Continuar",
+          className: "btn btn-primary primary-button process__process-button px-5 mx-3",
+          onClick: () => {
+            dispatch(actions.setSuraProgress(3));
+            history.push(HealthProcessAuthRoute);
+          },
+        },
+      ];
 
     return (
         <div>
@@ -43,13 +47,20 @@ const Insurability = () => {
 
             {
                 beneficiaries.map((beneficiary, i) => (
-                    <BeneficiaryForm key={i} beneficiary={beneficiary} reducerState={state} />
+                    <BeneficiaryForm key={i} beneficiary={beneficiary} formik={formik} />
                 ))
             }
+
+            <BaseSection
+                actions={actionsButton}
+            >
+            </BaseSection>
+
+
         </div>
 
 
     )
 }
 
-export default Insurability
+export default InsurabilityInfo
