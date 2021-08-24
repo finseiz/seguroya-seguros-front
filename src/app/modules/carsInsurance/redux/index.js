@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { bolivarPlan } from "../model";
 
 const initialState = {
-  clientData: {},
+  dataToSend: {},
   plans: [],
   data: {
     cities: [],
@@ -15,42 +15,18 @@ const initialState = {
   }
 };
 
-const actionTypes = {
-  SET_CLIENT_DATA: "SET_CLIENT_DATA",
-  SET_FIELD_CLIENT_DATA: "SET_FIELD_CLIENT_DATA",
-  ADD_CLIENT_DATA: "ADD_CLIENT_DATA",
-  SET_PLANS: "SET_PLANS",
-  ADD_PLANS: "ADD_PLANS",
-  SET_DATA: "SET_DATA",
-};
-
-const setClientData = (data) => (dispatch) => {
-  const action = { type: actionTypes.SET_CLIENT_DATA, data };
-  dispatch(carsInsuranceSlice.actions.setClientData(action));
-};
-
-const setClientDataField = (value, field) => (dispatch) => {
-  const action = { type: actionTypes.SET_FIELD_CLIENT_DATA, value, field };
-  dispatch(carsInsuranceSlice.actions.setClientDataField(action));
-};
-
 const setDataField = (value, field) => (dispatch) => {
-  const action = { type: actionTypes.SET_DATA, value, field };
+  const action = { value, field };
   dispatch(carsInsuranceSlice.actions.setDataField(action));
 };
 
-const addClientData = (data) => (dispatch) => {
-  const action = { type: actionTypes.ADD_CLIENT_DATA, data };
-  dispatch(carsInsuranceSlice.actions.addClientData(action));
-};
-
 const setPlans = (data) => (dispatch) => {
-  const action = { type: actionTypes.SET_PLANS, data };
+  const action = { data };
   dispatch(carsInsuranceSlice.actions.setPlans(action));
 };
 
 const addPlans = (data) => (dispatch) => {
-  const action = { type: actionTypes.ADD_CLIENT_DATA, data };
+  const action = { data };
   dispatch(carsInsuranceSlice.actions.addPlans(action));
 };
 
@@ -77,10 +53,12 @@ const setSelectedPlan = ( plan ) => ( dispatch ) => {
   const action = { plan };
   dispatch(carsInsuranceSlice.actions.setSelectedPlan(action));
 }
+
+const editDataToSend = (data) => (dispatch) => {
+  dispatch(carsInsuranceSlice.actions.editDataToSend(data));
+};
+
 export const actions = {
-  setClientData,
-  setClientDataField,
-  addClientData,
   setPlans,
   addPlans,
   setDataField,
@@ -88,28 +66,17 @@ export const actions = {
 
   setInitialProgress,
   setSelectedPlan,
-  setUniqueProgress
+  setUniqueProgress,
+  editDataToSend
 };
 
 export const carsInsuranceSlice = createSlice({
   name: "carsInsurance",
   initialState,
   reducers: {
-    setClientData: (state, action) => {
-      const { data } = action.payload;
-      state.clientData = data;
-    },
-    setClientDataField: (state, action) => {
-      const { value, field } = action.payload;
-      state.clientData[field] = value;
-    },
     setDataField: (state, action) => {
       const { value, field } = action.payload;
       state.data[field] = value;
-    },
-    addClientData: (state, action) => {
-      const { data } = action.payload;
-      state.clientData = { ...state.clientData, ...data };
     },
     setPlans: (state, action) => {
       const { data } = action.payload;
@@ -132,6 +99,13 @@ export const carsInsuranceSlice = createSlice({
     setSelectedPlan: (state, action) => {
       const { plan } = action.payload;
       state.selectedPlan = plan;
+    },
+    editDataToSend: (state, action) => {
+      const newData = action.payload;
+      state.dataToSend = {
+        ...state.dataToSend,
+        ...newData,
+      };
     },
   },
 });

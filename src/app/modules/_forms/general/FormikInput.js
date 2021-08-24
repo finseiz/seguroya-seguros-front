@@ -21,7 +21,7 @@ const FormikInput = ({ field, formik, label="", type="text", disable=false, labe
             />
             {
                 hasError && (
-                    <div className="invalid-feedback">{formik.errors[field]}</div>
+                    <div className="invalid-msj">{formik.errors[field]}</div>
                 )
             }
         </div>

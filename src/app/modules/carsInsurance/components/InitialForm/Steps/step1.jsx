@@ -1,188 +1,84 @@
-export function Step1({ formik }) {
+import FormikInput from "app/modules/_forms/general/FormikInput";
+import FormikRadioGroup from "app/modules/_forms/general/FormikRadioGroup";
+import FormikSelect from "app/modules/_forms/general/FormikSelect";
+import { genderRadioTypes, SbsIdentificationsTypes } from "../helpers/constants";
+
+export function Step1({ formik, countries }) {
+
   return (
     <div className="card-body">
-      <div className="form-row">
-        <div className="form-group col-6">
-          <label htmlFor="license_plate" className="form-label">
-            Ingresa tu placa
-          </label>
-          <input
-            type="text"
-            name="license_plate"
-            className={`form-control ${
-              formik.touched.license_plate
-                ? formik.errors.license_plate
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("license_plate")}
-          />
-          <div className="invalid-feedback">{formik.errors.license_plate}</div>
+
+      <div className="row">
+
+        <div className="col-6 p-0 pr-2">
+          <FormikInput field="fullname" formik={formik} label="Nombres" />
         </div>
 
-        <div className="form-group col-6">
-          <label htmlFor="email" className="form-label">
-            Correo Electrónico
-          </label>
-          <input
-            type="email"
-            name="email"
-            className={`form-control ${
-              formik.touched.email
-                ? formik.errors.email
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("email")}
-          />
-          <div className="invalid-feedback">{formik.errors.email}</div>
-        </div>
-        
-      </div>
-
-      <div className="form-row">
-        <div className="form-group col-6">
-          <label htmlFor="name" className="form-label">
-            Nombres
-          </label>
-          <input
-            type="text"
-            name="name"
-            className={`form-control ${
-              formik.touched.name
-                ? formik.errors.name
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("name")}
-          />
-          <div className="invalid-feedback">{formik.errors.name}</div>
-        </div>
-        <div className="form-group col-6">
-          <label htmlFor="lastname" className="form-label">
-            Apellidos
-          </label>
-          <input
-            type="text"
-            name="lastname"
-            className={`form-control ${
-              formik.touched.lastname
-                ? formik.errors.lastname
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("lastname")}
-          />
-          <div className="invalid-feedback">{formik.errors.lastname}</div>
-        </div>
-      </div>
-
-      <div className="form-row">
-        <div className="form-group col-3">
-          <label htmlFor="cellphone" className="form-label">
-            Celular
-          </label>
-          <input
-            type="text"
-            name="cellphone"
-            className={`form-control ${
-              formik.touched.cellphone
-                ? formik.errors.cellphone
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("cellphone")}
-          />
-          <div className="invalid-feedback">{formik.errors.cellphone}</div>
-        </div>
-        <div className="form-group col-3">
-          <label htmlFor="birth_date" className="form-label">
-            Fecha de Nacimiento
-          </label>
-          <input
-            type="date"
-            name="birth_date"
-            className={`form-control ${
-              formik.touched.birth_date
-                ? formik.errors.birth_date
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("birth_date")}
-          />
-          <div className="invalid-feedback">{formik.errors.birth_date}</div>
+        <div className="col p-0 pr-2">
+          <FormikInput field="surname" formik={formik} label="Primer apellido" />
         </div>
 
-        <div className="form-group col-6">
-          <label htmlFor="discount_code" className="form-label">
-            Tengo un código de descuento (Opcional)
-          </label>
-          <input
-            type="text"
-            name="discount_code"
-            className={`form-control ${
-              formik.touched.discount_code
-                ? formik.errors.discount_code
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("discount_code")}
-          />
-          <div className="invalid-feedback">{formik.errors.discount_code}</div>
-        </div>
-        
-      </div>
-
-      <div className="form-row">
-        <div className="form-group col-3">
-          <label htmlFor="document_type" className="form-label">
-            Tipo de documento
-          </label>
-          <select
-            type="text"
-            id="document_type"
-            name="document_type"
-            className={`form-control form-select ${
-              formik.touched.document_type
-                ? formik.errors.document_type
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("document_type")}
-          >
-            <option value="">Seleccionar</option>
-            <option value="Cédula de Ciudadanía">Cédula de Ciudadanía</option>
-          </select>
-          <div className="invalid-feedback">{formik.errors.document_type}</div>
-        </div>
-        <div className="form-group col-3">
-          <label htmlFor="identification" className="form-label">
-            Número de documento
-          </label>
-          <input
-            type="text"
-            name="identification"
-            className={`form-control ${
-              formik.touched.identification
-                ? formik.errors.identification
-                  ? "is-invalid"
-                  : "is-valid"
-                : ""
-            }`}
-            {...formik.getFieldProps("identification")}
-          />
-          <div className="invalid-feedback">{formik.errors.identification}</div>
+        <div className="col p-0 pr-2">
+          <FormikInput field="secondSurname" formik={formik} label="Segundo apellido" />
         </div>
 
       </div>
+
+      <div className="row mt-2">
+
+        <div className="col-6 p-0 pr-2">
+          <FormikInput field="email" formik={formik} label="Correo" type="email" />
+        </div>
+
+        <div className="col p-0 pr-2">
+          <FormikInput field="cellphone" formik={formik} label="Celular" type="number" />
+        </div>
+
+        <div className="col p-0 pr-2">
+          <FormikInput field="birthDate" formik={formik} label="Fecha de nacimiento" type="date" />
+        </div>
+
+      </div>
+
+      <div className="row mt-2">
+
+        <div className="col p-0 pr-2">
+          <FormikSelect
+            field="country" formik={formik} label="País"
+            options={countries.map(country => ({ title: country["nombre"], value: country["id"] }))}
+          />
+        </div>
+
+        <div className="col p-0 pr-2">
+          <FormikSelect
+            field="identificationType" formik={formik} label="Tipo de identification"
+            options={SbsIdentificationsTypes}
+          />
+        </div>
+
+        <div className="col p-0 pr-2">
+          <FormikInput field="identification" formik={formik} label="Identificación" />
+        </div>
+
+        <div className="col p-0 pr-2">
+          <FormikInput field="licensePlate" formik={formik} label="Placa del vehículo" />
+        </div>
+
+      </div>
+
+      <div className="row mt-2">
+
+        <div className="col-6 p-0 pr-2">
+          <FormikRadioGroup
+            formik={formik}
+            field="gender"
+            label="Género"
+            options={genderRadioTypes}
+          />
+        </div>
+
+      </div>
+
     </div>
   );
 }

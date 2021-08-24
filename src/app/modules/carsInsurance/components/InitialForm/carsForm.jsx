@@ -1,38 +1,42 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
-import { CircularProgress } from "@material-ui/core";
 import { Step1, Step2, Step3 } from "./Steps";
 import { actions } from "../../redux";
 import { CarsSchema, initialValues } from "./helpers/formik";
 import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
 import { ProgressIndicator } from "app/components/process/ProgressIndicator";
 import { CarsKmProcessSelectPlanRoute, CarsProcessSelectPlanRoute } from "app/routes/childs/Cars/routes";
+import { getCountries } from "./controller";
+import moment from "moment";
 
 function CarsForm() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { cities } = useSelector((state) => state.carsInsurance.data);
   const [step, setStep] = React.useState(1);
+  const [countries, setCountries] = useState([]);
+
+  useEffect(() => {
+    getCountries().then( list => setCountries(list) )
+  }, [])
 
   const formik = useFormik({
     initialValues,
     validationSchema: CarsSchema,
-    onSubmit: (values, { setSubmitting }) => {
+    onSubmit: (values) => {
       if (step === 1) {
-        dispatch(actions.addClientData(values));
+        dispatch(actions.editDataToSend(values));
         setStep((prevStep) => prevStep + 1)
-        setSubmitting(false);
         dispatch(actions.setInitialProgress(50));
         formik.setFieldValue("firstsubmit", true);
       } else {
+        dispatch(actions.editDataToSend(values));
         if ( formik.values.insuranceType === "ar" )
           history.push(CarsProcessSelectPlanRoute);
         else
           history.push(CarsKmProcessSelectPlanRoute);
       }
-
     },
   });
 
@@ -44,7 +48,6 @@ function CarsForm() {
       case 2:
         setStep((prevStep) => prevStep + 1)
         dispatch(actions.setInitialProgress(100));
-        //formik.setFieldTouched("insuranceType", false)
         formik.setFieldError("insuranceType", "");
         formik.setFieldError("data_processing_licence", "");
         break;
@@ -100,7 +103,7 @@ function CarsForm() {
 
         {/* Form steps */}
         <div className="container w-100 inital-from__box mt-3">
-          {step === 1 && <Step1 formik={formik} cities={cities} />}
+          {step === 1 && <Step1 formik={formik} countries={countries} />}
           {step === 2 && <Step2 formik={formik} onEdit={backBtnAction} />}
           {step === 3 && <Step3 formik={formik} />}
         </div>
@@ -126,9 +129,6 @@ function CarsForm() {
             className="btn btn-primary primary-button mx-3"
           >
             <span>Continuar</span>
-            {formik.isSubmitting && (
-              <CircularProgress className="ml-2" size={10} color="inherit" />
-            )}
           </button>
         </div>
 

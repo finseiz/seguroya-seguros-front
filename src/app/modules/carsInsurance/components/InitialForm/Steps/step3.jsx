@@ -1,7 +1,23 @@
+import React, { useState, useEffect } from "react";
 import FormikSelect from "app/modules/_forms/general/FormikSelect";
 import Question from "app/modules/_forms/overview/Question";
+import { getCirculationZone } from "../controller";
+import { Spinner } from "react-bootstrap";
 
 export function Step3({ formik }) {
+
+  const [zoneLoading, setZoneLoading] = useState(false);
+  const [circulationZone, setCirculationZone] = useState([]);
+
+  useEffect(() => {
+    setZoneLoading(true);
+    getCirculationZone(formik.values.insuranceType)
+      .then((list) => {
+        setCirculationZone(list)
+        setZoneLoading(false);
+      })
+  }, [formik.values.insuranceType])
+
   return (
 
     <div className="card-body text-center">
@@ -66,18 +82,20 @@ export function Step3({ formik }) {
         ]}
       />
 
-      <FormikSelect
-        formik={formik}
-        className="w-50 m-auto"
-        field="city"
-        label="Zona de circulación"
-        options={[
-          { title: "Selecciona una opción", value: "" },
-          { title: "Cali", value: "H" },
-          { title: "Bogotá", value: "P" },
-        ]}
-      />
+      {!zoneLoading ?
+        <FormikSelect
+          formik={formik}
+          className="w-50 m-auto"
+          field="circulationZone"
+          label="Zona de circulación"
+          options={circulationZone.map((element) => ({ title: element["name"], value: element["id_state"] }))}
+        /> :
+        (<div className="mt-3">
+          <Spinner animation="border" role="status" />
+        </div>)
+      }
 
+      {/* { title: "Selecciona una opción", value: "" }, */}
 
     </div>
   );

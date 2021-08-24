@@ -10,7 +10,9 @@ import Radio from '../general/Radio'
  * @param {string} optionsClass - "flex-column"
  * @returns 
  */
-const Question = ({ question, options, formik, align="center", questionClass="", marginTop="2", radioLabelClass="", optionsClass="", showError=false, ...others }) => {
+const Question = ({ question, options, formik, align="center", questionClass="", marginTop="2", 
+    radioLabelClass="", optionsClass="", showError=false, ...others }
+) => {
     return (
         <div {...others} >
             {

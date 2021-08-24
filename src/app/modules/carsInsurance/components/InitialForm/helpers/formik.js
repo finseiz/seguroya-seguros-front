@@ -1,37 +1,56 @@
 import * as Yup from "yup";
 
 export const CarsSchema = Yup.object().shape({
-    license_plate: Yup.string().required("Campo requerido"),
-    document_type: Yup.string().required("Campo requerido"),
-    identification: Yup.string().required("Campo requerido"),
-    name: Yup.string().required("Campo requerido"),
-    lastname: Yup.string().required("Campo requerido"),
+    cellphone: Yup.string().required("Campo requerido").length(10, "Ingresa 10 caracteres"),
     email: Yup.string().email("Email requerido").required("Campo requerido"),
-    birth_date: Yup.string().required("Campo requerido"),
-    cellphone: Yup.string().required("Campo requerido"),
+    birthDate: Yup.string().required("Campo requerido"),
+    gender: Yup.string().required("Campo requerido"),
+    identification: Yup.string().required("Campo requerido"),
+    country: Yup.number().required("Campo requerido"),
+    identificationType: Yup.string().required("Campo requerido"),
+    fullname: Yup.string().required("Campo requerido"),
+    licensePlate: Yup.string().required("Campo requerido"),
+    surname: Yup.string().required("Campo requerido"),
+    secondSurname: Yup.string().required("Campo requerido"),
 
     firstsubmit: Yup.bool().required("Campo requerido").default(false),
     data_processing_licence: Yup.bool().when('firstsubmit', {
-        is: true, then: Yup.bool().oneOf([true]).required("Debes aceptar el tratamiendo de datos para continuar")
+        is: true, then: Yup.bool().oneOf([true]).required("Debes aceptar el tratamiento de datos para continuar")
     }),
     insuranceType: Yup.string().when('firstsubmit', {
-        is: true, then: Yup.string().oneOf(["km", "ar"], {}).required("Campo requerido")
+        is: true, then: Yup.string().oneOf(["km", "ar"]).required("Campo requerido")
     }),
-    city: Yup.string().when('firstsubmit', {
+    circulationZone: Yup.string().when('firstsubmit', {
         is: true, then: Yup.string().required("Campo requerido")
     }),
 });
 
 export const initialValues = {
-    license_plate: "a",
-    document_type: "a",
-    identification: "a",
-    name: "a",
-    lastname: "a",
-    email: "aa@gmail.com",
-    birth_date: "a",
-    cellphone: "3",
-    discount_code: "2",
+
+    cellphone: 3057807788,
+    email: "cesardaza91@gmail.com",
+    birthDate: "",
+    gender: "F",
+    identification: "45454534",
+    country: "",
+    identificationType: "Cedula",
+    fullname: "acccwdsfc",
+    licensePlate: "IJK996",
+    surname: "sdfcsa",
+    secondSurname: "acsdfcsdc",
+    
+    // cellphone: "",
+    // email: "",
+    // birthDate: "",
+    // gender: "",
+    // identification: "",
+    // country: "",
+    // identificationType: "",
+    // fullname: "",
+    // licensePlate: "",
+    // surname: "",
+    // secondSurname: "",
+
     current_insurance: "3",
     knowledge_of_insurance_coverage: "4",
     search_to_project: "5",
@@ -39,5 +58,20 @@ export const initialValues = {
     firstsubmit: false,
     data_processing_licence: undefined,
     insuranceType: "",
-    city: "",
+    circulationZone: "",
+    
 };
+
+// cellphone *
+// email *
+// birthDate *
+// gender *
+// identification *
+// country *
+// identificationType *
+// fullname *
+// licensePlate *
+// surname *
+// secondSurname *
+// circulationZone
+// discountCode
