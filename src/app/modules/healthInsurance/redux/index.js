@@ -30,9 +30,12 @@ const setSuraProgress = (progress) => (dispatch) => {
   dispatch(healthInsuranceSlice.actions.setSuraProgress(action));
 };
 
-const setBeneficiaries = (beneficiaries) => (dispatch) => {
-  const action = { beneficiaries };
-  dispatch(healthInsuranceSlice.actions.setBeneficiaries(action));
+const addBeneficiary = (beneficiary) => (dispatch) => {
+  dispatch(healthInsuranceSlice.actions.addBeneficiary(beneficiary));
+}
+
+const deleteBeneficiary = (index) => (dispatch) => {
+  dispatch(healthInsuranceSlice.actions.deleteBeneficiary(index));
 }
 
 export const actions = {
@@ -40,7 +43,8 @@ export const actions = {
   setPlans,
   setSelectedPlan,
   setSuraProgress,
-  setBeneficiaries
+  addBeneficiary,
+  deleteBeneficiary,
 };
 
 export const healthInsuranceSlice = createSlice({
@@ -63,9 +67,15 @@ export const healthInsuranceSlice = createSlice({
       const { plan } = action.payload;
       state.selectedPlan = plan;
     },
-    setBeneficiaries: (state, action) => {
-      const { beneficiaries } = action.payload;
-      state.beneficiaries = beneficiaries;
+    addBeneficiary: (state, action) => {
+      const beneficiary = action.payload;
+      state.beneficiaries.push( {...beneficiary, id: state.beneficiaries.length} );
     },
+    deleteBeneficiary: (state, action) => {
+      const index = action.payload;
+      const aux = [...state.beneficiaries];
+      aux.splice(index, 1);
+      state.beneficiaries = aux.map( (item, i) => ({...item, id: i}) );
+    }
   },
 });

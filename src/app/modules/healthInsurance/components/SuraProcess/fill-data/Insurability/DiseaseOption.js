@@ -1,17 +1,17 @@
 import React from 'react'
 import Radio from "app/modules/_forms/general/Radio"
 
-export const DiseaseOption = ({ formik, id, value }) => {
+export const DiseaseOption = ({ formik, id, value, fieldList }) => {
 
-    const list = formik.values[id].diseaseList;
+    const list = formik.values[id][fieldList];
 
     const addOrRemoveItem = () => {
         let valuesCopy = [...formik.values];
         const index = list.findIndex( disease => value === disease )
         if ( index !== -1 ) {
-            valuesCopy[id].diseaseList.splice( index, 1 );
+            valuesCopy[id][fieldList].splice( index, 1 );
         }else{
-            valuesCopy[id].diseaseList.push(value)
+            valuesCopy[id][fieldList].push(value)
         }
         formik.setValues(valuesCopy)
     }

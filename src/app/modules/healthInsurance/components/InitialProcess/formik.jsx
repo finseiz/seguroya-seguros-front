@@ -15,8 +15,8 @@ export const healthInitialValues = {
     discount_code: "prueba",
     gender: "prueba",
     
-    current_health_service: "",
-    knowledge_of_insurance_coverage: "",
-    delivery_service: "",
-    data_processing_licence: "",
+    // current_health_service: "",
+    // knowledge_of_insurance_coverage: "",
+    // delivery_service: "",
+    // data_processing_licence: "",
 };

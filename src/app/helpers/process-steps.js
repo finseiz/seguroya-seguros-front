@@ -41,7 +41,7 @@ export const carsKmProcessSteps = [
 
 export const healthProcessSteps = [
   {
-    title: "Agregar beneficiarios"
+    title: "Perfilamiento"
   },
   {
     title: "Selecciona el plan",

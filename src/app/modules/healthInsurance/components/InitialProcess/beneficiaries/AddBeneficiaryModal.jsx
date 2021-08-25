@@ -4,7 +4,6 @@ import BaseModal from "app/components/UI/baseModal";
 import { beneficiariesSchema, beneficiariesValues } from "./formik";
 import FormikInput from "app/modules/_forms/general/FormikInput";
 import FormikSelect from "app/modules/_forms/general/FormikSelect";
-import FormikRadioGroup from "../../../../../_forms/general/FormikRadioGroup";
 
 function AddBeneficiary({ open, handleClose, handleSubmit }) {
 

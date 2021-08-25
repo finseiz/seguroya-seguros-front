@@ -24,18 +24,18 @@ const InsurabilityInfo = () => {
             text: "Atras",
             className: "btn btn-primary primary-button process__process-button px-5 mx-3",
             onClick: () => {
-              history.push(HealthProcessSelectPlanRoute);
+                history.push(HealthProcessSelectPlanRoute);
             },
         },
         {
-          text: "Continuar",
-          className: "btn btn-primary primary-button process__process-button px-5 mx-3",
-          onClick: () => {
-            dispatch(actions.setSuraProgress(3));
-            history.push(HealthProcessAuthRoute);
-          },
+            text: "Continuar",
+            className: "btn btn-primary primary-button process__process-button px-5 mx-3",
+            onClick: () => {
+                dispatch(actions.setSuraProgress(3));
+                history.push(HealthProcessAuthRoute);
+            },
         },
-      ];
+    ];
 
     return (
         <div>

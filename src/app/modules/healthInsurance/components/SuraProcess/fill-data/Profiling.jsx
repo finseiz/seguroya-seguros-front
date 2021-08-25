@@ -1,8 +1,36 @@
+import BaseSection from "app/components/UI/baseSection";
+import { actions } from "app/modules/healthInsurance/redux";
 import Question from "app/modules/_forms/overview/Question";
+import { HealthProcessSelectPlanRoute } from "app/routes/childs/Health/routes";
+import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-export function Step3({ formik }) {
+export function Profiling({ }) {
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const formik = useFormik({
+    initialValues: {},
+  })
+
+  const actionsButton = [
+    {
+      text: "Continuar",
+      className: "btn btn-primary primary-button process__process-button px-5 mx-3",
+      onClick: () => {
+        dispatch(actions.setSuraProgress(2));
+        history.push(HealthProcessSelectPlanRoute);
+      },
+    },
+  ];
+
   return (
-    <div className="card-body text-center">
+    <BaseSection
+      title="Perfilamiento"
+      actions={actionsButton}
+    >
 
       <p className="text-left inital-from__title mt-2 text-center">
         Formulario de perfilamiento del cliente SALUD (aplica términos y condiciones)
@@ -51,6 +79,6 @@ export function Step3({ formik }) {
         ]}
       />
 
-    </div>
+    </BaseSection>
   );
 }

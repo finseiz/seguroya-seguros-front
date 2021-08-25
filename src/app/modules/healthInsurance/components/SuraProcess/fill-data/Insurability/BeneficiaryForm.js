@@ -20,7 +20,7 @@ const BeneficiaryForm = ({ beneficiary: { name, lastname, id }, formik }) => {
                 {
                     diseaseList.map((disease) => (
                         <div className="col mt-2 p-0">
-                            <DiseaseOption id={id} formik={formik} value={disease} />
+                            <DiseaseOption id={id} formik={formik} value={disease} fieldList="diseaseList" />
                         </div>
                     ))
                 }
@@ -37,7 +37,7 @@ const BeneficiaryForm = ({ beneficiary: { name, lastname, id }, formik }) => {
                     {
                         ["Padre", "Madre", "Hermanos/as"].map((disease) => (
                             <div className="mr-4">
-                                <DiseaseOption id={id} formik={formik} value={disease} />
+                                <DiseaseOption id={id} formik={formik} value={disease} fieldList="familyDisease" />
                             </div>
                         ))
                     }
