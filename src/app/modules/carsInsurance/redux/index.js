@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { bolivarPlan } from "../model";
 
 const initialState = {
   dataToSend: {},
@@ -30,13 +29,6 @@ const addPlans = (data) => (dispatch) => {
   dispatch(carsInsuranceSlice.actions.addPlans(action));
 };
 
-const addBolivarPlans = (data) => (dispatch) => {
-  const plans = [];
-  data.data.forEach((element) => {
-    plans.push(bolivarPlan(element));
-  });
-  dispatch(addPlans(plans));
-};
 
 /** -------------------------------- Nuevo -------------------------------- */
 const setInitialProgress = ( progress ) => (dispatch) => {
@@ -62,7 +54,6 @@ export const actions = {
   setPlans,
   addPlans,
   setDataField,
-  addBolivarPlans,
 
   setInitialProgress,
   setSelectedPlan,

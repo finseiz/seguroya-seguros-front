@@ -9,6 +9,10 @@ export const getPlansRequest = async (data) => {
         path: getPlansPath,
         method: "POST",
         body: JSON.stringify(data)
-    })
-    return response.json()
+    });
+    if ( response.status === 200) 
+        return response.json()
+    else
+        throw new Error("Request failed: " + response.status);
+    
 }

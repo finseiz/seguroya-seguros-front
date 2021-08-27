@@ -31,11 +31,11 @@ export const KmPlanDetails = () => {
             "Tienes 10 conductores elegidos en el año."
         ]);
         setCommets([
-            { 
-                comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 
-                qualification: "1", 
-                userName: "Roberto Sanchez", 
-                userImageUrl: "www.src.com" 
+            {
+                comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                qualification: 5,
+                userName: "Roberto Sanchez",
+                userImageUrl: "www.src.com"
             },
         ])
     }, []);
@@ -54,28 +54,28 @@ export const KmPlanDetails = () => {
                             <div className="row plans_sal_container-details">
 
                                 {/** Insurance left */}
-                                <div className="plan-sal_container-desc">
-                                    
+                                <div className="col-md-auto plan-sal_container-desc">
+
                                     {/** Insurance Logo */}
                                     <div>
                                         <img
-                                            src={toAbsoluteUrl( `/media/logos/${selectPlan.logoPath}` )}
+                                            src={toAbsoluteUrl(`/media/logos/${selectPlan.logoPath}`)}
                                         />
                                     </div>
 
                                     {/** Insurance Name */}
                                     <div className="plans_sel_plan-name mt-4">
-                                        { selectPlan.insuranceName } - Vida
+                                        {selectPlan.insuranceName} - Vida
                                     </div>
 
                                     {/** INsurance benefits */}
                                     <ul className="plan_sel_benefits">
                                         {
-                                            benefits.map( (benefit, i) => (
+                                            benefits.map((benefit, i) => (
                                                 <li className="my-3 plan_sel_benefit-item" key={i}>
-                                                    { benefit }
+                                                    {benefit}
                                                 </li>
-                                            ) )
+                                            ))
                                         }
                                     </ul>
 
@@ -83,37 +83,52 @@ export const KmPlanDetails = () => {
                                 </div>
 
                                 {/** Insurance Right */}
-                                <div>
+                                <div className="col">
 
                                     {/** Insurance qualification */}
-                                    <p className="mb-1 plans_sal_plan-label-2"> Calificación de usuario </p>
-                                    <div className="row">
-                                        <Qualification qualification={selectPlan.qualification} className="mb-4" />
-                                        <p className="plans_plan-qualification my-1 mx-2"> { selectPlan.qualification } </p>
-                                    </div>
+                                    {
+                                        selectPlan.qualification &&
+                                        (
+                                            <>
+                                                <p className="mb-1 plans_sal_plan-label-2"> Calificación de usuario </p>
+                                                <div className="row">
+                                                    <Qualification qualification={selectPlan.qualification} className="mb-4" />
+                                                    <p className="plans_plan-qualification my-1 mx-2"> {selectPlan.qualification} </p>
+                                                </div>
+                                            </>
+                                        )
+                                    }
+
+                                    {
+                                        selectPlan.descriptionValues.map((description) => (
+                                            <div>
+                                                <p className="mb-1 plans_sal_plan-label-2" > {description.label} </p>
+                                                <p > <b> {description.value} </b> </p>
+                                            </div>
+                                        ))
+                                    }
 
                                     {/** Insurance Price */}
                                     <div className="">
-                                        <p className="mb-1 plans_sal_plan-label-2"> Precio </p>
-                                        <p className="mb-1 plans_sal_plan-value-2"> { parseCurrency(selectPlan.anualPrice) } </p>
-                                        <p className=""> { `Hasta ${ parseCurrency(selectPlan.share) } por ${selectPlan.shareNumber} coutas` } </p>
+                                        <p className="mb-1 plans_sal_plan-label-2"> Precio final</p>
+                                        <p className="mb-1 plans_sal_plan-value-2"> {parseCurrency(selectPlan.anualPrice)} </p>
                                     </div>
 
                                     {/**Insurance Button */}
                                     <div className="text-center">
-                                        <button 
+                                        <button
                                             type="button"
                                             className="btn primary_btn_expand w-100"
-                                            onClick={ () => { 
-                                                dispatch( actions.setSelectedPlan( plans[id] ) )
-                                                history.push( CarsKmProcessOtpRoute ) 
-                                            } }
+                                            onClick={() => {
+                                                dispatch(actions.setSelectedPlan(plans[id]))
+                                                history.push(CarsKmProcessOtpRoute)
+                                            }}
                                         >
                                             Comprar
                                         </button>
                                     </div>
-                                    
-                                    
+
+
                                 </div>
 
                             </div>
@@ -122,7 +137,7 @@ export const KmPlanDetails = () => {
                     )
                 }
 
-                
+
 
             </div>
         </div>

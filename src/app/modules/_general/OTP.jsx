@@ -4,7 +4,7 @@ import BaseModal from "app/components/UI/baseModal";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-export const ConfirmationCode = ({ redirectRoute, messageIndex }) => {
+export const ConfirmationCode = ({ redirectRoute, messageIndex, email="" }) => {
 
   const [openModal, setOpenModal] = useState(false);
   const history = useHistory();
@@ -58,7 +58,7 @@ export const ConfirmationCode = ({ redirectRoute, messageIndex }) => {
                 Tu poliza será enviada a tu correo
               </p>
               <div>
-                <a href="#"> mandreaotero@gmail.com </a>
+                <a href="#"> { email } </a>
               </div>
 
             </div>

@@ -75,7 +75,7 @@ function CarsForm() {
   }
 
   return (
-    <section className="w-100 px-5">
+    <section className="w-100 px-1">
       <form onSubmit={formik.handleSubmit}>
 
         <div className="text-center">
@@ -102,7 +102,7 @@ function CarsForm() {
         </div>
 
         {/* Form steps */}
-        <div className="container w-100 inital-from__box mt-3">
+        <div className="w-100 inital-from__box mt-3">
           {step === 1 && <Step1 formik={formik} countries={countries} />}
           {step === 2 && <Step2 formik={formik} onEdit={backBtnAction} />}
           {step === 3 && <Step3 formik={formik} />}

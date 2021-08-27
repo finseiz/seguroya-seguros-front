@@ -9,6 +9,7 @@ const Qualification = ({qualification, ...others}) => {
                 Array(5).fill(5).map( (_, i) => {
                     return (
                         <img
+                            key={i}
                             className="mx-1"
                             src={toAbsoluteUrl(`/media/icons/star${ (i+1) <= Number(qualification)  ? "-fill" : ""}.svg` )}
                         />

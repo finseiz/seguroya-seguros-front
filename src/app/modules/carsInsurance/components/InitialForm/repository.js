@@ -2,7 +2,7 @@ import { makeRequest, URL } from "app/const"
 
 const baseURL = "sbs/"
 const getCountriesPath = baseURL + "paises"
-const getCirculationZoneByKmPath = baseURL + "departamentos"
+const getCirculationZoneByKmPath = baseURL + "zonas-circulacion"
 
 export const getCountriesRequest = async () => {
     const response = await makeRequest({path: getCountriesPath, method: "GET" })

@@ -33,10 +33,7 @@ export const carsProcessSteps = [
 export const carsKmProcessSteps = [
   {
     title: "Verfica tu identidad",
-  },
-  {
-    title: "Llena el SARLAFT",
-  },
+  }
 ]
 
 export const healthProcessSteps = [

@@ -1,4 +1,5 @@
 import { parseCurrency } from "app/const/parse-currency"
+import { simpleNumberFormat } from "./number-format"
 
 export const colmenaPlan = ( price, returnValue ) => {
     return [
@@ -7,10 +8,10 @@ export const colmenaPlan = ( price, returnValue ) => {
     ]
 }
 
-export const bolivarPlan = ( price, type ) => {
+export const bolivarPlan = ({kmCosto, coverage}) => {
     return [
-        {label: "Valor del carro", value: `${parseCurrency(price)}COP`},
-        {label: "Tipo de cobertura", value: type},
+        {label: "Costo por km", value: `${parseCurrency(kmCosto)}COP`},
+        {label: "Cobertura", value: `${simpleNumberFormat(coverage)}KMS`},
     ]
 }
 

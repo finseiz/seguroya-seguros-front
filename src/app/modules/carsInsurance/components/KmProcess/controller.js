@@ -1,4 +1,7 @@
+import { bolivarPlan } from "app/helpers/select-plan";
+import { CarsKmProcessDetailsPlanRouteFunc } from "app/routes/childs/Cars/routes";
 import moment from "moment";
+import { actions } from "../../redux";
 import { getPlansRequest } from "./repository"
 
 const prepareDataToSend = (values) => {
@@ -20,16 +23,26 @@ const prepareDataToSend = (values) => {
     }
 }
 
-export const getPlans = async (reduxFormValues) => {
+export const getPlans = async (reduxFormValues, dispatch) => {
 
     try {
         const data = prepareDataToSend(reduxFormValues);
-        const list = await getPlansRequest(data);
-        return list;
-    } catch (error) {
-        // controlar error en el UI
-        // return undefined;
-    }
+        const { costs } = await getPlansRequest(data);
 
-    return [];
+        dispatch(actions.setPlans( costs.map( (plan) => 
+            ({
+                logoPath: "sbs-logo.png",
+                insuranceName: "SBS - Auto",
+                //qualification: 3,
+                anualPrice: plan.total_cost,
+                descriptionValues: bolivarPlan({ coverage: plan.package, kmCosto: plan.cost_by_km}),
+                redirect: CarsKmProcessDetailsPlanRouteFunc
+            })
+        )))
+
+        return costs;
+
+    } catch (error) {
+        return undefined;
+    }
 }

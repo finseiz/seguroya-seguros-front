@@ -88,7 +88,7 @@ export function Step3({ formik }) {
           className="w-50 m-auto"
           field="circulationZone"
           label="Zona de circulación"
-          options={circulationZone.map((element) => ({ title: element["name"], value: element["id_state"] }))}
+          options={circulationZone.map((element) => ({ title: element["nombre"], value: element["id"] }))}
         /> :
         (<div className="mt-3">
           <Spinner animation="border" role="status" />

@@ -6,7 +6,7 @@ export default function CarsPage() {
   return (
     <div className="container-fluid p-0">
       <div className="row m-0 background-cars">
-        <div className="container content">
+        <div className=" content">
           <CarsForm />
         </div>
       </div>

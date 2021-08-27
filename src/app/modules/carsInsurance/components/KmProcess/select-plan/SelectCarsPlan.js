@@ -1,33 +1,26 @@
-import Plan from 'app/components/process/Plan';
+import React, { useEffect, useMemo, useState } from 'react'
+
+import KmPlan from 'app/components/process/plans/KmPlans';
 import { WhatsAppContainer } from 'app/components/process/WhatsAppContainer'
-import { bolivarPlan } from 'app/helpers/select-plan';
-import { actions } from 'app/modules/carsInsurance/redux';
-import { CarsKmProcessDetailsPlanRouteFunc } from 'app/routes/childs/Cars/routes';
-import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlans } from '../controller';
 
-
 export const SelectCarsPlanKm = () => {
 
+    const [requestStatus, setRequestStatus] = useState({ loading: false, error: false });
     const { dataToSend, plans } = useSelector(state => state.carsInsurance);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        getPlans(dataToSend)
-        dispatch(actions.setPlans([
-            {
-                logoPath: "sbs-logo.png",
-                insuranceName: "SBS - Auto",
-                qualification: 3,
-                anualPrice: 500000000,
-                share: 200000,
-                shareNumber: 12,
-                descriptionValues: bolivarPlan(50000000, "Cali - 10km"),
-                redirect: CarsKmProcessDetailsPlanRouteFunc
-            },
-        ]))
-    }, [])
+        if ( plans.length === 0 ) {
+            setRequestStatus({ loading: true, error: false})
+            getPlans(dataToSend, dispatch)
+            .then(plansResponse => {
+                if ( plansResponse === undefined) setRequestStatus({ loading: false, error: true})
+                else setRequestStatus({ loading: false, error: false})
+            })
+        }
+    }, [dataToSend])
 
     return (
         <div className="container my-5">
@@ -36,19 +29,41 @@ export const SelectCarsPlanKm = () => {
 
                 <WhatsAppContainer />
 
-                <div className="row justify-content-between mt-3" >
-                    {
-                        plans.length && (
-                            plans.map((plan, i) => (
-                                <Plan
-                                    key={i}
-                                    index={i}
-                                    {...plan}
-                                />
-                            ))
-                        )
-                    }
-                </div>
+                {
+                    requestStatus.loading ?
+                    (
+                        <div>
+                            Estamos buscando los mejores planes...
+                        </div>
+                    ) :
+                    requestStatus.error ?
+                    (
+                        <div>
+                            No fue posible encontrar ningún plan (ERR)
+                        </div>
+                    ) :
+                    (
+                        <div className="row justify-content-between mt-3" >
+                            {
+                                plans.length > 0 ?  (
+                                    plans.map((plan, i) => (
+                                        <KmPlan
+                                            key={i}
+                                            index={i}
+                                            {...plan}
+                                        />
+                                    ))
+                                ) : (
+                                    <div>
+                                        No existen planes disponibles para ti
+                                    </div>
+                                )
+                            }
+                        </div>
+                    )
+                }
+
+
 
             </div>
 

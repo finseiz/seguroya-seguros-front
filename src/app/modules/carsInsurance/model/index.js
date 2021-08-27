@@ -19,26 +19,3 @@ export const carsPlans = (data) => {
     opcionPA: "S",
   };
 };
-
-export const bolivarPlan = (data) => {
-  const {
-    numerodeliquidacion,
-    opcionAutosDescripcion,
-    coberturasCotizacion,
-    deduciblePeridaTotal,
-    totalPrima,
-  } = data.responseData;
-
-  return {
-    insurance_name: "BOLIVAR",
-    title: numerodeliquidacion,
-    rate: 4.0,
-    premium: coberturasCotizacion[0].valorPrima,
-    return_value: deduciblePeridaTotal,
-    anual_price: totalPrima,
-    mensual_price: "",
-    message: "",
-    description: opcionAutosDescripcion,
-    plan: data.responseData,
-  };
-};
