@@ -1,7 +1,8 @@
 import FormikInput from "app/modules/_forms/general/FormikInput";
 import FormikRadioGroup from "app/modules/_forms/general/FormikRadioGroup";
 import FormikSelect from "app/modules/_forms/general/FormikSelect";
-import { genderRadioTypes, SbsIdentificationsTypes } from "../helpers/constants";
+import { genderRadioTypes } from "app/helpers/radio-options";
+import { SbsIdentificationsTypes } from "../helpers/constants";
 
 export function Step1({ formik, countries }) {
 

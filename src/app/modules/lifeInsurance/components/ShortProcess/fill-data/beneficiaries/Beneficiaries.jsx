@@ -52,8 +52,8 @@ export const Beneficiaries = ({}) => {
       <TableProcess
         columns={[
           { title: "Identificación", field: "identification" },
-          { title: "Nombre", field: "fullname" },
-          { title: "Parentesco", field: "kinship" },
+          { title: "Nombre", field: "firstName" },
+          { title: "Apellido", field: "surname" },
           { title: "Porcentaje de participación", field: "participation" },
           { title: "", field: "tools" }
         ]}

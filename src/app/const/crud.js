@@ -2,8 +2,8 @@ import { URL } from ".";
 
 /**
  * 
- * @param @requires {string} path - path petition   
- * @param @requires {string} method - "GET" or "POST"
+ * @requires @param {string} path - path petition   
+ * @requires @param {string} method - "GET" or "POST"
  * @param {object} headers - Headers()
  * @param  {...any} others 
  * @returns 
@@ -21,7 +21,15 @@ export function makeRequest({ path, method, headers, ...others }) {
   return fetch(myRequest);
 }
 
-export function getQueryParams(filters) {
+/**
+ * Use for add query params from an object - communly for added in path
+ * Example: 
+ * Recived: {name: "David", age: 12}
+ * Return: "?name=David&age=12"
+ * @requires @param {object} filters  - Object of query params {key: value}
+ * @returns String of query params
+ */
+export function queryParams(filters) {
   let ans = "";
   let first = true;
   for (const filter in filters) {

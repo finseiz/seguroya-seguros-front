@@ -4,15 +4,16 @@ import { toAbsoluteUrl } from 'theme/helpers/AssetsHelpers'
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Qualification from 'app/components/process/Qualification';
-import { parseCurrency } from 'app/const/parse-currency';
 import Comments from "./../../../../../components/process/Comments";
 import { LifeProcessInsurabilityRoute } from 'app/routes/childs/Life/routes';
 import { actions } from 'app/modules/lifeInsurance/redux';
-
+import { useFormik } from 'formik';
+import * as Yup from "yup";
+import FormikRadioGroup from 'app/modules/_forms/general/FormikRadioGroup';
 
 export const PlanDetails = () => {
 
-    const { id } = useParams();
+    const { policy, plan } = useParams();
     const dispatch = useDispatch();
     const { plans } = useSelector(state => state.lifeInsurance);
     const [selectPlan, setSelectPlan] = useState();
@@ -22,7 +23,12 @@ export const PlanDetails = () => {
     const [commets, setCommets] = useState([]);
 
     useEffect(() => {
-        setSelectPlan(plans[id]);
+        //const selectedPlan = plans.find(planElemt => planElemt.redirectValues == {policy: parseInt(policy), plan: parseInt(plan) })
+        const selectedPlan = plans.find(planElement =>
+            planElement.redirectValues.policy === parseInt(policy) &&
+            planElement.redirectValues.plan === parseInt(plan)
+        );
+        setSelectPlan(selectedPlan);
         setBenefits([
             "Si tienes un accidente contra otro vehículo, un bien material, una o varias personas, tienes unaprotección del 80%.",
             "Si tienes un accidente y tu carro tiene un daño superior al 75% del valor del vehículo tienes una protección de $2’000.000 y el valor a pagar es $300.000.",
@@ -31,20 +37,29 @@ export const PlanDetails = () => {
             "Tienes 10 conductores elegidos en el año."
         ]);
         setCommets([
-            { 
-                comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 
-                qualification: "1", 
-                userName: "Roberto Sanchez", 
-                userImageUrl: "www.src.com" 
+            {
+                comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                qualification: "1",
+                userName: "Roberto Sanchez",
+                userImageUrl: "www.src.com"
             },
             {
-                comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 
-                qualification: "4", 
-                userName: "Juan Perez", 
-                userImageUrl: "www.src.com" 
+                comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                qualification: "4",
+                userName: "Juan Perez",
+                userImageUrl: "www.src.com"
             }
         ])
     }, []);
+
+    const formik = useFormik({
+        initialValues: { selectedPayment: "" },
+        validationSchema: Yup.object().shape({ selectedPayment: Yup.number().min(0).required("Campo requerido") }),
+        onSubmit: ( {selectedPayment} ) => {
+            dispatch(actions.setSelectedPlan({...selectPlan, paymentID: selectedPayment}))
+            history.push(LifeProcessInsurabilityRoute)
+        }
+    })
 
     return (
         <div className="container my-5">
@@ -60,28 +75,28 @@ export const PlanDetails = () => {
                             <div className="row plans_sal_container-details">
 
                                 {/** Insurance left */}
-                                <div className="plan-sal_container-desc">
-                                    
+                                <div className="col-md-auto plan-sal_container-desc">
+
                                     {/** Insurance Logo */}
                                     <div>
                                         <img
-                                            src={toAbsoluteUrl( `/media/logos/${selectPlan.logoPath}` )}
+                                            src={toAbsoluteUrl(`/media/logos/${selectPlan.logoPath}`)}
                                         />
                                     </div>
 
                                     {/** Insurance Name */}
                                     <div className="plans_sel_plan-name mt-4">
-                                        { selectPlan.insuranceName } - Vida
+                                        {selectPlan.insuranceName} - Vida
                                     </div>
 
                                     {/** INsurance benefits */}
                                     <ul className="plan_sel_benefits">
                                         {
-                                            benefits.map( (benefit, i) => (
+                                            benefits.map((benefit, i) => (
                                                 <li className="my-3 plan_sel_benefit-item" key={i}>
-                                                    { benefit }
+                                                    {benefit}
                                                 </li>
-                                            ) )
+                                            ))
                                         }
                                     </ul>
 
@@ -89,37 +104,70 @@ export const PlanDetails = () => {
                                 </div>
 
                                 {/** Insurance Right */}
-                                <div>
+                                <div className="col">
 
                                     {/** Insurance qualification */}
-                                    <p className="mb-1 plans_sal_plan-label-2"> Calificación de usuario </p>
-                                    <div className="row">
-                                        <Qualification qualification={selectPlan.qualification} className="mb-4" />
-                                        <p className="plans_plan-qualification my-1 mx-2"> { selectPlan.qualification } </p>
-                                    </div>
+                                    {
+                                        selectPlan.qualification &&
+                                        (
+                                            <>
+                                                <p className="mb-1 plans_sal_plan-label-2"> Calificación de usuario </p>
+                                                <div className="row">
+                                                    <Qualification qualification={selectPlan.qualification} className="mb-4" />
+                                                    <p className="plans_plan-qualification my-1 mx-2"> {selectPlan.qualification} </p>
+                                                </div>
+                                            </>
+                                        )
+                                    }
 
-                                    {/** Insurance Price */}
-                                    <div className="">
-                                        <p className="mb-1 plans_sal_plan-label-2"> Precio </p>
-                                        <p className="mb-1 plans_sal_plan-value-2"> { parseCurrency(selectPlan.anualPrice) } </p>
-                                        <p className=""> { `Hasta ${ parseCurrency(selectPlan.share) } por ${selectPlan.shareNumber} coutas` } </p>
-                                    </div>
+                                    {/** Insurance Description */}
+                                    {
+                                        selectPlan.descriptionValues.map((description, i) => (
+                                            <div key={i}>
+                                                <p className="mb-1 plans_sal_plan-label-2" > {description.label} </p>
+                                                <p > <b> {description.value} </b> </p>
+                                            </div>
+                                        ))
+                                    }
+                                    <hr />
 
-                                    {/**Insurance Button */}
-                                    <div className="text-center">
-                                        <button 
-                                            type="button"
-                                            className="btn primary_btn_expand w-100"
-                                            onClick={ () => { 
-                                                dispatch( actions.setSelectedPlan( plans[id] ) )
-                                                history.push( LifeProcessInsurabilityRoute ) 
-                                            } }
-                                        >
-                                            Comprar
-                                        </button>
-                                    </div>
-                                    
-                                    
+                                    <form onSubmit={formik.handleSubmit}>
+
+                                        {/** Insurance Price */}
+                                        <div className="">
+                                            <p className="mb-1 plans_sal_plan-label-2"> Precios </p>
+                                            
+                                                <FormikRadioGroup
+                                                    formik={formik}
+                                                    field="selectedPayment"
+                                                    
+                                                    options={
+                                                        selectPlan.payments.map((payment, i) => (
+                                                            { title: (
+                                                                <div key={i}>
+                                                                    <p className="mb-1 plans_sal_plan-value-2"> {payment["informacion"]} </p>
+                                                                    <p className=""> {`Pago ${payment["nombre"]}`} </p>
+                                                                </div>
+                                                            ), value: payment.cod }
+                                                        ))
+                                                    }
+                                                    optionsClass="flex-column"
+                                                />
+                                        </div>
+
+                                        {/**Insurance Button */}
+                                        <div className="text-center mt-4">
+                                            <button
+                                                type="submit"
+                                                className="btn primary_btn_expand w-100"
+                                            >
+                                                Comprar
+                                            </button>
+                                        </div>
+
+                                    </form>
+
+
                                 </div>
 
                             </div>
@@ -128,7 +176,7 @@ export const PlanDetails = () => {
                     )
                 }
 
-                
+
 
             </div>
         </div>

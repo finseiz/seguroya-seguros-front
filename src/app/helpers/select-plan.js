@@ -1,10 +1,11 @@
 import { parseCurrency } from "app/const/parse-currency"
 import { simpleNumberFormat } from "./number-format"
 
-export const colmenaPlan = ( price, returnValue ) => {
+export const colmenaPlan = ( returnValue, primaValue, insuranceValue) => {
     return [
-        {label: "Prima", value: `${parseCurrency(price)}COP`},
-        {label: "Retorno de prima", value: `${returnValue}%`},
+        {label: "Retorno de prima", value: returnValue},
+        {label: "Prima", value: primaValue},
+        {label: "Valor Asegurado", value: insuranceValue},
     ]
 }
 

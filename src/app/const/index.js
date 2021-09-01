@@ -1,4 +1,4 @@
-export { makeRequest, getQueryParams } from "./crud";
+export { makeRequest } from "./crud";
 
 export const URL = "http://35.247.228.183:8080/api/";
 

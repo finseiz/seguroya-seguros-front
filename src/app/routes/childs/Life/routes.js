@@ -5,8 +5,8 @@ export const LifeProcessRoute = LifeHomeRoute + "/process"
 
 export const LifeProcessSelectPlanRoute =  LifeProcessRoute + "/select-plan";
 
-export const LifeProcessDetailsPlanRoute =  LifeProcessRoute + "/:id/details";
-export const LifeProcessDetailsPlanRouteFunc = (id) => LifeProcessRoute + `/${id}/details`;
+export const LifeProcessDetailsPlanRoute =  LifeProcessRoute + "/:policy/:plan/details";
+export const LifeProcessDetailsPlanRouteFunc = ({policy, plan}) => LifeProcessRoute + `/${policy}/${plan}/details`;
 
 export const LifeProcessInsurabilityRoute =  LifeProcessRoute + "/insurability-info";
 

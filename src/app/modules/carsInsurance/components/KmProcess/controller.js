@@ -1,6 +1,6 @@
+import { formatGeneralDate } from "app/helpers/date-format";
 import { bolivarPlan } from "app/helpers/select-plan";
 import { CarsKmProcessDetailsPlanRouteFunc } from "app/routes/childs/Cars/routes";
-import moment from "moment";
 import { actions } from "../../redux";
 import { getPlansRequest } from "./repository"
 
@@ -8,7 +8,7 @@ const prepareDataToSend = (values) => {
     return {
         celular: values.cellphone,
         email: values.email,
-        fechaNacimeinto: moment(values.birthDate).format('YYYY-MM-DD'),
+        fechaNacimeinto: formatGeneralDate(values.birthDate),
         genero: values.gender,
         infoDocumento: {
             documento: values.identification,

@@ -5,9 +5,13 @@ import { beneficiariesSchema, beneficiariesValues } from "./formik";
 import FormikInput from "app/modules/_forms/general/FormikInput";
 import FormikSelect from "app/modules/_forms/general/FormikSelect";
 import FormikRadioGroup from "../../../../../_forms/general/FormikRadioGroup";
+import { genderRadioTypes } from "app/helpers/radio-options";
+import { getBeneficiariesDocumentTypes, getKinshipList } from "../../controller";
+import { useSelector } from "react-redux";
 
 function AddBeneficiary({ open, handleClose, handleSubmit }) {
 
+  const { general:{lists} } = useSelector(state => state.lifeInsurance)
   const formik = useFormik({
     initialValues: beneficiariesValues,
     validationSchema: beneficiariesSchema,
@@ -29,14 +33,30 @@ function AddBeneficiary({ open, handleClose, handleSubmit }) {
           {/* Left form */}
           <div className="col p-0">
 
-            <FormikInput formik={formik} field="fullname" label="Nombre completo" />
+            <div className="row">
+              <div className="col p-0 pr-2">
+                <FormikInput formik={formik} field="firstName" label="Primer nombre" />
+              </div>
+              <div className="col p-0">
+                <FormikInput formik={formik} field="middleName" label="Segundo nombre" />
+              </div>
+            </div>
 
             <div className="row mt-2">
               <div className="col p-0 pr-2">
-                <FormikInput formik={formik} field="cellphone" type="number" label="Celular" />
+                <FormikInput formik={formik} field="surname" label="Apellido" />
               </div>
               <div className="col p-0">
-                <FormikInput formik={formik} field="birth_date" type="date" label="Edad" />
+                <FormikInput formik={formik} field="secondeSurname" label="Segundo apellido" />
+              </div>
+            </div>
+
+            <div className="row mt-2">
+              <div className="col p-0 pr-2">
+                <FormikInput formik={formik} field="cellphone" type="phone" label="Celular" />
+              </div>
+              <div className="col p-0">
+                <FormikInput formik={formik} field="birthDate" type="date" label="Edad" />
               </div>
             </div>
 
@@ -45,10 +65,7 @@ function AddBeneficiary({ open, handleClose, handleSubmit }) {
                 formik={formik}
                 field="gender"
                 label="Género"
-                options={[
-                  { title: "Femenino", value: "F" },
-                  { title: "Masculino", value: "M" }
-                ]}
+                options={genderRadioTypes}
               />
             </div>
 
@@ -62,15 +79,9 @@ function AddBeneficiary({ open, handleClose, handleSubmit }) {
                 <FormikSelect
                   formik={formik}
                   field="kinship"
-                  label="Parentesco"
-                  options={[
-                    { title: "Hijo", value: "H" },
-                    { title: "Padre", value: "P" },
-                  ]}
+                  label="Parentescoo"
+                  options={getKinshipList(lists)}
                 />
-              </div>
-              <div className="col">
-                <FormikInput formik={formik} field="age" label="Edad" />
               </div>
             </div>
 
@@ -78,13 +89,9 @@ function AddBeneficiary({ open, handleClose, handleSubmit }) {
               <div className="col p-0">
                 <FormikSelect
                   formik={formik}
-                  field="document_type"
+                  field="documentType"
                   label="Tipo de documento"
-                  options={[
-                    { title: "Cédula", value: "CC" },
-                    { title: "TI", value: "TI" },
-                    { title: "Pasaporte", value: "PA" },
-                  ]}
+                  options={getBeneficiariesDocumentTypes(lists)}
                 />
               </div>
               <div className="col">

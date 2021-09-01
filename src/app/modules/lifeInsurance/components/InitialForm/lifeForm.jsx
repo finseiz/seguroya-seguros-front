@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
@@ -9,23 +9,20 @@ import { initialSchema, initialValues } from "./helpers/formik";
 import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
 import { ProgressIndicator } from "../../../../components/process/ProgressIndicator";
 import { LifeProcessSelectPlanRoute } from "app/routes/childs/Life/routes";
+import { getInitialValues } from "./controller";
 
 function LifeForm() {
   const history = useHistory();
   const dispatch = useDispatch();
   const [step, setStep] = React.useState(1);
-  const { data } = useSelector((state) => state.lifeInsurance);
 
   const formik = useFormik({
     initialValues,
     validationSchema: initialSchema,
-    onSubmit: (values, { setSubmitting }) => {
-
+    onSubmit: (values) => {
       dispatch(actions.addClientData(values));
       setStep((prevStep) => prevStep + 1)
-      setSubmitting(false);
       dispatch(actions.setInitialProgress(50));
-
     },
   });
 
@@ -60,8 +57,13 @@ function LifeForm() {
     }
   }
 
+  useEffect(() => {
+    // TODO: si la lista ya está, no llamar de nuevo.
+    getInitialValues(dispatch);
+  }, [])
+
   return (
-    <section className="w-100 px-5">
+    <section className="w-100">
       <form onSubmit={formik.handleSubmit}>
 
         <div className="text-center">
@@ -88,7 +90,7 @@ function LifeForm() {
         </div>
 
         {/* Form steps */}
-        <div className="container w-100 inital-from__box mt-3">
+        <div className="inital-from__box mt-3">
           {step === 1 && <Step1 formik={formik} />}
           {step === 2 && <Step2 formik={formik} onEdit={backBtnAction} />}
           {step === 3 && <Step3 formik={formik} />}
@@ -115,9 +117,6 @@ function LifeForm() {
             className="btn btn-primary primary-button mx-3"
           >
             <span>Continuar</span>
-            {formik.isSubmitting && (
-              <CircularProgress className="ml-2" size={10} color="inherit" />
-            )}
           </button>
         </div>
 

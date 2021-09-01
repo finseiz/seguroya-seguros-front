@@ -1,40 +1,25 @@
+import React, { Fragment, useEffect, useState } from 'react'
+import LifePlan from 'app/components/process/plans/LifePlans';
 import { WhatsAppContainer } from 'app/components/process/WhatsAppContainer'
-import { colmenaPlan } from 'app/helpers/select-plan';
-import { actions } from 'app/modules/lifeInsurance/redux';
-import { LifeProcessDetailsPlanRouteFunc } from 'app/routes/childs/Life/routes';
-import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import Plan from "./../../../../../components/process/Plan";
+import { getPlans } from '../controller';
 
 export const SelectLifePlan = () => {
 
-    const { plans } = useSelector(state => state.lifeInsurance);
+    const { plans, clientData } = useSelector(state => state.lifeInsurance);
+    const [requestStatus, setRequestStatus] = useState({ loading: false, error: false})
     const dispatch = useDispatch();
 
     useEffect(() => {
+
+        if ( plans.length === 0 ){
+            setRequestStatus({ loading: true, error: false})
+            getPlans(dispatch, clientData).then( response => {
+                if ( response ) setRequestStatus({ loading: false, error: false})
+                else setRequestStatus({ loading: false, error: true})
+            })
+        }
         
-        dispatch( actions.setPlans([
-            {
-                logoPath: "colmena-logo.svg", 
-                insuranceName: "Colmena",
-                qualification: 3,
-                anualPrice: 5000000,
-                share: 200000,
-                shareNumber: 12,
-                descriptionValues: colmenaPlan(25000, 80),
-                redirect: LifeProcessDetailsPlanRouteFunc
-            },
-            {
-                logoPath: "colmena-logo.svg", 
-                insuranceName: "Colmena",
-                qualification: 1,
-                anualPrice: 2300000,
-                share: 100000,
-                shareNumber: 12,
-                descriptionValues: colmenaPlan(49000, 33),
-                redirect: LifeProcessDetailsPlanRouteFunc
-            },
-        ]) )
     }, [])
 
     return (
@@ -43,21 +28,33 @@ export const SelectLifePlan = () => {
             <div className="mx-3">
 
             <WhatsAppContainer />
-            
-            <div className="row justify-content-between mt-3" >
-                {
-                    plans.length && (
-                        plans.map( ( plan, i ) => (
-                            <Fragment key={i}>
-                                <Plan 
-                                    index={i}
-                                    { ...plan }
-                                />
-                            </Fragment>
-                        ))
-                    )
-                }
-            </div>
+
+            {
+                requestStatus.error ?
+                (
+                    <div> No fue posible recuperar planes </div>
+                ):
+                requestStatus.loading ? 
+                (
+                    <div> Estamos buscando los mejores planes </div>
+                ):
+                (
+                <div className="row justify-content-between mt-3" >
+                    {
+                        plans.length && (
+                            plans.map( ( plan, i ) => (
+                                <Fragment key={i}>
+                                    <LifePlan 
+                                        index={i}
+                                        { ...plan }
+                                    />
+                                </Fragment>
+                            ))
+                        )
+                    }
+                </div>
+                )
+            }
 
             </div>
 

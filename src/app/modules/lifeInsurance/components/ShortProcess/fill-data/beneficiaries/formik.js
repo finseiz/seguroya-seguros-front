@@ -1,25 +1,29 @@
 import * as Yup from "yup";
 
 export const beneficiariesValues = {
-    fullname: "Pedro",
-    kinship: "P",
-    age: 12,
+    firstName: "Pedro",
+    middleName: "Pedro",
+    surname: "Pedro",
+    secondeSurname: "Pedro",
     cellphone: "300566655",
-    birth_date: "12/12/2019",
-    document_type: "CC",
+    birthDate: "",
+    gender: "F",
+    kinship: 0,
+    documentType: 0,
     identification: "10223",
-    gender: "",
-    participation: 23,
+    participation: 25,
 };
 
 export const beneficiariesSchema = Yup.object().shape({
-    fullname: Yup.string().required("Campo requerido"),
-    kinship: Yup.string().required("Campo requerido"),
-    age: Yup.number().required("Campo requerido"),
+    firstName: Yup.string().required("Campo requerido"),
+    middleName: Yup.string(),
+    surname: Yup.string().required("Campo requerido"),
+    secondeSurname: Yup.string().required("Campo requerido"),
     cellphone: Yup.number().required("Campo requerido"),
-    birth_date: Yup.string().required("Campo requerido"),
-    document_type: Yup.string().required("Campo requerido"),
-    identification: Yup.number().required("Campo requerido"),
+    birthDate: Yup.string().required("Campo requerido"),
     gender: Yup.string().oneOf(["F", "M"]).required("Campo requerido"),
+    kinship: Yup.string().required("Campo requerido"),
+    documentType: Yup.number().required("Campo requerido"),
+    identification: Yup.string().required("Campo requerido"),
     participation: Yup.number().min(1).max(100).required("Campo requerido"),
 });

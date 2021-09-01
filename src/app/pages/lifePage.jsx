@@ -5,7 +5,7 @@ function LifePage() {
   return (
     <div className="container-fluid p-0">
       <div className="row m-0 background-life">
-        <div className="container content ">
+        <div className="content ">
           <LifeForm />
         </div>
       </div>
