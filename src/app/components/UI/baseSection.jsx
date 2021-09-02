@@ -1,7 +1,6 @@
 import React from "react";
-import { CircularProgress } from "@material-ui/core";
 
-function BaseSection({ children, title, description, actions, loading }) {
+function BaseSection({ children, title, description, actions, loading=false }) {
   return (
 
     <div className="container-fluid">
@@ -44,6 +43,12 @@ function BaseSection({ children, title, description, actions, loading }) {
             <div className="card-body text-center">
 
               {
+                loading ? 
+                (
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden"></span>
+                  </div>
+                ):
                 actions.map((action, index) => {
                   const { content, text, ...props } = action;
                   return (
@@ -56,15 +61,6 @@ function BaseSection({ children, title, description, actions, loading }) {
                       {content ?? (
                         <>
                           <span> {text} </span>
-                          {
-                            loading && (
-                              <CircularProgress
-                                className="ml-2"
-                                size={10}
-                                color="inherit"
-                              />
-                            )
-                          }
                         </>
                       )}
                     </button>

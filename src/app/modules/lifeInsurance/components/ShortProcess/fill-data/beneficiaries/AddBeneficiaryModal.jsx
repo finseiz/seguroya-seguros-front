@@ -47,7 +47,7 @@ function AddBeneficiary({ open, handleClose, handleSubmit }) {
                 <FormikInput formik={formik} field="surname" label="Apellido" />
               </div>
               <div className="col p-0">
-                <FormikInput formik={formik} field="secondeSurname" label="Segundo apellido" />
+                <FormikInput formik={formik} field="secondSurname" label="Segundo apellido" />
               </div>
             </div>
 

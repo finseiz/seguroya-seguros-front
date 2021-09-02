@@ -3,7 +3,7 @@ import { colmenaPlan } from "app/helpers/select-plan";
 import { createSelectOptions } from "app/helpers/selet-options";
 import { LifeProcessDetailsPlanRouteFunc } from "app/routes/childs/Life/routes";
 import { actions } from "../../redux";
-import { getPlansRequest } from "./repository"
+import { getPlansRequest, sendDataRequest } from "./repository"
 
 export const getPlans = async ( dispatch, clientData ) => {
     try {
@@ -59,4 +59,71 @@ export const getBeneficiariesDocumentTypes = ( lists ) => {
         return createSelectOptions(types)
     }
     return [];   
+}
+
+export const isPecentCorrect = ( beneficiaries ) => {
+
+    if ( beneficiaries.length ){
+        let count = 0;
+        beneficiaries.forEach( (element) => count += element.participation );
+
+        if ( count === 100 ){
+            return true
+        }
+    }
+    return false;
+
+}
+
+const prepareInformation = ( state ) => {
+
+    const values = state.selectedPlan;
+    const client = state.clientData;
+
+    return {
+        beneficiarios: values.beneficiaries.map( (beneficiary) => ({
+            celular: beneficiary.cellphone,
+            fechaNacimiento: formatGeneralDate(beneficiary.birthDate),
+            genero: beneficiary.gender,
+            indexParentesco: beneficiary.kinship,
+            numeroDocumento: beneficiary.identification,
+            porcentaje: beneficiary.participation,
+            primerApellido: beneficiary.surname,
+            primerNombre: beneficiary.firstName,
+            segundoApellido: beneficiary.secondeSurname,
+            segundoNombre: beneficiary.middleName,
+            tipoDocumento: beneficiary.documentType
+        })),
+        opPago: values.paymentID,
+        opPlan: values.redirectValues.plan,
+        opPrima: values.redirectValues.policy,
+        tomador: {
+          celular: client.phone,
+          direccion: client.address,
+          email: client.email,
+          fechaExpedicion: formatGeneralDate(client.expeditionDate),
+          fechaNacimiento: formatGeneralDate(client.birthDate),
+          genero: client.gender,
+          indexCiudadNac: parseInt(client.birthCity),
+          indexCiudadRes: parseInt(client.residenceCity),
+          indexDepNac: parseInt(client.birthDep),
+          indexDepRes: parseInt(client.residenceDep),
+          numeroDocumento: client.document,
+          ocupacion: parseInt(client.occupation),
+          tipoDocumento: parseInt(client.documentType),
+          primerApellido: client.surname,
+          primerNombre: client.firstName,
+          segundoApellido: client.secondSurname,
+          segundoNombre: client.middleName,
+        }
+    }
+
+}
+
+export const sendInformation = async ( state ) => {
+
+    const body = prepareInformation(state);
+    debugger
+    const response = await sendDataRequest(body);
+    debugger
 }

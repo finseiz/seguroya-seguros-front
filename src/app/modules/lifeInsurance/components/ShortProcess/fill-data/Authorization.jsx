@@ -6,11 +6,12 @@ import { activeRadio, onChangeQuestion, activeError, canContinue } from "./../..
 import { questionAuthTerms, questionAuthPersonalData, questionAuthContent } from "./../questions-values";
 import { useState } from "react";
 import { LifeProcessOTP, LifeProcessPersonAndMoreDataRoute } from "app/routes/childs/Life/routes";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { actions } from "app/modules/lifeInsurance/redux";
+import { sendInformation } from "../controller";
 
-export const Authorization = ({ }) => {
+export const Authorization = ({}) => {
 
   const initValues = {
     [questionAuthTerms.id]: "",
@@ -19,6 +20,8 @@ export const Authorization = ({ }) => {
   }
   const [values, onChange] = useForm(initValues);
   const [trySubmit, setTrySubmit] = useState(false);
+  const [loadingRequest, setLoadingRequest] = useState(false);
+  const lifeInsurance = useSelector(state => state.lifeInsurance)
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -34,9 +37,12 @@ export const Authorization = ({ }) => {
     {
       text: "Continuar",
       className: "btn btn-primary primary-button process__process-button px-5 mx-3",
-      onClick: () => {
+      onClick: async () => {
         setTrySubmit(true)
         if ( canContinue(values) ){
+          setLoadingRequest(true);
+          await sendInformation( lifeInsurance )
+          setLoadingRequest(true);
           dispatch(actions.setShortProcess(4));
           history.push(LifeProcessOTP);
         }
@@ -49,6 +55,7 @@ export const Authorization = ({ }) => {
     <BaseSection
       title="Autorizaciones"
       actions={actionsButton}
+      loading={loadingRequest}
     >
       <div className="process__others-container">
         <div className="p-3 process__normal-text process__short-container">

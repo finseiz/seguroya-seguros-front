@@ -3,7 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   clientData: {},
   plans: [],
-  selectedPlan: {},
+  selectedPlan: {
+    beneficiaries: []
+  },
   progress: {
     initial: 0,
     /** WARING: If this name change [shortProcess] change, most change lifeInsaranceRoute.jsx at processIndicatorName="**" */
@@ -39,6 +41,10 @@ const setSelectedPlan = (plan) => (dispatch) => {
   dispatch(lifeInsuranceSlice.actions.setSelectedPlan(action));
 }
 
+const setBeneficiares = (beneficiaries) => (dispatch) => {
+  dispatch(lifeInsuranceSlice.actions.setBeneficiares(beneficiaries));
+}
+
 /**
  * 
  * @param {*} values 
@@ -56,7 +62,8 @@ export const actions = {
   setInitialProgress,
   setSelectedPlan,
   setShortProcess,
-  setGeneralValues
+  setGeneralValues,
+  setBeneficiares
 };
 
 export const lifeInsuranceSlice = createSlice({
@@ -81,11 +88,15 @@ export const lifeInsuranceSlice = createSlice({
     },
     setSelectedPlan: (state, action) => {
       const { plan } = action.payload;
-      state.selectedPlan = plan;
+      state.selectedPlan = { ...state.selectedPlan, ...plan };
+    },
+    setBeneficiares: (state, action) => {
+      const beneficiaries = action.payload;
+      state.selectedPlan.beneficiaries = beneficiaries;
     },
     setGeneralValues: (state, action) => {
       const { values, field } = action.payload;
       state.general[field] = values;
-    },   
+    },
   },
 });

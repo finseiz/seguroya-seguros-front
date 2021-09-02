@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import BaseSection from "app/components/UI/baseSection";
 import AddBeneficiary from "./AddBeneficiaryModal";
 import { LifeProcessInsurabilityRoute, LifeProcessPersonAndMoreDataRoute, } from "./../../../../../../routes/childs/Life/routes";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actions } from "app/modules/lifeInsurance/redux";
 import { useHistory } from "react-router-dom";
 import TableProcess from "../../../../../../components/process/table/Table";
+import { isPecentCorrect } from "../../controller";
 
 export const Beneficiaries = ({}) => {
-  const [beneficiaries, setBeneficiaries] = useState([]);
-  const [openAddModal, setOpenAddModal] = React.useState(false);
+  const { selectedPlan:{beneficiaries:globalBeneficiaries} } = useSelector(state => state.lifeInsurance)
+  const [beneficiaries, setBeneficiaries] = useState([...globalBeneficiaries]);
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [showPercentError, setShowPercentError] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -26,8 +29,14 @@ export const Beneficiaries = ({}) => {
       text: "Continuar",
       className: "btn btn-primary primary-button process__process-button px-5 mx-3",
       onClick: () => {
-        dispatch(actions.setShortProcess(2));
-        history.push(LifeProcessPersonAndMoreDataRoute);
+        const beneficiariesPercent = isPecentCorrect(beneficiaries)
+        if ( beneficiariesPercent ){
+          dispatch(actions.setShortProcess(2));
+          dispatch(actions.setBeneficiares(beneficiaries));
+          history.push(LifeProcessPersonAndMoreDataRoute);
+        }else{
+          setShowPercentError(true)
+        }        
       },
     },
   ];
@@ -49,6 +58,15 @@ export const Beneficiaries = ({}) => {
       title="Inscribe beneficiarios"
       actions={actionsButton}
     >
+      {
+        showPercentError && 
+        (
+          <div class="alert alert-danger" role="alert">
+            El porcentaje de los beneficiarios debe sumar 100.
+          </div>
+        )
+      }
+      
       <TableProcess
         columns={[
           { title: "Identificación", field: "identification" },
