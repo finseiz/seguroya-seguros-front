@@ -4,6 +4,7 @@ import { queryParams } from "app/const/crud"
 const baseURL = "colmena/"
 const cotization = baseURL + "cotizar"
 const sendData = baseURL + "solicitar"
+const validate = baseURL + "validar-solicitud"
 
 /**
  * Get Colmena Plans
@@ -18,6 +19,11 @@ export const getPlansRequest = async ( date ) => {
     return response.json()
 }
 
+/**
+ * 
+ * @param {object} data 
+ * @returns If success, return and object with [idSolicitud]
+ */
 export const sendDataRequest = async ( data ) => {
     const response = await makeRequest({
         path: sendData,
@@ -25,4 +31,18 @@ export const sendDataRequest = async ( data ) => {
         body: JSON.stringify(data)
     })
     return response.json()
+}
+
+/**
+ * 
+ * @param {object} data 
+ * @returns Object with [status] and [body] from request
+ */
+export const validateRequest = async ( data ) => {
+    const response = await makeRequest({
+        path: validate,
+        method: "POST",
+        body: JSON.stringify(data)
+    })
+    return { status: response.status, body: response.body }
 }

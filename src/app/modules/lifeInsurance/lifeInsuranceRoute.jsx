@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Switch, Route, useHistory } from "react-router-dom";
 import { Content } from "theme/layout/utils/content";
-import { LifeProcessAuthorizationRoute, LifeProcessBeneficiariesRoute, LifeProcessDetailsPlanRoute, LifeProcessDone, LifeProcessInsurabilityRoute, LifeProcessOTP, LifeProcessPersonAndMoreDataRoute, LifeProcessSelectPlanRoute } from "app/routes/childs/Life/routes";
+import { LifeHomeRoute, LifeProcessAuthorizationRoute, LifeProcessBeneficiariesRoute, LifeProcessDetailsPlanRoute, LifeProcessDone, LifeProcessInsurabilityRoute, LifeProcessOTP, LifeProcessPersonAndMoreDataRoute, LifeProcessSelectPlanRoute } from "app/routes/childs/Life/routes";
 import { SelectLifePlan } from "./components/ShortProcess/select-plan/SelectLifePlan";
 import { PlanDetails } from "./components/ShortProcess/select-plan/PlanDetails";
 import { lifeProcessSteps } from "../../helpers/process-steps";
@@ -12,8 +12,18 @@ import { PersonAndOthers } from "./components/ShortProcess/fill-data/person-othe
 import { Authorization } from "./components/ShortProcess/fill-data/Authorization";
 import { ConfirmationCode } from "../_general/OTP";
 import { ProcessDone } from "../_general/ProcessDone";
+import { useSelector } from "react-redux";
+import { sendOtp } from "./components/ShortProcess/controller";
 
 function LifeInsuranceRoute() {
+
+  const { clientData, selectedPlan, progress:{initial} } = useSelector(state => state.lifeInsurance);
+  const history = useHistory();
+
+  /** Life Route Protection */
+  // if ( !clientData.email && !(initial === 100) ){
+  //   history.push(LifeHomeRoute)
+  // }
 
   return (
 
@@ -60,7 +70,12 @@ function LifeInsuranceRoute() {
         <Route
           exact={true}
           path={LifeProcessOTP}
-          component={ () => <ConfirmationCode redirectRoute={LifeProcessDone} messageIndex={0} /> }
+          component={ () => <ConfirmationCode 
+            redirectRoute={LifeProcessDone} 
+            messageIndex={0} 
+            email={clientData.email}
+            onSubmit={ async (otp) => await sendOtp(otp, selectedPlan)  }
+          /> }
         />
 
         <Route

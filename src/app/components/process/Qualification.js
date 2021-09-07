@@ -21,7 +21,7 @@ const Qualification = ({qualification, ...others}) => {
 }
 
 Qualification.propTypes = {
-    qualification: PropTypes.number.isRequired
+    qualification: PropTypes.any.isRequired
 }
 
 export default Qualification

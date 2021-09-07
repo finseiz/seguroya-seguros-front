@@ -8,10 +8,10 @@ import { useHistory } from "react-router-dom";
 import TableProcess from "../../../../../../components/process/table/Table";
 import { isPecentCorrect } from "../../controller";
 
-export const Beneficiaries = ({}) => {
-  const { selectedPlan:{beneficiaries:globalBeneficiaries} } = useSelector(state => state.lifeInsurance)
+export const Beneficiaries = ({ }) => {
+  const { selectedPlan: { beneficiaries: globalBeneficiaries } } = useSelector(state => state.lifeInsurance)
   const [beneficiaries, setBeneficiaries] = useState([...globalBeneficiaries]);
-  const [openAddModal, setOpenAddModal] = useState(false);
+  const [modalState, setModalState] = useState({ open: false, initialValues: {} });
   const [showPercentError, setShowPercentError] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -30,27 +30,37 @@ export const Beneficiaries = ({}) => {
       className: "btn btn-primary primary-button process__process-button px-5 mx-3",
       onClick: () => {
         const beneficiariesPercent = isPecentCorrect(beneficiaries)
-        if ( beneficiariesPercent ){
+        if (beneficiariesPercent) {
           dispatch(actions.setShortProcess(2));
           dispatch(actions.setBeneficiares(beneficiaries));
           history.push(LifeProcessPersonAndMoreDataRoute);
-        }else{
+        } else {
           setShowPercentError(true)
-        }        
+        }
       },
     },
   ];
 
-  const handleCloseAddModal = () => setOpenAddModal(false);
+  const handleCloseModal = () => setModalState({ open: false, initialValues: {} });
 
-  const deleteRow = ( index ) => { 
+  const handleEditItemModal = (index) => setModalState({ open: true, initialValues: {...beneficiaries[index], index} });
+
+  const deleteRow = (index) => {
     const aux = [...beneficiaries];
-    aux.splice( index, 1 );
-    setBeneficiaries( aux );
+    aux.splice(index, 1);
+    setBeneficiaries(aux);
   }
 
-  const addData = ( values ) => {
-    setBeneficiaries( [...beneficiaries, values] );
+  const addData = (values, index) => {
+    // If updating
+    if ( index !== undefined ){
+      const aux = [...beneficiaries];
+      aux[index] = values;
+      setBeneficiaries([...aux]);
+    // Otherwise (adding)
+    }else{
+      setBeneficiaries([...beneficiaries, values]);
+    }
   };
 
   return (
@@ -59,14 +69,14 @@ export const Beneficiaries = ({}) => {
       actions={actionsButton}
     >
       {
-        showPercentError && 
+        showPercentError &&
         (
           <div class="alert alert-danger" role="alert">
             El porcentaje de los beneficiarios debe sumar 100.
           </div>
         )
       }
-      
+
       <TableProcess
         columns={[
           { title: "Identificación", field: "identification" },
@@ -75,26 +85,26 @@ export const Beneficiaries = ({}) => {
           { title: "Porcentaje de participación", field: "participation" },
           { title: "", field: "tools" }
         ]}
-        data={ beneficiaries }
-        deleteRow={ deleteRow }
-        editRow={ () => {} }
+        data={beneficiaries}
+        deleteRow={deleteRow}
+        editRow={handleEditItemModal}
       />
 
       <div className="text-center">
         <button
           className="btn btn-primary process__process-table-btn mt-2"
-          onClick={() => setOpenAddModal(true) }
+          onClick={() => setModalState({ open: true, initialValues: {} })}
         >
           Añadir beneficiario/a
         </button>
       </div>
 
       <AddBeneficiary
-        open={openAddModal}
-        handleClose={handleCloseAddModal}
-        handleSubmit={ (values) => {
-          addData(values);
-          handleCloseAddModal();
+        state={modalState}
+        handleClose={handleCloseModal}
+        handleSubmit={(values, index) => {
+          addData(values, index);
+          handleCloseModal();
         }}
       />
     </BaseSection>

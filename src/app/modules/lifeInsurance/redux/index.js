@@ -8,7 +8,8 @@ const initialState = {
   },
   progress: {
     initial: 0,
-    /** WARING: If this name change [shortProcess] change, most change lifeInsaranceRoute.jsx at processIndicatorName="**" */
+    /** WARING: If this name change [shortProcess] change, most change lifeInsaranceRoute.jsx 
+     * at processIndicatorName="**" */
     shortProcess: 0,
   },
   general: {

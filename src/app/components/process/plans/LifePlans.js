@@ -49,8 +49,8 @@ const LifePlan = (props) => {
 
                     {
                         descriptionValues &&
-                        descriptionValues.map(value => (
-                            <div>
+                        descriptionValues.map((value, i) => (
+                            <div key={i}>
                                 <p className="plans_plan-label"> {value.label} </p>
                                 <p className="plans_plan-value"> {value.value} </p>
                             </div>

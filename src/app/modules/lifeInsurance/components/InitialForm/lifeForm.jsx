@@ -60,6 +60,7 @@ function LifeForm() {
   useEffect(() => {
     // TODO: si la lista ya está, no llamar de nuevo.
     getInitialValues(dispatch);
+    dispatch(actions.setInitialProgress(0));
   }, [])
 
   return (

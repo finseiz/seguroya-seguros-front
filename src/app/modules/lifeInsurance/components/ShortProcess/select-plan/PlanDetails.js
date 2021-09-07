@@ -23,7 +23,6 @@ export const PlanDetails = () => {
     const [commets, setCommets] = useState([]);
 
     useEffect(() => {
-        //const selectedPlan = plans.find(planElemt => planElemt.redirectValues == {policy: parseInt(policy), plan: parseInt(plan) })
         const selectedPlan = plans.find(planElement =>
             planElement.redirectValues.policy === parseInt(policy) &&
             planElement.redirectValues.plan === parseInt(plan)
@@ -36,25 +35,11 @@ export const PlanDetails = () => {
             "Si tienes un accidente y tu carro tiene un daño inferior al 75% del valor del vehículo (ej. puertas, el parabrisas, etc.), el valor a pagar es $300.000.",
             "Tienes 10 conductores elegidos en el año."
         ]);
-        setCommets([
-            {
-                comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                qualification: "1",
-                userName: "Roberto Sanchez",
-                userImageUrl: "www.src.com"
-            },
-            {
-                comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                qualification: "4",
-                userName: "Juan Perez",
-                userImageUrl: "www.src.com"
-            }
-        ])
     }, []);
 
     const formik = useFormik({
         initialValues: { selectedPayment: "" },
-        validationSchema: Yup.object().shape({ selectedPayment: Yup.number().min(0).required("Campo requerido") }),
+        validationSchema: Yup.object().shape({ selectedPayment: Yup.string().required("Campo requerido") }),
         onSubmit: ( {selectedPayment} ) => {
             dispatch(actions.setSelectedPlan({...selectPlan, paymentID: selectedPayment}))
             history.push(LifeProcessInsurabilityRoute)
@@ -148,7 +133,7 @@ export const PlanDetails = () => {
                                                                     <p className="mb-1 plans_sal_plan-value-2"> {payment["informacion"]} </p>
                                                                     <p className=""> {`Pago ${payment["nombre"]}`} </p>
                                                                 </div>
-                                                            ), value: payment.cod }
+                                                            ), value: payment.nombre }
                                                         ))
                                                     }
                                                     optionsClass="flex-column"

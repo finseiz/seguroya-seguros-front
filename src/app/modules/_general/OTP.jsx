@@ -3,15 +3,32 @@ import BaseSection from "app/components/UI/baseSection";
 import BaseModal from "app/components/UI/baseModal";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
-export const ConfirmationCode = ({ redirectRoute, messageIndex, email="" }) => {
+/**
+ * 
+ * @param {*} redirectRoute 
+ * @param {*} messageIndex 
+ * @param {*} email 
+ * @param {*} onSubmit *Important* Must return a boolean. If "true", the user will be redirected
+ * @returns 
+ */
+export const ConfirmationCode = ({ redirectRoute, messageIndex, email="", onSubmit }) => {
 
   const [openModal, setOpenModal] = useState(false);
   const history = useHistory();
   const message = [
     "Digita el código que se ha enviado por mensaje de texto a tu celular",
     "Digita el código que se ha enviado a tu correo electrónico"
-  ]
+  ];
+  const formik = useFormik({
+    initialValues: { otp: "" },
+    validationSchema: Yup.object().shape({
+      otp: Yup.number().required("Este campo es requrido")
+    }),
+    onSubmit: (values) => setOpenModal(true)
+  })
 
   return (
     <BaseSection
@@ -19,28 +36,38 @@ export const ConfirmationCode = ({ redirectRoute, messageIndex, email="" }) => {
     >
       <div className="text-center process__opt_container center-flex">
 
-        <div>
-          <p className="m-1">
-            { message[messageIndex] }
-          </p>
-          <div className="mb-2">
-            <a href="#">Click aquí para re-enviar el mensaje</a>.
+        <form onSubmit={formik.handleSubmit}>
+
+          <div>
+            <p className="m-1">
+              { message[messageIndex] }
+            </p>
+            <div className="mb-2">
+              <a href="#">Click aquí para re-enviar el mensaje</a>.
+            </div>
+
+            <input
+              type="number"
+              className="form-control process__opt_input mb-3 process-input-otp process__otp-width"
+              { ...formik.getFieldProps("otp") }
+            />
+            {
+              formik.errors["otp"] && formik.touched["otp"] &&
+              (
+                <p className="invalid-msj"> { formik.errors["otp"] } </p>
+              ) 
+            }
+            
+
+            <button
+              type="submit"
+              className="btn btn-primary primary-button process__process-button process__otp-width mx-3"
+            >
+              Continuar
+            </button>
           </div>
 
-          <input
-            type="text"
-            name="confirmation_code"
-            className="form-control process__opt_input mb-3 process-input-otp process__otp-width"
-          />
-
-          <button
-            type="submit"
-            className="btn btn-primary primary-button process__process-button process__otp-width mx-3"
-            onClick={() => setOpenModal(true)}
-          >
-            Continuar
-          </button>
-        </div>
+        </form>
 
       </div>
 
@@ -60,7 +87,6 @@ export const ConfirmationCode = ({ redirectRoute, messageIndex, email="" }) => {
               <div>
                 <a href="#"> { email } </a>
               </div>
-
             </div>
 
             <div className="row">
@@ -74,8 +100,11 @@ export const ConfirmationCode = ({ redirectRoute, messageIndex, email="" }) => {
               <button
                 type="submit"
                 className="col btn btn-primary primary-button ml-2 w-100"
-                onClick={() => {
-                  history.push(redirectRoute);
+                onClick={ async () => {
+                  if ( onSubmit ){
+                    const redirect = await onSubmit(formik.values["otp"])
+                    redirect && history.push(redirectRoute);
+                  }
                 }}
               >
                 <b>Continuar</b>

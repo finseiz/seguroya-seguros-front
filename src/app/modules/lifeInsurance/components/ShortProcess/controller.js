@@ -3,7 +3,7 @@ import { colmenaPlan } from "app/helpers/select-plan";
 import { createSelectOptions } from "app/helpers/selet-options";
 import { LifeProcessDetailsPlanRouteFunc } from "app/routes/childs/Life/routes";
 import { actions } from "../../redux";
-import { getPlansRequest, sendDataRequest } from "./repository"
+import { getPlansRequest, sendDataRequest, validateRequest } from "./repository"
 
 export const getPlans = async ( dispatch, clientData ) => {
     try {
@@ -120,10 +120,39 @@ const prepareInformation = ( state ) => {
 
 }
 
-export const sendInformation = async ( state ) => {
+export const sendInformation = async ( state, dispatch ) => {
 
-    const body = prepareInformation(state);
-    debugger
-    const response = await sendDataRequest(body);
-    debugger
+    try {
+        const body = prepareInformation(state);
+        const response = await sendDataRequest(body);
+        if ( response["idSolicitud"] ){
+            dispatch( actions.setSelectedPlan({quoteId: response["idSolicitud"] }) );
+            return true;
+        }else{
+            return false;
+        }
+    } catch (error) {
+        return false
+    }
+}
+
+export const sendOtp = async ( otp, state ) => {
+    const requestId = state.quoteId;
+    try {
+
+        const data = {
+            codigo: otp,
+            idSolicitud: requestId
+        }
+
+        const response = await validateRequest(data);
+        debugger
+        if ( response.status === 200 ){
+            return true;
+        }else{
+            return false;
+        }
+    } catch (error) {
+        return false;
+    }
 }

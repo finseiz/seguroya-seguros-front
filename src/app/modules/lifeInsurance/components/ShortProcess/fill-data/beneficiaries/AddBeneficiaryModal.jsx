@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import BaseModal from "app/components/UI/baseModal";
 import { beneficiariesSchema, beneficiariesValues } from "./formik";
@@ -9,14 +9,19 @@ import { genderRadioTypes } from "app/helpers/radio-options";
 import { getBeneficiariesDocumentTypes, getKinshipList } from "../../controller";
 import { useSelector } from "react-redux";
 
-function AddBeneficiary({ open, handleClose, handleSubmit }) {
+function AddBeneficiary({ state, handleClose, handleSubmit }) {
 
   const { general:{lists} } = useSelector(state => state.lifeInsurance)
+  const { initialValues, open } = state;
+
+  const isEditing = initialValues.participation;
+
   const formik = useFormik({
-    initialValues: beneficiariesValues,
+    initialValues: isEditing ? initialValues : beneficiariesValues,
+    enableReinitialize: true,
     validationSchema: beneficiariesSchema,
     onSubmit: ( values ) => {
-      handleSubmit(values);
+      handleSubmit(values, initialValues.index);
       formik.resetForm();
     },
   });
@@ -26,7 +31,7 @@ function AddBeneficiary({ open, handleClose, handleSubmit }) {
 
       <form onSubmit={formik.handleSubmit}>
 
-        <p className="process__beneficiares-title">Beneficiario #</p>
+        <p className="process__beneficiares-title">Incribir beneficiario</p>
 
         <div className="row">
 
@@ -114,7 +119,11 @@ function AddBeneficiary({ open, handleClose, handleSubmit }) {
             type="submit"
             className="btn btn-primary process__process-table-btn mt-2"
           >
-            Añadir beneficiario/a
+            {
+              isEditing ? 
+              "Actualizar beneficiario/a":
+              "Añadir beneficiario/a"
+            }
           </button>
         </div>
 

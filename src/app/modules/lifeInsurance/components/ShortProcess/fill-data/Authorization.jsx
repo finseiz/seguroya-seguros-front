@@ -41,10 +41,12 @@ export const Authorization = ({}) => {
         setTrySubmit(true)
         if ( canContinue(values) ){
           setLoadingRequest(true);
-          await sendInformation( lifeInsurance )
-          setLoadingRequest(true);
-          dispatch(actions.setShortProcess(4));
-          history.push(LifeProcessOTP);
+          const success = await sendInformation( lifeInsurance, dispatch )
+          if ( success ){
+            dispatch(actions.setShortProcess(4));
+            history.push(LifeProcessOTP);   
+          }
+          setLoadingRequest(false);
         }
       },
     },
@@ -63,7 +65,6 @@ export const Authorization = ({}) => {
           <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
         </div>
       </div>
-
 
       <Question
         question={questionAuthTerms.question}

@@ -15,7 +15,7 @@ const Cell = ({
         return (
             <div>
                 <button title="editar" type="button" className="btn"
-                    onClick={ onEdit }
+                    onClick={ () => onEdit(index) }
                 >
                     <img
                         src={toAbsoluteUrl("/media/icons/edit-Icon.svg")}
