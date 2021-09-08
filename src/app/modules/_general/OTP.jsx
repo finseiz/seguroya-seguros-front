@@ -14,10 +14,12 @@ import * as Yup from "yup";
  * @param {*} onSubmit *Important* Must return a boolean. If "true", the user will be redirected
  * @returns 
  */
-export const ConfirmationCode = ({ redirectRoute, messageIndex, email="", onSubmit }) => {
+export const ConfirmationCode = ({ redirectRoute, messageIndex, email = "", onSubmit }) => {
 
   const [openModal, setOpenModal] = useState(false);
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
+
   const message = [
     "Digita el código que se ha enviado por mensaje de texto a tu celular",
     "Digita el código que se ha enviado a tu correo electrónico"
@@ -39,25 +41,24 @@ export const ConfirmationCode = ({ redirectRoute, messageIndex, email="", onSubm
         <form onSubmit={formik.handleSubmit}>
 
           <div>
-            <p className="m-1">
-              { message[messageIndex] }
+            <p className="m-3">
+              {message[messageIndex]}
             </p>
-            <div className="mb-2">
+            {/* <div className="mb-2">
               <a href="#">Click aquí para re-enviar el mensaje</a>.
-            </div>
+            </div> */}
 
             <input
               type="number"
               className="form-control process__opt_input mb-3 process-input-otp process__otp-width"
-              { ...formik.getFieldProps("otp") }
+              {...formik.getFieldProps("otp")}
             />
             {
               formik.errors["otp"] && formik.touched["otp"] &&
               (
-                <p className="invalid-msj"> { formik.errors["otp"] } </p>
-              ) 
+                <p className="invalid-msj"> {formik.errors["otp"]} </p>
+              )
             }
-            
 
             <button
               type="submit"
@@ -85,32 +86,42 @@ export const ConfirmationCode = ({ redirectRoute, messageIndex, email="", onSubm
                 Tu poliza será enviada a tu correo
               </p>
               <div>
-                <a href="#"> { email } </a>
+                <a href="#"> {email} </a>
               </div>
             </div>
 
-            <div className="row">
-              <button
-                type="submit"
-                className="col btn btn-primary primary-button mr-2 w-100 bg-dark-blue"
-                onClick={() => setOpenModal(false)}
-              >
-                <b>Volver</b>
-              </button>
-              <button
-                type="submit"
-                className="col btn btn-primary primary-button ml-2 w-100"
-                onClick={ async () => {
-                  if ( onSubmit ){
-                    const redirect = await onSubmit(formik.values["otp"])
-                    redirect && history.push(redirectRoute);
-                  }
-                }}
-              >
-                <b>Continuar</b>
-              </button>
+            {
+              loading ?
+                <div className="spinner-border" role="status">
+                  <span className="visually-hidden"></span>
+                </div> 
+                :
+                <div className="row">
+                  <button
+                    type="submit"
+                    className="col btn btn-primary primary-button mr-2 w-100 bg-dark-blue"
+                    onClick={() => setOpenModal(false)}
+                  >
+                    <b>Volver</b>
+                  </button>
+                  <button
+                    type="submit"
+                    className="col btn btn-primary primary-button ml-2 w-100"
+                    onClick={async () => {
+                      if (onSubmit) {
+                        setLoading(true);
+                        const redirect = await onSubmit(formik.values["otp"])
+                        redirect && history.push(redirectRoute);
+                        setLoading(false);
+                      }
+                    }}
+                  >
+                    <b>Continuar</b>
+                  </button>
 
-            </div>
+                </div>
+
+            }
 
 
           </div>
