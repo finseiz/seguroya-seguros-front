@@ -3,12 +3,11 @@ export const HealthHomeRoute = "/health";
 
 export const HealthProcessRoute = HealthHomeRoute + "/process"
 
-export const HealthProcessProfilingRoute =  HealthProcessRoute + "/profiling";
-
 export const HealthProcessSelectPlanRoute =  HealthProcessRoute + "/select-plan";
 
-export const HealthProcessDetailsPlanRoute =  HealthProcessRoute + "/:id/details";
-export const HealthProcessDetailsPlanRouteFunc = (id) => HealthProcessRoute + `/${id}/details`;
+export const HealthProcessBeneficiariesRoute =  HealthProcessRoute + "/beneficiaries";
+
+export const HealthProcessDetailsPlanRoute =  HealthProcessRoute + "/details";
 
 export const HealthProcessInsurabilityRoute =  HealthProcessRoute + "/insurability-info";
 

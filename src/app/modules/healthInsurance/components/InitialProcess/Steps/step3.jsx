@@ -1,38 +1,24 @@
-import BaseSection from "app/components/UI/baseSection";
-import { actions } from "app/modules/healthInsurance/redux";
+import React from 'react'
 import Question from "app/modules/_forms/overview/Question";
-import { HealthProcessSelectPlanRoute } from "app/routes/childs/Health/routes";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import * as Yup from "yup"
 
-export function Profiling({ }) {
-
-  const dispatch = useDispatch();
-  const history = useHistory();
+export function Step3({ onSubmit }) {
 
   const formik = useFormik({
-    initialValues: {},
+    initialValues: {
+      data_processing_licence: "",
+    },
+    validationSchema: Yup.object().shape({
+      data_processing_licence: Yup.string().oneOf([true]).required("Debes aceptar el tratamiento de datos")
+    }),
+    onSubmit
   })
 
-  const actionsButton = [
-    {
-      text: "Continuar",
-      className: "btn btn-primary primary-button process__process-button px-5 mx-3",
-      onClick: () => {
-        dispatch(actions.setSuraProgress(2));
-        history.push(HealthProcessSelectPlanRoute);
-      },
-    },
-  ];
-
   return (
-    <BaseSection
-      title="Perfilamiento"
-      actions={actionsButton}
-    >
+    <div className="card-body container ">
 
-      <p className="text-left inital-from__title mt-2 text-center">
+      <p className="text-left inital-from__title mt-3 px-4">
         Formulario de perfilamiento del cliente SALUD (aplica términos y condiciones)
       </p>
 
@@ -73,12 +59,13 @@ export function Profiling({ }) {
         question="¿Autorizo el tratamiento de mis datos personales a Seguro Ya?"
         formik={formik}
         className="mt-4"
+        showError
         options={[
           { formikValue: "data_processing_licence", label: "Si", value: true },
           { formikValue: "data_processing_licence", label: "No", value: false },
         ]}
       />
 
-    </BaseSection>
+    </div>
   );
 }

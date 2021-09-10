@@ -9,7 +9,6 @@ import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
 import { ProgressIndicator } from "app/components/process/ProgressIndicator";
 import { CarsKmProcessSelectPlanRoute, CarsProcessSelectPlanRoute } from "app/routes/childs/Cars/routes";
 import { getCountries } from "./controller";
-import moment from "moment";
 
 function CarsForm() {
   const history = useHistory();
@@ -18,7 +17,8 @@ function CarsForm() {
   const [countries, setCountries] = useState([]);
 
   useEffect(() => {
-    getCountries().then( list => setCountries(list) )
+    getCountries().then( list => setCountries(list) );
+    dispatch(actions.restartState());
   }, [])
 
   const formik = useFormik({

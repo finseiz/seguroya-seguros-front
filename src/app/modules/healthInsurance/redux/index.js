@@ -6,8 +6,16 @@ const initialState = {
     sura: 0
   },
   plans: [],
-  selectedPlan: {},
   beneficiaries: [],
+  generalLists: {
+    occupations: [],
+    documentTypes: [],
+    departments: [],
+  },
+  selectedPlan: {},
+  data: {
+    client: {},
+  }
 };
 
 const setPlans = (data) => (dispatch) => {
@@ -16,8 +24,7 @@ const setPlans = (data) => (dispatch) => {
 };
 
 const setSelectedPlan = (plan) => (dispatch) => {
-  const action = { plan };
-  dispatch(healthInsuranceSlice.actions.setSelectedPlan(action));
+  dispatch(healthInsuranceSlice.actions.setSelectedPlan(plan));
 }
 
 const setInitialProgress = (progress) => (dispatch) => {
@@ -38,6 +45,18 @@ const deleteBeneficiary = (index) => (dispatch) => {
   dispatch(healthInsuranceSlice.actions.deleteBeneficiary(index));
 }
 
+/**
+ * @param {string} field "occupations" | "departments" | "documentTypes"
+ * @param {array} data 
+ */
+const setGeneralListsValues = (field, data) => (dispatch) => {
+  dispatch(healthInsuranceSlice.actions.setGeneralLists({ data, field }));
+};
+
+const setClientData = (data) => (dispatch) => {
+  dispatch(healthInsuranceSlice.actions.setClientData(data));
+}
+
 export const actions = {
   setInitialProgress,
   setPlans,
@@ -45,6 +64,8 @@ export const actions = {
   setSuraProgress,
   addBeneficiary,
   deleteBeneficiary,
+  setGeneralListsValues,
+  setClientData
 };
 
 export const healthInsuranceSlice = createSlice({
@@ -64,8 +85,8 @@ export const healthInsuranceSlice = createSlice({
       state.plans = data;
     },
     setSelectedPlan: (state, action) => {
-      const { plan } = action.payload;
-      state.selectedPlan = plan;
+      const planInfo = action.payload;
+      state.selectedPlan = { ...state.selectedPlan, ...planInfo} ;
     },
     addBeneficiary: (state, action) => {
       const beneficiary = action.payload;
@@ -76,6 +97,14 @@ export const healthInsuranceSlice = createSlice({
       const aux = [...state.beneficiaries];
       aux.splice(index, 1);
       state.beneficiaries = aux.map( (item, i) => ({...item, id: i}) );
+    },
+    setGeneralLists: ( state, action ) => {
+      const { data, field } = action.payload;
+      state.generalLists[field] = data;
+    },
+    setClientData: ( state, action ) => {
+      const data = action.payload;
+      state.data.client = {...state.data.client, ...data};
     }
   },
 });

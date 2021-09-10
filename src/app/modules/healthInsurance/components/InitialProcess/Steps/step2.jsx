@@ -10,19 +10,17 @@ export function Step2({ formik, onEdit }) {
         <p className="text-left inital-from__title mt-3 px-4"> Tus datos </p>
         <i></i>
 
-        <Field form="address" name="Nombre" formik={formik} onEdit={onEdit} />
-        <Field form="document_type" name="Celular" formik={formik} onEdit={onEdit} />
+        <Field form="firstName" name="Nombre" formik={formik} onEdit={onEdit} />
+        <Field form="surname" name="Apellido" formik={formik} onEdit={onEdit} />
 
-        <Field form="identification" name="Identificación" formik={formik} onEdit={onEdit} />
-        <Field form="fullname" name="Correo" formik={formik} onEdit={onEdit} />
+        <Field form="phone" name="Celular" formik={formik} onEdit={onEdit} />
+        <Field form="document" name="Identificación" formik={formik} onEdit={onEdit} />
 
-        <Field form="email" name="Fecha de expedición" formik={formik} onEdit={onEdit} />
-        <Field form="cellphone" name="Género" formik={formik} onEdit={onEdit} />
+        <Field form="email" name="Correo" formik={formik} onEdit={onEdit} />
+        <Field form="birthDate" name="Fecha de nacimiento" formik={formik} onEdit={onEdit} />
 
-        <Field form="birthdate" name="Fecha de nacimiento" formik={formik} onEdit={onEdit} />
-        <Field form="discount_code" name="Ocupación" formik={formik} onEdit={onEdit} />
-
-        <Field form="gender" name="Código de descuento" formik={formik} onEdit={onEdit} />
+        <Field form="address" name="Dirección" formik={formik} onEdit={onEdit} />
+        <Field form="discount_code" name="Código de descuento" formik={formik} onEdit={onEdit} />
 
       </div>
 

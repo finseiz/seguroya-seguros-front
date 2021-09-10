@@ -1,10 +1,10 @@
 
 import { AsideProcess } from 'app/components/process/AsideProcess'
 import { carsKmProcessSteps } from 'app/helpers/process-steps'
-import { CarsKmProcessDetailsPlanRoute, CarsKmProcessDoneRoute, CarsKmProcessOtpRoute, CarsKmProcessSarlaftRoute, CarsKmProcessSelectPlanRoute } from 'app/routes/childs/Cars/routes'
+import { CarsHomeRoute, CarsKmProcessDetailsPlanRoute, CarsKmProcessDoneRoute, CarsKmProcessOtpRoute, CarsKmProcessSelectPlanRoute } from 'app/routes/childs/Cars/routes'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, useHistory } from 'react-router-dom'
 import { Content } from 'theme/layout/utils/content'
 import { ConfirmationCode } from '../_general/OTP'
 import { ProcessDone } from '../_general/ProcessDone'
@@ -13,7 +13,13 @@ import { SelectCarsPlanKm } from './components/KmProcess/select-plan/SelectCarsP
 
 export default function CarsInsuranceKmRoute() {
 
-    const { dataToSend:{ email } } = useSelector(state => state.carsInsurance)
+    const { dataToSend:{ email }, progress:{initial} } = useSelector(state => state.carsInsurance)
+    const history = useHistory();
+
+    /** Health Route Protection */
+    if ( !email && !(initial === 100) ){
+        history.push(CarsHomeRoute)
+    }
 
     return (
         <Switch>

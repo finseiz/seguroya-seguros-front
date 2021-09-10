@@ -10,6 +10,7 @@
 @import "./components/process";
 @import "./components/sarlaft";
 @import "./components/auth";
+@import "./components/navbar";
 
 @font-face {
   font-family: "Como";
@@ -27,7 +28,6 @@
 }
 
 .page {
-  margin-top: 5rem;
   min-height: calc(100vh - calc(3.5rem + 1px) - calc(3.5rem + 1px));
 }
 

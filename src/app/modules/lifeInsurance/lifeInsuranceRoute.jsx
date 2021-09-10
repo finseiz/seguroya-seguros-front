@@ -21,9 +21,9 @@ function LifeInsuranceRoute() {
   const history = useHistory();
 
   /** Life Route Protection */
-  // if ( !clientData.email && !(initial === 100) ){
-  //   history.push(LifeHomeRoute)
-  // }
+  if ( !clientData.email && !(initial === 100) ){
+    history.push(LifeHomeRoute)
+  }
 
   return (
 

@@ -1,40 +1,20 @@
 import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { WhatsAppContainer } from 'app/components/process/WhatsAppContainer'
-import { suraPlan } from 'app/helpers/select-plan';
-import { actions } from 'app/modules/healthInsurance/redux';
-import Plan from 'app/components/process/Plan';
-import { HealthProcessDetailsPlanRouteFunc } from 'app/routes/childs/Health/routes';
+import SuraPlan from 'app/components/process/plans/SuraPlan';
+import { useState } from 'react';
+import { getPlans } from '../controller';
 
 export const SelectSuraHealthPlan = () => {
 
-    const { plans } = useSelector(state => state.healthInsurance);
+    const { plans, data:{client} } = useSelector(state => state.healthInsurance);
     const dispatch = useDispatch();
+    const [request, setRequest] = useState({ loading: false, error: false})
 
     useEffect(() => {
-        
-        dispatch( actions.setPlans([
-            {
-                logoPath: "sura-logo.png", 
-                insuranceName: "Sura",
-                qualification: 3,
-                anualPrice: 5000000,
-                share: 200000,
-                shareNumber: 12,
-                descriptionValues: suraPlan("Evoluciona"),
-                redirect: HealthProcessDetailsPlanRouteFunc
-            },
-            {
-                logoPath: "sura-logo.png", 
-                insuranceName: "Sura",
-                qualification: 1,
-                anualPrice: 2300000,
-                share: 100000,
-                shareNumber: 12,
-                descriptionValues: suraPlan("Clásico"),
-                redirect: HealthProcessDetailsPlanRouteFunc
-            },
-        ]) )
+        setRequest({ loading: true, error: false });
+        getPlans(client, dispatch)
+            .then( ( success ) => setRequest({ loading: false, error: !success }) )
     }, [])
 
     return (
@@ -43,21 +23,32 @@ export const SelectSuraHealthPlan = () => {
             <div className="mx-3">
 
             <WhatsAppContainer />
-            
-            <div className="row justify-content-between mt-3" >
-                {
-                    plans.length && (
-                        plans.map( ( plan, i ) => (
-                            <Fragment key={i}>
-                                <Plan
-                                    index={i}
-                                    { ...plan }
-                                />
-                            </Fragment>
-                        ))
-                    )
-                }
-            </div>
+
+            {
+                request.error ?
+                (
+                    <div> No fue posible recuperar planes </div>
+                ):
+                request.loading ? 
+                (
+                    <div> Estamos buscando los mejores planes </div>
+                ):
+                <div className="row justify-content-between mt-3" >
+                    {
+                        plans.length && (
+                            plans.map( ( plan, i ) => (
+                                <Fragment key={i}>
+                                    <SuraPlan
+                                        index={i}
+                                        { ...plan }
+                                    />
+                                </Fragment>
+                            ))
+                        )
+                    }
+                </div>
+                
+            }
 
             </div>
 

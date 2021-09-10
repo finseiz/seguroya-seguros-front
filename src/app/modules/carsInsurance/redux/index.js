@@ -50,6 +50,10 @@ const editDataToSend = (data) => (dispatch) => {
   dispatch(carsInsuranceSlice.actions.editDataToSend(data));
 };
 
+const restartState = () => (dispatch) => {
+  dispatch(carsInsuranceSlice.actions.restartState());
+};
+
 export const actions = {
   setPlans,
   addPlans,
@@ -58,7 +62,8 @@ export const actions = {
   setInitialProgress,
   setSelectedPlan,
   setUniqueProgress,
-  editDataToSend
+  editDataToSend,
+  restartState
 };
 
 export const carsInsuranceSlice = createSlice({
@@ -97,6 +102,10 @@ export const carsInsuranceSlice = createSlice({
         ...state.dataToSend,
         ...newData,
       };
+    },
+
+    restartState: (state) => {
+      state = initialState;
     },
   },
 });

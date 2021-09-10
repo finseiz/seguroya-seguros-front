@@ -26,7 +26,7 @@ export const getCirculationZone = async ( userSelection ) => {
             list.unshift({ nombre: "Selecciona", id: "" })
             return list;    
         } catch (error) {
-            
+            return [];    
         }
         
     }else{
