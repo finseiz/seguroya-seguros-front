@@ -5,11 +5,21 @@ export const beneficiariesValues = {
     middleName: "David",
     surname: "Alca",
     secondSurname: "Lorza",
-    documentType: "",
-    document: "3433434",
+    documentType: "C",
+    document: "87851475",
     kinship: "NI",
-    birthDate: "20",
+    birthDate: "2000-01-02",
     gender: "F",
+
+    // firstName: "",
+    // middleName: "",
+    // surname: "",
+    // secondSurname: "",
+    // documentType: "",
+    // document: "",
+    // kinship: "",
+    // birthDate: "",
+    // gender: "",
 };
 
 export const beneficiariesSchema = Yup.object().shape({

@@ -9,17 +9,18 @@ import { getDocumentTypes, getKinship } from "../../controller";
 import { genderRadioTypes } from "app/helpers/radio-options";
 import FormikRadioGroup from "app/modules/_forms/general/FormikRadioGroup";
 
-
-function AddBeneficiary({ open, handleClose, handleSubmit }) {
+function AddBeneficiary({ state:{open, initialValues}, handleClose, handleSubmit }) {
 
   const { generalLists:{ documentTypes}, plans, selectedPlan } = useSelector(state => state.healthInsurance)
 
+  const isEditing = initialValues.document;
+
   const formik = useFormik({
-    initialValues: beneficiariesValues,
+    initialValues: isEditing ? initialValues : beneficiariesValues,
     enableReinitialize: true,
     validationSchema: beneficiariesSchema,
     onSubmit: (values) => {
-      handleSubmit(values);
+      handleSubmit(values, isEditing);
       formik.resetForm();
     },
   });
@@ -81,8 +82,12 @@ function AddBeneficiary({ open, handleClose, handleSubmit }) {
           <button
             type="submit"
             className="btn btn-primary process__process-table-btn mt-2"
-          >
-            Añadir asegurado/a
+          > 
+            {
+              isEditing ? 
+              "Editar asegurado/a" :
+              "Añadir asegurado/a"
+            }
           </button>
         </div>
 

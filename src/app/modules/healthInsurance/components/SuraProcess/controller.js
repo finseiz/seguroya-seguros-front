@@ -1,5 +1,5 @@
 import { actions } from "../../redux";
-import { getPlansRequest } from "../../repository";
+import { getPlansRequest, getQuoteRequest } from "../../repository";
 
 export const getPlans = async (clienteData, dispatch) => {
 
@@ -9,55 +9,106 @@ export const getPlans = async (clienteData, dispatch) => {
 
         const plans = await getPlansRequest(residenceDep, residenceCity);
 
-        if ( plans.status === 200 ){
+        if (plans.status === 200) {
 
             const plansToSet = []
-            plans.body.map( plan => {
+            plans.body.map(plan => {
                 const planValue = {
-                    logoPath: "sura-logo.png", 
+                    logoPath: "sura-logo.png",
                     insuranceName: "Sura",
                     data: plan
                 }
                 plansToSet.push(planValue);
             })
-        
-            dispatch( actions.setPlans(plansToSet) );
+
+            dispatch(actions.setPlans(plansToSet));
             return true;
 
-        }else{
+        } else {
             return false;
         }
-        
+
     } catch (error) {
-        return false;   
-    }    
+        return false;
+    }
 }
 
-export const getDocumentTypes = ( list ) => {
-    if ( list.length > 0 ){
-        let selectOptions = list.map( (element) => ({value: element["id"], title: element["descripcion"]}) )
-        selectOptions.unshift({value: "", title: "Selecciona"});
+export const getDocumentTypes = (list) => {
+    if (list.length > 0) {
+        let selectOptions = list.map((element) => ({ value: element["id"], title: element["descripcion"] }))
+        selectOptions.unshift({ value: "", title: "Selecciona" });
         return selectOptions;
     }
-    return [];    
+    return [];
 }
 
-export const getKinship = ( plans, selectedPlan ) => {
+export const getKinship = (plans, selectedPlan) => {
 
     try {
 
-        const plan = plans.find( (plan) => plan.data["solucion"]["codigo"] === selectedPlan.solutionId );
+        const plan = plans.find((plan) => plan.data["solucion"]["codigo"] === selectedPlan.solutionId);
         const list = plan.data["infoSolucion"]["parentescos"];
 
-        let selectOptions = list.map( (element) => ({value: element["codigo"], title: element["nombre"]}) )
-        selectOptions.unshift({value: "", title: "Selecciona"});
+        let selectOptions = list.map((element) => ({ value: element["codigo"], title: element["nombre"] }))
+        selectOptions.unshift({ value: "", title: "Selecciona" });
         return selectOptions;
-        
+
     } catch (error) {
-        
+
     }
+}
 
-    
 
+
+export const getQuote = async (state, selectedPlan) => {
+    const body = createBody(state, selectedPlan);
+    const response = await getQuoteRequest(body)
+    return response;
+}
+
+const createBody = (state, selectedPlan) => {
+
+    const { 
+        beneficiaries, 
+        generalLists:{ documentTypes, occupations }, 
+        data:{client} 
+    } = state;
+
+    return {
+        asegurados: beneficiaries.map((ben) => (
+            {
+                fechaNacimiento: ben.birthDate,
+                identificacion: {
+                    numero: ben.document,
+                    tipo: documentTypes.find( type => type["id"] === ben.documentType )
+                },
+                parentesco: selectedPlan.data["infoSolucion"]["parentescos"].find( kinship => kinship["codigo"] === ben.kinship ),
+                primerApellido: ben.surname.toUpperCase(),
+                primerNombre: ben.firstName.toUpperCase(),
+                segundoApellido: ben.secondSurname.toUpperCase(),
+                segundoNombre: ben.middleName?.toUpperCase(),
+                sexo: ben.gender
+            }
+        )),
+        celular: client.phone,
+        correoElectronico: client.email,
+        departamento: client.residenceDep,
+        direccion: client.address,
+        fechaNacimiento: client.birthDate,
+        identificacion: {
+            numero: client.document,
+            tipo: documentTypes.find( type => type["id"] === client.documentType )
+        },
+        municipio: client.residenceCity,
+        ocupacion: occupations.find( occupation => occupation["id"] === client.occupation ),
+        planSalud: selectedPlan.data["infoSolucion"]["plan"],
+        primerApellido: client.surname.toUpperCase(),
+        primerNombre: client.firstName.toUpperCase(),
+        segundoApellido: client.secondSurname.toUpperCase(),
+        segundoNombre: client.middleName?.toUpperCase(),
+        sexo: client.gender,
+        solucionSalud: selectedPlan.data["solucion"],
+        telefono: "8000000"
+    }
 
 }

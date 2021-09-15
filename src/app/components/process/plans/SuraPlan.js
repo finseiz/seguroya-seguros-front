@@ -9,8 +9,7 @@ import { actions } from 'app/modules/healthInsurance/redux';
 
 const SuraPlan = (props) => {
 
-    const { logoPath, insuranceName, index, qualification, descriptionValues, 
-        data:{solucion}, redirect } = props;
+    const { logoPath, insuranceName, index, qualification, data: { solucion } } = props;
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -18,21 +17,21 @@ const SuraPlan = (props) => {
     return (
         <div>
 
-            <div className="container custom-card plans_plan-container" style={{maxWidth: 300}}>
+            <div className="container custom-card plans_plan-container" style={{ maxWidth: 300 }}>
 
                 {/** Insurance Logo */}
                 <div className="plans_insurance-logo-space">
                     <img
                         className="plans_insurance-logo"
                         src={toAbsoluteUrl(`/media/logos/${logoPath}`)}
-                        style={{maxWidth: 220}}
+                        style={{ maxWidth: 220 }}
                     />
                 </div>
 
                 {/** Insurance Description */}
                 <div className="plans__insurance-desc">
                     <p className="plans_plan-name">
-                        {insuranceName} { index !== undefined && `- Plan ${index + 1}` }
+                        {insuranceName} {index !== undefined && `- Plan ${index + 1}`}
                     </p>
 
                     <p className="plans_plan-name">
@@ -57,15 +56,10 @@ const SuraPlan = (props) => {
                         )
                     }
 
-                    {
-                        descriptionValues && 
-                        descriptionValues.map(value => (
-                            <div>
-                                <p className="plans_plan-label"> { value.label } </p>
-                                <p className="plans_plan-value"> { value.value } </p>
-                            </div>
-                        ))
-                    }
+                    <div>
+                        <p className="plans_plan-label"> Beneficios </p>
+                        <p className="plans_plan-health-value"> {solucion["descripcion"]} </p>
+                    </div>
 
                 </div>
 
@@ -77,10 +71,10 @@ const SuraPlan = (props) => {
                         type="button"
                         className="btn primary_btn_expand w-90"
                         onClick={() => {
-                            dispatch( actions.setSelectedPlan({
+                            dispatch(actions.setSelectedPlan({
                                 solutionId: solucion["codigo"],
                                 logoPath
-                            }) )
+                            }))
                             history.push(HealthProcessBeneficiariesRoute)
                         }}
                     >

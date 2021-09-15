@@ -11,7 +11,7 @@ export const healthSchema = Yup.object().shape({
     email: Yup.string().email().required("Campo requerido"),
     address: Yup.string().required("Campo requerido"),
     birthDate: Yup.string().required("Campo requerido"),
-    phone: Yup.string().required("Campo requerido"),
+    phone: Yup.string().length(10).required("Campo requerido"),
     residenceDep: Yup.string().required("Campo requerido"),
     residenceCity: Yup.string().required("Campo requerido"),
     gender: Yup.string().required("Campo requerido"),
@@ -19,11 +19,11 @@ export const healthSchema = Yup.object().shape({
 
 export const healthInitialValues = {
     firstName: "Juan",
-    middleName: "Juan",
+    middleName: "",
     surname: "Juan",
     secondSurname: "Juan",
     documentType: "C",
-    document: "34433423",
+    document: "78547785",
     occupation: "B10",
     email: "juan@example.com",
     address: "Calle 34 n",
@@ -31,7 +31,7 @@ export const healthInitialValues = {
     phone: "3057807785",
     residenceDep: "34",
     residenceCity: "10",
-    gender: "F",
+    gender: "M",
     
     // current_health_service: "",
     // knowledge_of_insurance_coverage: "",

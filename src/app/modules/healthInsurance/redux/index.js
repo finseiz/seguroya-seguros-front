@@ -45,6 +45,10 @@ const deleteBeneficiary = (index) => (dispatch) => {
   dispatch(healthInsuranceSlice.actions.deleteBeneficiary(index));
 }
 
+const updateBeneficiary = (data, index) => (dispatch) => {
+  dispatch(healthInsuranceSlice.actions.updateBeneficiary({data, index}));
+}
+
 /**
  * @param {string} field "occupations" | "departments" | "documentTypes"
  * @param {array} data 
@@ -64,6 +68,7 @@ export const actions = {
   setSuraProgress,
   addBeneficiary,
   deleteBeneficiary,
+  updateBeneficiary,
   setGeneralListsValues,
   setClientData
 };
@@ -90,13 +95,17 @@ export const healthInsuranceSlice = createSlice({
     },
     addBeneficiary: (state, action) => {
       const beneficiary = action.payload;
-      state.beneficiaries.push( {...beneficiary, id: state.beneficiaries.length} );
+      state.beneficiaries.push( {...beneficiary, id: beneficiary.document} );
     },
     deleteBeneficiary: (state, action) => {
       const index = action.payload;
       const aux = [...state.beneficiaries];
       aux.splice(index, 1);
-      state.beneficiaries = aux.map( (item, i) => ({...item, id: i}) );
+      state.beneficiaries = aux;
+    },
+    updateBeneficiary: (state, action) => {
+      const { data, index } = action.payload;
+      state.beneficiaries[index] = {...data, id: data.document};
     },
     setGeneralLists: ( state, action ) => {
       const { data, field } = action.payload;
