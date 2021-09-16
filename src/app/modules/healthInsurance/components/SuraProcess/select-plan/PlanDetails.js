@@ -31,17 +31,19 @@ export const PlanDetails = () => {
         initialValues: { selectedPayment: "" },
         validationSchema: Yup.object().shape({ selectedPayment: Yup.string().required("Campo requerido") }),
         onSubmit: ( {selectedPayment} ) => {
-            // dispatch(actions.setSelectedPlan({...selectPlan, paymentID: selectedPayment}))
-            // history.push(LifeProcessInsurabilityRoute)
+             dispatch(actions.setSelectedPlan({ 
+                quoteId: quote["infoPoliza"]["numeroCotizacion"],
+                payment: quote["tarifas"]["listaPrimas"].find( element => element.tipo === selectedPayment )
+            }));
+             history.push(HealthProcessInsurabilityRoute)
         }
     })
 
     useEffect(() => {
-        //setRequest({ loading: false, error: false });
+        setRequest({ loading: true, error: false });
         setBenefits([
             dataPlan?.data?.solucion.descripcion,
         ]);
-        if ( !quote.tarifas )
         getQuote(state, dataPlan)
         .then(( response ) => {
             if ( response.status === 200 ) {

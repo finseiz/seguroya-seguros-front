@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import Radio from "app/modules/_forms/general/Radio"
 
 export const DiseaseOption = ({ formik, id, value, fieldList }) => {
-
+    
     const list = formik.values[id][fieldList];
 
     const addOrRemoveItem = () => {

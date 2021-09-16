@@ -27,16 +27,23 @@
   text-align: center;
 }
 
-.brand p {
+.home-msj {
   font-family: Como;
-  font-style: normal;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 35px;
   line-height: 41px;
+  text-align: center;
+  color: #FFFFFF;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
 
-  color: #ffffff;
+.home-msj-2{
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: $light-blue;
 
-  text-shadow: 2px 2px 4px;
 }
 
 .image-wrapper {
@@ -54,4 +61,13 @@
   object-fit: contain;
   width: 100%;
   height: auto;
+}
+
+.separator>.col {
+  border-right: 1px solid #EBEBF2;
+  border-radius: 2px;
+
+  &:last-child{
+    border-right: none;
+  }
 }

@@ -3,7 +3,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import BeneficiaryForm from './BeneficiaryForm'
 import { useFormik } from 'formik'
-import { initialValues } from './formik'
+import { initialValues, insurabilitySchema } from './formik'
 import { actions } from "app/modules/healthInsurance/redux";
 import { HealthProcessAuthRoute, HealthProcessSelectPlanRoute } from 'app/routes/childs/Health/routes'
 import { useDispatch } from "react-redux";
@@ -11,12 +11,14 @@ import { useHistory } from "react-router-dom";
 
 const InsurabilityInfo = () => {
 
-    const { beneficiaries } = useSelector(state => state.healthInsurance)
+    const { beneficiaries, data:{client} } = useSelector(state => state.healthInsurance)
     const dispatch = useDispatch();
     const history = useHistory();
+    const formList = [...beneficiaries, client]
 
     const formik = useFormik({
-        initialValues: initialValues(beneficiaries),
+        initialValues: initialValues(formList),
+        //validationSchema: insurabilitySchema
     });
 
     const actionsButton = [
@@ -46,8 +48,8 @@ const InsurabilityInfo = () => {
             </BaseSection>
 
             {
-                beneficiaries.map((beneficiary, i) => (
-                    <BeneficiaryForm key={i} beneficiary={beneficiary} formik={formik} />
+                formList.map((beneficiary, i) => (
+                    <BeneficiaryForm key={i} beneficiary={beneficiary} formik={formik} index={i} />
                 ))
             }
 

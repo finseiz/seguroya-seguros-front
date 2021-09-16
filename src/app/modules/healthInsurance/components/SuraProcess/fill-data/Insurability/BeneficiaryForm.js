@@ -8,11 +8,11 @@ import FormikInput from 'app/modules/_forms/general/FormikInput'
 import FormikSelect from 'app/modules/_forms/general/FormikSelect'
 import FormikRadioGroup from 'app/modules/_forms/general/FormikRadioGroup'
 
-const BeneficiaryForm = ({ beneficiary: { name, lastname, id }, formik }) => {
+const BeneficiaryForm = ({ beneficiary: { firstName, surname }, formik, index:id }) => {
 
     return (
         <BaseSection>
-            <p className="process__ins-info-userfullname">{`Declaración  ${name} ${lastname} `}</p>
+            <p className="process__ins-info-userfullname">{`Declaración  ${firstName} ${surname} `}</p>
 
             <p className="process__ins-info-question"> 1. ¿Le han diagnosticado alguna enfermedad? </p>
 

@@ -30,11 +30,12 @@ const Question = ({ question, options, formik, align="center", questionClass="",
                         options.map((option, i) => {
                             let isActive = true;
                             if ( option.formikValue.includes(".") ){
-                                const [position, field] = option.formikValue.split(".")
-                                isActive = formik.values[position][field] === option.value
+                                const [position, field] = option.formikValue.split(".");
+                                isActive = formik.values[position][field] === option.value;
                             }else{
                                 isActive = formik.values[option.formikValue] === option.value;
                             }
+
                             return (
                                 <div key={i} className={`row align-items-center mt-${marginTop}`}>
                                     <Radio

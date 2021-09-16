@@ -7,20 +7,24 @@ function BrandPage() {
   return (
     <section className="container-fluid brand overflow-hidden w-100 m-0">
       <div className="row h-100 m-0">
-        <div className="col align-self-center">
-          <p>
+        <div className="align-self-center text-center">
+          <p className="home-msj mx-5">
             Buscamos hacer más fácil y cercano el mundo de los seguros siendo tu
             asesor digital 24/7
           </p>
-          <div className="col d-flex justify-content-center">
-            <div className="card">
+          <div className="d-flex justify-content-center mt-5">
+            <div className="card w-50">
               <div className="card-body">
-                <span>
-                  ¡Estamos listos para ayudarte! Selecciona una opción para
-                  cotizar un seguro
-                </span>
+                <div className="home-msj-2 mb-4">
+                  <p className="m-0">
+                    ¡Estamos listos para ayudarte!
+                  </p>
+                  <p className="m-0">
+                    Selecciona una opción para cotizar un seguro
+                  </p>
+                </div>
                 <div className="container mt-3">
-                  <div className="row">
+                  <div className="row separator">
                     <div className="col">
                       <NavLink to={CarsHomeRoute}>
                         <div className="small-icon">
@@ -33,7 +37,7 @@ function BrandPage() {
                       </NavLink>
                     </div>
                     <div className="col">
-                      <NavLink to={ LifeHomeRoute }>
+                      <NavLink to={LifeHomeRoute}>
                         <div className="small-icon">
                           <img
                             src={toAbsoluteUrl("/media/icons/healthcare.svg")}
