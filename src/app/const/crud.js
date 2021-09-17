@@ -14,7 +14,9 @@ export function makeRequest({ path, method, headers, ...others }) {
   const id = setTimeout(() => controller.abort(), timeout);
   let config = {
     method,
-    headers: headers ?? { 'Content-Type': 'application/json' },
+    headers: headers ? 
+      {...headers, 'Content-Type': 'application/json' } : 
+      { 'Content-Type': 'application/json' },
     ...others,
   };
   let myRequest = new Request(URL + path, config);

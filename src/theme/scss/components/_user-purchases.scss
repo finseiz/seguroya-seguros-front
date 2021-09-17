@@ -1,0 +1,31 @@
+
+.purchase__{
+
+    &container{
+        background-color: #EBEBF2;
+        max-width: 50rem;
+        margin: 2.5rem auto;
+    }
+
+    &title{
+        font-family: Como, "Helvetica Neue", Helvetica, Arial;
+        font-weight: bold;
+        font-size: 30px;
+        line-height: 35px;
+        color: $light-blue;
+
+    }
+
+    &desc{
+        font-size: 18px;
+        line-height: 25px;
+        text-align: center;
+        color: $dark-blue-2;
+        margin: 0 3rem;
+    }
+
+    &main-container{
+        background-color: #F2F2F2;
+    }
+
+}

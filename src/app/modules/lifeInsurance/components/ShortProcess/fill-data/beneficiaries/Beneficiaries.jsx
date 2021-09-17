@@ -71,7 +71,7 @@ export const Beneficiaries = ({ }) => {
       {
         showPercentError &&
         (
-          <div class="alert alert-danger" role="alert">
+          <div className="alert alert-danger" role="alert">
             El porcentaje de los beneficiarios debe sumar 100.
           </div>
         )

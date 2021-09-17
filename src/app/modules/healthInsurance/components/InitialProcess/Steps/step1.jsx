@@ -25,7 +25,7 @@ export function Step1({ formik }) {
   )
 
   return (
-    <div class="card-body">
+    <div className="card-body">
 
       <div className="row">
         {renderInput("firstName", "Primer nombre")}

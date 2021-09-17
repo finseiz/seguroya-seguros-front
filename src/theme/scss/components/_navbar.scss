@@ -18,3 +18,16 @@
 .whatsapp-icon{
     max-width: 20px;
 }
+
+.dropdown {
+    background-color: #EBEBF2;
+    color: $dark-blue;
+    border: 0;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.dropdown__icon{
+    width: 1.5rem;
+    margin-right: 0.7rem;
+}

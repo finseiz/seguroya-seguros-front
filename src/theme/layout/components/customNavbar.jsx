@@ -1,12 +1,20 @@
+import { actions } from "app/modules/auth/_redux/authRedux";
 import { LoginRoute, RegistryRoute } from "app/routes/childs/Auth/routes";
+import { UserPurchasesRoute } from "app/routes/childs/User/routes";
 import React from "react";
-import { Navbar, Nav } from "react-bootstrap";
-import { NavLink, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { toAbsoluteUrl } from "../../helpers";
 
 function CustomNavbar() {
 
-  const history = useHistory();
+  const { user, authToken } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+
+  const isAuthenticated = authToken !== undefined;
+  const userName = user?.nombres ?? "";
+
+  const logout = () => dispatch(actions.logout());
 
   return (
     <div>
@@ -15,9 +23,9 @@ function CustomNavbar() {
         <div className="whatsapp-contact text-center">
 
           <img
-              src={toAbsoluteUrl("/media/icons/whatsapp.png")}
-              alt="wa-icon"
-              className="mx-2 my-1 whatsapp-icon"
+            src={toAbsoluteUrl("/media/icons/whatsapp.png")}
+            alt="wa-icon"
+            className="mx-2 my-1 whatsapp-icon"
           />
           ¡Contactanos por WhatsApp +57 340 5689!
         </div>
@@ -67,6 +75,17 @@ function CustomNavbar() {
                     Preguntas
                   </NavLink>
                 </li>
+
+                {
+                  isAuthenticated &&
+                  (
+                    <li className="nav-item">
+                      <NavLink to={UserPurchasesRoute} className="nav-link" activeClassName="active" >
+                        Mi biblioteca
+                      </NavLink>
+                    </li>
+                  )
+                }
               </ul>
 
             </div>
@@ -75,18 +94,41 @@ function CustomNavbar() {
 
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
-                <li className="nav-item">
-                  <NavLink to={LoginRoute} className="nav-link" activeClassName="active" >
-                    <div className="btn btn-secondary secondary-button"> Iniciar Sesión </div>
-                  </NavLink>
-                </li>
+                {
+                  isAuthenticated ?
+                  (
+                    <div>
+                      <div className="dropdown">
+                        <button className="btn btn-secondary dropdown-toggle dropdown" type="button" id="userSessionDropD" data-bs-toggle="dropdown" aria-expanded="false">
+                          <img
+                            src={toAbsoluteUrl(`/media/icons/persona.svg`)}
+                            className="dropdown__icon"
+                          />
+                          ¡Bienvenid@, {userName}!
+                        </button>
+                        <ul className="dropdown-menu" aria-labelledby="userSessionDropD">
+                          <li><span className="dropdown-item" onClick={() => logout()}>Cerrar sesión</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                  ) :
+                  (
+                    <>
+                      <li className="nav-item">
+                        <NavLink to={LoginRoute} className="nav-link" activeClassName="active" >
+                          <div className="btn btn-secondary secondary-button"> Iniciar Sesión </div>
+                        </NavLink>
+                      </li>
 
-                <li className="nav-item">
-                  <NavLink to={RegistryRoute} className="nav-link" activeClassName="active" >
-                    <div className="btn btn-secondary primary-button"> Registarse </div>
-                  </NavLink>
-                </li>
+                      <li className="nav-item">
+                        <NavLink to={RegistryRoute} className="nav-link" activeClassName="active" >
+                          <div className="btn btn-secondary primary-button"> Registarse </div>
+                        </NavLink>
+                      </li>
+                    </>
+                  )
 
+                }
 
               </ul>
 
@@ -94,45 +136,12 @@ function CustomNavbar() {
 
           </div>
 
-
-
         </div>
+
       </nav>
 
     </div>
   )
-
-  // return (
-  //   <Navbar
-  //     bg="white"
-  //     variant="light"
-  //     className="header navbar-default navbar-fixed-top fixed-top"
-  //   >
-  //     <Navbar.Brand to="/home">
-  //       <img
-  //         src={toAbsoluteUrl("/media/logos/logo_seguroya_dark.svg")}
-  //       />{" "}
-  //     </Navbar.Brand>
-  //     <Nav className="mr-auto">
-  //       <Nav.Link>Inicio</Nav.Link>
-  //       <Nav.Link>¿Quiénes somos?</Nav.Link>
-  //       <Nav.Link>Ofertas</Nav.Link>
-  //       <Nav.Link>Preguntas Frecuentes</Nav.Link>
-  //     </Nav>
-  //     <button 
-  //       className="btn btn-secondary secondary-button"
-  //       onClick={ () => history.push(LoginRoute) }
-  //     >
-  //       Iniciar Sesión
-  //     </button>
-  //     <button 
-  //       className="btn btn-primary primary-button ml-2"
-  //       onClick={ () => history.push(RegistryRoute) }
-  //     >
-  //       Registrarse
-  //     </button>
-  //   </Navbar>
-  // );
 }
 
 export default CustomNavbar;
