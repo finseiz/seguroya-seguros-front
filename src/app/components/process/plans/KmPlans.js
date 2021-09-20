@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { toAbsoluteUrl } from 'theme/helpers/AssetsHelpers';
 import { useHistory } from 'react-router-dom';
-import { parseCurrency } from 'app/const/parse-currency';
+import { parseCurrency } from 'app/helpers/parse-currency';
 import Qualification from '../Qualification';
 
 const KmPlan = (props) => {

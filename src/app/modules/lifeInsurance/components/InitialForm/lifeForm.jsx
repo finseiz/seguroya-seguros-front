@@ -2,7 +2,6 @@ import React, {useEffect} from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
-import { CircularProgress } from "@material-ui/core";
 import { Step1, Step2, Step3 } from "./components/steps";
 import { actions } from "../../redux";
 import { initialSchema, initialValues } from "./helpers/formik";

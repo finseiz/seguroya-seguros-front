@@ -25,7 +25,28 @@
     }
 
     &main-container{
-        background-color: #F2F2F2;
+        //background-color: #F2F2F2;
+        text-align: center;
+    }
+
+    &table-container{
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    &table{
+        max-width: 1000px;
+        margin: 2rem 3rem;
+        background-color: #fff;
+        border-radius: 10px;
+        border-spacing: 0;
     }
 
 }
+
+.line-none[role="columnheader"] {
+    border-bottom: 0;
+    border-top: 0;
+}
+

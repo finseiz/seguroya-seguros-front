@@ -1,4 +1,4 @@
-import { parseCurrency } from "app/const/parse-currency"
+import { parseCurrency } from "app/helpers/parse-currency"
 import { simpleNumberFormat } from "./number-format"
 
 export const colmenaPlan = ( returnValue, primaValue, insuranceValue) => {

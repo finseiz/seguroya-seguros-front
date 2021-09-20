@@ -1,6 +1,16 @@
+import { makeRequest } from "app/const";
 
-export const policyPath = "/poliza"
+const policyPath = "poliza";
 
-export const getPoliciesPath = policyPath + "/polizas";
+const getPoliciesPath = policyPath + "/polizas";
 
 
+export const getPoliciesRequest = async (token) => {
+    const response = await makeRequest({
+        path: getPoliciesPath,
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}`}
+    })
+    const body = await response.json();
+    return {body, status: response.status}
+}

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { toAbsoluteUrl } from 'theme/helpers/AssetsHelpers';
 import Qualification from "./Qualification";
-import { parseCurrency } from "./../../const/parse-currency";
+import { parseCurrency } from "../../helpers/parse-currency";
 import { useHistory } from 'react-router-dom';
 
 const Plan = (props) => {

@@ -4,7 +4,7 @@ import { toAbsoluteUrl } from 'theme/helpers/AssetsHelpers'
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Qualification from 'app/components/process/Qualification';
-import { parseCurrency } from 'app/const/parse-currency';
+import { parseCurrency } from 'app/helpers/parse-currency';
 import Comments from 'app/components/process/Comments';
 import { actions } from 'app/modules/healthInsurance/redux';
 import { HealthProcessInsurabilityRoute } from 'app/routes/childs/Health/routes';

@@ -1,37 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import moment from 'moment'
+import { useSelector } from 'react-redux'
 import { useTable } from 'react-table'
+import { getUserPolicies } from '../controller'
 
 
-export const MainTable = () => {
+export const MainTable = ({ }) => {
 
-    const data = React.useMemo(
-        () => [
-            {
-                col1: 'Hello',
-                col2: 'World',
-            },
-            {
-                col1: 'react-table',
-                col2: 'rocks',
-            },
-            {
-                col1: 'whatever',
-                col2: 'you want',
-            },
-        ],
-        []
-    )
+    const { authToken } = useSelector(state => state.auth)
+
+    const [data, setData] = useState([]);
 
     const columns = React.useMemo(
         () => [
-            { Header: '', accessor: 'logo' },
-            { Header: 'Marco', accessor: ''},
-            { Header: 'Tipo', accessor: ''},
-            { Header: 'Plan', accessor: ''},
-            { Header: 'Adquirido', accessor: ''}
+            { Header: '', accessor: 'logo', 
+                Cell: ( cellData ) => ( <img src={ cellData.value } style={{maxWidth: "3.5rem"}}/>)
+            },
+            { Header: 'Marco', accessor: 'aseguradora'},
+            { Header: 'Tomador', accessor: 'nombres'},
+            { Header: 'Tipo', accessor: 'tipoPoliza'},
+            { Header: 'Estado', accessor: 'estado'},
+            { Header: 'Adquirido', accessor: 'fechaCotizacion', 
+                Cell: (cellData) => moment(cellData.value).format('DD-MM-YYYY')
+            }
         ],
         []
     )
+
+    useEffect(() => {
+        getUserPolicies(authToken)
+        .then((data) => setData(data))
+    }, [])
 
     const {
         getTableProps,
@@ -44,7 +43,9 @@ export const MainTable = () => {
     return (
         <main className="purchase__main-container">
 
-            <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
+            <div className="purchase__table-container"> 
+
+            <table {...getTableProps()} className="table purchase__table">
 
                 <thead>
                     {headerGroups.map(headerGroup => (
@@ -52,12 +53,7 @@ export const MainTable = () => {
                             {headerGroup.headers.map(column => (
                                 <th
                                     {...column.getHeaderProps()}
-                                    style={{
-                                        borderBottom: 'solid 3px red',
-                                        background: 'aliceblue',
-                                        color: 'black',
-                                        fontWeight: 'bold',
-                                    }}
+                                    className="line-none"
                                 >
                                     {column.render('Header')}
                                 </th>
@@ -75,11 +71,6 @@ export const MainTable = () => {
                                     return (
                                         <td
                                             {...cell.getCellProps()}
-                                            style={{
-                                                padding: '10px',
-                                                border: 'solid 1px gray',
-                                                background: 'papayawhip',
-                                            }}
                                         >
                                             {cell.render('Cell')}
                                         </td>
@@ -91,6 +82,8 @@ export const MainTable = () => {
                 </tbody>
 
             </table>
+
+            </div>
 
         </main>
     )
