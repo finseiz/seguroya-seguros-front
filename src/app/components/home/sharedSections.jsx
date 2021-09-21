@@ -83,23 +83,22 @@ function SharedSections() {
                     </div>
                     <div className="my-3 font-primary">
                       <strong>
-                        Estamos para ayudarte a aprender y entender el mundo de
-                        los seguros
+                        Estamos para ayudarte a entender el mundo de los seguros
                       </strong>
                     </div>
                     <ul className="text-left">
                       <li>
-                        Queremos hacer de los seguros un mundo más entendible.
+                        Te ofrecemos un proceso de compra fácil, rápido y práctico.
                       </li>
                       <li>
-                        Estamos para apoyarte y asesorarte en caso de accidente.
+                        El lenguaje de nuestra plataforma es práctico y fácil de entender. 
                       </li>
                     </ul>
                   </div>
                   <div className="col">
                     <div className="image-wrapper">
                       <img
-                        src={toAbsoluteUrl("/media/images/ilustration-02.svg")}
+                        src={toAbsoluteUrl("/media/images/ilustration-03.svg")}
                         alt="ilustration-02"
                       />
                     </div>
@@ -107,30 +106,29 @@ function SharedSections() {
                       <strong>Nos adaptamos a ti</strong>
                     </div>
                     <ul className="text-left">
-                      <li>Te entregamos en forma digital tu SOAT.</li>
-                      <li>Te atendemos las 24 horas al día.</li>
-                      <li>Te entregamos en el momento que tu dispongas.</li>
+                      <li>Te ofrecemos soluciones ajustadas a tus necesidades. </li>
+                      <li>Te ofrecemos una variedad de productos y de diferentes compañías aseguradoras.</li>
+                      <li>Podrás recibir excelentes ofertas.</li>
                     </ul>
                   </div>
                   <div className="col">
                     <div className="image-wrapper">
                       <img
-                        src={toAbsoluteUrl("/media/images/ilustration-03.svg")}
+                        src={toAbsoluteUrl("/media/images/ilustration-02.svg")}
                         alt="ilustration-03"
                       />
                     </div>
                     <div className="my-3 font-primary">
                       <strong>
-                        Estamos para ayudarte a aprender y entender el mundo de
-                        los seguros
+                        Servicio 100% digital
                       </strong>
                     </div>
                     <ul className="text-left">
                       <li>
-                        Queremos hacer de los seguros un mundo más entendible.
+                        Atención y asesoría inmediata, las 24 horas del día.
                       </li>
                       <li>
-                        Estamos para apoyarte y asesorarte en caso de accidente.
+                        Contarás con una biblioteca, donde podrás almacenar todos tus seguros y su información.
                       </li>
                     </ul>
                   </div>

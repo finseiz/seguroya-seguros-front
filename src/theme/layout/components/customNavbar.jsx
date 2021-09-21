@@ -1,6 +1,7 @@
 import { actions } from "app/modules/auth/_redux/authRedux";
 import { LoginRoute, RegistryRoute } from "app/routes/childs/Auth/routes";
 import { UserPurchasesRoute } from "app/routes/childs/User/routes";
+import { AboutUsRoute, FrequentQuestionsRoute, HomeRoute } from "app/routes/routes";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -53,13 +54,13 @@ function CustomNavbar() {
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <li className="nav-item">
-                  <NavLink to="/home" className="nav-link" activeClassName="active" >
+                  <NavLink to={HomeRoute} className="nav-link" activeClassName="active" >
                     Inicio
                   </NavLink>
                 </li>
 
                 <li className="nav-item">
-                  <NavLink to="/about-us" className="nav-link" activeClassName="active" >
+                  <NavLink to={AboutUsRoute} className="nav-link" activeClassName="active" >
                     ¿Quiénes somos?
                   </NavLink>
                 </li>
@@ -71,7 +72,7 @@ function CustomNavbar() {
                 </li>
 
                 <li className="nav-item">
-                  <NavLink to="/questions" className="nav-link" activeClassName="active" >
+                  <NavLink to={FrequentQuestionsRoute} className="nav-link" activeClassName="active" >
                     Preguntas
                   </NavLink>
                 </li>

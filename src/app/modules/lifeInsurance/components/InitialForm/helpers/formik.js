@@ -20,10 +20,16 @@ export const initialSchema = Yup.object().shape({
     residenceCity: Yup.number().required("Campo requerido"),
     gender: Yup.string().required("Campo requerido"),
 
-    // current_insurance: Yup.string().required("Campo requerido"),
-    // knowledge_of_insurance_coverage: Yup.string().required("Campo requerido"),
-    // search_to_project: Yup.string().required("Campo requerido"),
-    // data_processing_licence: Yup.string().required("Campo requerido"),
+    firstsubmit: Yup.bool().required("Campo requerido").default(false),
+    insuranceReason: Yup.string().when('firstsubmit', {
+        is: true, then: Yup.string().required("Campo requerido")
+    }),
+    dataAuthorization: Yup.bool().when('firstsubmit', {
+        is: true, then: Yup.bool().oneOf([true], "Debes aceptar los términos para continuar").required("Debes aceptar el tratamiento de datos para continuar")
+    }),
+    insuranceType: Yup.string().when('firstsubmit', {
+        is: true, then: Yup.string().required("Campo requerido")
+    }),
 });
 
 export const initialValues = {
@@ -39,16 +45,16 @@ export const initialValues = {
     address: "Calle 34",
     birthDate: "1995-01-02",
     expeditionDate: "2013-01-02",
-    birthDep: undefined,
+    birthDep: 0,
     birthCity: "0",
-    residenceDep: undefined,
+    residenceDep: 0,
     residenceCity: "0",
     gender: "F",
     
-    current_insurance: "",
-    knowledge_of_insurance_coverage: "",
-    search_to_project: "",
-    data_processing_licence: "",
+    firstsubmit: false,
+    insuranceReason: "",
+    dataAuthorization: undefined,
+    insuranceType: "",
 
     //discount_code: "",
 };

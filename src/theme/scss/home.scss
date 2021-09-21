@@ -71,3 +71,19 @@
     border-right: none;
   }
 }
+
+.home-pages__{
+
+  &title{
+    font-family: Como;
+    font-weight: bold;
+    color: $light-blue;
+    font-size: 2.5rem;
+  }
+
+  &content{
+    color: $dark-blue;
+    font-size: 1rem;
+  }
+  
+}

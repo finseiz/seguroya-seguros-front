@@ -15,6 +15,20 @@ export const healthSchema = Yup.object().shape({
     residenceDep: Yup.string().required("Campo requerido"),
     residenceCity: Yup.string().required("Campo requerido"),
     gender: Yup.string().required("Campo requerido"),
+
+    firstsubmit: Yup.bool().required("Campo requerido").default(false),
+    currentHealthService: Yup.string().when('firstsubmit', {
+        is: true, then: Yup.string().required("Campo requerido")
+    }),
+    mostImportant: Yup.string().when('firstsubmit', {
+        is: true, then: Yup.string().required("Campo requerido")
+    }),
+    permanentService: Yup.string().when('firstsubmit', {
+        is: true, then: Yup.string().required("Campo requerido")
+    }),
+    dataAuthorization: Yup.bool().when('firstsubmit', {
+        is: true, then: Yup.bool().oneOf([true], "Debes aceptar los términos para continuar").required("Debes aceptar el tratamiento de datos para continuar")
+    }),
 });
 
 export const healthInitialValues = {
@@ -32,9 +46,10 @@ export const healthInitialValues = {
     residenceDep: "34",
     residenceCity: "10",
     gender: "M",
-    
-    // current_health_service: "",
-    // knowledge_of_insurance_coverage: "",
-    // delivery_service: "",
-    // data_processing_licence: "",
+
+    firstsubmit: false,
+    currentHealthService: "",
+    mostImportant: "",
+    permanentService: "",
+    dataAuthorization: undefined,
 };

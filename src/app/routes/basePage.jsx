@@ -12,15 +12,24 @@ import { AuthRoutes } from "./childs/Auth/AuthRoutes.js";
 import { AuthRoute } from "./childs/Auth/routes.js";
 import { UserRouter } from "./childs/User/UserRouter.js";
 import { UserRoute } from "./childs/User/routes.js";
+import { HomeRoute, AboutUsRoute, FrequentQuestionsRoute } from "./routes.js";
+import { AboutUs } from "app/pages/home/AboutUs.js";
+import { FrecuentQuestions } from "app/pages/home/frecuent-questions/index.js";
 
 function BasePage() {
 
   return (
     <React.Suspense fallback={<LoadingScreen />}>
       <Switch>
-        <Redirect exact from="/" to="/home" />
+        <Redirect exact from="/" to={HomeRoute} />
 
-        <Route exact path="/home" component={Home} />
+        <Route exact path={HomeRoute} component={Home} />
+
+        <Route exact path={AboutUsRoute} component={AboutUs} />
+
+        <Route exact path={FrequentQuestionsRoute} component={FrecuentQuestions} />
+
+        {/* Modules */}
         
         <Route path={LifeHomeRoute} component={LifeRoutes} />
 

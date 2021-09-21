@@ -21,23 +21,27 @@ function HealthForm() {
     initialValues: healthInitialValues,
     validationSchema: healthSchema,
     onSubmit: (values) => {
-      setStep((prevStep) => prevStep + 1)
-      dispatch(actions.setInitialProgress(50));
+      if ( step === 1 ){
+        setStep((prevStep) => prevStep + 1)
+        dispatch(actions.setInitialProgress(50));
+        formik.setFieldValue("firstsubmit", true);
+      }else{
+        dispatch(actions.setClientData(formik.values))
+        history.push(HealthProcessSelectPlanRoute);
+      }
+      
     },
   });
 
   const continueBtn = () => {
     switch (step) {
       case 1:
+      case 3:
         formik.handleSubmit();
         break;
       case 2:
         setStep((prevStep) => prevStep + 1)
         dispatch(actions.setInitialProgress(100));
-        break;
-      case 3:
-        dispatch(actions.setClientData(formik.values))
-        history.push(HealthProcessSelectPlanRoute);
         break;
       default:
         break;

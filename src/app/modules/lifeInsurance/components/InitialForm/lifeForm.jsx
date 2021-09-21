@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { Step1, Step2, Step3 } from "./components/steps";
 import { actions } from "../../redux";
@@ -19,23 +19,27 @@ function LifeForm() {
     initialValues,
     validationSchema: initialSchema,
     onSubmit: (values) => {
-      dispatch(actions.addClientData(values));
-      setStep((prevStep) => prevStep + 1)
-      dispatch(actions.setInitialProgress(50));
+      if ( step === 1 ){
+        dispatch(actions.addClientData(values));
+        setStep((prevStep) => prevStep + 1)
+        dispatch(actions.setInitialProgress(50));
+        formik.setFieldValue("firstsubmit", true);
+      }else{
+        history.push(LifeProcessSelectPlanRoute);
+      }
+      
     },
   });
 
   const continueBtn = () => {
     switch (step) {
       case 1:
+      case 3:
         formik.handleSubmit();
         break;
       case 2:
         setStep((prevStep) => prevStep + 1)
         dispatch(actions.setInitialProgress(100));
-        break;
-      case 3:
-        history.push(LifeProcessSelectPlanRoute);
         break;
       default:
         break;
@@ -57,7 +61,6 @@ function LifeForm() {
   }
 
   useEffect(() => {
-    // TODO: si la lista ya está, no llamar de nuevo.
     getInitialValues(dispatch);
     dispatch(actions.setInitialProgress(0));
   }, [])
