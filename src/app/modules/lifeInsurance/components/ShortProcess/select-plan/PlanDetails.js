@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { WhatsAppContainer } from 'app/components/process/WhatsAppContainer'
 import { toAbsoluteUrl } from 'theme/helpers/AssetsHelpers'
 import { useHistory, useParams } from 'react-router-dom';
@@ -17,10 +17,16 @@ export const PlanDetails = () => {
     const dispatch = useDispatch();
     const { plans } = useSelector(state => state.lifeInsurance);
     const [selectPlan, setSelectPlan] = useState();
-    let history = useHistory();
+    const history = useHistory();
 
-    const [benefits, setBenefits] = useState([]);
-    const [commets, setCommets] = useState([]);
+    const benefits = useMemo(() => [
+        "Si mueres dentro de la vigencia de la póliza, Colmena pagará la suma indicada en la carátula de la póliza según el plan escogido. ",
+        "En caso de que estés vivo en la fecha de fin de la vigencia del seguro, Colmena pagará la suma indicada en la carátula de la póliza según el plan escogido.",
+        "Edad mínina de ingreso: 18 años. Edad máxima de ingresa: 65 anos. ",
+        "Las primas se calcularán para períodos mensuales y podrás pagar anual, semestral o trimestral, con un descuento de acuerdo a la periodicidad elegida.",
+        "Esta póliza es temporal y estará vigente por el término de diez (10) años contados a partir de la fecha de inicio de vigencia indicado en la carátula de la póliza",
+        "La presente póliza no es de renovación automática y solo se podrá renovar a voluntad de las partes contratantes.",
+    ], []);
 
     useEffect(() => {
         const selectedPlan = plans.find(planElement =>
@@ -28,13 +34,6 @@ export const PlanDetails = () => {
             planElement.redirectValues.plan === parseInt(plan)
         );
         setSelectPlan(selectedPlan);
-        setBenefits([
-            "Si tienes un accidente contra otro vehículo, un bien material, una o varias personas, tienes unaprotección del 80%.",
-            "Si tienes un accidente y tu carro tiene un daño superior al 75% del valor del vehículo tienes una protección de $2’000.000 y el valor a pagar es $300.000.",
-            "Si te roban tu vehículo y se considera perdido totalmente tienes una protección de $2’000.000.",
-            "Si tienes un accidente y tu carro tiene un daño inferior al 75% del valor del vehículo (ej. puertas, el parabrisas, etc.), el valor a pagar es $300.000.",
-            "Tienes 10 conductores elegidos en el año."
-        ]);
     }, []);
 
     const formik = useFormik({
@@ -85,7 +84,7 @@ export const PlanDetails = () => {
                                         }
                                     </ul>
 
-                                    <Comments commentList={commets} />
+                                    {/* <Comments commentList={commets} /> */}
                                 </div>
 
                                 {/** Insurance Right */}

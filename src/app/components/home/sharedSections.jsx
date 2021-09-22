@@ -7,66 +7,37 @@ function SharedSections() {
   const allies = [InsuranceLogo.COLMENA, InsuranceLogo.BOLIVAR];
 
   const offers = [
-    {
-      img: "/media/images/tmp02.jpg",
-      title: "¡Seguro por Kilometro!",
-      content: (
-        <ul>
-          <li>Beneficio</li>
-        </ul>
-      ),
-    },
-    {
-      img: "/media/images/tmp02.jpg",
-      title: "15% dcto en salud ",
-      content: (
-        <ul>
-          <li>Beneficio</li>
-        </ul>
-      ),
-    },
-    {
-      img: "/media/images/tmp02.jpg",
-      title: "¡Seguro por Kilometro!",
-      content: (
-        <ul>
-          <li>Beneficio</li>
-        </ul>
-      ),
-    },
+    { img: "/media/offers/of1.jpg", },
+    { img: "/media/offers/of2.jpg", },
+    { img: "/media/offers/of3.jpg", },
   ];
   return (
     <>
       <PageContainer className="bg-gray">
         <div className="container-fluid text-center h-100">
           <div className="row h-100 m-0">
-            <div className="col align-self-center">
+            <div className="col">
               <h5>Ofertas</h5>
               <div className="container-fluid">
-                <CardGridContainer data={offers} size="4">
-                  {(offer) => (
-                    <div
-                      className="card w-100 h-100 overflow-hidden"
-                      style={{ borderRadius: "10px" }}
-                    >
-                      <img src={toAbsoluteUrl(offer.img)} alt="" />
-                      <div className="card-body">
-                        <div className="card-title">{offer.title}</div>
-                        <div className="card-text text-left">
-                          {offer.content}
-                        </div>
-                        <button className="btn btn-primary primary-button ml-2">
-                          Ver más
-                        </button>
+                <div className="row m-0"> 
+                  {
+                    offers.map( offer => (
+                      <div className="col-md-auto mt-4">
+                        <img 
+                          src={offer.img} 
+                          className="home-offer__image"
+                        />
                       </div>
-                    </div>
-                  )}
-                </CardGridContainer>
+                    ) )
+                  }
+
+                </div>
               </div>
             </div>
           </div>
         </div>
       </PageContainer>
+
       <PageContainer className="bg-white">
         <div className="container-fluid text-center h-100">
           <div className="row h-100 m-0">

@@ -1,7 +1,7 @@
 import { actions } from "app/modules/auth/_redux/authRedux";
 import { LoginRoute, RegistryRoute } from "app/routes/childs/Auth/routes";
 import { UserPurchasesRoute } from "app/routes/childs/User/routes";
-import { AboutUsRoute, FrequentQuestionsRoute, HomeRoute } from "app/routes/routes";
+import { AboutUsRoute, FrequentQuestionsRoute, HomeRoute, OffersRoute } from "app/routes/routes";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -66,7 +66,7 @@ function CustomNavbar() {
                 </li>
 
                 <li className="nav-item">
-                  <NavLink to="/offers" className="nav-link" activeClassName="active" >
+                  <NavLink to={OffersRoute} className="nav-link" activeClassName="active" >
                     Ofertas
                   </NavLink>
                 </li>

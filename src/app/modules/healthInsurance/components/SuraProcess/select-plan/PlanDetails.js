@@ -1,17 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { WhatsAppContainer } from 'app/components/process/WhatsAppContainer'
 import { toAbsoluteUrl } from 'theme/helpers/AssetsHelpers'
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Qualification from 'app/components/process/Qualification';
 import { parseCurrency } from 'app/helpers/parse-currency';
-import Comments from 'app/components/process/Comments';
 import { actions } from 'app/modules/healthInsurance/redux';
 import { HealthProcessInsurabilityRoute } from 'app/routes/childs/Health/routes';
-import { getQuote } from '../controller';
+import { findPlan, getQuote } from '../controller';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 import FormikRadioGroup from 'app/modules/_forms/general/FormikRadioGroup';
+import { getBenefits } from './PlanBenefist';
 
 export const PlanDetails = () => {
 
@@ -20,10 +20,13 @@ export const PlanDetails = () => {
     const { plans, selectedPlan } = state;
     const history = useHistory();
     
-    const [benefits, setBenefits] = useState([]);
-    const [commets, setCommets] = useState([]);
     const [request, setRequest] = useState({ loading: false, error: false})
     const [quote, setQuote] = useState({});
+
+    const benefits = useMemo(() => {
+        const plan = findPlan(plans, selectedPlan.solutionId)
+        return getBenefits(plan["data"]["solucion"]["nombre"]);
+    }, [])
 
     const dataPlan = plans.find( plan => plan.data["solucion"]["codigo"] === selectedPlan.solutionId )
 
@@ -40,19 +43,19 @@ export const PlanDetails = () => {
     })
 
     useEffect(() => {
-        setRequest({ loading: true, error: false });
-        setBenefits([
-            dataPlan?.data?.solucion.descripcion,
-        ]);
-        getQuote(state, dataPlan)
-        .then(( response ) => {
-            if ( response.status === 200 ) {
-                setRequest({ loading: false, error: false });
-                setQuote(response.body)
-            }else{
-                setRequest({ loading: false, error: true });
-            }
-        })
+        if ( !quote.tarifas ){
+            setRequest({ loading: true, error: false });
+            getQuote(state, dataPlan)
+            .then(( response ) => {
+                if ( response.status === 200 ) {
+                    setRequest({ loading: false, error: false });
+                    setQuote(response.body)
+                }else{
+                    setRequest({ loading: false, error: true });
+                }
+            })
+        }
+        
     }, []);
 
     const radioOption = ( i, payment ) => (
@@ -99,7 +102,7 @@ export const PlanDetails = () => {
 
                                         {/** Insurance Name */}
                                         <div className="plans_sel_plan-name mt-4">
-                                            { selectedPlan.insuranceName } - Salud
+                                            Sura - Salud
                                         </div>
 
                                         {/** INsurance benefits */}
@@ -113,7 +116,7 @@ export const PlanDetails = () => {
                                             }
                                         </ul>
 
-                                        <Comments commentList={commets} />
+                                        {/* <Comments commentList={commets} /> */}
                                     </div>
 
                                     {/** Insurance Right */}

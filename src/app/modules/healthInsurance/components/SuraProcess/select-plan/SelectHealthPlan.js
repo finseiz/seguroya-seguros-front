@@ -12,9 +12,12 @@ export const SelectSuraHealthPlan = () => {
     const [request, setRequest] = useState({ loading: false, error: false})
 
     useEffect(() => {
-        setRequest({ loading: true, error: false });
-        getPlans(client, dispatch)
-            .then( ( success ) => setRequest({ loading: false, error: !success }) )
+        if ( plans.length === 0 ){
+            setRequest({ loading: true, error: false });
+            getPlans(client, dispatch)
+                .then( ( success ) => setRequest({ loading: false, error: !success }) )
+        }
+        
     }, [])
 
     return (

@@ -58,6 +58,8 @@ export const getKinship = (plans, selectedPlan) => {
     }
 }
 
+export const findPlan = (plans, id) => plans.find((plan) => plan.data["solucion"]["codigo"] === id );
+
 
 
 export const getQuote = async (state, selectedPlan) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { WhatsAppContainer } from 'app/components/process/WhatsAppContainer'
 import { toAbsoluteUrl } from 'theme/helpers/AssetsHelpers'
 import { useHistory, useParams } from 'react-router-dom';
@@ -18,26 +18,24 @@ export const KmPlanDetails = () => {
     const [selectPlan, setSelectPlan] = useState();
     let history = useHistory();
 
-    const [benefits, setBenefits] = useState([]);
-    const [commets, setCommets] = useState([]);
+    const benefits1 = useMemo(() => [
+        "Cobertura de responsabilidad civil extracontractual: si tienes algún accidente con otro vehículo y causas lesiones en otra persona o daños a un bien material, tendrás un valor asegurado de $4.000.000.000. CUBIERTO AL 100%",
+        "Cobertura por pérdida total por hurto o por accidente, CUBIERTO AL 100%",
+        "Cobertura por pérdida parcial por daños y por hurto. Deducible de 1 SMMLV o 10%",
+        "Asistencias técnicas como conductor elegido, grúa, carro taller y pequeños accesorios."
+    ], [])
+    const benefits2 = useMemo(() => [
+        "Detalles de tu póliza y recargas de KM. ",
+        "Alerta de impacto: en caso de siniestro.",
+        "Localización del vehículo en caso de hurto.",
+        "Mecánico a bordo: diagnóstico mecánico del vehículo -el dispositivo detecta fallas mecánicas relacionadas con sistema electrónico, inyectores, control de emisiones, combustible y aire, encendido, transmisión entre otros",
+        "Asistencia inmediata en caso de accidente.",
+        "Botón de pánico 24/7.",
+        
+    ], [])
 
     useEffect(() => {
         setSelectPlan(plans[id]);
-        setBenefits([
-            "Si un accidente contra otro, un bien material, una o varias personas, tienes unaprotección del 80%.",
-            "Si tienes un accidente y tu carro tiene un daño superior al 75% del valor del vehículo tienes una protección de $2’000.000 y el valor a pagar es $300.000.",
-            "Si te roban tu vehículo y se considera perdido totalmente tienes una protección de $2’000.000.",
-            "Si tienes un accidente y tu carro tiene un daño inferior al 75% del valor del vehículo (ej. puertas, el parabrisas, etc.), el valor a pagar es $300.000.",
-            "Tienes 10 conductores elegidos en el año."
-        ]);
-        setCommets([
-            {
-                comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                qualification: 5,
-                userName: "Roberto Sanchez",
-                userImageUrl: "www.src.com"
-            },
-        ])
     }, []);
 
     return (
@@ -65,13 +63,13 @@ export const KmPlanDetails = () => {
 
                                     {/** Insurance Name */}
                                     <div className="plans_sel_plan-name mt-4">
-                                        {selectPlan.insuranceName} - Vida
+                                        {selectPlan.insuranceName}
                                     </div>
 
                                     {/** INsurance benefits */}
                                     <ul className="plan_sel_benefits">
                                         {
-                                            benefits.map((benefit, i) => (
+                                            benefits1.map((benefit, i) => (
                                                 <li className="my-3 plan_sel_benefit-item" key={i}>
                                                     {benefit}
                                                 </li>
@@ -79,7 +77,20 @@ export const KmPlanDetails = () => {
                                         }
                                     </ul>
 
-                                    <Comments commentList={commets} />
+                                    <p> <b>Valor agregado del producto</b> </p>
+                                    <p> <b>Todo lo puedes manejar desde la APP de la compañía SBS:</b> </p>
+
+                                    <ul className="plan_sel_benefits">
+                                        {
+                                            benefits2.map((benefit, i) => (
+                                                <li className="my-3 plan_sel_benefit-item" key={i}>
+                                                    {benefit}
+                                                </li>
+                                            ))
+                                        }
+                                    </ul>
+
+                                    {/* <Comments commentList={commets} /> */}
                                 </div>
 
                                 {/** Insurance Right */}
