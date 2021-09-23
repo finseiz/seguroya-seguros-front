@@ -10,17 +10,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { actions } from "app/modules/lifeInsurance/redux";
 import { sendInformation } from "../controller";
+import { DataAuthorization } from "app/components/process/DataAuthorization";
 
-export const Authorization = ({}) => {
+export const Authorization = ({ }) => {
 
   const initValues = {
     [questionAuthTerms.id]: "",
     [questionAuthPersonalData.id]: "",
     [questionAuthContent.id]: "",
   }
-  const [values, onChange] = useForm(initValues);
+  const [values, onChange, _, validateAllTrue] = useForm(initValues);
   const [trySubmit, setTrySubmit] = useState(false);
   const [loadingRequest, setLoadingRequest] = useState(false);
+  const [showError, setShowError] = useState(false);
+
   const lifeInsurance = useSelector(state => state.lifeInsurance)
   const dispatch = useDispatch();
   const history = useHistory();
@@ -39,14 +42,19 @@ export const Authorization = ({}) => {
       className: "btn btn-primary primary-button process__process-button px-5 mx-3",
       onClick: async () => {
         setTrySubmit(true)
-        if ( canContinue(values) ){
-          setLoadingRequest(true);
-          const success = await sendInformation( lifeInsurance, dispatch )
-          if ( success ){
-            dispatch(actions.setShortProcess(4));
-            history.push(LifeProcessOTP);   
+        const allTrue = validateAllTrue();
+        if (canContinue(values)) {
+          if (allTrue) {
+            setLoadingRequest(true);
+            const success = await sendInformation(lifeInsurance, dispatch)
+            if (success) {
+              dispatch(actions.setShortProcess(4));
+              history.push(LifeProcessOTP);
+            }
+            setLoadingRequest(false);
+          } else {
+            setShowError(true);
           }
-          setLoadingRequest(false);
         }
       },
     },
@@ -62,7 +70,11 @@ export const Authorization = ({}) => {
       <div className="process__others-container">
         <div className="p-3 process__normal-text process__short-container">
           <p className="text-center"> <b> Términos y condiciones </b> </p>
-          <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+
+          <p> <b> ¿Qué cubre este seguro? </b> </p>
+          <p> <b> Muerte por cualquier causa: </b>  Si mueres dentro de la vigencia de la póliza por causa natural no preexistente o accidental, o prexistente declarada y aceptada por la compañía, Colmena pagará la suma indicada en la carátula de la póliza según el plan escogido. Si mueres como consecuencia de guerra civil y/o internacional, por suicidio voluntario o involuntario, o en el ejercicio de actividades ilícitas, Colmena no pagará el seguro. </p>
+          <p> Para determinar la cobertura del amparo, se entenderá la fecha del fallecimiento como la fecha del siniestro. En caso de desaparición, un juez definirá la fecha de muerte. </p>
+          <a href="#" >Ver todo...</a>
         </div>
       </div>
 
@@ -74,17 +86,11 @@ export const Authorization = ({}) => {
           active: () => activeRadio(questionAuthTerms, i, values),
           onChange: () => onChangeQuestion(questionAuthTerms, i, onChange)
         }))}
-        activeError={ activeError(questionAuthTerms, values) }
+        activeError={activeError(questionAuthTerms, values)}
         showError={trySubmit}
       />
 
-      <div className="process__others-container mt-3">
-        <div className="p-3 process__normal-text process__short-container">
-          <p className="text-center"> <b> Autorización tratamiento de datos personales </b> </p>
-          <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
-        </div>
-      </div>
-
+      <DataAuthorization />
 
       <Question
         question={questionAuthPersonalData.question}
@@ -94,7 +100,7 @@ export const Authorization = ({}) => {
           active: () => activeRadio(questionAuthPersonalData, i, values),
           onChange: () => onChangeQuestion(questionAuthPersonalData, i, onChange)
         }))}
-        activeError={ activeError(questionAuthPersonalData, values) }
+        activeError={activeError(questionAuthPersonalData, values)}
         showError={trySubmit}
       />
 
@@ -106,9 +112,18 @@ export const Authorization = ({}) => {
           active: () => activeRadio(questionAuthContent, i, values),
           onChange: () => onChangeQuestion(questionAuthContent, i, onChange)
         }))}
-        activeError={ activeError(questionAuthContent, values) }
+        activeError={activeError(questionAuthContent, values)}
         showError={trySubmit}
       />
+
+      {
+        showError &&
+        (
+          <div class=" mt-4 alert alert-danger" role="alert">
+            Debes aceptar todas las preguntas anteriores
+          </div>
+        )
+      }
 
 
     </BaseSection>

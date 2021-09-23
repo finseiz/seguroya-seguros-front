@@ -1,18 +1,14 @@
-import React, { useMemo } from "react";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
-
+import React, { useState } from "react";
 import { useForm } from "app/modules/_forms/useForm";
 import Question from "app/components/process/Question";
 import BaseSection from "app/components/UI/baseSection";
-import { actions } from "app/modules/healthInsurance/redux";
-
-import { questionAuthTerms, questionAuthPersonalData, questionAuthContent } from "./questions-values";
-import { activeRadio, onChangeQuestion, activeError, canContinue } from "../../../../../_forms/forms-actions";
-import { HealthProcessDoneRoute } from "app/routes/childs/Health/routes";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { questionAuthContent, questionAuthPersonalData, questionAuthTerms } from "app/modules/healthInsurance/components/SuraProcess/fill-data/Auth/questions-values";
+import { CarsKmProcessOtpRoute } from "app/routes/childs/Cars/routes";
+import { actions } from "../../redux";
+import { activeRadio, onChangeQuestion, activeError, canContinue } from "app/modules/_forms/forms-actions";
 import { DataAuthorization } from "app/components/process/DataAuthorization";
-import { findPlan } from "../../controller";
 
 export const Authorization = ({ }) => {
 
@@ -27,30 +23,21 @@ export const Authorization = ({ }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const state = useSelector(state => state.healthInsurance);
-  const { plans, selectedPlan } = state;
-
-  const includePay = useMemo(() => {
-    const plan = findPlan(plans, selectedPlan.solutionId)
-    const planName = plan["data"]["solucion"]["nombre"];
-    if (planName.includes("EVOLUCIONA")) return true;
-    else return false;
-  }, [])
-
   const actionsButton = [
     {
       text: "Continuar",
       className: "btn btn-primary primary-button process__process-button px-5 mx-3",
-      onClick: () => {
+      onClick: async () => {
         setTrySubmit(true)
         const allTrue = validateAllTrue();
         if (canContinue(values)) {
           if (allTrue) {
-            dispatch(actions.setSuraProgress(4));
-            history.push(HealthProcessDoneRoute);
+            dispatch(actions.setUniqueProgress(1));
+            history.push(CarsKmProcessOtpRoute);
           } else {
             setShowError(true);
           }
+
         }
       },
     },
@@ -65,11 +52,12 @@ export const Authorization = ({ }) => {
       <div className="process__others-container">
         <div className="p-3 process__normal-text process__short-container">
           <p className="text-center"> <b> Términos y condiciones </b> </p>
-          <p>  {planData(includePay)}  </p>
+
+          <p> SBS SEGUROS COLOMBIAS.A. EN ADELANTE SBS COLOMBIA, TE PAGARÁ A TI O A LOS BENEFICIARIOS, HASTA EL LÍMITE INDICADO EN LA CARÁTULA DE LA PÓLIZA, LA INDEMNIZACIÓN CORRESPONDIENTE, DE ACUERDO CON LAS COBERTURAS QUE A CONTINUACIÓN SE INDICAN Y QUE AFECTEN A TU VEHÍCULO ASEGURADO, SIEMPRE Y CUANDO OCURRA UN SINIESTRO AMPARADO DURANTE LA VIGENCIA DEL SEGURO. </p>
+          <p> LAS COBERTURAS VARIARÁN EN CASO DE QUE TU VEHÍCULO ESTÉ DETENIDO O EN MOVIMIENTO. </p>
           <a href="#" >Ver todo...</a>
         </div>
       </div>
-
 
       <Question
         question={questionAuthTerms.question}
@@ -109,7 +97,6 @@ export const Authorization = ({ }) => {
         showError={trySubmit}
       />
 
-
       {
         showError &&
         (
@@ -119,24 +106,6 @@ export const Authorization = ({ }) => {
         )
       }
 
-
     </BaseSection>
   );
-}
-
-const planData = (includePay) => {
-
-  return (
-    <>
-      Tratamiento médico hospitalario y ambulatorio en Colombia{includePay && " con copago"}, de acuerdo con lo indicado en la carátula de la póliza
-      Si te enfermas o te accidentas, SURA te pagará los tratamientos médicos y quirúrgicos que se describen a continuación, siempre y cuando:
-      <ul>
-        <li> El tratamiento sea prestado en Colombia. </li>
-        <li> El tratamiento sea consecuencia de un accidente ocurrido o de una enfermedad adquirida, durante la vigencia del seguro. </li>
-        <li> El tratamiento sea prestado durante la vigencia del seguro. </li>
-        <li> Te encuentres al día con los valores a pagar. </li>
-      </ul>
-    </>
-  );
-
 }

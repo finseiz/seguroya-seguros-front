@@ -1,10 +1,11 @@
 import PageContainer from "app/components/UI/sectionContainer";
-import { InsuranceLogo } from "app/const";
+import { insuranceLogoAbsolutePath } from "app/const";
 import { toAbsoluteUrl } from "theme/helpers";
 import CardGridContainer from "../UI/CardGridContainer";
+import { OurClients } from "./OurClients";
 
 function SharedSections() {
-  const allies = [InsuranceLogo.COLMENA, InsuranceLogo.BOLIVAR];
+  const allies = Object.values(insuranceLogoAbsolutePath).map(l => l);
 
   const offers = [
     { img: "/media/offers/of1.jpg", },
@@ -19,16 +20,16 @@ function SharedSections() {
             <div className="col">
               <h5>Ofertas</h5>
               <div className="container-fluid">
-                <div className="row m-0"> 
+                <div className="row m-0">
                   {
-                    offers.map( offer => (
+                    offers.map(offer => (
                       <div className="col-md-auto mt-4">
-                        <img 
-                          src={offer.img} 
+                        <img
+                          src={offer.img}
                           className="home-offer__image"
                         />
                       </div>
-                    ) )
+                    ))
                   }
 
                 </div>
@@ -62,7 +63,7 @@ function SharedSections() {
                         Te ofrecemos un proceso de compra fácil, rápido y práctico.
                       </li>
                       <li>
-                        El lenguaje de nuestra plataforma es práctico y fácil de entender. 
+                        El lenguaje de nuestra plataforma es práctico y fácil de entender.
                       </li>
                     </ul>
                   </div>
@@ -111,38 +112,9 @@ function SharedSections() {
         <div className="text-center w-100 h-100"></div>
       </PageContainer>
       <PageContainer className="bg-dark-blue">
-        <div className="container-fluid text-center text-white">
-          <div className="row h-100 m-0">
-            <div className="col align-self-center">
-              <h5 className="text-white">Nuestros Clientes</h5>
-              <div className="container">
-                <div className="row m-0">
-                  <div className="col-3">
-                    <div className="profile-image">
-                      <img
-                        src={toAbsoluteUrl("/media/images/tmp01.png")}
-                        alt="author_photo"
-                      />
-                    </div>
-                  </div>
-                  <div className="col-9 text-left">
-                    <p>
-                      “Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Ut enim ad minim veniam”.
-                    </p>
-
-                    <p>
-                      <strong>Carolina Gómez Botero</strong>
-                    </p>
-                    <p>
-                      <strong>Directora Ejecutiva Colgate S.A.</strong>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="container-fluid text-center text-white ">
+          <h5 className="text-white">Nuestros Clientes</h5>
+          <OurClients />
         </div>
       </PageContainer>
       <PageContainer>
@@ -151,13 +123,15 @@ function SharedSections() {
             <div className="col align-self-center">
               <h5>Nuestros Aliados</h5>
               <div className="container">
-                <CardGridContainer data={allies} limit={3}>
+                <CardGridContainer data={allies} >
                   {(ally) => (
                     <div className="card w-100 h-100">
-                      <div className="card-body overflow-hidden">
+                      <div className="card-body overflow-hidden row">
                         <img
-                          src={toAbsoluteUrl(`/media/logos/${ally}`)}
+                          src={ally}
                           alt="img-logo"
+                          style={{ maxHeight: '8rem', maxWidth: '60%' }}
+                          className="m-auto"
                         />
                       </div>
                     </div>
@@ -168,6 +142,7 @@ function SharedSections() {
           </div>
         </div>
       </PageContainer>
+
       <PageContainer className="bg-white">
         <div className="container-fluid text-center h-100">
           <div className="row h-100 m-0">
@@ -179,10 +154,19 @@ function SharedSections() {
               </span>
               <div className="mt-3">
                 <button className="btn btn-secondary secondary-button">
-                  WhatsApp
+                  
+                  <img
+                    src={toAbsoluteUrl("/media/icons/whatsapp.png")}
+                    alt="wa-icon"
+                    className="mx-1"
+                  />
+                  <span className="whatsapp__text" style={{fontSize: "1rem"}}>
+                    WhatsApp 
+                  </span>
+
                 </button>
-                <button className="btn btn-primary primary-button ml-2">
-                  Ver preguntas frencuentes
+                <button className="btn btn-primary primary-button ml-2 w-25">
+                  <p className="my-1"> <b> Ver preguntas frencuentes </b> </p>
                 </button>
               </div>
             </div>

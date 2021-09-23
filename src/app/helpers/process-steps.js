@@ -32,6 +32,9 @@ export const carsProcessSteps = [
 
 export const carsKmProcessSteps = [
   {
+    title: "Autorizaciones",
+  },
+  {
     title: "Verfica tu identidad",
   }
 ]

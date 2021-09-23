@@ -17,6 +17,17 @@ export const useForm = ( initialState = {} ) => {
 
     }
 
-    return [ values, handleInputChange, reset ];
+    const validateAllTrue = () => {
+        let returnValue = true;
+        Object.values( values ).forEach( (value) => {
+            if ( value !== true ){
+                returnValue = false;
+            }
+        })
+
+        return returnValue;
+    }
+
+    return [ values, handleInputChange, reset, validateAllTrue ];
 
 }

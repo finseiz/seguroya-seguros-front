@@ -3,8 +3,13 @@ import FormikRadioGroup from "app/modules/_forms/general/FormikRadioGroup";
 import FormikSelect from "app/modules/_forms/general/FormikSelect";
 import { genderRadioTypes } from "app/helpers/radio-options";
 import { SbsIdentificationsTypes } from "../helpers/constants";
+import { useEffect } from "react";
 
 export function Step1({ formik, countries }) {
+
+  useEffect(() => {
+    formik.setFieldValue("firstsubmit", false);
+  }, [])
 
   return (
     <div className="card-body">

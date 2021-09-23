@@ -1,13 +1,14 @@
 
 import { AsideProcess } from 'app/components/process/AsideProcess'
 import { carsKmProcessSteps } from 'app/helpers/process-steps'
-import { CarsHomeRoute, CarsKmProcessDetailsPlanRoute, CarsKmProcessDoneRoute, CarsKmProcessOtpRoute, CarsKmProcessSelectPlanRoute } from 'app/routes/childs/Cars/routes'
+import { CarsHomeRoute, CarsKmProcessDataAutorizationRoute, CarsKmProcessDetailsPlanRoute, CarsKmProcessDoneRoute, CarsKmProcessOtpRoute, CarsKmProcessSelectPlanRoute } from 'app/routes/childs/Cars/routes'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Route, Switch, useHistory } from 'react-router-dom'
 import { Content } from 'theme/layout/utils/content'
 import { ConfirmationCode } from '../_general/OTP'
 import { ProcessDone } from '../_general/ProcessDone'
+import { Authorization } from './components/KmProcess/Authorization'
 import { KmPlanDetails } from './components/KmProcess/select-plan/PlanDetails'
 import { SelectCarsPlanKm } from './components/KmProcess/select-plan/SelectCarsPlan'
 
@@ -38,6 +39,12 @@ export default function CarsInsuranceKmRoute() {
                     />
                 }
             >
+                <Route
+                    exact={true}
+                    path={CarsKmProcessDataAutorizationRoute}
+                    component={ Authorization }
+                />
+
                 <Route
                     exact={true}
                     path={CarsKmProcessOtpRoute}

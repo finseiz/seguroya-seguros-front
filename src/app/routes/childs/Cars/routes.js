@@ -25,8 +25,8 @@ export const CarsKmProcessSelectPlanRoute =  CarsKmProcessRoute + "/select-plan"
 export const CarsKmProcessDetailsPlanRoute =  CarsKmProcessRoute + "/:id/details";
 export const CarsKmProcessDetailsPlanRouteFunc = (id) => CarsKmProcessRoute + `/${id}/details`;
 
-export const CarsKmProcessOtpRoute =  CarsKmProcessRoute + "/otp";
+export const CarsKmProcessDataAutorizationRoute =  CarsKmProcessRoute + "/autorization";
 
-export const CarsKmProcessSarlaftRoute =  CarsKmProcessRoute + "/sarlaft/form";
+export const CarsKmProcessOtpRoute =  CarsKmProcessRoute + "/otp";
 
 export const CarsKmProcessDoneRoute =  CarsKmProcessRoute + "/done";

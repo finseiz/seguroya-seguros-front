@@ -8,6 +8,7 @@ import { registryInitialValues, registrySchema } from '../helpers/formik';
 import { getCities, getDepartments, signupUser } from '../helpers/controller';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { Terms } from './Terms';
 
 export const Registry = () => {
 
@@ -140,8 +141,7 @@ export const Registry = () => {
                 <div className="process__others-container mt-5">
                     <div className="p-3 process__normal-text process__short-container">
                         <p className="text-center"> <b> Términos y condiciones </b> </p>
-                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
-                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+                        <Terms />
                     </div>
                 </div>
 

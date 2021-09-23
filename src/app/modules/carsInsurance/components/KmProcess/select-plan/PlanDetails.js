@@ -7,7 +7,7 @@ import Qualification from 'app/components/process/Qualification';
 import { parseCurrency } from 'app/helpers/parse-currency';
 import Comments from "./../../../../../components/process/Comments";
 import { actions } from 'app/modules/carsInsurance/redux';
-import { CarsKmProcessOtpRoute, CarsProcessOtpRoute } from 'app/routes/childs/Cars/routes';
+import { CarsKmProcessDataAutorizationRoute } from 'app/routes/childs/Cars/routes';
 
 
 export const KmPlanDetails = () => {
@@ -132,7 +132,7 @@ export const KmPlanDetails = () => {
                                             className="btn primary_btn_expand w-100"
                                             onClick={() => {
                                                 dispatch(actions.setSelectedPlan(plans[id]))
-                                                history.push(CarsKmProcessOtpRoute)
+                                                history.push(CarsKmProcessDataAutorizationRoute)
                                             }}
                                         >
                                             Comprar

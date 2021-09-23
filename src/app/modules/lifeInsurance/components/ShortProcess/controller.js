@@ -146,7 +146,6 @@ export const sendOtp = async ( otp, state ) => {
         }
 
         const response = await validateRequest(data);
-        debugger
         if ( response.status === 200 ){
             return true;
         }else{

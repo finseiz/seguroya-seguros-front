@@ -2,6 +2,7 @@ import { genderRadioTypes } from "app/helpers/radio-options";
 import FormikInput from "app/modules/_forms/general/FormikInput";
 import FormikRadioGroup from "app/modules/_forms/general/FormikRadioGroup";
 import FormikSelect from "app/modules/_forms/general/FormikSelect";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getCity, getDepartments, getDocumentTypes, getOccupations } from "../controller";
 
@@ -23,6 +24,10 @@ export function Step1({ formik }) {
       />
     </div>
   )
+
+  useEffect(() => {
+    formik.setFieldValue("firstsubmit", false);
+  }, [])
 
   return (
     <div className="card-body">
