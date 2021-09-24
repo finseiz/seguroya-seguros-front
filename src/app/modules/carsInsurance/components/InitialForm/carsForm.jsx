@@ -7,7 +7,7 @@ import { actions } from "../../redux";
 import { CarsSchema, initialValues } from "./helpers/formik";
 import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
 import { ProgressIndicator } from "app/components/process/ProgressIndicator";
-import { CarsKmProcessSelectPlanRoute, CarsProcessSelectPlanRoute } from "app/routes/childs/Cars/routes";
+import { CarsKmProcessSelectPlanRoute, CarsProcessSheduleAppointmentRoute } from "app/routes/childs/Cars/routes";
 import { getCountries } from "./controller";
 
 function CarsForm() {
@@ -28,7 +28,6 @@ function CarsForm() {
     validationSchema: CarsSchema,
     onSubmit: (values) => {
       if (step === 1) {
-        dispatch(actions.editDataToSend(values));
         setStep((prevStep) => prevStep + 1)
         dispatch(actions.setInitialProgress(50));
         formik.setFieldValue("firstsubmit", true);
@@ -45,7 +44,7 @@ function CarsForm() {
         }
         dispatch(actions.editDataToSend(values));
         if ( formik.values.insuranceType === "ar" )
-          history.push(CarsProcessSelectPlanRoute);
+          history.push(CarsProcessSheduleAppointmentRoute);
         else
           history.push(CarsKmProcessSelectPlanRoute);
       }

@@ -1,8 +1,8 @@
 import { makeRequest } from "app/const"
 
-const baseURL = "sbs/"
+const baseURL = "segurosbolivar/"
 
-const getPlansPath = baseURL + "cotizar"
+const getPlansPath = baseURL + "liquidacion"
 
 export const getPlansRequest = async (data) => {
     const response = await makeRequest({
@@ -10,9 +10,6 @@ export const getPlansRequest = async (data) => {
         method: "POST",
         body: JSON.stringify(data)
     });
-    if ( response.status === 200) 
-        return response.json()
-    else
-        throw new Error("Request failed: " + response.status);
-    
+    const body = await response.json();
+    return { body, status: response.status }
 }

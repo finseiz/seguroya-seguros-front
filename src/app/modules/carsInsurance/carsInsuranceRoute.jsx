@@ -8,7 +8,7 @@ import { PlanDetails } from "./components/Process/select-plan/PlanDetails";
 import { ConfirmationCode } from "../_general/OTP";
 import { carsProcessSteps } from "app/helpers/process-steps";
 import { SarlaftForm } from "../_general/sarlaft-form/SarlaftForm";
-import { ScheduleAppointment } from "./components/Process/ScheduleAppointment";
+import { ScheduleAppointment } from "./components/Process/aditionalData/ScheduleAppointment";
 import { useDispatch } from "react-redux";
 import { actions } from "./redux";
 import { ProcessDone } from "../_general/ProcessDone";
@@ -36,6 +36,12 @@ export default function CarsInsuranceRoute() {
       >
         <Route
           exact={true}
+          path={CarsProcessSheduleAppointmentRoute}
+          component={ScheduleAppointment}
+        />
+
+        <Route
+          exact={true}
           path={CarsProcessOtpRoute}
           component={() => <ConfirmationCode redirectRoute={CarsProcessSarlaftRoute} messageIndex={1} />}
         />
@@ -50,17 +56,11 @@ export default function CarsInsuranceRoute() {
             }}
           />}
         />
-
-        <Route
-          exact={true}
-          path={CarsProcessSheduleAppointmentRoute}
-          component={ScheduleAppointment}
-        />
-
+        
         <Route
           exact={true}
           path={CarsProcessDoneRoute}
-          component={() => <ProcessDone 
+          component={() => <ProcessDone
             bottomMessage="Te llamaremos pronto para concluir el proceso"
           />}
         />

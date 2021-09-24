@@ -67,7 +67,7 @@ function BrandPage() {
                       </div>
                       <strong>SOAT</strong>
                     </div>
-                    <div className="col">
+                    {/* <div className="col">
                       <div className="small-icon">
                         <img
                           src={toAbsoluteUrl("/media/icons/pawprint.svg")}
@@ -75,7 +75,7 @@ function BrandPage() {
                         />
                       </div>
                       <strong>Mascotas</strong>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

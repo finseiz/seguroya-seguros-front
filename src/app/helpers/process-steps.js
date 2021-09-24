@@ -19,13 +19,16 @@ export const lifeProcessSteps = [
 
 export const carsProcessSteps = [
   {
+    title: "Agenda tu cita de inspección",
+  },
+  {
+    title: "Selecciona tu plan",
+  },
+  {
     title: "Verfica tu identidad",
   },
   {
     title: "Llena el SARLAFT",
-  },
-  {
-    title: "Agenda tu cita de inspección",
   },
 ]
 

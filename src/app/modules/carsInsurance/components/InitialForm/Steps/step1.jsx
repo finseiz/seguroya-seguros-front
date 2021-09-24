@@ -2,8 +2,8 @@ import FormikInput from "app/modules/_forms/general/FormikInput";
 import FormikRadioGroup from "app/modules/_forms/general/FormikRadioGroup";
 import FormikSelect from "app/modules/_forms/general/FormikSelect";
 import { genderRadioTypes } from "app/helpers/radio-options";
-import { SbsIdentificationsTypes } from "../helpers/constants";
 import { useEffect } from "react";
+import { CarsIdentificationsTypes } from "app/helpers/selet-options";
 
 export function Step1({ formik, countries }) {
 
@@ -58,7 +58,7 @@ export function Step1({ formik, countries }) {
         <div className="col p-0 pr-2">
           <FormikSelect
             field="identificationType" formik={formik} label="Tipo de identification"
-            options={SbsIdentificationsTypes}
+            options={CarsIdentificationsTypes}
           />
         </div>
 

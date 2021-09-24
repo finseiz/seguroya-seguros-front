@@ -4,6 +4,7 @@ import { WhatsAppContainer } from 'app/components/process/WhatsAppContainer'
 import SuraPlan from 'app/components/process/plans/SuraPlan';
 import { useState } from 'react';
 import { getPlans } from '../controller';
+import { Loading } from 'app/components/process/messages/Loading';
 
 export const SelectSuraHealthPlan = () => {
 
@@ -34,7 +35,7 @@ export const SelectSuraHealthPlan = () => {
                 ):
                 request.loading ? 
                 (
-                    <div> Estamos buscando los mejores planes </div>
+                    <div> <Loading /> </div>
                 ):
                 <div className="row justify-content-between mt-3" >
                     {
