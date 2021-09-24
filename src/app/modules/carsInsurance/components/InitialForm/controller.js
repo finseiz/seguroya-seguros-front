@@ -1,4 +1,4 @@
-import { getCirculationZoneByKmRequest, getCountriesRequest } from "./repository"
+import { getBolivarCitiesRequest, getCirculationZoneByKmRequest, getCountriesRequest } from "./repository"
 
 export const getCountries = async () => {
 
@@ -18,7 +18,11 @@ export const getCountries = async () => {
 export const getCirculationZone = async ( userSelection ) => {
 
     if ( userSelection === "ar" ){
-        // realizar petición
+        const response = await getBolivarCitiesRequest();
+        if ( response.status === 200){
+            const list = response.body["catalogoDato"];
+            return list;
+        }
         return [];
     }else if ( userSelection === "km" ) {
         try {

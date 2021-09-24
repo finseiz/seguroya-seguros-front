@@ -9,7 +9,7 @@ export const colmenaPlan = ( returnValue, primaValue, insuranceValue) => {
     ]
 }
 
-export const bolivarPlan = ({kmCosto, coverage}) => {
+export const bolivarPlan = (kmCosto, coverage) => {
     return [
         {label: "Costo por km", value: `${parseCurrency(kmCosto)}COP`},
         {label: "Cobertura", value: `${simpleNumberFormat(coverage)}KMS`},

@@ -3,20 +3,30 @@ import FormikSelect from "app/modules/_forms/general/FormikSelect";
 import Question from "app/modules/_forms/overview/Question";
 import { getCirculationZone } from "../controller";
 import { Spinner } from "react-bootstrap";
+import FormikInput from "app/modules/_forms/general/FormikInput";
 
-export function Step3({ formik }) {
+export function Step3({ formik, setCirculation }) {
 
   const [zoneLoading, setZoneLoading] = useState(false);
   const [circulationZone, setCirculationZone] = useState([]);
 
-  const citiesList = useMemo(() => circulationZone.map((element) => ({ title: element["nombre"], value: element["id"] })), [circulationZone])
+  const citiesList = useMemo(() => {
+    if ( formik.values.insuranceType === "km" ){
+      return circulationZone.map((element) => ({ title: element["nombre"], value: element["id"] }))
+    }else if ( formik.values.insuranceType === "ar" ){
+      return circulationZone.map((element) => element["valor"]);
+    }
+    return [];
+  }, [circulationZone])
 
   useEffect(() => {
     setZoneLoading(true);
+    formik.setFieldValue("circulationZone", "")
     getCirculationZone(formik.values.insuranceType)
       .then((list) => {
         setCirculationZone(list)
         setZoneLoading(false);
+        setCirculation([...list])
       })
   }, [formik.values.insuranceType])
 
@@ -61,20 +71,31 @@ export function Step3({ formik }) {
         ]}
       />
 
-      {!zoneLoading ?
-        <FormikSelect
-          formik={formik}
-          className="w-50 m-auto"
-          field="circulationZone"
-          label="Zona de circulación"
-          options={citiesList}
-        /> :
-        (<div className="mt-3">
-          <Spinner animation="border" role="status" />
-        </div>)
+      {
+        !zoneLoading ?
+        formik.values.insuranceType === "km" ? 
+          <FormikSelect
+            formik={formik}
+            className="w-50 m-auto"
+            field="circulationZone"
+            label="Zona de circulación"
+            options={citiesList}
+          /> 
+        :
+          <FormikInput 
+            formik={formik} 
+            className="m-auto w-50"
+            field="circulationZone" 
+            label="Zona de circulación" 
+            datalist={citiesList}
+          />
+        :
+        (
+          <div className="mt-3">
+            <Spinner animation="border" role="status" />
+          </div>
+        )
       }
-
-      {/* { title: "Selecciona una opción", value: "" }, */}
 
     </div>
   );

@@ -13,6 +13,7 @@ import { activeRadio, onChangeQuestion, activeError, canContinue } from "../../.
 import { HealthProcessDoneRoute } from "app/routes/childs/Health/routes";
 import { DataAuthorization } from "app/components/process/DataAuthorization";
 import { findPlan } from "../../controller";
+import { termsAndConditions } from "app/helpers/terms-conditions";
 
 export const Authorization = ({ }) => {
 
@@ -30,11 +31,24 @@ export const Authorization = ({ }) => {
   const state = useSelector(state => state.healthInsurance);
   const { plans, selectedPlan } = state;
 
+  const planName = useMemo(() => {
+    const plan = findPlan(plans, selectedPlan.solutionId);
+    return plan["data"]["solucion"]["nombre"];
+  }, [])
+
   const includePay = useMemo(() => {
-    const plan = findPlan(plans, selectedPlan.solutionId)
-    const planName = plan["data"]["solucion"]["nombre"];
     if (planName.includes("EVOLUCIONA")) return true;
     else return false;
+  }, [])
+
+  const downloadTermsLink = useMemo(() => {
+    if (planName.includes("CLÁSICO")) {
+      return termsAndConditions.SuraClasico;
+    } else if (planName.includes("EVOLUCIONA")) {
+      return termsAndConditions.SuraEvoluciona;
+    } else {
+      return termsAndConditions.SuraGlobal;
+    }
   }, [])
 
   const actionsButton = [
@@ -66,7 +80,7 @@ export const Authorization = ({ }) => {
         <div className="p-3 process__normal-text process__short-container">
           <p className="text-center"> <b> Términos y condiciones </b> </p>
           <p>  {planData(includePay)}  </p>
-          <a href="#" >Ver todo...</a>
+          <a href={downloadTermsLink} >Ver todo...</a>
         </div>
       </div>
 

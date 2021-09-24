@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { actions } from "app/modules/lifeInsurance/redux";
 import { sendInformation } from "../controller";
 import { DataAuthorization } from "app/components/process/DataAuthorization";
+import { termsAndConditions } from "app/helpers/terms-conditions";
 
 export const Authorization = ({ }) => {
 
@@ -74,7 +75,7 @@ export const Authorization = ({ }) => {
           <p> <b> ¿Qué cubre este seguro? </b> </p>
           <p> <b> Muerte por cualquier causa: </b>  Si mueres dentro de la vigencia de la póliza por causa natural no preexistente o accidental, o prexistente declarada y aceptada por la compañía, Colmena pagará la suma indicada en la carátula de la póliza según el plan escogido. Si mueres como consecuencia de guerra civil y/o internacional, por suicidio voluntario o involuntario, o en el ejercicio de actividades ilícitas, Colmena no pagará el seguro. </p>
           <p> Para determinar la cobertura del amparo, se entenderá la fecha del fallecimiento como la fecha del siniestro. En caso de desaparición, un juez definirá la fecha de muerte. </p>
-          <a href="#" >Ver todo...</a>
+          <a href={termsAndConditions.Colmena} >Ver todo...</a>
         </div>
       </div>
 

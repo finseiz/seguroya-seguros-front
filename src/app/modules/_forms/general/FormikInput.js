@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const FormikInput = ({ field, formik, label="", type="text", disable=false, labelClass="", className="" }) => {
+const FormikInput = ({ field, formik, label="", type="text", disable=false, labelClass="", className="", datalist }) => {
 
     const hasError = formik.touched[field] && formik.errors[field];
 
@@ -18,12 +18,23 @@ const FormikInput = ({ field, formik, label="", type="text", disable=false, labe
                 className={`form-control ${hasError ? "is-invalid" : ""}`}
                 disabled={disable}
                 {...formik.getFieldProps(field)}
+                list={`${field}-field`}
             />
             {
                 hasError && (
                     <div className="invalid-msj">{formik.errors[field]}</div>
                 )
             }
+            {
+                datalist &&
+                (
+                    <datalist id={`${field}-field`}>
+                        { datalist.map( (element,i) => (<option value={element} key={i}/>) ) }
+                    </datalist>
+                    
+                )
+            }
+            
         </div>
     )
 }

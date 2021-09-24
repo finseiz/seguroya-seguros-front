@@ -11,10 +11,12 @@ import { CarsKmProcessSelectPlanRoute, CarsProcessSelectPlanRoute } from "app/ro
 import { getCountries } from "./controller";
 
 function CarsForm() {
+
   const history = useHistory();
   const dispatch = useDispatch();
   const [step, setStep] = React.useState(1);
   const [countries, setCountries] = useState([]);
+  const [circulationZone, setCirculationZone] = useState([]);
 
   useEffect(() => {
     getCountries().then( list => setCountries(list) );
@@ -31,6 +33,16 @@ function CarsForm() {
         dispatch(actions.setInitialProgress(50));
         formik.setFieldValue("firstsubmit", true);
       } else {
+        if ( formik.values.insuranceType === "ar" ){
+          const value = formik.values.circulationZone;
+          const element = circulationZone.find( e => e.valor === value )
+          if ( element === undefined ) {
+            formik.setFieldValue("circulationZone", "");
+            return;
+          }else{
+            values.circulationZone = element["codigo"]
+          }
+        }
         dispatch(actions.editDataToSend(values));
         if ( formik.values.insuranceType === "ar" )
           history.push(CarsProcessSelectPlanRoute);
@@ -105,7 +117,7 @@ function CarsForm() {
         <div className="w-100 inital-from__box mt-3">
           {step === 1 && <Step1 formik={formik} countries={countries} />}
           {step === 2 && <Step2 formik={formik} onEdit={backBtnAction} />}
-          {step === 3 && <Step3 formik={formik} />}
+          {step === 3 && <Step3 formik={formik} setCirculation={setCirculationZone} />}
         </div>
 
         {/* Bottom buttons */}

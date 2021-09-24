@@ -9,6 +9,7 @@ import { CarsKmProcessOtpRoute } from "app/routes/childs/Cars/routes";
 import { actions } from "../../redux";
 import { activeRadio, onChangeQuestion, activeError, canContinue } from "app/modules/_forms/forms-actions";
 import { DataAuthorization } from "app/components/process/DataAuthorization";
+import { termsAndConditions } from "app/helpers/terms-conditions";
 
 export const Authorization = ({ }) => {
 
@@ -37,7 +38,6 @@ export const Authorization = ({ }) => {
           } else {
             setShowError(true);
           }
-
         }
       },
     },
@@ -55,7 +55,7 @@ export const Authorization = ({ }) => {
 
           <p> SBS SEGUROS COLOMBIAS.A. EN ADELANTE SBS COLOMBIA, TE PAGARÁ A TI O A LOS BENEFICIARIOS, HASTA EL LÍMITE INDICADO EN LA CARÁTULA DE LA PÓLIZA, LA INDEMNIZACIÓN CORRESPONDIENTE, DE ACUERDO CON LAS COBERTURAS QUE A CONTINUACIÓN SE INDICAN Y QUE AFECTEN A TU VEHÍCULO ASEGURADO, SIEMPRE Y CUANDO OCURRA UN SINIESTRO AMPARADO DURANTE LA VIGENCIA DEL SEGURO. </p>
           <p> LAS COBERTURAS VARIARÁN EN CASO DE QUE TU VEHÍCULO ESTÉ DETENIDO O EN MOVIMIENTO. </p>
-          <a href="#" >Ver todo...</a>
+          <a href={termsAndConditions.SBS} >Ver todo...</a>
         </div>
       </div>
 
