@@ -4,9 +4,9 @@ import KmPlan from 'app/components/process/plans/KmPlans';
 import { WhatsAppContainer } from 'app/components/process/WhatsAppContainer'
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlans } from '../controller';
+import { Loading } from 'app/components/process/messages/Loading';
 
-export const SelectCarsPlanKm = () => {
-
+export const SelectCarsPlanKm = () => {    
     const [requestStatus, setRequestStatus] = useState({ loading: false, error: false });
     const { dataToSend, plans } = useSelector(state => state.carsInsurance);
     const dispatch = useDispatch();
@@ -32,9 +32,10 @@ export const SelectCarsPlanKm = () => {
                 {
                     requestStatus.loading ?
                     (
-                        <div>
-                            Estamos buscando los mejores planes...
-                        </div>
+                        // <div>
+                        //     Estamos buscando los mejores planes...
+                        // </div>
+                        <div> <Loading /> </div>
                     ) :
                     requestStatus.error ?
                     (

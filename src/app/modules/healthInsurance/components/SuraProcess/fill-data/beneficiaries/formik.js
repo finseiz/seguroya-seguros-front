@@ -9,7 +9,7 @@ export const beneficiariesValues = {
     document: "87851475",
     kinship: "NI",
     birthDate: "2000-01-02",
-    gender: "F",
+    gender: "M",
 
     // firstName: "",
     // middleName: "",

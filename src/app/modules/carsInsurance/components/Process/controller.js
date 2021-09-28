@@ -25,7 +25,6 @@ export const getPlans = async (dataToSend) => {
 
     const body = prepareData(dataToSend);
     const response = await getPlansRequest(body);
-    
     if ( response.status === 200 ){
 
     } else {
