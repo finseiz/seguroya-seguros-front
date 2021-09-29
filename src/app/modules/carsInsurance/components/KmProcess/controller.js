@@ -27,16 +27,16 @@ export const getPlans = async (reduxFormValues, dispatch) => {
 
     try {
         const data = prepareDataToSend(reduxFormValues);
-        const { costs } = await getPlansRequest(data);
-
+        const { costs } = await getPlansRequest(data);        
         dispatch(actions.setPlans( costs.map( (plan) => 
             ({
                 logoPath: "sbs-logo.png",
                 insuranceName: "SBS - Auto",
                 //qualification: 3,
                 anualPrice: plan.total_cost,
-                descriptionValues: bolivarPlan({ coverage: plan.package, kmCosto: plan.cost_by_km}),
+                descriptionValues: bolivarPlan( plan.cost_by_km, plan.package ),
                 redirect: CarsKmProcessDetailsPlanRouteFunc
+
             })
         )))
 

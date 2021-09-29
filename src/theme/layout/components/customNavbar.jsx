@@ -21,15 +21,17 @@ function CustomNavbar() {
     <div>
 
       <div className="container-fluid">
-        <div className="whatsapp-contact text-center">
+        <a href="https://api.whatsapp.com/message/QOFDDFAB7GWIE1" target="_blank">
+          <div className="whatsapp-contact text-center">
 
-          <img
-            src={toAbsoluteUrl("/media/icons/whatsapp.png")}
-            alt="wa-icon"
-            className="mx-2 my-1 whatsapp-icon"
-          />
-          ¡Contactanos por WhatsApp +57 340 5689!
-        </div>
+            <img
+              src={toAbsoluteUrl("/media/icons/whatsapp.png")}
+              alt="wa-icon"
+              className="mx-2 my-1 whatsapp-icon"
+            />
+            ¡Contactanos por WhatsApp +57 340 5689!
+          </div>
+        </a>
       </div>
 
       <nav className="navbar navbar-expand-lg navbar-light bg-white">

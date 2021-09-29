@@ -1,4 +1,9 @@
 
 export const simpleNumberFormat = (num) => {
-    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+    try {        
+        debugger;
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+    } catch (error) {
+        return '';
+    }
 }

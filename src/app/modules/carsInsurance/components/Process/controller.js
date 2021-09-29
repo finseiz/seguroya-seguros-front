@@ -56,7 +56,7 @@ export const getPlans = async (dataToSend, dispatch) => {
 
         dispatch(actions.setPlans(plans))
         dispatch(actions.editDataToSend({quoteId}))
-
+        
     } else {
         throw new Error("No fue posible recuperar los planes")
     }
