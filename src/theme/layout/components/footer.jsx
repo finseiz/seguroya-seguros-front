@@ -37,7 +37,7 @@ function Footer() {
             </ul>
           </div>
           <div className="col-3">
-            <span>Fromas de pago</span>
+            <span>Formas de pago</span>
             <p>Pago seguro en línea con</p>
           </div>
           <div className="col-2">

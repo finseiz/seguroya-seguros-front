@@ -8,7 +8,6 @@ export const getPlans = async (clienteData, dispatch) => {
         const { residenceDep, residenceCity } = clienteData;
 
         const plans = await getPlansRequest(residenceDep, residenceCity);
-
         if (plans.status === 200) {
 
             const plansToSet = []
@@ -65,6 +64,7 @@ export const findPlan = (plans, id) => plans.find((plan) => plan.data["solucion"
 export const getQuote = async (state, selectedPlan) => {
     const body = createBody(state, selectedPlan);
     const response = await getQuoteRequest(body)
+    debugger;
     return response;
 }
 

@@ -14,9 +14,11 @@ export const WhatsAppContainer = () => {
                         className="my-2"
                     />
                 </div>
-                <div>
-                    <p className="whatsapp__text"> Contactanos por WhatsApp </p>
-                </div>
+                <a href="https://api.whatsapp.com/message/QOFDDFAB7GWIE1" target="_blank">
+                    <div>
+                        <p className="whatsapp__text"> Contactanos por WhatsApp </p>
+                    </div>
+                </a>
                 
             </div>           
             

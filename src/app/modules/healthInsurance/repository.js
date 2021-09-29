@@ -38,12 +38,13 @@ export const getPlansRequest = async ( departmentId, cityId ) => {
     return {body, status: response.status}
 }
 
-export const getQuoteRequest = async ( data ) => { 
+export const getQuoteRequest = async ( data ) => {    
     const response = await makeRequest({
         path: quote, 
         method: "POST",
         body: JSON.stringify(data)
     });
+    debugger;
     const body = await response.json()
     return {body, status: response.status}
 }

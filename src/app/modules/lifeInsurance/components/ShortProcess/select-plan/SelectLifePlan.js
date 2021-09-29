@@ -3,6 +3,8 @@ import LifePlan from 'app/components/process/plans/LifePlans';
 import { WhatsAppContainer } from 'app/components/process/WhatsAppContainer'
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlans } from '../controller';
+import { Loading } from 'app/components/process/messages/Loading';
+
 
 export const SelectLifePlan = () => {
 
@@ -36,7 +38,8 @@ export const SelectLifePlan = () => {
                 ):
                 requestStatus.loading ? 
                 (
-                    <div> Estamos buscando los mejores planes </div>
+                    // <div> Estamos buscando los mejores planes </div>
+                    <div> <Loading /> </div>
                 ):
                 (
                 <div className="row justify-content-between mt-3" >

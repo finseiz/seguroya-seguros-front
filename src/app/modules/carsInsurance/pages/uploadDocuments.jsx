@@ -9,8 +9,7 @@ export default function UploadDocuments() {
   const formik = useFormik({
     initialValues,
     //validationSchema: schema,
-    onSubmit: (values, actions) => {
-      console.log(values);
+    onSubmit: (values, actions) => {      
       setTimeout(async () => {
         actions.setSubmitting(false);
       }, 1000);

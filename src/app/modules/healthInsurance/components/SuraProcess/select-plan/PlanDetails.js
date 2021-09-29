@@ -12,6 +12,8 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 import FormikRadioGroup from 'app/modules/_forms/general/FormikRadioGroup';
 import { getBenefits } from './PlanBenefist';
+import { Loading } from 'app/components/process/messages/Loading';
+
 
 export const PlanDetails = () => {
 
@@ -47,6 +49,7 @@ export const PlanDetails = () => {
             setRequest({ loading: true, error: false });
             getQuote(state, dataPlan)
             .then(( response ) => {
+                debugger;
                 if ( response.status === 200 ) {
                     setRequest({ loading: false, error: false });
                     setQuote(response.body)
@@ -85,7 +88,8 @@ export const PlanDetails = () => {
                                 ):
                                 request.loading ? 
                                 (
-                                    <div> Estamos cargando los datos de tu plan </div>
+                                    // <div> Estamos cargando los datos de tu plan </div>
+                                    <div> <Loading /> </div>
                                 ):
 
                                 <div className="row plans_sal_container-details">

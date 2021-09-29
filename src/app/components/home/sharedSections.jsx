@@ -153,18 +153,19 @@ function SharedSections() {
                 frencuentes
               </span>
               <div className="mt-3">
-                <button className="btn btn-secondary secondary-button">
-                  
-                  <img
-                    src={toAbsoluteUrl("/media/icons/whatsapp.png")}
-                    alt="wa-icon"
-                    className="mx-1"
-                  />
-                  <span className="whatsapp__text" style={{fontSize: "1rem"}}>
-                    WhatsApp 
-                  </span>
+                <a href="https://api.whatsapp.com/message/QOFDDFAB7GWIE1" target="_blank">
+                  <button  className="btn btn-secondary secondary-button">                    
+                    <img
+                      src={toAbsoluteUrl("/media/icons/whatsapp.png")}
+                      alt="wa-icon"
+                      className="mx-1"
+                    />
+                    <span className="whatsapp__text" style={{fontSize: "1rem"}}>
+                      WhatsApp 
+                    </span>
 
-                </button>
+                  </button>
+                </a>
                 <button className="btn btn-primary primary-button ml-2 w-25">
                   <p className="my-1"> <b> Ver preguntas frencuentes </b> </p>
                 </button>
