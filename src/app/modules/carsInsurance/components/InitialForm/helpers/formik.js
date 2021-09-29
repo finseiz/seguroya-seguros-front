@@ -12,6 +12,7 @@ export const CarsSchema = Yup.object().shape({
     licensePlate: Yup.string().required("Campo requerido"),
     surname: Yup.string().required("Campo requerido"),
     secondSurname: Yup.string().required("Campo requerido"),
+    address: Yup.string().required("Campo requerido"),
 
     firstsubmit: Yup.bool().required("Campo requerido").default(false),
     mostImportant: Yup.string().when('firstsubmit', {
@@ -31,7 +32,7 @@ export const CarsSchema = Yup.object().shape({
 export const initialValues = {
 
     cellphone: 3057807788,
-    email: "cesardaza91@gmail.com",
+    email: "fbeckerf_r391k@gexik.com",
     birthDate: "",
     gender: "F",
     identification: "45454534",
@@ -41,6 +42,7 @@ export const initialValues = {
     licensePlate: "IJK996",
     surname: "Albornoz",
     secondSurname: "Castrp",
+    address: "Calle 45n",
     
     // cellphone: "",
     // email: "",

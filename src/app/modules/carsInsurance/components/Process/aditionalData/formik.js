@@ -8,7 +8,7 @@ export const initalData = {
     includeAccessories: undefined,
     accesoriesSum: 0,
     payment: "",
-    scheduleSelection: "",
+    inspectionType: "",
 }
 
 export const schema = Yup.object().shape({
@@ -18,5 +18,5 @@ export const schema = Yup.object().shape({
     includeAccessories: Yup.bool().required("Campo requerido"),
     accesoriesSum: Yup.number().when( 'includeAccessories', { is: true, then: Yup.number().required("Campo requerido")}),
     payment: Yup.number().required("Campo requerido"),
-    scheduleSelection: Yup.string().required("Campo requerido"),
+    inspectionType: Yup.string().required("Campo requerido"),
 })

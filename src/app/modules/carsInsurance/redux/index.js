@@ -14,23 +14,11 @@ const initialState = {
   }
 };
 
-const setDataField = (value, field) => (dispatch) => {
-  const action = { value, field };
-  dispatch(carsInsuranceSlice.actions.setDataField(action));
-};
-
 const setPlans = (data) => (dispatch) => {
   const action = { data };
   dispatch(carsInsuranceSlice.actions.setPlans(action));
 };
 
-const addPlans = (data) => (dispatch) => {
-  const action = { data };
-  dispatch(carsInsuranceSlice.actions.addPlans(action));
-};
-
-
-/** -------------------------------- Nuevo -------------------------------- */
 const setInitialProgress = ( progress ) => (dispatch) => {
   const action = { data: progress };
   dispatch(carsInsuranceSlice.actions.setInitialProgress(action));
@@ -56,8 +44,6 @@ const restartState = () => (dispatch) => {
 
 export const actions = {
   setPlans,
-  addPlans,
-  setDataField,
 
   setInitialProgress,
   setSelectedPlan,
@@ -70,20 +56,10 @@ export const carsInsuranceSlice = createSlice({
   name: "carsInsurance",
   initialState,
   reducers: {
-    setDataField: (state, action) => {
-      const { value, field } = action.payload;
-      state.data[field] = value;
-    },
     setPlans: (state, action) => {
       const { data } = action.payload;
       state.plans = data;
     },
-    addPlans: (state, action) => {
-      const { data } = action.payload;
-      state.plans = [...state.plans, ...data];
-    },
-
-    /** -------------------------------- Nuevo -------------------------------- */
     setInitialProgress: (state, action) => {
       const { data } = action.payload;
       state.progress.initial = data;

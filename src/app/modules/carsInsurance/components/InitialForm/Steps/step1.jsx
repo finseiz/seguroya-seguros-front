@@ -83,6 +83,10 @@ export function Step1({ formik, countries }) {
           />
         </div>
 
+        <div className="col p-0 pr-2">
+          <FormikInput field="address" formik={formik} label="Dirección" />
+        </div>
+
       </div>
 
     </div>

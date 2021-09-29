@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { WhatsAppContainer } from 'app/components/process/WhatsAppContainer'
 import { toAbsoluteUrl } from 'theme/helpers/AssetsHelpers'
 import { useHistory, useParams } from 'react-router-dom';
@@ -8,37 +8,49 @@ import { parseCurrency } from 'app/helpers/parse-currency';
 import Comments from "./../../../../../components/process/Comments";
 import { actions } from 'app/modules/carsInsurance/redux';
 import { CarsProcessOtpRoute } from 'app/routes/childs/Cars/routes';
+import { createQuote, sendOtp } from '../controller';
 
 
 export const PlanDetails = () => {
 
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { plans } = useSelector(state => state.carsInsurance);
-    const [selectPlan, setSelectPlan] = useState();
-    let history = useHistory();
+    const { plans, dataToSend } = useSelector(state => state.carsInsurance);
+    const [requestStatus, setRequestStatus] = useState({ loading: false, error: false });
 
-    const [benefits, setBenefits] = useState([]);
-    const [commets, setCommets] = useState([]);
+    const history = useHistory();
 
-    useEffect(() => {
-        setSelectPlan(plans[id]);
-        setBenefits([
-            "Si tienes un accidente contra otro vehículo, un bien material, una o varias personas, tienes unaprotección del 80%.",
-            "Si tienes un accidente y tu carro tiene un daño superior al 75% del valor del vehículo tienes una protección de $2’000.000 y el valor a pagar es $300.000.",
-            "Si te roban tu vehículo y se considera perdido totalmente tienes una protección de $2’000.000.",
-            "Si tienes un accidente y tu carro tiene un daño inferior al 75% del valor del vehículo (ej. puertas, el parabrisas, etc.), el valor a pagar es $300.000.",
-            "Tienes 10 conductores elegidos en el año."
-        ]);
-        setCommets([
-            { 
-                comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.", 
-                qualification: "1", 
-                userName: "Roberto Sanchez", 
-                userImageUrl: "www.src.com" 
-            },
-        ])
-    }, []);
+    const benefits = useMemo(() => [
+        "Cobertura de responsabilidad civil extracontractual: si tienes algún accidente con otro vehículo y causas lesiones en otra persona o daños a un bien material, tendrás un valor asegurado de $4.000.000.000. CUBIERTO AL 100%",
+        "Cobertura por pérdida total por hurto o por accidente. CUBIERTO AL 100%",
+        "Cobertura por pérdida parcial por daños y por hurto. Deducible UNICO de $800.000 pesos",
+        "Asistencias técnicas como conductor elegido, grúa, carro taller y pequeños accesorios.",
+    ], [])
+
+    const benefitsPlus = useMemo(() => [
+        "La oficina móvil reacciona en caso de accidente sin heridos ni fallecidos para agilizar los temas del seguro.",
+        "Conductor profesional para cuando necesites realizar una diligencias en tu carro y no puedas hacerlo.",
+        "Valet parking exclusivo.",
+        "Posibilidad de hacer diligencias que tu no puedes realizar.",
+        "Programa de reposición especial, en caso de perdida total.",
+        "Descuentos con proveedores para comprar vehiculo nuevos.",
+
+    ], [])
+
+    const selectPlan = useMemo(() => plans.find(plan => plan.id === parseInt(id)), [])
+
+    const onSubmit = async () => {
+        setRequestStatus({ loading: true, error: false })
+        const response = await createQuote(dataToSend, id)
+        if (response) {
+            setRequestStatus({ loading: false, error: false })
+            dispatch(actions.setSelectedPlan({...selectPlan, quoteId: response}))
+            sendOtp(response);
+            history.push(CarsProcessOtpRoute);
+        } else {
+            setRequestStatus({ loading: false, error: true })
+        }
+    }
 
     return (
         <div className="container my-5">
@@ -54,66 +66,97 @@ export const PlanDetails = () => {
                             <div className="row plans_sal_container-details">
 
                                 {/** Insurance left */}
-                                <div className="plan-sal_container-desc">
-                                    
+                                <div className="col-md-auto plan-sal_container-desc">
+
                                     {/** Insurance Logo */}
                                     <div>
                                         <img
-                                            src={toAbsoluteUrl( `/media/logos/${selectPlan.logoPath}` )}
+                                            src={toAbsoluteUrl(`/media/logos/${selectPlan.logoPath}`)}
                                         />
                                     </div>
 
                                     {/** Insurance Name */}
                                     <div className="plans_sel_plan-name mt-4">
-                                        { selectPlan.insuranceName } - Vida
+                                        {selectPlan.insuranceName}
                                     </div>
 
                                     {/** INsurance benefits */}
                                     <ul className="plan_sel_benefits">
                                         {
-                                            benefits.map( (benefit, i) => (
+                                            benefits.map((benefit, i) => (
                                                 <li className="my-3 plan_sel_benefit-item" key={i}>
-                                                    { benefit }
+                                                    {benefit}
                                                 </li>
-                                            ) )
+                                            ))
                                         }
                                     </ul>
 
-                                    <Comments commentList={commets} />
+                                    <b> <p> Valores agregados </p> </b>
+
+                                    {/** INsurance benefits */}
+                                    <ul className="plan_sel_benefits">
+                                        {
+                                            benefitsPlus.map((benefit, i) => (
+                                                <li className="my-3 plan_sel_benefit-item" key={i}>
+                                                    {benefit}
+                                                </li>
+                                            ))
+                                        }
+                                    </ul>
+
+                                    {/* <Comments commentList={commets} /> */}
                                 </div>
 
                                 {/** Insurance Right */}
-                                <div>
+                                <div className="col">
 
-                                    {/** Insurance qualification */}
-                                    <p className="mb-1 plans_sal_plan-label-2"> Calificación de usuario </p>
-                                    <div className="row">
-                                        <Qualification qualification={selectPlan.qualification} className="mb-4" />
-                                        <p className="plans_plan-qualification my-1 mx-2"> { selectPlan.qualification } </p>
-                                    </div>
+                                    {
+                                        selectPlan.qualification &&
+                                        (
+                                            <>
+                                                {/** Insurance qualification */}
+                                                <p className="mb-1 plans_sal_plan-label-2"> Calificación de usuario </p>
+                                                <div className="row">
+                                                    <Qualification qualification={selectPlan.qualification} className="mb-4" />
+                                                    <p className="plans_plan-qualification my-1 mx-2"> {selectPlan.qualification} </p>
+                                                </div>
+                                            </>
+                                        )
+                                    }
+
 
                                     {/** Insurance Price */}
                                     <div className="">
                                         <p className="mb-1 plans_sal_plan-label-2"> Precio </p>
-                                        <p className="mb-1 plans_sal_plan-value-2"> { parseCurrency(selectPlan.anualPrice) } </p>
-                                        <p className=""> { `Hasta ${ parseCurrency(selectPlan.share) } por ${selectPlan.shareNumber} coutas` } </p>
+                                        <p className="mb-1 plans_sal_plan-value-2"> {parseCurrency(selectPlan.anualPrice)} </p>
                                     </div>
 
                                     {/**Insurance Button */}
-                                    <div className="text-center">
-                                        <button 
-                                            type="button"
-                                            className="btn primary_btn_expand w-100"
-                                            onClick={ () => { 
-                                                dispatch( actions.setSelectedPlan( plans[id] ) )
-                                                history.push( CarsProcessOtpRoute ) 
-                                            } }
-                                        >
-                                            Comprar
-                                        </button>
-                                    </div>
-                                    
-                                    
+                                    {
+                                        requestStatus.loading ?
+                                        (
+                                            <div className="spinner-border" role="status">
+                                                <span className="sr-only"></span>
+                                            </div>
+
+                                        ) :
+                                        (
+
+                                            <div className="text-center">
+                                                <button
+                                                    type="button"
+                                                    className="btn primary_btn_expand w-100"
+                                                    onClick={onSubmit}
+                                                >
+                                                    Comprar
+                                                </button>
+                                            </div>
+                                        )
+                                    }
+
+
+
+
                                 </div>
 
                             </div>
@@ -122,7 +165,7 @@ export const PlanDetails = () => {
                     )
                 }
 
-                
+
 
             </div>
         </div>

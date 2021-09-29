@@ -9,12 +9,14 @@ import { ConfirmationCode } from "../_general/OTP";
 import { carsProcessSteps } from "app/helpers/process-steps";
 import { SarlaftForm } from "../_general/sarlaft-form/SarlaftForm";
 import { ScheduleAppointment } from "./components/Process/aditionalData/ScheduleAppointment";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { actions } from "./redux";
 import { ProcessDone } from "../_general/ProcessDone";
+import { sendOtp, verifyOtp } from "./components/Process/controller";
 
 export default function CarsInsuranceRoute() {
 
+  const { dataToSend:{email}, selectedPlan:{quoteId} } = useSelector(state => state.carsInsurance);
   const dispatch = useDispatch();
 
   return (
@@ -27,7 +29,7 @@ export default function CarsInsuranceRoute() {
       <Content
         aside={() =>
           <AsideProcess
-            title="Compra Seguro para Autos - Bolívar Auto Oro"
+            title="Compra Seguro para Autos"
             process={carsProcessSteps}
             insuranceName="carsInsurance"
             processIndicatorName="uniqueProcess"
@@ -43,7 +45,13 @@ export default function CarsInsuranceRoute() {
         <Route
           exact={true}
           path={CarsProcessOtpRoute}
-          component={() => <ConfirmationCode redirectRoute={CarsProcessSarlaftRoute} messageIndex={1} />}
+          component={() => <ConfirmationCode 
+            email={email}
+            onSubmit={(otp) => verifyOtp(quoteId, otp) }
+            redirectRoute={CarsProcessSarlaftRoute} 
+            messageIndex={1}
+
+          />}
         />
 
         <Route

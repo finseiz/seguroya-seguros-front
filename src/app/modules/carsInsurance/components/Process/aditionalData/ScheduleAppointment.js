@@ -149,15 +149,20 @@ export const ScheduleAppointment = () => {
                         <FormikRadioGroup
                             label="¿Cómo quieres que sea tu cita de inspección?"
                             formik={formik}
-                            field="scheduleSelection"
+                            field="inspectionType"
                             align="left"
                             optionsClass="flex-column"
                             questionClass="text-left"
                             radioLabelClass="inital-from__option-without-max"
                             options={[
-                                { title: "Presencial", value: "pre" },
-                                { title: "Virtual - Tu tomas las fotos y nos las envías", value: "vir" },
-                                { title: (<span> Virtual Asistida - Te llamamos <br/> para explicarte el proceso </span>), value: "vir2" },
+                                { title: "Presencial", value: "PRESENCIAL" },
+                                { title: "Virtual - Tu tomas las fotos y nos las envías", value: "VIRTUAL" },
+                                { 
+                                    title: (
+                                        <span> Virtual Asistida - Te llamamos <br/> para explicarte el proceso </span>
+                                    ), 
+                                    value: "VIRTUAL_ASISTIDA" 
+                                },
                             ]}
                         />
                     </div>
