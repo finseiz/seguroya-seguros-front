@@ -1,5 +1,6 @@
 import { actions } from "../../redux";
 import { getPlansRequest, getQuoteRequest } from "../../repository";
+import { sendOtpRequest, verifyOtpRequest } from "app/modules/_general/repositories/otp";
 
 export const getPlans = async (clienteData, dispatch) => {
 
@@ -64,7 +65,6 @@ export const findPlan = (plans, id) => plans.find((plan) => plan.data["solucion"
 export const getQuote = async (state, selectedPlan) => {
     const body = createBody(state, selectedPlan);
     const response = await getQuoteRequest(body)
-    debugger;
     return response;
 }
 
@@ -112,5 +112,26 @@ const createBody = (state, selectedPlan) => {
         solucionSalud: selectedPlan.data["solucion"],
         telefono: "8000000"
     }
+
+}
+
+export const sendOtp = async ( qouteId ) => {
+    await sendOtpRequest({
+        idAseguradora: 2, // Seguros Sura
+        numCotizacion: qouteId
+    });
+}
+
+export const verifyOtp = async ( quoteId, otp ) => {
+    const response = await verifyOtpRequest({
+        idAseguradora: 2, // Seguros Sura
+        numCotizacion: quoteId,
+        otp
+    });
+    if ( response.status === 200 ){
+        return true;
+    }
+
+    return false;
 
 }

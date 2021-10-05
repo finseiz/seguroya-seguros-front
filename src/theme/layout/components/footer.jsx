@@ -1,12 +1,15 @@
 import Navbar from "react-bootstrap/Navbar";
 import { toAbsoluteUrl } from "../../helpers";
+import { NavLink } from "react-router-dom";
+import { AboutUsRoute, FrequentQuestionsRoute, HomeRoute, OffersRoute } from "app/routes/routes";
+
 
 function Footer() {
   return (
     <Navbar className="bg-dark-blue footer">
       <div className="container-fluid mx-5 py-4 text-white">
         <div className="row m-0 w-100">
-          <div className="col-5">
+          <div className="col-4">
             <img
               className="logo"
               src={toAbsoluteUrl("/media/logos/logo_seguroya_light.svg")}
@@ -28,12 +31,28 @@ function Footer() {
               />
             </div>
           </div>
-          <div className="col-2">
+          <div className="col-3">
             <ul>
-              <li>Inicio</li>
-              <li>¿Quiénes somos?</li>
-              <li>Ofertas</li>
-              <li>Preguntas frecuentes</li>
+              <li>
+                <NavLink to={HomeRoute}  >
+                  Inicio
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={AboutUsRoute}  >
+                  ¿Quiénes somos?
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={OffersRoute}  >
+                    Ofertas
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to={FrequentQuestionsRoute}  >
+                  Preguntas frecuentes
+                </NavLink>
+              </li>
             </ul>
           </div>
           <div className="col-3">
@@ -42,8 +61,11 @@ function Footer() {
           </div>
           <div className="col-2">
             <span>Contáctanos</span>
+            <br />
             <span>seguroya.co</span>
+            <br />
             <span>3204056381</span>
+            <br />
             <span> info@seguroya.co</span>
           </div>
         </div>

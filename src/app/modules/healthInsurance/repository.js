@@ -44,7 +44,6 @@ export const getQuoteRequest = async ( data ) => {
         method: "POST",
         body: JSON.stringify(data)
     });
-    debugger;
     const body = await response.json()
     return {body, status: response.status}
 }

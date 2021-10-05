@@ -13,4 +13,6 @@ export const HealthProcessInsurabilityRoute =  HealthProcessRoute + "/insurabili
 
 export const HealthProcessAuthRoute =  HealthProcessRoute + "/auth";
 
+export const HealthProcessOTPRoute =  HealthProcessRoute + "/otp";
+
 export const HealthProcessDoneRoute =  HealthProcessRoute + "/done";

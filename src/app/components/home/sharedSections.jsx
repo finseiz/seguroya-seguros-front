@@ -3,32 +3,35 @@ import { insuranceLogoAbsolutePath } from "app/const";
 import { toAbsoluteUrl } from "theme/helpers";
 import CardGridContainer from "../UI/CardGridContainer";
 import { OurClients } from "./OurClients";
+import { NavLink } from "react-router-dom";
 
 function SharedSections() {
   const allies = Object.values(insuranceLogoAbsolutePath).map(l => l);
 
   const offers = [
-    { img: "/media/offers/of1.jpg", },
-    { img: "/media/offers/of2.jpg", },
-    { img: "/media/offers/of3.jpg", },
+    { img: "/media/offers/of1.jpg", path:"/cars", },
+    { img: "/media/offers/of2.jpg", path:"/life", },
+    { img: "/media/offers/of3.jpg", path:"/health",},
   ];
   return (
     <>
       <PageContainer className="bg-gray">
-        <div className="container-fluid text-center h-100">
+        <div className=" text-center h-100">
           <div className="row h-100 m-0">
             <div className="col">
-              <h5>Ofertas</h5>
+              <h5>Ofertas </h5>
               <div className="container-fluid">
                 <div className="row m-0">
                   {
-                    offers.map(offer => (
-                      <div className="col-md-auto mt-4">
-                        <img
-                          src={offer.img}
-                          className="home-offer__image"
-                        />
-                      </div>
+                    offers.map(offer => ( 
+                      <NavLink to={offer.path} className="m-0">                        
+                        <div className="col-4  mt-4">
+                          <img
+                            src={offer.img}
+                            className="home-offer__image"
+                          />
+                        </div>
+                      </NavLink>
                     ))
                   }
 

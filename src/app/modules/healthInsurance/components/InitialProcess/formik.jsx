@@ -39,7 +39,7 @@ export const healthInitialValues = {
     documentType: "C",
     document: "78547785",
     occupation: "B10",
-    email: "juan@example.com",
+    email: "d.santiagocardenas.m@gmail.com",
     address: "Calle 34 n",
     birthDate: "2021-01-01",
     phone: "3057807785",

@@ -20,7 +20,7 @@ function BrandPage() {
                     ¡Estamos listos para ayudarte!
                   </p>
                   <p className="m-0">
-                    Selecciona una opción para cotizar un seguro
+                    Selecciona una opción para cotizar TU SEGURO
                   </p>
                 </div>
                 <div className="container mt-3">

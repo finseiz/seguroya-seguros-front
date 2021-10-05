@@ -41,7 +41,7 @@ export const initialValues = {
     document: "123123",
     phone: "3057807786",
     occupation: "0",
-    email: "fbeckerf_r391k@gexik.com", // dragon
+    email: "d.santiagocardenas.m@gmail.com", // dragon
     address: "Calle 34",
     birthDate: "1995-01-02",
     expeditionDate: "2013-01-02",

@@ -32,16 +32,16 @@ export const CarsSchema = Yup.object().shape({
 export const initialValues = {
 
     cellphone: 3057807788,
-    email: "fbeckerf_r391k@gexik.com",
+    email: "d.santiagocardenas.m@gmail.com",
     birthDate: "",
     gender: "F",
     identification: "45454534",
     country: 0,
     identificationType: "Cedula",
-    fullname: "Pedro",
+    fullname: "Pedro ",
     licensePlate: "IJK996",
     surname: "Albornoz",
-    secondSurname: "Castrp",
+    secondSurname: "Castro",
     address: "Calle 45n",
     
     // cellphone: "",
