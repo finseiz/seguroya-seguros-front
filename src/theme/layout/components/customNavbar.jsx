@@ -29,7 +29,7 @@ function CustomNavbar() {
               alt="wa-icon"
               className="mx-2 my-1 whatsapp-icon"
             />
-            ¡Contactanos por WhatsApp +57 340 5689!
+            ¡Contactanos por WhatsApp!
           </div>
         </a>
       </div>

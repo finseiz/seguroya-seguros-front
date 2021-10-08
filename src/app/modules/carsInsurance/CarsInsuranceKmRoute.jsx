@@ -11,10 +11,11 @@ import { ProcessDone } from '../_general/ProcessDone'
 import { Authorization } from './components/KmProcess/Authorization'
 import { KmPlanDetails } from './components/KmProcess/select-plan/PlanDetails'
 import { SelectCarsPlanKm } from './components/KmProcess/select-plan/SelectCarsPlan'
+import { verifyOtp } from "./components/KmProcess/controller";
 
 export default function CarsInsuranceKmRoute() {
 
-    const { dataToSend:{ email }, progress:{initial} } = useSelector(state => state.carsInsurance)
+    const { dataToSend:{ email }, progress:{initial}, selectedPlan } = useSelector(state => state.carsInsurance)
     const history = useHistory();
 
     /** Health Route Protection */
@@ -52,6 +53,7 @@ export default function CarsInsuranceKmRoute() {
                         redirectRoute={CarsKmProcessDoneRoute} 
                         messageIndex={1} 
                         email={email}
+                        onSubmit={(otp) => verifyOtp(selectedPlan.carId, otp) }
                     />}
                 />
 

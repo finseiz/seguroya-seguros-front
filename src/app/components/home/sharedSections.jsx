@@ -4,6 +4,7 @@ import { toAbsoluteUrl } from "theme/helpers";
 import CardGridContainer from "../UI/CardGridContainer";
 import { OurClients } from "./OurClients";
 import { NavLink } from "react-router-dom";
+import {  FrequentQuestionsRoute, } from "app/routes/routes";
 
 function SharedSections() {
   const allies = Object.values(insuranceLogoAbsolutePath).map(l => l);
@@ -11,7 +12,7 @@ function SharedSections() {
   const offers = [
     { img: "/media/offers/of1.jpg", path:"/cars", },
     { img: "/media/offers/of2.jpg", path:"/life", },
-    { img: "/media/offers/of3.jpg", path:"/health",},
+    // { img: "/media/offers/of3.jpg", path:"/health",},
   ];
   return (
     <>
@@ -34,6 +35,14 @@ function SharedSections() {
                       </NavLink>
                     ))
                   }
+                  <a href="https://api.whatsapp.com/message/QOFDDFAB7GWIE1" target="_blank">
+                    <div className="col-4  mt-4">
+                        <img
+                          src="/media/offers/of3.jpg"
+                          className="home-offer__image"
+                        />
+                      </div>
+                  </a>
 
                 </div>
               </div>
@@ -169,9 +178,13 @@ function SharedSections() {
 
                   </button>
                 </a>
-                <button className="btn btn-primary primary-button ml-2 w-25">
-                  <p className="my-1"> <b> Ver preguntas frencuentes </b> </p>
-                </button>
+                <NavLink to={FrequentQuestionsRoute}  className="m-0">                 
+                  <button className="btn btn-primary primary-button ml-2 w-25">
+                    <p className="my-1"> <b> Ver preguntas frencuentes </b> </p>
+                  </button>
+                </NavLink>
+
+
               </div>
             </div>
           </div>

@@ -8,7 +8,7 @@ import { parseCurrency } from 'app/helpers/parse-currency';
 import Comments from "./../../../../../components/process/Comments";
 import { actions } from 'app/modules/carsInsurance/redux';
 import { CarsKmProcessDataAutorizationRoute } from 'app/routes/childs/Cars/routes';
-
+import { sendOtp } from "../controller";
 
 export const KmPlanDetails = () => {
 
@@ -132,6 +132,7 @@ export const KmPlanDetails = () => {
                                             className="btn primary_btn_expand w-100"
                                             onClick={() => {
                                                 dispatch(actions.setSelectedPlan(plans[id]))
+                                                sendOtp(selectPlan.carId);
                                                 history.push(CarsKmProcessDataAutorizationRoute)
                                             }}
                                         >
@@ -147,9 +148,6 @@ export const KmPlanDetails = () => {
                         </div>
                     )
                 }
-
-
-
             </div>
         </div>
     )

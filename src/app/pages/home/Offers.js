@@ -21,16 +21,16 @@ export const Offers = () => {
             ],
             path:"/life",
         },
-        {
-            img: "/media/offers/of3.jpg",
-            benefits: [
-                "Accede a un médico especialista en cualquier horario y desde cualquier lugar.",
-                "Sin filas, sin largas esperas y con la tranquilidad de no tener riesgos de contagio de COVID-19.",
-                "Sin restricción de edad. ",
+        // {
+        //     img: "/media/offers/of3.jpg",
+            // benefits: [
+            //     "Accede a un médico especialista en cualquier horario y desde cualquier lugar.",
+            //     "Sin filas, sin largas esperas y con la tranquilidad de no tener riesgos de contagio de COVID-19.",
+            //     "Sin restricción de edad. ",
 
-            ],
-            path:"/health",
-        },
+            // ],
+        //     path:"/health",
+        // },
     ], [])
 
     return (
@@ -45,7 +45,7 @@ export const Offers = () => {
                                 <div className="bg-white home-offer__image-container">
                                     <NavLink to={offer.path}>
                                         <img
-                                            src={offer.img}
+                                            src={offer.img} 
                                             className="home-offer__image"
                                         />
 
@@ -54,13 +54,37 @@ export const Offers = () => {
                                         {
                                             offer.benefits.map(benefit => (
                                                 <li> {benefit} </li>
-                                            ))
+                                            )
+                                            )
                                         }
                                     </ul>
                                 </div>
                             </div>
                     ))
                 }
+
+                    <div className="col-4 mt-4 ">
+                        <div className="bg-white home-offer__image-container">                            
+                            <a href="https://api.whatsapp.com/message/QOFDDFAB7GWIE1" target="_blank">
+                                <img
+                                    src="/media/offers/of3.jpg"
+                                    className="home-offer__image"
+                                />                            
+                            </a>
+                            <ul className="py-4 text-left home-offer__text">
+                                {                                                                        
+                                    [
+                                        "Accede a un médico especialista en cualquier horario y desde cualquier lugar.",
+                                        "Sin filas, sin largas esperas y con la tranquilidad de no tener riesgos de contagio de COVID-19.",
+                                        "Sin restricción de edad. ",
+                        
+                                    ].map(benefit => (
+                                        <li> {benefit} </li>
+                                    ))
+                                }
+                            </ul>
+                        </div>
+                    </div>
             </div>
 
 

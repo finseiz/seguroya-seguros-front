@@ -39,6 +39,9 @@ export const carsKmProcessSteps = [
   },
   {
     title: "Verifica tu identidad",
+  },
+  {
+    title: "Compra finalizada",
   }
 ]
 

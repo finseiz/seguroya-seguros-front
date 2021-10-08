@@ -43,7 +43,7 @@ export const PlanDetails = () => {
              history.push(HealthProcessInsurabilityRoute)
         } 
     })
-
+ 
     useEffect(() => {
         if ( !quote.tarifas ){
             setRequest({ loading: true, error: false });

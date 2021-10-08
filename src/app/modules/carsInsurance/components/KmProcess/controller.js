@@ -3,6 +3,7 @@ import { bolivarPlan } from "app/helpers/select-plan";
 import { CarsKmProcessDetailsPlanRouteFunc } from "app/routes/childs/Cars/routes";
 import { actions } from "../../redux";
 import { getPlansRequest } from "./repository"
+import { sendOtpRequest, verifyOtpRequest } from "app/modules/_general/repositories/otp";
 
 const prepareDataToSend = (values) => {
     return {
@@ -27,7 +28,7 @@ export const getPlans = async (reduxFormValues, dispatch) => {
 
     try {
         const data = prepareDataToSend(reduxFormValues);
-        const { costs } = await getPlansRequest(data);        
+        const { costs, policy } = await getPlansRequest(data);        
         dispatch(actions.setPlans( costs.map( (plan) => 
             ({
                 logoPath: "sbs-logo.png",
@@ -35,8 +36,8 @@ export const getPlans = async (reduxFormValues, dispatch) => {
                 //qualification: 3,
                 anualPrice: plan.total_cost,
                 descriptionValues: bolivarPlan( plan.cost_by_km, plan.package ),
-                redirect: CarsKmProcessDetailsPlanRouteFunc
-
+                redirect: CarsKmProcessDetailsPlanRouteFunc,
+                carId:policy.car_id
             })
         )))
 
@@ -45,4 +46,25 @@ export const getPlans = async (reduxFormValues, dispatch) => {
     } catch (error) {
         return undefined;
     }
+}
+
+export const sendOtp = async ( qouteId ) => {
+    await sendOtpRequest({
+        idAseguradora: 4, // Seguros SBS
+        numCotizacion: qouteId
+    });
+}
+
+export const verifyOtp = async ( quoteId, otp ) => {
+    const response = await verifyOtpRequest({
+        idAseguradora: 4, // Seguros SBS
+        numCotizacion: quoteId,
+        otp
+    });
+    if ( response.status === 200 ){
+        return true;
+    }
+
+    return false;
+
 }

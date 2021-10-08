@@ -8,7 +8,7 @@ import Qualification from '../Qualification';
 const KmPlan = (props) => {
 
     const { logoPath, insuranceName, index, qualification, descriptionValues,
-        anualPrice, redirect } = props;
+        anualPrice, redirect, carId } = props;
 
     const history = useHistory();
 

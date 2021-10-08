@@ -11,25 +11,12 @@ function Footer() {
         <div className="row m-0 w-100">
           <div className="col-4">
             <img
-              className="logo"
+              className="logoFooter"
               src={toAbsoluteUrl("/media/logos/logo_seguroya_light.svg")}
               alt="logo-seguroya-light"
             />
-            <p className="my-4">
-              Compañías encargadas de la expedición de nuestras polizas
-            </p>
-            <div className="d-flex flex-row my-4">
-              <img
-                className="logo"
-                src={toAbsoluteUrl("/media/logos/seguros-del-estado-logo.svg")}
-                alt="logo-seguro-del-estado"
-              />
-              <img
-                className="logo ml-2"
-                src={toAbsoluteUrl("/media/logos/seguros-mundial-logo.svg")}
-                alt="logo-seguros-mundiales"
-              />
-            </div>
+            
+            
           </div>
           <div className="col-3">
             <ul>
