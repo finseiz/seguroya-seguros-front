@@ -28,7 +28,6 @@ function CarsForm() {
     validationSchema: CarsSchema,
     onSubmit: (values) => {
       if (step === 1) {
-        dispatch(actions.restartState());
         setStep((prevStep) => prevStep + 1)
         dispatch(actions.setInitialProgress(50));
         formik.setFieldValue("firstsubmit", true);
