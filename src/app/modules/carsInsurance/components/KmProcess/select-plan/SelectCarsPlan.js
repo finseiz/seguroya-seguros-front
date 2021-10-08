@@ -32,9 +32,6 @@ export const SelectCarsPlanKm = () => {
                 {
                     requestStatus.loading ?
                     (
-                        // <div>
-                        //     Estamos buscando los mejores planes...
-                        // </div>
                         <div> <Loading /> </div>
                     ) :
                     requestStatus.error ?

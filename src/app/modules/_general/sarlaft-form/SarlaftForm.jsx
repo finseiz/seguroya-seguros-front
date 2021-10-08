@@ -1,55 +1,97 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useFormik } from "formik";
 
 import BaseSection from "app/components/UI/baseSection";
-import { sarlaftInitialValues } from "./formik";
+import { sarlaftInitialValues, sarlaftSchema } from "./formik";
 import FormikInput from "app/modules/_forms/general/FormikInput";
 import FormikSelect from "app/modules/_forms/general/FormikSelect";
 import FormikRadioGroup from "app/modules/_forms/general/FormikRadioGroup";
-import { requestType } from "app/helpers/sarlaft-const";
 import { PositiveOrNegativeOption } from "app/helpers/radio-options";
 import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getActivities, getActivityTypes, getCiiuActivities, getCities, getDepartments, getDocumentTypes, getInternationalOperationTypes, getSectors, sendData } from "./controller";
 
 export const SarlaftForm = ({ redirectRoute, onLoad }) => {
 
-  const [citiesAndDep, setCitiesAndDep] = useState([
-    { title: "Cali, Valle", value: "cali" },
-    { title: "Bogotá, Cundinamarca", value: "bog" },
-  ]);
-
-  const [departements, setDepartements] = useState([
-    { title: "Valle", value: "cali" },
-    { title: "Cundinamarca", value: "bog" },
-    { title: "Cauca", value: "bog" },
-    { title: "Tolima", value: "bog" },
-  ]);
-
-  const [docTypes, setDocTypes] = useState([
-    { title: "Cédula", value: "CC" },
-    { title: "Tarjeta de identidad", value: "TI" },
-    { title: "Pasaporte", value: "PA" },
-  ]);
-
-  const [cities, setCities] = useState([
-    { title: "Popayán", value: "CC" },
-    { title: "Caloto", value: "CC" },
-    { title: "Paispamba", value: "CC" },
-  ]);
-
-  const history = useHistory();
-
-  useEffect(() => {
-    if (onLoad) onLoad();
-  }, [])
+  const [requestStatus, setRequestStatus] = useState({ loading: false, error: false})
 
   const formik = useFormik({
     initialValues: sarlaftInitialValues,
-    //validationSchema: schema,
-    onSubmit: (values, actions) => {
-      history.push(redirectRoute);
+    validationSchema: sarlaftSchema,
+    onSubmit: (values) => {
+      setRequestStatus({ loading: true, error: false })
+      sendData(values)
+      .then( (data) => {
+        if (data) {
+          setRequestStatus({ loading: false, error: false })
+          history.push(redirectRoute);
+        }else{
+          setRequestStatus({ loading: false, error: true })
+        }
+      })
+      
     },
   });
+
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const [departments, setDepartments] = useState([]);
+
+  const [cities, setCities] = useState([]);
+  const [diligenceCities, setDiligenceCities] = useState([]);
+  const [companyCities, setCompanyCities] = useState([]);
+
+  const [ciiuActivities, setCiiuActivities] = useState([]);
+
+  const sectors = useMemo(getSectors, []);
+  const activities = useMemo(getActivities, []);
+  const activityType = useMemo(getActivityTypes, []);
+  const docTypes = useMemo(getDocumentTypes, []);
+  const internationalOperations = useMemo(getInternationalOperationTypes, []);
+
+  useEffect(() => {
+    getDepartments().then((data) => setDepartments(data));
+    getCiiuActivities().then((data) => setCiiuActivities(data));
+  }, [])
+
+  useEffect(() => {
+    formik.setFieldValue("cityRes", "")
+    if (formik.values.departmentRes !== "") {
+      getCities(formik.values.departmentRes)
+        .then((data) => setCities(data))
+        .catch(( ) => setCities([]))
+    } else {
+      setCities([])
+    }
+  }, [formik.values.departmentRes])
+
+  useEffect(() => {
+    formik.setFieldValue("city", "")
+    if (formik.values.department !== "") {
+      getCities(formik.values.department)
+        .then((data) => setDiligenceCities(data))
+        .catch(( ) => setDiligenceCities([]))
+    } else {
+      setDiligenceCities([])
+    }
+  }, [formik.values.department])
+
+  useEffect(() => {
+    formik.setFieldValue("companyCity", "")
+    if (formik.values.companyDepartment !== "") {
+      getCities(formik.values.companyDepartment)
+        .then((data) => setCompanyCities(data))
+        .catch(( ) => setCompanyCities([]))
+    } else {
+      setCompanyCities([])
+    }
+  }, [formik.values.companyDepartment])
+
+  useEffect(() => {
+    if (onLoad) onLoad();
+  }, [dispatch])
 
   const actionsButton = [
     {
@@ -93,10 +135,10 @@ export const SarlaftForm = ({ redirectRoute, onLoad }) => {
             formik={formik}
             field={field}
             options={[
-              { title: "Familiar", value: "F" },
-              { title: "Comercial", value: "C" },
-              { title: "Laboral", value: "L" },
-              { title: "Otra", value: "Ot" },
+              { title: "Familiar", value: "FAMILIAR" },
+              { title: "Comercial", value: "COMERCIAL" },
+              { title: "Laboral", value: "LABORAL" },
+              { title: "Otra", value: "OTRA" },
             ]}
           />
         </div>
@@ -124,11 +166,7 @@ export const SarlaftForm = ({ redirectRoute, onLoad }) => {
 
           {simpleField("date", "Fecha Diligenciamiento", "date")}
 
-          {select("city", "Lugar de expedición", citiesAndDep)}
-
-          {simpleField("office", "Sucursal")}
-
-          {select("requestType", "Tipo de Solicitud", requestType)}
+          {select("requestType", "Tipo de Solicitud", [{title: "Vinculación", value: "VINCULACION"}])}
 
         </div>
 
@@ -137,21 +175,24 @@ export const SarlaftForm = ({ redirectRoute, onLoad }) => {
           formik={formik}
           field="vinculationType"
           options={[
-            { title: "Tomador", value: "T" },
-            { title: "Asegurado", value: "A" },
-            { title: "Beneficiario", value: "B" },
-            { title: "Afianzado", value: "Af" },
-            { title: "Proveedor", value: "Pr" },
-            { title: "Intermediario", value: "In" },
-            { title: "Otra", value: "O" },
+            { title: "Tomador", value: "TOMADOR" },
+            { title: "Asegurado", value: "ASEGURADO" },
+            { title: "Beneficiario", value: "BENEFICIARIO" },
+            { title: "Afianzado", value: "AFIANZADO" },
+            { title: "Proveedor", value: "PROVEEDOR" },
+            { title: "Intermediario", value: "INTERMEDIARIO" },
+            { title: "Otra", value: "OTRO" },
           ]}
         />
+        {formik.values.vinculationType === "OTRO" &&  (simpleField("otherVinculationType", "¿Cúal?"))}
 
         <p className="sarlaft-section-subtitle text-left mt-4"> Indique los vínculos existentes entre tomador-asegurado </p>
         {ties("tie_1", "Tomador - Asegurado")}
+        {formik.values.tie_1 === "OTRA" &&  (simpleField("otherTie1", "¿Cúal?"))}
         {ties("tie_2", "Beneficiario - Tomador")}
+        {formik.values.tie_2 === "OTRA" &&  (simpleField("otherTie2", "¿Cúal?"))}
         {ties("tie_3", "Asegurado - Beneficiario")}
-
+        {formik.values.tie_3 === "OTRA" &&  (simpleField("otherTie3", "¿Cúal?"))}
 
       </BaseSection>
 
@@ -160,49 +201,53 @@ export const SarlaftForm = ({ redirectRoute, onLoad }) => {
         <div className="row row-cols-3">
 
           {simpleField("fullname", "Nombre completo")}
-          {simpleField("firstLastName", "Primer apellido")}
-          {simpleField("secondLastName", "Segundo Apellido")}
+          {simpleField("surname", "Primer apellido")}
+          {simpleField("secondSurname", "Segundo Apellido")}
 
           {select("documentType", "Tipo de documento", docTypes)}
           {simpleField("document", "Número de documento")}
           {simpleField("expeditionDate", "Fecha de expedición", "date")}
 
-          {select("expeditionCity", "Lugar de expedición", citiesAndDep)}
+          {simpleField("expeditionCity", "Lugar de expedición")}
           {simpleField("birthdate", "Fecha de nacimiento", "date")}
-          {select("birthCity", "Lugar de nacimiento", citiesAndDep)}
+          {simpleField("birthCity", "Lugar de nacimiento")}
 
           {simpleField("nationality", "Nacionalidad 1")}
           {simpleField("secondNationality", "Nacionalidad 2 (Opcional)")}
           {simpleField("email", "Correo electrónico")}
 
-          {simpleField("address", "Dirección (residencia)")}
-          {select("department", "Departamento", departements)}
-          {select("city", "Ciudad", cities)}
+          {select("departmentRes", "Departamento de residencia", departments)}
+          {select("cityRes", "Ciudad de residencia", cities)}
+          {simpleField("address", "Dirección de residencia")}
 
+          {select("department", "Departamento diligencia", departments)}
+          {select("city", "Ciudad diligencia", diligenceCities)}
           {simpleField("phone", "Teléfono", "phone")}
+
           {simpleField("cellphone", "Celular", "phone")}
 
         </div>
         <hr />
         <div className="row row-cols-3 mt-4">
 
-          {simpleField("mainActivity", "Actividad principal")}
-          {select("sector", "Sector", cities)}
-          {simpleField("ciu", "CIU (cód)")}
+          {select("mainActivity", "Actividad principal", activities)}
+          {select("sector", "Sector", sectors)}
+          {select("ciiu", "CIU (cód)",  ciiuActivities)}
 
-          {select("activityType", "Tipo de actividad", cities)}
+          {select("activityType", "Tipo de actividad", activityType)}
+          {formik.values.activityType === "OTRO" &&  (simpleField("otherActivityType", "¿Cúal?"))}
           {simpleField("occupation", "Ocupación")}
           {simpleField("position", "Cargo")}
 
           {simpleField("companyName", "Empresa donde trabaja")}
           {simpleField("companyAddress", "Dirección (oficina)")}
-          {select("companyDepartment", "Departamento", departements)}
+          {select("companyDepartment", "Departamento", departments)}
 
-          {select("companyCity", "Ciudad", cities)}
+          {select("companyCity", "Ciudad", companyCities)}
           {simpleField("companyPhone", "Teléfono", "phone")}
-          {simpleField("optionalActivity", "Actividad secundaria")}
+          {select("optionalActivity", "Actividad secundaria", activities)}
 
-          {simpleField("companyCiu", "CIU (cód)")}
+          {select("secondeCiiu", "CIU (cód)", ciiuActivities)}
 
         </div>
 
@@ -219,7 +264,7 @@ export const SarlaftForm = ({ redirectRoute, onLoad }) => {
           {simpleField("heritage", "Patrimonio (activos - pasivos, pesos)", "number")}
           {simpleField("otherIncome", "Otros ingresos (pesos)", "number")}
 
-          {simpleField("otherIncomeDesc", "Concepto otros ingresos mensuales", "number")}
+          {simpleField("otherIncomeDesc", "Concepto otros ingresos mensuales")}
 
         </div>
         <div className="row mt-4">
@@ -305,21 +350,13 @@ export const SarlaftForm = ({ redirectRoute, onLoad }) => {
 
       <BaseSection
         actions={actionsButton}
+        loading={requestStatus.loading}
       >
         <p className="sarlaft-section-title"> 4. Actividades en operaciones internacionales </p>
 
-        <FormikRadioGroup
-          formik={formik}
-          field={"carryOutInternationalTransactions"}
-          question={"¿Realiza transacciones en moneda extranjera?"}
-          questionClass="sarlaft-radio-label"
-          radioLabelClass="sarlaft-radio-option"
-          marginTop="0"
-          options={PositiveOrNegativeOption}
-          className="mt-3"
-        />
+        {select("typeOfInternationalTransactions", "¿Que tipo de transacciones realiza en moneda estrajera?", internationalOperations)}
 
-        {simpleField("currency", "En caso afirmativo, ¿cuál?")}
+        {formik.values.typeOfInternationalTransactions === "OTRO" &&  (simpleField("otherTypeOfIntTransaction", "¿Cúal?"))}
 
         <FormikRadioGroup
           formik={formik}
@@ -342,6 +379,16 @@ export const SarlaftForm = ({ redirectRoute, onLoad }) => {
           options={PositiveOrNegativeOption}
           className="mt-3"
         />
+
+        {
+          requestStatus.error &&
+          (
+            <div className="alert alert-danger mt-4" role="alert">
+              Ha ocurrido un error enviando la información
+            </div>
+          )
+        }
+        
 
       </BaseSection>
     </form>

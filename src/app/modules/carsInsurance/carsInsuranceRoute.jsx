@@ -1,7 +1,7 @@
 import React from "react";
 import { AsideProcess } from "app/components/process/AsideProcess";
 import { CarsHomeRoute, CarsProcessDetailsPlanRoute, CarsProcessDoneRoute, CarsProcessOtpRoute, CarsProcessSarlaftRoute, CarsProcessSelectPlanRoute, CarsProcessSheduleAppointmentRoute } from "app/routes/childs/Cars/routes";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { Content } from "theme/layout/utils/content";
 import { SelectCarsPlan } from "./components/Process/select-plan/SelectCarsPlan";
 import { PlanDetails } from "./components/Process/select-plan/PlanDetails";
@@ -16,8 +16,14 @@ import { sendOtp, verifyOtp } from "./components/Process/controller";
 
 export default function CarsInsuranceRoute() {
 
-  const { dataToSend:{email}, selectedPlan:{quoteId} } = useSelector(state => state.carsInsurance);
+  const { dataToSend:{email}, selectedPlan:{quoteId}, progress:{initial} } = useSelector(state => state.carsInsurance);
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  /** Health Route Protection */
+  if ( !email && !(initial === 100) ){
+    history.push(CarsHomeRoute)
+  }
 
   return (
     <Switch>
@@ -58,7 +64,7 @@ export default function CarsInsuranceRoute() {
           exact={true}
           path={CarsProcessSarlaftRoute}
           component={() => <SarlaftForm
-            redirectRoute={CarsProcessSheduleAppointmentRoute}
+            redirectRoute={CarsProcessDoneRoute}
             onLoad={() => {
               dispatch(actions.setUniqueProgress(1))
             }}

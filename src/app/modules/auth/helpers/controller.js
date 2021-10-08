@@ -1,6 +1,7 @@
 import { createSelectOptions } from "app/helpers/selet-options";
+import { citiesRequest, departmentsRequest } from "app/modules/_general/repositories/locations";
 import { actions } from "../_redux/authRedux";
-import { citiesRequest, createAccountRequest, departmentsRequest, getUserInformationRequest, loginRequest, setUserInformation } from "./repository"
+import { createAccountRequest, getUserInformationRequest, loginRequest, setUserInformation } from "./repository"
 
 export const createAuthData = (data) => ({
     "documento": data.document,
