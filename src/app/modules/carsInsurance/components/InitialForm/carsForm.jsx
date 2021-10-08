@@ -19,7 +19,7 @@ function CarsForm() {
   const [circulationZone, setCirculationZone] = useState([]);
 
   useEffect(() => {
-    getCountries().then( list => setCountries(list) );
+    getCountries().then( list => setCountries(list) );     
     dispatch(actions.restartState());
   }, [])
 
@@ -28,6 +28,7 @@ function CarsForm() {
     validationSchema: CarsSchema,
     onSubmit: (values) => {
       if (step === 1) {
+        dispatch(actions.restartState());
         setStep((prevStep) => prevStep + 1)
         dispatch(actions.setInitialProgress(50));
         formik.setFieldValue("firstsubmit", true);
@@ -43,9 +44,10 @@ function CarsForm() {
           }
         }
         dispatch(actions.editDataToSend(values));
-        if ( formik.values.insuranceType === "ar" )
+        if ( formik.values.insuranceType === "ar" )          
           history.push(CarsProcessSheduleAppointmentRoute);
-        else
+        else   
+               
           history.push(CarsKmProcessSelectPlanRoute);
       }
     },

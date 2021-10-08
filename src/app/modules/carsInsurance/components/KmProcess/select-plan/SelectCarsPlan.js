@@ -15,7 +15,7 @@ export const SelectCarsPlanKm = () => {
         if ( plans.length === 0 ) {
             setRequestStatus({ loading: true, error: false})
             getPlans(dataToSend, dispatch)
-            .then(plansResponse => {                
+            .then(plansResponse => {                                
                 if ( plansResponse === undefined) setRequestStatus({ loading: false, error: true})
                 else setRequestStatus({ loading: false, error: false})
             })
@@ -32,9 +32,6 @@ export const SelectCarsPlanKm = () => {
                 {
                     requestStatus.loading ?
                     (
-                        // <div>
-                        //     Estamos buscando los mejores planes...
-                        // </div>
                         <div> <Loading /> </div>
                     ) :
                     requestStatus.error ?

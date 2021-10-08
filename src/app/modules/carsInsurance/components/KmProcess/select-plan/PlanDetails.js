@@ -31,7 +31,7 @@ export const KmPlanDetails = () => {
         "Mecánico a bordo: diagnóstico mecánico del vehículo -el dispositivo detecta fallas mecánicas relacionadas con sistema electrónico, inyectores, control de emisiones, combustible y aire, encendido, transmisión entre otros",
         "Asistencia inmediata en caso de accidente.",
         "Botón de pánico 24/7.",
-        
+
     ], [])
 
     useEffect(() => {
@@ -47,100 +47,107 @@ export const KmPlanDetails = () => {
 
                 {
                     selectPlan && (
-                        <div className="custom-card bg-white my-4">
+                        <div className="my-4">
 
-                            <div className="row plans_sal_container-details">
+                            <div className="row">
 
                                 {/** Insurance left */}
-                                <div className="col-md-auto plan-sal_container-desc">
+                                <div className="col-md-8 p-0">
 
-                                    {/** Insurance Logo */}
-                                    <div>
-                                        <img
-                                            src={toAbsoluteUrl(`/media/logos/${selectPlan.logoPath}`)}
-                                        />
+                                    <div className="bg-white mr-4 custom-card p-5">
+
+                                        {/** Insurance Logo */}
+                                        <div>
+                                            <img
+                                                src={toAbsoluteUrl(`/media/logos/${selectPlan.logoPath}`)}
+                                            />
+                                        </div>
+
+                                        {/** Insurance Name */}
+                                        <div className="plans_sel_plan-name mt-4">
+                                            {selectPlan.insuranceName}
+                                        </div>
+
+                                        {/** INsurance benefits */}
+                                        <ul className="plan_sel_benefits">
+                                            {
+                                                benefits1.map((benefit, i) => (
+                                                    <li className="my-3 plan_sel_benefit-item" key={i}>
+                                                        {benefit}
+                                                    </li>
+                                                ))
+                                            }
+                                        </ul>
+
+                                        <p> <b>Valor agregado del producto</b> </p>
+                                        <p> <b>Todo lo puedes manejar desde la APP de la compañía SBS:</b> </p>
+
+                                        <ul className="plan_sel_benefits">
+                                            {
+                                                benefits2.map((benefit, i) => (
+                                                    <li className="my-3 plan_sel_benefit-item" key={i}>
+                                                        {benefit}
+                                                    </li>
+                                                ))
+                                            }
+                                        </ul>
+
                                     </div>
-
-                                    {/** Insurance Name */}
-                                    <div className="plans_sel_plan-name mt-4">
-                                        {selectPlan.insuranceName}
-                                    </div>
-
-                                    {/** INsurance benefits */}
-                                    <ul className="plan_sel_benefits">
-                                        {
-                                            benefits1.map((benefit, i) => (
-                                                <li className="my-3 plan_sel_benefit-item" key={i}>
-                                                    {benefit}
-                                                </li>
-                                            ))
-                                        }
-                                    </ul>
-
-                                    <p> <b>Valor agregado del producto</b> </p>
-                                    <p> <b>Todo lo puedes manejar desde la APP de la compañía SBS:</b> </p>
-
-                                    <ul className="plan_sel_benefits">
-                                        {
-                                            benefits2.map((benefit, i) => (
-                                                <li className="my-3 plan_sel_benefit-item" key={i}>
-                                                    {benefit}
-                                                </li>
-                                            ))
-                                        }
-                                    </ul>
 
                                     {/* <Comments commentList={commets} /> */}
                                 </div>
 
                                 {/** Insurance Right */}
-                                <div className="col">
+                                <div className="col-md-4 p-0">
 
-                                    {/** Insurance qualification */}
-                                    {
-                                        selectPlan.qualification &&
-                                        (
-                                            <>
-                                                <p className="mb-1 plans_sal_plan-label-2"> Calificación de usuario </p>
-                                                <div className="row">
-                                                    <Qualification qualification={selectPlan.qualification} className="mb-4" />
-                                                    <p className="plans_plan-qualification my-1 mx-2"> {selectPlan.qualification} </p>
+                                    <div className="custom-card bg-white p-4">
+
+                                        {/** Insurance qualification */}
+                                        {
+                                            selectPlan.qualification &&
+                                            (
+                                                <>
+                                                    <p className="mb-1 plans_sal_plan-label-2"> Calificación de usuario </p>
+                                                    <div className="row">
+                                                        <Qualification qualification={selectPlan.qualification} className="mb-4" />
+                                                        <p className="plans_plan-qualification my-1 mx-2"> {selectPlan.qualification} </p>
+                                                    </div>
+                                                </>
+                                            )
+                                        }
+
+                                        {
+                                            selectPlan.descriptionValues.map((description) => (
+                                                <div>
+                                                    <p className="mb-1 plans_sal_plan-label-2" > {description.label} </p>
+                                                    <p > <b> {description.value} </b> </p>
                                                 </div>
-                                            </>
-                                        )
-                                    }
+                                            ))
+                                        }
 
-                                    {
-                                        selectPlan.descriptionValues.map((description) => (
-                                            <div>
-                                                <p className="mb-1 plans_sal_plan-label-2" > {description.label} </p>
-                                                <p > <b> {description.value} </b> </p>
-                                            </div>
-                                        ))
-                                    }
+                                        {/** Insurance Price */}
+                                        <div>
+                                            <p className="mb-1 plans_sal_plan-label-2"> Precio final</p>
+                                            <p className="mb-1 plans_sal_plan-value-2"> {parseCurrency(selectPlan.anualPrice)} </p>
+                                        </div>
+                                            
+                                        {/**Insurance Button */}
+                                        <div className="text-center">
+                                            <button
+                                                type="button"
+                                                className="btn primary_btn_expand w-100"
+                                                onClick={() => {
+                                                    dispatch(actions.setSelectedPlan(plans[id]))
+                                                    sendOtp(selectPlan.carId);
+                                                    history.push(CarsKmProcessDataAutorizationRoute)
+                                                }}
+                                            >
+                                                Comprar
+                                            </button>
+                                        </div>
 
-                                    {/** Insurance Price */}
-                                    <div className="">
-                                        <p className="mb-1 plans_sal_plan-label-2"> Precio final</p>
-                                        <p className="mb-1 plans_sal_plan-value-2"> {parseCurrency(selectPlan.anualPrice)} </p>
+
                                     </div>
-
-                                    {/**Insurance Button */}
-                                    <div className="text-center">
-                                        <button
-                                            type="button"
-                                            className="btn primary_btn_expand w-100"
-                                            onClick={() => {
-                                                dispatch(actions.setSelectedPlan(plans[id]))
-                                                sendOtp(selectPlan.carId);
-                                                history.push(CarsKmProcessDataAutorizationRoute)
-                                            }}
-                                        >
-                                            Comprar
-                                        </button>
-                                    </div>
-
-
                                 </div>
 
                             </div>

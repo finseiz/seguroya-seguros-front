@@ -2,15 +2,11 @@ import { makeRequest } from "app/const"
 
 const userURL = "usuario/"
 const authURL = "auth/"
-const locationURL = "ubicacion/"
 
 const userInformationPath = userURL + "info-usuario"
 
 const createAccountPath = authURL + "crear-cuenta"
 const loginPath = authURL + "login"
-
-const departmentsPath = locationURL + "departamentos"
-const citiesPath = (id) =>  `${locationURL}${id}/municipios`
 
 /**
  * @param {object} data { documento, password, tipoDocumento }
@@ -59,20 +55,3 @@ export const loginRequest = async (data) => {
     return {body, status: response.status}
 }
 
-export const departmentsRequest = async () => {
-    const response = await makeRequest({
-        path: departmentsPath, 
-        method: "GET",
-    })
-    const body = await response.json();
-    return {body, status: response.status}
-}
-
-export const citiesRequest = async ( department ) => {
-    const response = await makeRequest({
-        path: citiesPath(department), 
-        method: "GET",
-    })
-    const body = await response.json();
-    return {body, status: response.status}
-}

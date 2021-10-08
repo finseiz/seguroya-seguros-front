@@ -80,7 +80,7 @@ export const carsInsuranceSlice = createSlice({
       };
     },
 
-    restartState: (state) => {
+    restartState: (state) => {      
       state = initialState;
     },
   },

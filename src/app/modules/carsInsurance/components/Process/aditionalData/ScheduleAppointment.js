@@ -26,6 +26,7 @@ export const ScheduleAppointment = () => {
         onSubmit: (values) => {
             dispatch(actions.editDataToSend(values));
             history.push(CarsProcessSelectPlanRoute);
+            dispatch(actions.setUniqueProgress(2))
         }
     });
 
