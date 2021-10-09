@@ -64,7 +64,6 @@ export const findPlan = (plans, id) => plans.find((plan) => plan.data["solucion"
 export const getQuote = async (state, selectedPlan) => {
     const body = createBody(state, selectedPlan);
     const response = await getQuoteRequest(body)
-    debugger;
     return response;
 }
 

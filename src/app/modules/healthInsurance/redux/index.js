@@ -61,6 +61,10 @@ const setClientData = (data) => (dispatch) => {
   dispatch(healthInsuranceSlice.actions.setClientData(data));
 }
 
+const resetState = () => (dispatch) => {
+  dispatch(healthInsuranceSlice.actions.reset());
+}
+
 export const actions = {
   setInitialProgress,
   setPlans,
@@ -70,7 +74,8 @@ export const actions = {
   deleteBeneficiary,
   updateBeneficiary,
   setGeneralListsValues,
-  setClientData
+  setClientData,
+  resetState
 };
 
 export const healthInsuranceSlice = createSlice({
@@ -114,6 +119,7 @@ export const healthInsuranceSlice = createSlice({
     setClientData: ( state, action ) => {
       const data = action.payload;
       state.data.client = {...state.data.client, ...data};
-    }
+    },
+    reset: ( ) => initialState 
   },
 });

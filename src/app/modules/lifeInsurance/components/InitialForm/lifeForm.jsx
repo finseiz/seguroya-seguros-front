@@ -15,6 +15,12 @@ function LifeForm() {
   const dispatch = useDispatch();
   const [step, setStep] = React.useState(1);
 
+  useEffect(() => {
+    getInitialValues(dispatch);
+    dispatch(actions.setInitialProgress(0));
+    dispatch(actions.resetState());
+  }, [])
+
   const formik = useFormik({
     initialValues,
     validationSchema: initialSchema,
@@ -59,11 +65,6 @@ function LifeForm() {
         break;
     }
   }
-
-  useEffect(() => {
-    getInitialValues(dispatch);
-    dispatch(actions.setInitialProgress(0));
-  }, [])
 
   return (
     <section className="w-100">

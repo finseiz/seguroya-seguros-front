@@ -49,7 +49,6 @@ export const PlanDetails = () => {
             setRequest({ loading: true, error: false });
             getQuote(state, dataPlan)
             .then(( response ) => {
-                debugger;
                 if ( response.status === 200 ) {
                     setRequest({ loading: false, error: false });
                     setQuote(response.body)
