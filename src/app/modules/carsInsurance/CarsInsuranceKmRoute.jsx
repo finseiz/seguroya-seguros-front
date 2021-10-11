@@ -14,7 +14,7 @@ import { SelectCarsPlanKm } from './components/KmProcess/select-plan/SelectCarsP
 
 export default function CarsInsuranceKmRoute() {
 
-    const { dataToSend:{ email }, progress:{initial} } = useSelector(state => state.carsInsurance)
+    const { dataToSend:{ email }, progress:{initial}, selectedPlan:{anualPrice, descriptionValues} } = useSelector(state => state.carsInsurance)
     const history = useHistory();
 
     /** Health Route Protection */
@@ -52,6 +52,7 @@ export default function CarsInsuranceKmRoute() {
                         redirectRoute={CarsKmProcessDoneRoute} 
                         messageIndex={1} 
                         email={email}
+                        onSubmit={() =>true}
                     />}
                 />
 
@@ -60,10 +61,13 @@ export default function CarsInsuranceKmRoute() {
                     path={CarsKmProcessDoneRoute}
                     component={() => <ProcessDone
                         bottomMessage="¡Tu poliza ya está en camino! Pronto la enviaremos a tu correo electrónico"
+                        payment={{
+                            name: "Seguro por kilómetro",
+                            description: `Seguro por kilómetro con cobertura ${descriptionValues[1].value}`,
+                            amount: anualPrice
+                        }}
                     />}
                 />
-
-
 
             </Content>
 
