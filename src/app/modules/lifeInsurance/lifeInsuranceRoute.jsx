@@ -87,6 +87,7 @@ function LifeInsuranceRoute() {
             messageIndex={0} 
             email={clientData.email}
             onSubmit={ async (otp) => await sendOtp(otp, selectedPlan)  }
+            showModal={false}
           /> }
         />
 
