@@ -5,13 +5,13 @@ export const beneficiariesValues = {
     middleName: "Pedro",
     surname: "Pedro",
     secondSurname: "Pedro",
-    cellphone: "",
-    birthDate: "",
+    cellphone: "3101111111",
+    birthDate: "1991-03-22",
     gender: "F",
-    kinship: 0,
+    kinship: 3,
     documentType: 0,
-    identification: "",
-    participation: 0,
+    identification: "1061589654",
+    participation: 100,
 };
 
 

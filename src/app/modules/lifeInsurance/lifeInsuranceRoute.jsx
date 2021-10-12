@@ -25,6 +25,18 @@ function LifeInsuranceRoute() {
     history.push(LifeHomeRoute)
   }
 
+  /**
+   * Backend returns the amount with characters (Ej: '$ 19.999')
+   * Calling this function, it's taken the plan fron "selectedPlan", 
+   * then it will remove all characters 
+   * @returns Amount of selected plan
+   */
+  const getSelectedPlanAmount = () => {
+     const { informacion } = selectedPlan.payments.find( e => e.nombre === selectedPlan.paymentID )
+     const value = informacion.replace(/[^\w\s]/gi, '').trim();
+     return parseInt(value);
+  }
+
   return (
 
     <Switch>
@@ -83,6 +95,11 @@ function LifeInsuranceRoute() {
           path={LifeProcessDone}
           component={() => <ProcessDone 
             bottomMessage="¡Tu poliza ya está en camino! Pronto la enviaremos a tu correo electrónico"
+            payment={{
+              amount: getSelectedPlanAmount(),
+              description: "Seguro de vida Colmena, con pago mensual",
+              name: "Seguro de vida"
+            }}
           />}
         />
 

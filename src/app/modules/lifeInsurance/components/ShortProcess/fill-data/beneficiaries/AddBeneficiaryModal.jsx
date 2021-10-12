@@ -61,7 +61,7 @@ function AddBeneficiary({ state, handleClose, handleSubmit }) {
                 <FormikInput formik={formik} field="cellphone" type="phone" label="Celular" />
               </div>
               <div className="col p-0">
-                <FormikInput formik={formik} field="birthDate" type="date" label="Edad" />
+                <FormikInput formik={formik} field="birthDate" type="date" label="Fecha de nacimiento" />
               </div>
             </div>
 

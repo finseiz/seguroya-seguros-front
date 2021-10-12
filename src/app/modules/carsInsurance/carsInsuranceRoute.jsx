@@ -66,7 +66,7 @@ export default function CarsInsuranceRoute() {
           component={() => <SarlaftForm
             redirectRoute={CarsProcessDoneRoute}
             onLoad={() => {
-              dispatch(actions.setUniqueProgress(1))
+              dispatch(actions.setUniqueProgress(3))
             }}
           />}
         />

@@ -222,9 +222,9 @@ export const SarlaftForm = ({ redirectRoute, onLoad }) => {
 
           {select("department", "Departamento diligencia", departments)}
           {select("city", "Ciudad diligencia", diligenceCities)}
-          {simpleField("phone", "Teléfono", "phone")}
+          {simpleField("phone", "Teléfono", "number")}
 
-          {simpleField("cellphone", "Celular", "phone")}
+          {simpleField("cellphone", "Celular", "number")}
 
         </div>
         <hr />
