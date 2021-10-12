@@ -16,7 +16,7 @@ import { verifyOtp } from "./components/Process/controller";
 
 export default function CarsInsuranceRoute() {
 
-  const { dataToSend:{email}, selectedPlan:{quoteId}, progress:{initial} } = useSelector(state => state.carsInsurance);
+  const { dataToSend:{email}, selectedPlan:{quoteId, insuranceName, anualPrice}, progress:{initial} } = useSelector(state => state.carsInsurance);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -75,7 +75,12 @@ export default function CarsInsuranceRoute() {
           exact={true}
           path={CarsProcessDoneRoute}
           component={() => <ProcessDone
-            bottomMessage="Te llamaremos pronto para concluir el proceso"
+            bottomMessage="Continúe con el pago para finalizar tu seguro"
+            payment={{
+              name: "Seguro todo riesto",
+              description: `Seguro por kilómetro ${insuranceName}`,
+              amount: anualPrice
+            }}
           />}
         />
 
