@@ -11,13 +11,21 @@ import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getActivities, getActivityTypes, getCiiuActivities, getCities, getDepartments, getDocumentTypes, getInternationalOperationTypes, getSectors, sendData } from "./controller";
+import PropTypes from 'prop-types'
 
-export const SarlaftForm = ({ redirectRoute, onLoad }) => {
+/**
+ * 
+ * @param {string} redirectRoute - Next path if form submit successfully
+ * @param {function} onLoad - Function that is excecuted on the creations of the componente
+ * @param {bool} redirectRoute - This variable allows to 
+ * @returns 
+ */
+export const SarlaftForm = ({ redirectRoute, onLoad, updateForm=false }) => {
 
   const [requestStatus, setRequestStatus] = useState({ loading: false, error: false})
 
   const formik = useFormik({
-    initialValues: sarlaftInitialValues,
+    initialValues: sarlaftInitialValues(updateForm),
     validationSchema: sarlaftSchema,
     onSubmit: (values) => {
       setRequestStatus({ loading: true, error: false })
@@ -50,6 +58,15 @@ export const SarlaftForm = ({ redirectRoute, onLoad }) => {
   const activityType = useMemo(getActivityTypes, []);
   const docTypes = useMemo(getDocumentTypes, []);
   const internationalOperations = useMemo(getInternationalOperationTypes, []);
+  const vinculationTypes = useMemo(() => {
+    if ( !updateForm ) return [{title: "Vinculación", value: "VINCULACION"}];
+    else return [
+      { title: "Selecciona", value: "" },
+      { title: "Actualización", value: "ACTUALIZACION" },
+      { title: "Renovación", value: "RENOVACION" },
+      { title: "Vinculación", value: "VINCULACION" },
+    ]
+  }, []);
 
   useEffect(() => {
     getDepartments().then((data) => setDepartments(data));
@@ -166,7 +183,7 @@ export const SarlaftForm = ({ redirectRoute, onLoad }) => {
 
           {simpleField("date", "Fecha Diligenciamiento", "date")}
 
-          {select("requestType", "Tipo de Solicitud", [{title: "Vinculación", value: "VINCULACION"}])}
+          {select("requestType", "Tipo de Solicitud", vinculationTypes)}
 
         </div>
 
@@ -394,3 +411,10 @@ export const SarlaftForm = ({ redirectRoute, onLoad }) => {
     </form>
   );
 }
+
+SarlaftForm.propTypes = {
+  redirectRoute: PropTypes.string.isRequired,
+  onLoad: PropTypes.func,
+  updateForm: PropTypes.bool
+}
+

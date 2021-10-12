@@ -12,7 +12,7 @@ import { ScheduleAppointment } from "./components/Process/aditionalData/Schedule
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "./redux";
 import { ProcessDone } from "../_general/ProcessDone";
-import { sendOtp, verifyOtp } from "./components/Process/controller";
+import { verifyOtp } from "./components/Process/controller";
 
 export default function CarsInsuranceRoute() {
 
