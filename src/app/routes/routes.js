@@ -6,3 +6,5 @@ export const AboutUsRoute = "/quienes-somos";
 export const FrequentQuestionsRoute = "/preguntas-frecuentes";
 
 export const OffersRoute = "/ofertas";
+
+export const PaymentsRoute = "/pagos";

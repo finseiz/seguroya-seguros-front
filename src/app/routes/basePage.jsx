@@ -12,10 +12,11 @@ import { AuthRoutes } from "./childs/Auth/AuthRoutes.js";
 import { AuthRoute } from "./childs/Auth/routes.js";
 import { UserRouter } from "./childs/User/UserRouter.js";
 import { UserRoute } from "./childs/User/routes.js";
-import { HomeRoute, AboutUsRoute, FrequentQuestionsRoute, OffersRoute } from "./routes.js";
+import { HomeRoute, AboutUsRoute, FrequentQuestionsRoute, OffersRoute, PaymentsRoute } from "./routes.js";
 import { AboutUs } from "app/pages/home/AboutUs.js";
 import { FrecuentQuestions } from "app/pages/home/frecuent-questions/index.js";
 import { Offers } from "app/pages/home/Offers.js";
+import { Response } from "app/modules/_general/payments/response.js";
 
 function BasePage() {
 
@@ -43,6 +44,8 @@ function BasePage() {
         <Route path={AuthRoute} component={AuthRoutes} />
 
         <Route path={UserRoute} component={UserRouter} />
+
+        <Route path={PaymentsRoute} component={Response} />
         
         <Redirect to="/error/404" />
 

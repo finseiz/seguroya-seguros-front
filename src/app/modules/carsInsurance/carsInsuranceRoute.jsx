@@ -12,11 +12,11 @@ import { ScheduleAppointment } from "./components/Process/aditionalData/Schedule
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "./redux";
 import { ProcessDone } from "../_general/ProcessDone";
-import { sendOtp, verifyOtp } from "./components/Process/controller";
+import { verifyOtp } from "./components/Process/controller";
 
 export default function CarsInsuranceRoute() {
 
-  const { dataToSend:{email}, selectedPlan:{quoteId}, progress:{initial} } = useSelector(state => state.carsInsurance);
+  const { dataToSend:{email}, selectedPlan:{quoteId, insuranceName, anualPrice}, progress:{initial} } = useSelector(state => state.carsInsurance);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -66,7 +66,7 @@ export default function CarsInsuranceRoute() {
           component={() => <SarlaftForm
             redirectRoute={CarsProcessDoneRoute}
             onLoad={() => {
-              dispatch(actions.setUniqueProgress(1))
+              dispatch(actions.setUniqueProgress(3))
             }}
           />}
         />
@@ -75,7 +75,12 @@ export default function CarsInsuranceRoute() {
           exact={true}
           path={CarsProcessDoneRoute}
           component={() => <ProcessDone
-            bottomMessage="Te llamaremos pronto para concluir el proceso"
+            bottomMessage="Continúe con el pago para finalizar tu seguro"
+            payment={{
+              name: "Seguro todo riesto",
+              description: `Seguro por kilómetro ${insuranceName}`,
+              amount: anualPrice
+            }}
           />}
         />
 

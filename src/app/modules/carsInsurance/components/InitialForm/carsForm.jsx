@@ -21,6 +21,7 @@ function CarsForm() {
   useEffect(() => {
     getCountries().then( list => setCountries(list) );     
     dispatch(actions.restartState());
+    
   }, [])
 
   const formik = useFormik({

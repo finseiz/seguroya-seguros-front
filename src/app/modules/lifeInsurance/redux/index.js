@@ -57,6 +57,10 @@ const setGeneralValues = (values, field) => (dispatch) => {
   dispatch(lifeInsuranceSlice.actions.setGeneralValues(payload));
 }
 
+const resetState = () => (dispatch) => {
+  dispatch(lifeInsuranceSlice.actions.reset());
+}
+
 export const actions = {
   addClientData,
   setPlans,
@@ -64,7 +68,8 @@ export const actions = {
   setSelectedPlan,
   setShortProcess,
   setGeneralValues,
-  setBeneficiares
+  setBeneficiares,
+  resetState
 };
 
 export const lifeInsuranceSlice = createSlice({
@@ -99,5 +104,6 @@ export const lifeInsuranceSlice = createSlice({
       const { values, field } = action.payload;
       state.general[field] = values;
     },
+    reset: ( ) => initialState 
   },
 });

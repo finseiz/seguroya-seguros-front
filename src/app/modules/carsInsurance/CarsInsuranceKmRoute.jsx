@@ -15,7 +15,7 @@ import { verifyOtp } from "./components/KmProcess/controller";
 
 export default function CarsInsuranceKmRoute() {
 
-    const { dataToSend:{ email }, progress:{initial}, selectedPlan } = useSelector(state => state.carsInsurance)
+    const { dataToSend:{ email }, progress:{initial}, selectedPlan:{anualPrice, descriptionValues} } = useSelector(state => state.carsInsurance)
     const history = useHistory();
 
     /** Health Route Protection */
@@ -62,10 +62,13 @@ export default function CarsInsuranceKmRoute() {
                     path={CarsKmProcessDoneRoute}
                     component={() => <ProcessDone
                         bottomMessage="¡Tu poliza ya está en camino! Pronto la enviaremos a tu correo electrónico"
+                        payment={{
+                            name: "Seguro por kilómetro",
+                            description: `Seguro por kilómetro con cobertura ${descriptionValues[1].value}`,
+                            amount: anualPrice
+                        }}
                     />}
                 />
-
-
 
             </Content>
 

@@ -39,7 +39,7 @@ const editDataToSend = (data) => (dispatch) => {
 };
 
 const restartState = () => (dispatch) => {
-  dispatch(carsInsuranceSlice.actions.restartState());
+  dispatch(carsInsuranceSlice.actions.reset());
 };
 
 export const actions = {
@@ -79,9 +79,9 @@ export const carsInsuranceSlice = createSlice({
         ...newData,
       };
     },
-
-    restartState: (state) => {      
-      state = initialState;
+    reset: (state, action) => {
+      state = initialState
+      return initialState
     },
   },
 });

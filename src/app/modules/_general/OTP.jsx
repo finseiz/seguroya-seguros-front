@@ -12,15 +12,18 @@ import * as Yup from "yup";
  * @param {*} messageIndex 
  * @param {*} email 
  * @param {*} onSubmit *Important* Must return a boolean. If "true", the user will be redirected
+ * @param {*} showModal - In case of true, the modal will request the user email confirmation, 
+ *                      otherwise, the function [onSubmit] will be excecuted.
  * @returns 
  */
-export const ConfirmationCode = ({ redirectRoute, messageIndex, email = "", onSubmit }) => {
+export const ConfirmationCode = ({ redirectRoute, messageIndex, email = "", onSubmit, showModal=true }) => {
 
   const [openModal, setOpenModal] = useState(false);
-  
   const history = useHistory();
   
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const history = useHistory();
 
   const message = [
     "Digita el código que se ha enviado por mensaje de texto a tu celular",
@@ -32,8 +35,25 @@ export const ConfirmationCode = ({ redirectRoute, messageIndex, email = "", onSu
     validationSchema: Yup.object().shape({
       otp: Yup.number().required("Este campo es requrido")
     }),
-    onSubmit: (values) => setOpenModal(true)
+    onSubmit: (values) => {
+      if ( showModal ) setOpenModal(true)
+      else submitOtp();
+    }
   })
+
+  const submitOtp = async () => {
+    if (onSubmit) {
+      setLoading(true);
+      const redirect = await onSubmit(formik.values["otp"])
+      if ( redirect ){
+        history.push(redirectRoute);
+      }else{
+        setOpenModal(false)
+        setError(true)
+      }
+      setLoading(false);
+    }
+  }
 
   return (
     <BaseSection
@@ -42,6 +62,15 @@ export const ConfirmationCode = ({ redirectRoute, messageIndex, email = "", onSu
       <div className="text-center process__opt_container center-flex">
 
         <form onSubmit={formik.handleSubmit}>
+
+          { 
+            error &&
+            (
+              <div className="alert alert-danger mt-4" role="alert">
+                Error en el código. Por favor verifica la información
+              </div>
+            )
+          }
 
           <div>
             <p className="m-3">
@@ -63,12 +92,21 @@ export const ConfirmationCode = ({ redirectRoute, messageIndex, email = "", onSu
               )
             }
 
-            <button
-              type="submit"
-              className="btn btn-primary primary-button process__process-button process__otp-width mx-3"
-            >
-              Continuar
-            </button>
+            {
+              loading ? 
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden"></span>
+              </div> 
+              :
+              <button
+                type="submit"
+                className="btn btn-primary primary-button process__process-button process__otp-width mx-3"
+              >
+                Continuar
+              </button>
+            }
+
+            
           </div>
 
         </form>
@@ -110,14 +148,7 @@ export const ConfirmationCode = ({ redirectRoute, messageIndex, email = "", onSu
                   <button
                     type="submit"
                     className="col btn btn-primary primary-button ml-2 w-100"
-                    onClick={async () => {
-                      if (onSubmit) {
-                        setLoading(true);
-                        const redirect = await onSubmit(formik.values["otp"])
-                        redirect && history.push(redirectRoute);
-                        setLoading(false);
-                      }
-                    }}
+                    onClick={submitOtp}
                   >
                     <b>Continuar</b>
                   </button>

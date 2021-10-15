@@ -17,6 +17,12 @@ function HealthForm() {
   const dispatch = useDispatch();
   const [step, setStep] = React.useState(1);
 
+  useEffect(() => {
+    dispatch(actions.setInitialProgress(0));
+    dispatch(actions.resetState());
+    setGeneralDataLists(dispatch);
+  }, [])
+
   const formik = useFormik({
     initialValues: healthInitialValues,
     validationSchema: healthSchema,
@@ -61,11 +67,6 @@ function HealthForm() {
         break;
     }
   }
-
-  useEffect(() => {
-    dispatch(actions.setInitialProgress(0));
-    setGeneralDataLists(dispatch);
-  }, [])
 
   return (
     <section className="w-100 px-5">
