@@ -15,7 +15,7 @@ import { verifyOtp } from "./components/KmProcess/controller";
 
 export default function CarsInsuranceKmRoute() {
 
-    const { dataToSend:{ email }, progress:{initial}, selectedPlan:{anualPrice, descriptionValues} } = useSelector(state => state.carsInsurance)
+    const { dataToSend:{ email }, progress:{initial}, selectedPlan:{anualPrice, descriptionValues, carId} } = useSelector(state => state.carsInsurance)
     const history = useHistory();
 
     /** Health Route Protection */
@@ -53,7 +53,7 @@ export default function CarsInsuranceKmRoute() {
                         redirectRoute={CarsKmProcessDoneRoute} 
                         messageIndex={1} 
                         email={email}
-                        onSubmit={(otp) => verifyOtp(selectedPlan.carId, otp) }
+                        onSubmit={(otp) => verifyOtp(carId, otp) }
                     />}
                 />
 

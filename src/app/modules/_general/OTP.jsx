@@ -23,7 +23,6 @@ export const ConfirmationCode = ({ redirectRoute, messageIndex, email = "", onSu
   
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const history = useHistory();
 
   const message = [
     "Digita el código que se ha enviado por mensaje de texto a tu celular",
