@@ -8,8 +8,8 @@ import { parseCurrency } from 'app/helpers/parse-currency';
 import Comments from "./../../../../../components/process/Comments";
 import { actions } from 'app/modules/carsInsurance/redux';
 import { CarsProcessOtpRoute } from 'app/routes/childs/Cars/routes';
-import { createQuote, sendOtp } from '../controller';
-
+import { createQuote, sendOtp,getDocumentPdf } from '../controller';
+ 
 
 export const PlanDetails = () => {
 
@@ -47,6 +47,7 @@ export const PlanDetails = () => {
             dispatch(actions.setSelectedPlan({...selectPlan, quoteId: response}))
             sendOtp(response);
             history.push(CarsProcessOtpRoute);
+            getDocumentPdf(response);
         } else {
             setRequestStatus({ loading: false, error: true })
         }
@@ -61,102 +62,105 @@ export const PlanDetails = () => {
 
                 {
                     selectPlan && (
-                        <div className="custom-card bg-white my-4">
+                        <div className="my-4">
 
-                            <div className="row plans_sal_container-details">
+                            <div className="row">
 
                                 {/** Insurance left */}
-                                <div className="col-md-auto plan-sal_container-desc">
+                                <div className="col-md-8 p-0">
+                                    <div className="bg-white mr-4 custom-card p-5">
+                                        {/** Insurance Logo */}
+                                        <div>
+                                            <img
+                                                src={toAbsoluteUrl(`/media/logos/${selectPlan.logoPath}`)}
+                                            />
+                                        </div>
 
-                                    {/** Insurance Logo */}
-                                    <div>
-                                        <img
-                                            src={toAbsoluteUrl(`/media/logos/${selectPlan.logoPath}`)}
-                                        />
+                                        {/** Insurance Name */}
+                                        <div className="plans_sel_plan-name mt-4">
+                                            {selectPlan.insuranceName}
+                                        </div>
+
+                                        {/** INsurance benefits */}
+                                        <ul className="plan_sel_benefits">
+                                            {
+                                                benefits.map((benefit, i) => (
+                                                    <li className="my-3 plan_sel_benefit-item" key={i}>
+                                                        {benefit}
+                                                    </li>
+                                                ))
+                                            }
+                                        </ul>
+
+                                        <b> <p> Valores agregados </p> </b>
+
+                                        {/** INsurance benefits */}
+                                        <ul className="plan_sel_benefits">
+                                            {
+                                                benefitsPlus.map((benefit, i) => (
+                                                    <li className="my-3 plan_sel_benefit-item" key={i}>
+                                                        {benefit}
+                                                    </li>
+                                                ))
+                                            }
+                                        </ul>
+
+                                        {/* <Comments commentList={commets} /> */}
                                     </div>
 
-                                    {/** Insurance Name */}
-                                    <div className="plans_sel_plan-name mt-4">
-                                        {selectPlan.insuranceName}
-                                    </div>
-
-                                    {/** INsurance benefits */}
-                                    <ul className="plan_sel_benefits">
-                                        {
-                                            benefits.map((benefit, i) => (
-                                                <li className="my-3 plan_sel_benefit-item" key={i}>
-                                                    {benefit}
-                                                </li>
-                                            ))
-                                        }
-                                    </ul>
-
-                                    <b> <p> Valores agregados </p> </b>
-
-                                    {/** INsurance benefits */}
-                                    <ul className="plan_sel_benefits">
-                                        {
-                                            benefitsPlus.map((benefit, i) => (
-                                                <li className="my-3 plan_sel_benefit-item" key={i}>
-                                                    {benefit}
-                                                </li>
-                                            ))
-                                        }
-                                    </ul>
-
-                                    {/* <Comments commentList={commets} /> */}
                                 </div>
 
                                 {/** Insurance Right */}
-                                <div className="col">
+                                <div className="col-md-4 p-0">
+                                    <div className = "sticky-top">
+                                        <div className="custom-card bg-white p-4"> 
+                                        
+                                            {
+                                                selectPlan.qualification &&
+                                                (
+                                                    <>
+                                                        {/** Insurance qualification */}
+                                                        <p className="mb-1 plans_sal_plan-label-2"> Calificación de usuario </p>
+                                                        <div className="row">
+                                                            <Qualification qualification={selectPlan.qualification} className="mb-4" />
+                                                            <p className="plans_plan-qualification my-1 mx-2"> {selectPlan.qualification} </p>
+                                                        </div>
+                                                    </>
+                                                )
+                                            }
 
-                                    {
-                                        selectPlan.qualification &&
-                                        (
-                                            <>
-                                                {/** Insurance qualification */}
-                                                <p className="mb-1 plans_sal_plan-label-2"> Calificación de usuario </p>
-                                                <div className="row">
-                                                    <Qualification qualification={selectPlan.qualification} className="mb-4" />
-                                                    <p className="plans_plan-qualification my-1 mx-2"> {selectPlan.qualification} </p>
-                                                </div>
-                                            </>
-                                        )
-                                    }
 
+                                            {/** Insurance Price */}
+                                            <div className="">
+                                                <p className="mb-1 plans_sal_plan-label-2"> Precio </p>
+                                                <p className="mb-1 plans_sal_plan-value-2"> {parseCurrency(selectPlan.anualPrice)} </p>
+                                            </div>
 
-                                    {/** Insurance Price */}
-                                    <div className="">
-                                        <p className="mb-1 plans_sal_plan-label-2"> Precio </p>
-                                        <p className="mb-1 plans_sal_plan-value-2"> {parseCurrency(selectPlan.anualPrice)} </p>
+                                            {/**Insurance Button */}
+                                            {
+                                                requestStatus.loading ?
+                                                (
+                                                    <div className="text-center spinner-border" role="status">
+                                                        <span className="sr-only"></span>
+                                                    </div>
+
+                                                ) :
+                                                (
+
+                                                    <div className="text-center">
+                                                        <button
+                                                            type="button"
+                                                            className="btn primary_btn_expand w-100"
+                                                            onClick={onSubmit}
+                                                        >
+                                                            Comprar
+                                                        </button>
+                                                    </div>
+                                                )
+                                            }
+                                        </div> 
                                     </div>
-
-                                    {/**Insurance Button */}
-                                    {
-                                        requestStatus.loading ?
-                                        (
-                                            <div className="spinner-border" role="status">
-                                                <span className="sr-only"></span>
-                                            </div>
-
-                                        ) :
-                                        (
-
-                                            <div className="text-center">
-                                                <button
-                                                    type="button"
-                                                    className="btn primary_btn_expand w-100"
-                                                    onClick={onSubmit}
-                                                >
-                                                    Comprar
-                                                </button>
-                                            </div>
-                                        )
-                                    }
-
-
-
-
+                                     
                                 </div>
 
                             </div>
@@ -164,9 +168,6 @@ export const PlanDetails = () => {
                         </div>
                     )
                 }
-
-
-
             </div>
         </div>
     )

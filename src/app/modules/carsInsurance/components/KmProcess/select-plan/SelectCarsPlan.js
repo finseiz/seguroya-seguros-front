@@ -5,6 +5,8 @@ import { WhatsAppContainer } from 'app/components/process/WhatsAppContainer'
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlans } from '../controller';
 import { Loading } from 'app/components/process/messages/Loading';
+import { ErrorMessage } from 'app/components/process/messages/Erros';
+
 
 export const SelectCarsPlanKm = () => {    
     const [requestStatus, setRequestStatus] = useState({ loading: false, error: false });
@@ -32,13 +34,11 @@ export const SelectCarsPlanKm = () => {
                 {
                     requestStatus.loading ?
                     (
-                        <div> <Loading /> </div>
+                         <Loading /> 
                     ) :
                     requestStatus.error ?
                     (
-                        <div>
-                            No fue posible encontrar ningún plan (ERR)
-                        </div>
+                        <ErrorMessage /> 
                     ) :
                     (
                         <div className="row justify-content-between mt-3" >

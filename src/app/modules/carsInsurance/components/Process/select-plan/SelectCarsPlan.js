@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlans } from '../controller';
 import { Loading } from 'app/components/process/messages/Loading';
+import { ErrorMessage } from 'app/components/process/messages/Erros';
 import CarPlan from 'app/components/process/plans/CarPlans';
+
 
 export const SelectCarsPlan = () => {
 
@@ -11,9 +13,11 @@ export const SelectCarsPlan = () => {
     const [request, setRequest] = useState({ loading: false, error: false})
     const dispatch = useDispatch();
 
+   
+
     useEffect(() => {
 
-        if (  plans.length === 0 ){
+        if (  plans.length === 0 ){   
             setRequest({ loading: true, error: false });
             getPlans(dataToSend, dispatch)
             .then( _ => {                
@@ -33,7 +37,7 @@ export const SelectCarsPlan = () => {
                 {
                     request.error ?
                     (
-                        <div> No fue posible recuperar planes </div>
+                        <ErrorMessage />                         
                     ):
                     request.loading ? 
                     (

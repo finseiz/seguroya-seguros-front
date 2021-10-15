@@ -16,10 +16,10 @@ export const beneficiariesValues = {
 
 
 export const beneficiariesSchema = Yup.object().shape({
-    firstName: Yup.string().required("Campo requerido"),
-    middleName: Yup.string(),
-    surname: Yup.string().required("Campo requerido"),
-    secondSurname: Yup.string().required("Campo requerido"),
+    firstName: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales').required("Campo requerido"),
+    middleName: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales'),
+    surname: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales').required("Campo requerido"),
+    secondSurname: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales').required("Campo requerido"),
     cellphone: Yup.number().min(3000000000).max(3999999999).required("Campo requerido"),
     birthDate: Yup.string().required("Campo requerido"),
     gender: Yup.string().oneOf(["F", "M"]).required("Campo requerido"),

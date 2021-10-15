@@ -42,22 +42,23 @@ export function Step1({ formik }) {
       <div className="row mt-2">
         {renderSelect("documentType", "Tipo de documento",  getDocumentTypes(documentTypes) )}
         {renderInput("document", "Documento")}
-        {renderSelect("occupation", "Ocupación",  getOccupations(occupations), "-6" )}
       </div>
 
       <div className="row mt-2">
         {renderInput("email", "Correo", "email")}
-        {renderInput("address", "Direción de residencia")}
+        {renderSelect("occupation", "Ocupación",  getOccupations(occupations), "-6" )}
       </div>
 
       <div className="row mt-2">
         {renderInput("birthDate", "Fecha de nacimiento", "date")}
         {renderInput("phone", "Celular", "phone")}
+
       </div>
 
       <div className="row mt-2">
         {renderSelect("residenceDep", "Departamento de residencia", getDepartments(departments) )}
         {renderSelect("residenceCity", "Ciudad de residencia",  getCity(departments, formik.values.residenceDep )  )}
+        {renderInput("address", "Direción de residencia")}
       </div>
 
       <div className="row mt-2">

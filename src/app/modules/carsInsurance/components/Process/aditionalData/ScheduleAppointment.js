@@ -9,7 +9,7 @@ import { useFormik } from 'formik';
 import { initalData, schema } from './formik';
 import FormikRadioGroup from 'app/modules/_forms/general/FormikRadioGroup';
 import FormikInput from 'app/modules/_forms/general/FormikInput';
-import FormikSelect from 'app/modules/_forms/general/FormikSelect';
+import FormikSelect from 'app/modules/_forms/general/FormikSelect'; 
 
 export const ScheduleAppointment = () => {
 
@@ -25,7 +25,7 @@ export const ScheduleAppointment = () => {
         validationSchema: schema,
         onSubmit: (values) => {
             dispatch(actions.editDataToSend(values));
-            history.push(CarsProcessSelectPlanRoute);
+            history.push(CarsProcessSelectPlanRoute); 
             dispatch(actions.setUniqueProgress(2))
         }
     });

@@ -7,7 +7,7 @@ import { actions } from "../../redux";
 import { CarsSchema, initialValues } from "./helpers/formik";
 import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
 import { ProgressIndicator } from "app/components/process/ProgressIndicator";
-import { CarsKmProcessSelectPlanRoute, CarsProcessSheduleAppointmentRoute } from "app/routes/childs/Cars/routes";
+import { CarsProcessSelectPlanRoute,CarsKmProcessSelectPlanRoute, CarsProcessSheduleAppointmentRoute } from "app/routes/childs/Cars/routes";
 import { getCountries } from "./controller";
 
 function CarsForm() {
@@ -44,10 +44,10 @@ function CarsForm() {
           }
         }
         dispatch(actions.editDataToSend(values));
-        if ( formik.values.insuranceType === "ar" )          
-          history.push(CarsProcessSheduleAppointmentRoute);
-        else   
-               
+        if ( formik.values.insuranceType === "ar" ){                          
+          history.push(CarsProcessSelectPlanRoute);
+          // history.push(CarsProcessSheduleAppointmentRoute);
+        }else                  
           history.push(CarsKmProcessSelectPlanRoute);
       }
     },

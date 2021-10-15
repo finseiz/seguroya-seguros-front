@@ -54,103 +54,107 @@ export const PlanDetails = () => {
 
                 {
                     selectPlan && (
-                        <div className="custom-card bg-white my-4">
+                        <div className=" my-4">
 
-                            <div className="row plans_sal_container-details">
+                            <div className="row ">
 
                                 {/** Insurance left */}
-                                <div className="col-md-auto plan-sal_container-desc">
+                                <div className="col-md-8 p-0">
+                                    <div className="bg-white mr-4 custom-card p-5">
+                                        {/** Insurance Logo */}
+                                        <div>
+                                            <img
+                                                src={toAbsoluteUrl(`/media/logos/${selectPlan.logoPath}`)}
+                                            />
+                                        </div>
 
-                                    {/** Insurance Logo */}
-                                    <div>
-                                        <img
-                                            src={toAbsoluteUrl(`/media/logos/${selectPlan.logoPath}`)}
-                                        />
+                                        {/** Insurance Name */}
+                                        <div className="plans_sel_plan-name mt-4">
+                                            {selectPlan.insuranceName} - Vida
+                                        </div>
+
+                                        {/** INsurance benefits */}
+                                        <ul className="plan_sel_benefits">
+                                            {
+                                                benefits.map((benefit, i) => (
+                                                    <li className="my-3 plan_sel_benefit-item" key={i}>
+                                                        {benefit}
+                                                    </li>
+                                                ))
+                                            }
+                                        </ul>
+
+                                        {/* <Comments commentList={commets} /> */}
+
                                     </div>
-
-                                    {/** Insurance Name */}
-                                    <div className="plans_sel_plan-name mt-4">
-                                        {selectPlan.insuranceName} - Vida
-                                    </div>
-
-                                    {/** INsurance benefits */}
-                                    <ul className="plan_sel_benefits">
-                                        {
-                                            benefits.map((benefit, i) => (
-                                                <li className="my-3 plan_sel_benefit-item" key={i}>
-                                                    {benefit}
-                                                </li>
-                                            ))
-                                        }
-                                    </ul>
-
-                                    {/* <Comments commentList={commets} /> */}
                                 </div>
 
                                 {/** Insurance Right */}
-                                <div className="col">
+                                <div className="col-md-4 p-0">
+                                <div className = "sticky-top">
+                                        <div className="custom-card bg-white p-4"> 
+                                            {/** Insurance qualification */}
+                                            {
+                                                selectPlan.qualification &&
+                                                (
+                                                    <>
+                                                        <p className="mb-1 plans_sal_plan-label-2"> Calificación de usuario </p>
+                                                        <div className="row">
+                                                            <Qualification qualification={selectPlan.qualification} className="mb-4" />
+                                                            <p className="plans_plan-qualification my-1 mx-2"> {selectPlan.qualification} </p>
+                                                        </div>
+                                                    </>
+                                                )
+                                            }
 
-                                    {/** Insurance qualification */}
-                                    {
-                                        selectPlan.qualification &&
-                                        (
-                                            <>
-                                                <p className="mb-1 plans_sal_plan-label-2"> Calificación de usuario </p>
-                                                <div className="row">
-                                                    <Qualification qualification={selectPlan.qualification} className="mb-4" />
-                                                    <p className="plans_plan-qualification my-1 mx-2"> {selectPlan.qualification} </p>
-                                                </div>
-                                            </>
-                                        )
-                                    }
+                                            {/** Insurance Description */}
+                                            {
+                                                selectPlan.descriptionValues.map((description, i) => (
+                                                    <div key={i}>
+                                                        <p className="mb-1 plans_sal_plan-label-2" > {description.label} </p>
+                                                        <p > <b> {description.value} </b> </p>
+                                                    </div>
+                                                ))
+                                            }
+                                            <hr />
 
-                                    {/** Insurance Description */}
-                                    {
-                                        selectPlan.descriptionValues.map((description, i) => (
-                                            <div key={i}>
-                                                <p className="mb-1 plans_sal_plan-label-2" > {description.label} </p>
-                                                <p > <b> {description.value} </b> </p>
-                                            </div>
-                                        ))
-                                    }
-                                    <hr />
+                                            <form onSubmit={formik.handleSubmit}>
 
-                                    <form onSubmit={formik.handleSubmit}>
-
-                                        {/** Insurance Price */}
-                                        <div className="">
-                                            <p className="mb-1 plans_sal_plan-label-2"> Precios </p>
-                                            
-                                                <FormikRadioGroup
-                                                    formik={formik}
-                                                    field="selectedPayment"
+                                                {/** Insurance Price */}
+                                                <div className="">
+                                                    <p className="mb-1 plans_sal_plan-label-2"> Precios </p>
                                                     
-                                                    options={
-                                                        selectPlan.payments.map((payment, i) => (
-                                                            { title: (
-                                                                <div key={i}>
-                                                                    <p className="mb-1 plans_sal_plan-value-2"> {payment["informacion"]} </p>
-                                                                    <p className=""> {`Pago ${payment["nombre"]}`} </p>
-                                                                </div>
-                                                            ), value: payment.nombre }
-                                                        ))
-                                                    }
-                                                    optionsClass="flex-column"
-                                                />
+                                                        <FormikRadioGroup
+                                                            formik={formik}
+                                                            field="selectedPayment"
+                                                            
+                                                            options={
+                                                                selectPlan.payments.map((payment, i) => (
+                                                                    { title: (
+                                                                        <div key={i}>
+                                                                            <p className="mb-1 plans_sal_plan-value-2"> {payment["informacion"]} </p>
+                                                                            <p className=""> {`Pago ${payment["nombre"]}`} </p>
+                                                                        </div>
+                                                                    ), value: payment.nombre }
+                                                                ))
+                                                            }
+                                                            optionsClass="flex-column"
+                                                        />
+                                                </div>
+
+                                                {/**Insurance Button */}
+                                                <div className="text-center mt-4">
+                                                    <button
+                                                        type="submit"
+                                                        className="btn primary_btn_expand w-100"
+                                                    >
+                                                        Comprar
+                                                    </button>
+                                                </div>
+
+                                            </form>
                                         </div>
-
-                                        {/**Insurance Button */}
-                                        <div className="text-center mt-4">
-                                            <button
-                                                type="submit"
-                                                className="btn primary_btn_expand w-100"
-                                            >
-                                                Comprar
-                                            </button>
-                                        </div>
-
-                                    </form>
-
+                                </div>
 
                                 </div>
 

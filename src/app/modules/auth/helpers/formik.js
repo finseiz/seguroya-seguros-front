@@ -40,8 +40,8 @@ export const registrySchema = Yup.object().shape({
     password: Yup.string().required("Campo requerido").min(8, "Ingresa mínimo 8 caracteres").max(15,"Ingresa máximo 15 caracteres" ),
     documentType: Yup.string().oneOf(["CC", "CE"]).required("Campo requerido"),
 
-    name: Yup.string().required("Campo requerido"),
-    surname: Yup.string().required("Campo requerido"),
+    name: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales').required("Campo requerido"),
+    surname: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales').required("Campo requerido"),
     phone: Yup.string().required("Campo requerido").length(10, "Ingresa 10 caracteres"),
     email: Yup.string().email("Ingresa un correo válido").required("Campo requerido"),
     address: Yup.string().required("Campo requerido").min(10, "Ingresa mínimo 10 caracteres").max(50,"Ingresa máximo 50 caracteres" ),

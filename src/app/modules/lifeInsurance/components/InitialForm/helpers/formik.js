@@ -2,10 +2,10 @@ import * as Yup from "yup";
 
 export const initialSchema = Yup.object().shape({
 
-    firstName: Yup.string().required("Campo requerido"),
-    middleName: Yup.string(),
-    surname: Yup.string().required("Campo requerido"),
-    secondSurname: Yup.string().required("Campo requerido"),
+    firstName: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales').required("Campo requerido"),
+    middleName: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales'),
+    surname: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales').required("Campo requerido"),
+    secondSurname: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales').required("Campo requerido"),
     documentType: Yup.string().required("Campo requerido"),
     document: Yup.string().min(6).max(10).required("Campo requerido"),
     phone: Yup.number().min(3000000000).max(3999999999).required("Campo requerido"),
@@ -41,7 +41,7 @@ export const initialValues = {
     document: "5523234444",
     phone: "3057807786",
     occupation: "0",
-    email: "fbeckerf_r391k@gexik.com", // dragon
+    email: "d.santiagocardenas.m@gmail.com", 
     address: "Calle 34",
     birthDate: "1991-03-22",
     expeditionDate: "2010-03-01",

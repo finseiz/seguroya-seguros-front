@@ -5,6 +5,8 @@ import SuraPlan from 'app/components/process/plans/SuraPlan';
 import { useState } from 'react';
 import { getPlans } from '../controller';
 import { Loading } from 'app/components/process/messages/Loading';
+import { ErrorMessage } from 'app/components/process/messages/Erros';
+
 
 export const SelectSuraHealthPlan = () => {
 
@@ -31,11 +33,11 @@ export const SelectSuraHealthPlan = () => {
             {
                 request.error ?
                 (
-                    <div> No fue posible recuperar planes </div>
+                    <ErrorMessage />  
                 ):
                 request.loading ? 
                 (
-                    <div> <Loading /> </div>
+                     <Loading /> 
                 ):
                 <div className="row justify-content-between mt-3" >
                     {

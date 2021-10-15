@@ -18,9 +18,7 @@ export const lifeProcessSteps = [
 ]
 
 export const carsProcessSteps = [
-  {
-    title: "Agenda tu cita de inspección",
-  },
+ 
   {
     title: "Selecciona tu plan",
   },

@@ -34,12 +34,14 @@ export default function CarsInsuranceRoute() {
 
       <Content
         aside={() =>
-          <AsideProcess
-            title="Compra Seguro para Autos"
-            process={carsProcessSteps}
-            insuranceName="carsInsurance"
-            processIndicatorName="uniqueProcess"
-          />
+          <div className="row">
+              <AsideProcess
+                title="Compra Seguro para Autos"
+                process={carsProcessSteps}
+                insuranceName="carsInsurance"
+                processIndicatorName="uniqueProcess"
+              />
+          </div>
         }
       >
         <Route

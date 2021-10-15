@@ -99,55 +99,57 @@ export const KmPlanDetails = () => {
 
                                 {/** Insurance Right */}
                                 <div className="col-md-4 p-0">
+                                    <div className = "sticky-top">
+                                        <div className="custom-card bg-white p-4">
 
-                                    <div className="custom-card bg-white p-4">
+                                            {/** Insurance qualification */}
+                                            {
+                                                selectPlan.qualification &&
+                                                (
+                                                    <>
+                                                        <p className="mb-1 plans_sal_plan-label-2"> Calificación de usuario </p>
+                                                        <div className="row">
+                                                            <Qualification qualification={selectPlan.qualification} className="mb-4" />
+                                                            <p className="plans_plan-qualification my-1 mx-2"> {selectPlan.qualification} </p>
+                                                        </div>
+                                                    </>
+                                                )
+                                            }
 
-                                        {/** Insurance qualification */}
-                                        {
-                                            selectPlan.qualification &&
-                                            (
-                                                <>
-                                                    <p className="mb-1 plans_sal_plan-label-2"> Calificación de usuario </p>
-                                                    <div className="row">
-                                                        <Qualification qualification={selectPlan.qualification} className="mb-4" />
-                                                        <p className="plans_plan-qualification my-1 mx-2"> {selectPlan.qualification} </p>
+                                            {
+                                                selectPlan.descriptionValues.map((description) => (
+                                                    <div>
+                                                        <p className="mb-1 plans_sal_plan-label-2" > {description.label} </p>
+                                                        <p > <b> {description.value} </b> </p>
                                                     </div>
-                                                </>
-                                            )
-                                        }
+                                                ))
+                                            }
 
-                                        {
-                                            selectPlan.descriptionValues.map((description) => (
-                                                <div>
-                                                    <p className="mb-1 plans_sal_plan-label-2" > {description.label} </p>
-                                                    <p > <b> {description.value} </b> </p>
-                                                </div>
-                                            ))
-                                        }
+                                            {/** Insurance Price */}
+                                            <div>
+                                                <p className="mb-1 plans_sal_plan-label-2"> Precio final</p>
+                                                <p className="mb-1 plans_sal_plan-value-2"> {parseCurrency(selectPlan.anualPrice)} </p>
+                                            </div>
+                                                
+                                            {/**Insurance Button */}
+                                            <div className="text-center">
+                                                <button
+                                                    type="button"
+                                                    className="btn primary_btn_expand w-100"
+                                                    onClick={() => {
+                                                        dispatch(actions.setSelectedPlan(plans[id]))
+                                                        sendOtp(selectPlan.carId);
+                                                        history.push(CarsKmProcessDataAutorizationRoute)
+                                                    }}
+                                                >
+                                                    Comprar
+                                                </button>
+                                            </div>
 
-                                        {/** Insurance Price */}
-                                        <div>
-                                            <p className="mb-1 plans_sal_plan-label-2"> Precio final</p>
-                                            <p className="mb-1 plans_sal_plan-value-2"> {parseCurrency(selectPlan.anualPrice)} </p>
+
                                         </div>
-                                            
-                                        {/**Insurance Button */}
-                                        <div className="text-center">
-                                            <button
-                                                type="button"
-                                                className="btn primary_btn_expand w-100"
-                                                onClick={() => {
-                                                    dispatch(actions.setSelectedPlan(plans[id]))
-                                                    sendOtp(selectPlan.carId);
-                                                    history.push(CarsKmProcessDataAutorizationRoute)
-                                                }}
-                                            >
-                                                Comprar
-                                            </button>
-                                        </div>
-
-
                                     </div>
+
                                 </div>
 
                             </div>

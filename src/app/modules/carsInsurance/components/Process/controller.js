@@ -4,25 +4,33 @@ import { createQuoteRequest, getPlansRequest } from "./repository";
 import { bolivarPlan } from 'app/helpers/select-plan';
 import { CarsProcessDetailsPlanRouteFunc } from "app/routes/childs/Cars/routes";
 import { sendOtpRequest, verifyOtpRequest } from "app/modules/_general/repositories/otp";
+import { getDocumentaPdf } from "app/modules/_general/repositories/document";
 
 const prepareData = (data) => {
     return {
         apellidosTomador: data.surname + " " + data.secondSurname,
-        ceroKm: data.isNewCar ? "true" : "false",
+        // ceroKm: data.isNewCar ? "true" : "false",
+        ceroKm:  "false",
         ciudadMovilizacion: data.circulationZone,
         fechaNacimientoTomador: data.birthDate,
         generoConductor: data.gender,
-        marcaVehiculo: data.carBrand,
-        modeloVehiculo: data.carModel,
+        // marcaVehiculo: data.carBrand,
+        // modeloVehiculo: data.carModel,
+        marcaVehiculo: null,
+        modeloVehiculo: null,
         nombresTomador: data.fullname,
         numeroDocumentoTomador: data.identification,
-        opcionPA: data.includeAccessories ? "S" : "N",
-        periodoFact: data.payment,
+        // opcionPA: data.includeAccessories ? "S" : "N",
+        opcionPA:  "N",
+        // periodoFact: data.payment,
+        periodoFact: "12",
         placaVehiculo: data.licensePlate,
-        sumaAccesorios: data.accesoriesSum,
+        // sumaAccesorios: data.accesoriesSum,
+        sumaAccesorios: 0,
         tipoDocumentoTomador: getCarTypId(data.identificationType),
-        tipoInspeccion: data.inspectionType
-    }
+        // tipoInspeccion: data.inspectionType
+        tipoInspeccion: "VIRTUAL"
+    } 
 }
 
 export const getPlans = async (dataToSend, dispatch) => {
@@ -101,6 +109,33 @@ export const sendOtp = async ( qouteId ) => {
         numCotizacion: qouteId
     });
 }
+
+export const getDocumentPdf = async ( id ) => {
+   getDocumentaPdf(id)
+   .then((response) => response.blob())
+   .then((blob) => {
+     // Create blob link to download
+     const url = window.URL.createObjectURL(
+       new Blob([blob]),
+     );
+     const link = document.createElement('a');
+     link.href = url;
+     link.setAttribute(
+       'download',
+       'Poliza_'+id+'.pdf',
+     );
+ 
+     // Append to html link element page
+     document.body.appendChild(link);
+ 
+     // Start download
+     link.click();
+ 
+     // Clean up and remove the link
+     link.parentNode.removeChild(link);
+   });
+}
+
 
 export const verifyOtp = async ( quoteId, otp ) => {
 
