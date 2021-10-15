@@ -11,6 +11,7 @@ import { ProcessDone } from '../_general/ProcessDone'
 import { Authorization } from './components/KmProcess/Authorization'
 import { KmPlanDetails } from './components/KmProcess/select-plan/PlanDetails'
 import { SelectCarsPlanKm } from './components/KmProcess/select-plan/SelectCarsPlan'
+import { verifyOtp } from "./components/KmProcess/controller";
 
 export default function CarsInsuranceKmRoute() {
 
@@ -52,7 +53,7 @@ export default function CarsInsuranceKmRoute() {
                         redirectRoute={CarsKmProcessDoneRoute} 
                         messageIndex={1} 
                         email={email}
-                        onSubmit={() =>true}
+                        onSubmit={(otp) => verifyOtp(selectedPlan.carId, otp) }
                     />}
                 />
 

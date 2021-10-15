@@ -41,9 +41,9 @@ export const PlanDetails = () => {
                 payment: quote["tarifas"]["listaPrimas"].find( element => element.tipo === selectedPayment )
             }));
              history.push(HealthProcessInsurabilityRoute)
-        }
+        } 
     })
-
+ 
     useEffect(() => {
         if ( !quote.tarifas ){
             setRequest({ loading: true, error: false });

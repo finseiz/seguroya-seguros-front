@@ -19,6 +19,8 @@ import * as Yup from "yup";
 export const ConfirmationCode = ({ redirectRoute, messageIndex, email = "", onSubmit, showModal=true }) => {
 
   const [openModal, setOpenModal] = useState(false);
+  const history = useHistory();
+  
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const history = useHistory();
@@ -27,6 +29,7 @@ export const ConfirmationCode = ({ redirectRoute, messageIndex, email = "", onSu
     "Digita el código que se ha enviado por mensaje de texto a tu celular",
     "Digita el código que se ha enviado a tu correo electrónico"
   ];
+
   const formik = useFormik({
     initialValues: { otp: "" },
     validationSchema: Yup.object().shape({

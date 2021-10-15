@@ -25,7 +25,7 @@ export const carsProcessSteps = [
     title: "Selecciona tu plan",
   },
   {
-    title: "Verfica tu identidad",
+    title: "Verifica tu identidad",
   },
   {
     title: "Llena el SARLAFT",
@@ -38,13 +38,16 @@ export const carsKmProcessSteps = [
     title: "Autorizaciones",
   },
   {
-    title: "Verfica tu identidad",
+    title: "Verifica tu identidad",
+  },
+  {
+    title: "Compra finalizada",
   }
 ]
 
 export const healthProcessSteps = [
   {
-    title: "Beneficiarios"
+    title: "Asegurados"
   },
   {
     title: "Selecciona el plan",
@@ -55,4 +58,10 @@ export const healthProcessSteps = [
   {
     title: "Autorizaciones",
   },
+  {
+    title: "Verifica tu identidad",
+  },
+  {
+    title: "Compra finalizada",
+  }
 ]

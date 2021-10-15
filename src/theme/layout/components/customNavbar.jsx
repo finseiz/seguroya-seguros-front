@@ -29,7 +29,7 @@ function CustomNavbar() {
               alt="wa-icon"
               className="mx-2 my-1 whatsapp-icon"
             />
-            ¡Contactanos por WhatsApp +57 340 5689!
+            ¡Contactanos por WhatsApp!
           </div>
         </a>
       </div>
@@ -54,7 +54,7 @@ function CustomNavbar() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <div className="mr-auto">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-
+ 
                 <li className="nav-item">
                   <NavLink to={HomeRoute} className="nav-link" activeClassName="active" >
                     Inicio
@@ -75,7 +75,7 @@ function CustomNavbar() {
 
                 <li className="nav-item">
                   <NavLink to={FrequentQuestionsRoute} className="nav-link" activeClassName="active" >
-                    Preguntas
+                    Preguntas frecuentes
                   </NavLink>
                 </li>
 

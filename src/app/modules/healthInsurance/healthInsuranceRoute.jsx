@@ -1,6 +1,6 @@
 import { AsideProcess } from "app/components/process/AsideProcess";
 import { healthProcessSteps } from "app/helpers/process-steps";
-import { HealthHomeRoute, HealthProcessAuthRoute, HealthProcessBeneficiariesRoute, HealthProcessDetailsPlanRoute, HealthProcessDoneRoute, HealthProcessInsurabilityRoute, HealthProcessSelectPlanRoute } from "app/routes/childs/Health/routes";
+import { HealthHomeRoute, HealthProcessAuthRoute, HealthProcessBeneficiariesRoute, HealthProcessDetailsPlanRoute, HealthProcessDoneRoute, HealthProcessInsurabilityRoute, HealthProcessSelectPlanRoute,HealthProcessOTPRoute } from "app/routes/childs/Health/routes";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
@@ -11,10 +11,12 @@ import { Beneficiaries } from "./components/SuraProcess/fill-data/beneficiaries/
 import InsurabilityInfo from "./components/SuraProcess/fill-data/Insurability/Insurability";
 import { PlanDetails } from "./components/SuraProcess/select-plan/PlanDetails";
 import { SelectSuraHealthPlan } from "./components/SuraProcess/select-plan/SelectHealthPlan";
+import { sendOtp, verifyOtp } from "./components/SuraProcess/controller.js";
+import { ConfirmationCode } from "../_general/OTP";
 
 export default function HealthInsuranceRoute() {
 
-  const { data:{client}, progress:{initial} } = useSelector(state => state.healthInsurance)
+  const { data:{client}, progress:{initial}, selectedPlan:{quoteId}  } = useSelector(state => state.healthInsurance)
   const history = useHistory()
 
   /** Health Route Protection */
@@ -56,6 +58,20 @@ export default function HealthInsuranceRoute() {
           path={HealthProcessAuthRoute}
           component={Authorization}
         />
+
+        <Route
+          exact={true}
+          path={HealthProcessOTPRoute}
+          component={
+            () => <ConfirmationCode 
+              email={client.email}
+              onSubmit={(otp) => verifyOtp(quoteId, otp) }
+              redirectRoute={HealthProcessDoneRoute} 
+              messageIndex={1}
+           />
+          }
+        />
+
 
         <Route
           exact={true}

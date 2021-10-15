@@ -47,19 +47,7 @@ export function Step3({ formik, setCirculation }) {
           { formikValue: "mostImportant", label: "La compañía de seguros", value: "Compañía" },
           { formikValue: "mostImportant", label: "Los valores agregados, como el servicio de conductor elegido o profesional", value: "Otros" },
         ]}
-      />
-
-      <Question
-        question={"¿Autorizo el tratamiento de mis datos personales a Seguro Ya?"}
-        className="mt-4"
-        formik={formik}
-        showError
-        options={[
-          { formikValue: "dataAuthorization", label: "Si", value: true },
-          { formikValue: "dataAuthorization", label: "No", value: false },
-        ]}
-      />
-
+      />     
       <Question
         question={"Estás buscando un seguro todo riesgo o un seguro por kilómetros (el valor del seguro depende de los kilometros recorridos en su vehíco) para tu vehículo?"}
         className="mt-4"
@@ -96,6 +84,18 @@ export function Step3({ formik, setCirculation }) {
           </div>
         )
       }
+      
+       <Question
+        question={"¿Autorizo el tratamiento de mis datos personales a Seguro Ya?"}
+        className="mt-4"
+        formik={formik}
+        showError
+        options={[
+          { formikValue: "dataAuthorization", label: "Si", value: true },
+          { formikValue: "dataAuthorization", label: "No", value: false },
+        ]}
+      />
+
 
     </div>
   );

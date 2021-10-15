@@ -10,10 +10,11 @@ import { actions } from "app/modules/healthInsurance/redux";
 
 import { questionAuthTerms, questionAuthPersonalData, questionAuthContent } from "./questions-values";
 import { activeRadio, onChangeQuestion, activeError, canContinue } from "../../../../../_forms/forms-actions";
-import { HealthProcessDoneRoute } from "app/routes/childs/Health/routes";
+import { HealthProcessOTPRoute } from "app/routes/childs/Health/routes";
 import { DataAuthorization } from "app/components/process/DataAuthorization";
-import { findPlan } from "../../controller";
+import { findPlan,sendOtp } from "../../controller";
 import { termsAndConditions } from "app/helpers/terms-conditions";
+
 
 export const Authorization = ({ }) => {
 
@@ -60,8 +61,9 @@ export const Authorization = ({ }) => {
         const allTrue = validateAllTrue();
         if (canContinue(values)) {
           if (allTrue) {
-            dispatch(actions.setSuraProgress(4));
-            history.push(HealthProcessDoneRoute);
+            dispatch(actions.setSuraProgress(4));             
+            sendOtp(selectedPlan.quoteId);          
+            history.push(HealthProcessOTPRoute); 
           } else {
             setShowError(true);
           }

@@ -182,8 +182,7 @@ export const SarlaftForm = ({ redirectRoute, onLoad, updateForm=false }) => {
         <div className="row row-cols-3">
 
           {simpleField("date", "Fecha Diligenciamiento", "date")}
-
-          {select("requestType", "Tipo de Solicitud", vinculationTypes)}
+          {select("requestType", "Tipo de Solicitud", [{title: "Vinculación", value: "VINCULACION"}])}
 
         </div>
 

@@ -16,7 +16,7 @@ export const SelectCarsPlan = () => {
         if (  plans.length === 0 ){
             setRequest({ loading: true, error: false });
             getPlans(dataToSend, dispatch)
-            .then( _ => {
+            .then( _ => {                
                 setRequest({ loading: false, error: false });
             })
             .catch( _ => setRequest({ loading: false, error: true }) )
