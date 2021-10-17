@@ -42,7 +42,10 @@ export const Payment = ({ payment:{ name, description, amount }}) => {
     return (
         <>
             {
-                !initialLoading &&
+                initialLoading ?
+                (
+                    <p>Espere...</p>
+                ):
                 (
                     <button
                         className="btn btn-primary primary-button w-100 mt-3"
