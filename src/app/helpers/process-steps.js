@@ -50,9 +50,6 @@ export const healthProcessSteps = [
     title: "Asegurados"
   },
   {
-    title: "Selecciona el plan",
-  },
-  {
     title: "Información de asegurabilidad",
   },
   {

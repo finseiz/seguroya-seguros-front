@@ -1,6 +1,14 @@
 import { actions } from "../../redux";
-import { getPlansRequest, getQuoteRequest } from "../../repository";
+import { getDiseasesRequest, getPlansRequest, getQuoteRequest } from "../../repository";
 import { sendOtpRequest, verifyOtpRequest } from "app/modules/_general/repositories/otp";
+
+export const getDiseases = async ( ) => {
+    const response = await getDiseasesRequest();
+    if ( response.status === 200 ){
+        return response.body;
+    }
+    return [];
+}
 
 export const getPlans = async (clienteData, dispatch) => {
 

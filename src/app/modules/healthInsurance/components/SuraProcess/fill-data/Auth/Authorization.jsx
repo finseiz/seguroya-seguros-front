@@ -61,7 +61,7 @@ export const Authorization = ({ }) => {
         const allTrue = validateAllTrue();
         if (canContinue(values)) {
           if (allTrue) {
-            dispatch(actions.setSuraProgress(4));             
+            dispatch(actions.setSuraProgress(3));             
             sendOtp(selectedPlan.quoteId);          
             history.push(HealthProcessOTPRoute); 
           } else {

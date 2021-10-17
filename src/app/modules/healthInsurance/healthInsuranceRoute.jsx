@@ -20,9 +20,9 @@ export default function HealthInsuranceRoute() {
   const history = useHistory()
 
   /** Health Route Protection */
-  if ( !client.email && !(initial === 100) ){
-    history.push(HealthHomeRoute)
-  }
+  // if ( !client.email && !(initial === 100) ){
+  //   history.push(HealthHomeRoute)
+  // }
 
   return (
     <Switch>
