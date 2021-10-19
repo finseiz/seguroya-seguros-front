@@ -7,31 +7,31 @@ import FormikSelect from 'app/modules/_forms/general/FormikSelect'
 import FormikRadioGroup from 'app/modules/_forms/general/FormikRadioGroup'
 import { getDiseases } from '../../controller'
 
-const BeneficiaryForm = ({ beneficiary: { firstName, surname }, formik, first, onPrevious }) => {
+const BeneficiaryForm = ({ beneficiary: { firstName, surname }, formik, first, onPrevious, loading }) => {
 
     const [diseaseList, setDiseaseList] = useState([]);
     const relatives = useMemo(() => [
-        {id: "MADRE", "nombre": "Madre"},
-        {id: "PADRE", "nombre": "Padre"},
-        {id: "HERMANOS", "nombre": "Hermanos/as"},
+        { id: "MADRE", "nombre": "Madre" },
+        { id: "PADRE", "nombre": "Padre" },
+        { id: "HERMANOS", "nombre": "Hermanos/as" },
     ], []);
 
     const maritalStatus = useMemo(() => [
-        {value: "", title: "Seleccione"},
-        {value: "SOLTERO", title: "Soltero"},
-        {value: "CASADO", title: "Casado"},
-        {value: "VIUDO", title: "Viudo"},
-        {value: "UNION_LIBRE", title: "Union libre"},
+        { value: "", title: "Seleccione" },
+        { value: "SOLTERO", title: "Soltero" },
+        { value: "CASADO", title: "Casado" },
+        { value: "VIUDO", title: "Viudo" },
+        { value: "UNION_LIBRE", title: "Union libre" },
     ], []);
 
     useEffect(() => {
         getDiseases()
-        .then((data) => setDiseaseList(data) )
+            .then((data) => setDiseaseList(data))
     }, [])
 
     return (
         <BaseSection>
-        
+
             <p className="process__ins-info-userfullname">{`Declaración  ${firstName} ${surname} `}</p>
 
             <p className="process__ins-info-question"> 1. ¿Le han diagnosticado alguna enfermedad? </p>
@@ -71,7 +71,7 @@ const BeneficiaryForm = ({ beneficiary: { firstName, surname }, formik, first, o
             <div className="row row-cols-3">
 
                 <div className="col p-0 pr-2 mt-2">
-                    <FormikInput field={`occupation`} formik={formik} label="Ocupación"/>
+                    <FormikInput field={`occupation`} formik={formik} label="Ocupación" />
                 </div>
 
                 <div className="col p-0 pr-2 mt-2">
@@ -79,104 +79,109 @@ const BeneficiaryForm = ({ beneficiary: { firstName, surname }, formik, first, o
                 </div>
 
                 <div className="col p-0 pr-2 mt-2">
-                    <FormikInput field={`weight`} formik={formik} label="Peso" type="number"/>
+                    <FormikInput field={`weight`} formik={formik} label="Peso" type="number" />
                 </div>
 
                 <div className="col p-0 pr-2 mt-2">
-                    <FormikInput field={`height`} formik={formik} label="Estatura (cm)" type="number"/>
+                    <FormikInput field={`height`} formik={formik} label="Estatura (cm)" type="number" />
                 </div>
 
                 <div className="col p-0 pr-2 mt-2">
-                    <FormikInput field={`otherWeight`} formik={formik} label="Kg ganados/perdidos en el último año (+3/-2)"/>
+                    <FormikInput field={`otherWeight`} formik={formik} label="Kg ganados/perdidos en el último año (+3/-2)" />
                 </div>
 
                 <div className="col p-0 pr-2 mt-2">
-                    <FormikInput field={`company`} formik={formik} label="Empresa donde trabaja"/>
+                    <FormikInput field={`company`} formik={formik} label="Empresa donde trabaja" />
                 </div>
 
                 <div className="col p-0 pr-2 mt-2">
-                    <FormikInput field={`eps`} formik={formik} label="EPS"/>
+                    <FormikInput field={`eps`} formik={formik} label="EPS" />
                 </div>
 
                 <div className="col p-0 pr-2 mt-2">
-                    <FormikRadioGroup 
-                        field={`childenOver18`} 
-                        formik={formik} 
-                        label="¿Tiene numero de hijos dependientes menores de 18 años?" 
-                        radioLabelClass="process__ins-info-radio"
-                        options={[
-                            {title: "Si", value: true},
-                            {title: "No", value: false},
-                        ]}
-                    />
-                </div>
-
-                <div className="col p-0 pr-2 mt-2">
-                    <FormikRadioGroup 
-                        field={`highOccupationRisk`} 
+                    <FormikRadioGroup
+                        field={`childenOver18`}
                         formik={formik}
-                        label="¿La ocupación tiene riesgo?" 
+                        label="¿Tiene numero de hijos dependientes menores de 18 años?"
                         radioLabelClass="process__ins-info-radio"
                         options={[
-                            {title: "Si", value: true},
-                            {title: "No", value: false},
+                            { title: "Si", value: true },
+                            { title: "No", value: false },
                         ]}
                     />
                 </div>
 
                 <div className="col p-0 pr-2 mt-2">
-                    <FormikRadioGroup 
-                        field={`requestingSeniority`} 
+                    <FormikRadioGroup
+                        field={`highOccupationRisk`}
+                        formik={formik}
+                        label="¿La ocupación tiene riesgo?"
+                        radioLabelClass="process__ins-info-radio"
+                        options={[
+                            { title: "Si", value: true },
+                            { title: "No", value: false },
+                        ]}
+                    />
+                </div>
+
+                <div className="col p-0 pr-2 mt-2">
+                    <FormikRadioGroup
+                        field={`requestingSeniority`}
                         formik={formik}
                         label="¿Solicita antiguedad?"
                         radioLabelClass="process__ins-info-radio"
                         options={[
-                            {title: "Si", value: true},
-                            {title: "No", value: false},
+                            { title: "Si", value: true },
+                            { title: "No", value: false },
                         ]}
                     />
                 </div>
 
                 <div className="col p-0 pr-2 mt-2">
-                    <FormikRadioGroup 
-                        field={`emergency`} 
+                    <FormikRadioGroup
+                        field={`emergency`}
                         formik={formik}
-                        label="Emergencia médica" 
+                        label="Emergencia médica"
                         radioLabelClass="process__ins-info-radio"
                         options={[
-                            {title: "Si", value: true},
-                            {title: "No", value: false},
+                            { title: "Si", value: true },
+                            { title: "No", value: false },
                         ]}
                     />
                 </div>
 
             </div>
 
-            <div className="row justify-content-between mt-5">
+            {
+                !loading &&
+                (
+                    <div className="row justify-content-between mt-5">
 
-                <div>
-                    {
-                        !first && 
-                        (
-                            <button 
-                                className="btn btn-primary primary-button process__process-button px-5" 
-                                type="button"
-                                onClick={onPrevious}
-                            > Anterior </button>
-                        )
-                    }
-                </div>
+                        <div>
+                            {
+                                !first &&
+                                (
+                                    <button
+                                        className="btn btn-primary primary-button process__process-button px-5"
+                                        type="button"
+                                        onClick={onPrevious}
+                                    > Anterior </button>
+                                )
+                            }
+                        </div>
 
-                <div>
-                    {
-                        <button 
-                            className="btn btn-primary primary-button process__process-button px-5" 
-                            type="submit"
-                        > Siguiente </button>
-                    }
-                </div>
+                        <div>
+                            {
+                                <button
+                                    className="btn btn-primary primary-button process__process-button px-5"
+                                    type="submit"
+                                > Siguiente </button>
+                            }
+                        </div>
 
-            </div>
+                    </div>
+                )
+            }
 
         </BaseSection>
     )

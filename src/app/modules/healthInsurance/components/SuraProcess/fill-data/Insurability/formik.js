@@ -6,7 +6,6 @@ export const initialValues = ( beneficiary ) => {
         diseaseList: [], 
         otherDisease: "", 
         familyDisease: [],
-        occupation: "",
         maritalStatus: "",
         weight: "",
         height: "",
@@ -18,34 +17,18 @@ export const initialValues = ( beneficiary ) => {
         requestingSeniority: "",
         emergency: "",
         ...beneficiary,
+        occupation: "",
     })
 }
 
-// "ocupacion": occupation,
-// "estadoCivil": maritalStatus,
-// "peso": weight,
-// "estatura": height,
-// "pesoGanado": otherWeight,
-// "empresaTrabajo": company,
-// "eps": eps,
-// "hijosMenores": childenOver18,
-// "trabajoRiesgoso": highOccupationRisk
-// "antiguedad": requestingSeniority,
-// "emergenciaMedica": emergency,
-// "enfermedades": diseaseList,
-// "enfermedadesDistintas": otherDisease,
-// "familiares": familyDisease,
-// "nombre": firstName + " " + middleName + " " + surname + " " + secondSurname
-
-
 export const insurabilitySchema = Yup.object().shape({
-    occupation: Yup.string().required("Campo requerido"),
+    occupation: Yup.string().required("Campo requerido").min(3).max(30),
     maritalStatus: Yup.string().required("Campo requerido"),
-    weight: Yup.number().required("Campo requerido"),
-    height: Yup.number().required("Campo requerido"),
-    otherWeight: Yup.number().required("Campo requerido"),
-    company: Yup.string().required("Campo requerido"),
-    eps: Yup.string().required("Campo requerido"),
+    weight: Yup.number().required("Campo requerido").min(1),
+    height: Yup.number().required("Campo requerido").min(10).max(999),
+    otherWeight: Yup.string().required("Campo requerido"),
+    company: Yup.string().required("Campo requerido").min(3).max(30),
+    eps: Yup.string().required("Campo requerido").min(3).max(30),
     childenOver18: Yup.bool().required("Campo requerido"),
     highOccupationRisk: Yup.bool().required("Campo requerido"),
     requestingSeniority: Yup.bool().required("Campo requerido"),

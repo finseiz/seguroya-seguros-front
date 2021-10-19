@@ -15,6 +15,7 @@ const initialState = {
   selectedPlan: {},
   data: {
     client: {},
+    insurabilityInfoBeneficiaries: []
   }
 };
 
@@ -65,6 +66,10 @@ const resetState = () => (dispatch) => {
   dispatch(healthInsuranceSlice.actions.reset());
 }
 
+const handleInsurabilityPerson = (person) => (dispatch) => {
+  dispatch(healthInsuranceSlice.actions.addOrUpdateInsurabilityPerson(person));
+}
+
 export const actions = {
   setInitialProgress,
   setPlans,
@@ -75,7 +80,8 @@ export const actions = {
   updateBeneficiary,
   setGeneralListsValues,
   setClientData,
-  resetState
+  resetState,
+  handleInsurabilityPerson
 };
 
 export const healthInsuranceSlice = createSlice({
@@ -120,6 +126,17 @@ export const healthInsuranceSlice = createSlice({
       const data = action.payload;
       state.data.client = {...state.data.client, ...data};
     },
-    reset: ( ) => initialState 
+    reset: ( ) => initialState,
+    addOrUpdateInsurabilityPerson: ( state, action ) => {
+      const data = action.payload;
+      const list = state.data.insurabilityInfoBeneficiaries;
+
+      const index = list.findIndex( person => person.document === data.document );
+      if ( index !== -1 ) {
+        state.data.insurabilityInfoBeneficiaries[index] = { ...state.data.insurabilityInfoBeneficiaries[index], ...data };
+      }else{
+        state.data.insurabilityInfoBeneficiaries.push(data);
+      }
+    }
   },
 });

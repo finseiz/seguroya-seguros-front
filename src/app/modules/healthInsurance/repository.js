@@ -8,6 +8,7 @@ const occupationsPath = baseURL + "ocupaciones"
 const plansPath = baseURL + "soluciones-salud"
 const quote = baseURL + "cotizar-salud"
 const diseasesPath = baseURL + "enfermedades-salud"
+const beneficiariesInfoPath = baseURL + "info-salud"
 
 export const getCitiesRequest = async () => {
     const response = await makeRequest({path: citiesPath, method: "GET" });
@@ -54,6 +55,16 @@ export const getDiseasesRequest = async () => {
         path: diseasesPath, 
         method: "GET" 
     })
+    const body = await response.json()
+    return {body, status: response.status}
+}
+
+export const postBeneficiariesInfo = async ( data ) => {    
+    const response = await makeRequest({
+        path: beneficiariesInfoPath, 
+        method: "POST",
+        body: JSON.stringify(data)
+    });
     const body = await response.json()
     return {body, status: response.status}
 }

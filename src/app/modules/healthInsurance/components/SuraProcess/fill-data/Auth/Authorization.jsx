@@ -54,6 +54,11 @@ export const Authorization = ({ }) => {
 
   const actionsButton = [
     {
+      text: "Atras",
+      className: "btn btn-primary primary-button process__process-button px-5 mx-3",
+      onClick: () => history.goBack(),
+    },
+    {
       text: "Continuar",
       className: "btn btn-primary primary-button process__process-button px-5 mx-3",
       onClick: () => {
