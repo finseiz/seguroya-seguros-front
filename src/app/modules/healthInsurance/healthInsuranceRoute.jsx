@@ -16,7 +16,7 @@ import { ConfirmationCode } from "../_general/OTP";
 
 export default function HealthInsuranceRoute() {
 
-  const { data:{client}, progress:{initial}, selectedPlan:{quoteId}  } = useSelector(state => state.healthInsurance)
+  const { data:{client}, progress:{initial}, selectedPlan:{quoteId, payment}  } = useSelector(state => state.healthInsurance)
   const history = useHistory()
 
   /** Health Route Protection */
@@ -78,6 +78,11 @@ export default function HealthInsuranceRoute() {
           path={HealthProcessDoneRoute}
           component={() => <ProcessDone
             bottomMessage="Te llamaremos pronto para concluir el proceso"
+            payment={{
+              name: "Seguro de Salud",
+              description: `Seguro de salud con Sura de pago ${payment.tipo} (El presente represente tu primer o único pago)`,
+              amount: payment.valorTotal
+            }}
           />}
         />
 

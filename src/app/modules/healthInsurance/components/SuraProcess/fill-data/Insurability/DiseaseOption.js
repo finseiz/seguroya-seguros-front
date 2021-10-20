@@ -1,32 +1,32 @@
 import React, { useMemo } from 'react'
 import Radio from "app/modules/_forms/general/Radio"
 
-export const DiseaseOption = ({ formik, id, value, fieldList }) => {
+export const DiseaseOption = ({ formik, value, fieldList }) => {
     
-    const list = formik.values[id][fieldList];
+    const list = formik.values[fieldList];
 
     const addOrRemoveItem = () => {
-        let valuesCopy = [...formik.values];
-        const index = list.findIndex( disease => value === disease )
+        let valuesCopy = [...formik.values[fieldList]];
+        const index = list.findIndex( diseaseId => value.id === diseaseId )
         if ( index !== -1 ) {
-            valuesCopy[id][fieldList].splice( index, 1 );
+            valuesCopy.splice( index, 1 );
         }else{
-            valuesCopy[id][fieldList].push(value)
+            valuesCopy.push(value.id)
         }
-        formik.setValues(valuesCopy)
+        formik.setFieldValue(fieldList, valuesCopy)
     }
 
     return (
         <div className="row">
             <div className="col-md-auto p-0">
                 <Radio
-                    active={list.some(disease => value === disease)}
+                    active={list.some(diseaseId => value.id === diseaseId)}
                     imageType="square"
                     onClick={addOrRemoveItem}
                 />
             </div>
             <div className="col p-0">
-                {value}
+                {value.nombre}
             </div>
 
         </div>

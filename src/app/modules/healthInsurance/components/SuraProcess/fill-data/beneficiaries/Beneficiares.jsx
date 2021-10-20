@@ -2,7 +2,7 @@ import TableProcess from "app/components/process/table/Table";
 import BaseSection from "app/components/UI/baseSection";
 import { actions } from "app/modules/healthInsurance/redux";
 import { HealthProcessDetailsPlanRoute, HealthProcessSelectPlanRoute } from "app/routes/childs/Health/routes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import AddBeneficiary from "./AddBeneficiaryModal";
@@ -16,20 +16,24 @@ export function Beneficiaries({}) {
 
     const handleCloseAddModal = () => setModalState({ open: false, initialValues: {} });
 
+    useEffect(() => {
+        dispatch(actions.setSuraProgress(0));
+    }, [])
+
     const actionsButton = [
         {
             text: "Atras",
             className: "btn btn-primary primary-button process__process-button px-5 mx-3",
             onClick: () => {
-                dispatch(actions.setSuraProgress(1));
-                history.push(HealthProcessSelectPlanRoute);
+                dispatch(actions.setSuraProgress(0));
+                history.goBack();
             },
         },
         {
             text: "Continuar",
             className: "btn btn-primary primary-button process__process-button px-5 mx-3",
             onClick: () => {
-                dispatch(actions.setSuraProgress(2));
+                dispatch(actions.setSuraProgress(1));
                 history.push(HealthProcessDetailsPlanRoute);
             },
         },
@@ -38,7 +42,7 @@ export function Beneficiaries({}) {
     return (
 
         <BaseSection
-            title="Perfilamiento"
+            title="Inscripción de asegurados"
             actions={actionsButton}
         >
 
