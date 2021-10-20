@@ -39,10 +39,13 @@ const InsurabilityInfo = () => {
                 setLoading(true);
                 const canContinue = await sendBeneficiariesInformation(quoteId, documentTypes, insurabilityInfoBeneficiaries)
                 setLoading(false);
-                // if (canContinue) {
-                //     dispatch(actions.setSuraProgress(2));
-                //     history.push(HealthProcessAuthRoute);
-                // }
+                if (canContinue) {
+                    dispatch(actions.setSuraProgress(2));
+                    history.push(HealthProcessAuthRoute);
+                }else{
+                    setMessage({type: 'danger', message: 'Error al envía los datos, por favor intenta nuevamente', show: true});
+                    setTimeout(() => setMessage({type: '', message: '', show: false}), 4000);    
+                }
             } else {
                 setCurrentBeneficiary(currentBeneficiary + 1);
                 setMessage({type: 'success', message: '¡Excelente! Información agregada satisfactoriamente', show: true});
@@ -85,7 +88,7 @@ const InsurabilityInfo = () => {
             {
                 message.show &&
                 (
-                    <div className="alert alert-success mx-4" role="alert">
+                    <div className={`alert alert-${message.type} mx-4`} role="alert">
                         { message.message }
                     </div>
                 )

@@ -65,6 +65,5 @@ export const postBeneficiariesInfo = async ( data ) => {
         method: "POST",
         body: JSON.stringify(data)
     });
-    const body = await response.json()
-    return {body, status: response.status}
+    return {status: response.status}
 }
