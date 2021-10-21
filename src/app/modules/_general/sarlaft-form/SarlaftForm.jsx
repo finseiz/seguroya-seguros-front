@@ -20,7 +20,7 @@ import PropTypes from 'prop-types'
  * @param {bool} redirectRoute - This variable allows to 
  * @returns 
  */
-export const SarlaftForm = ({ redirectRoute, onLoad, updateForm=false }) => {
+export const SarlaftForm = ({ redirectRoute, onLoad, updateForm=false, canSkip=false }) => {
 
   const [requestStatus, setRequestStatus] = useState({ loading: false, error: false})
 
@@ -112,10 +112,16 @@ export const SarlaftForm = ({ redirectRoute, onLoad, updateForm=false }) => {
 
   const actionsButton = [
     {
-      text: "Continuar",
+      text: "Enviar",
       className: "btn btn-primary primary-button",
       type: "submit",
     },
+    canSkip === true ? {
+      text: "Omitir",
+      className: "btn btn-primary primary-button mx-2",
+      type: "button",
+      onClick: () => history.push(redirectRoute)
+    } : undefined
   ];
 
   const simpleField = (field, label, type = "text") => {
