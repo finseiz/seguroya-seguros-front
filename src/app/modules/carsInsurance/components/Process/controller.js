@@ -4,6 +4,7 @@ import { createQuoteRequest, getPlansRequest } from "./repository";
 import { bolivarPlan } from 'app/helpers/select-plan';
 import { CarsProcessDetailsPlanRouteFunc } from "app/routes/childs/Cars/routes";
 import { sendOtpRequest, verifyOtpRequest } from "app/modules/_general/repositories/otp";
+import { parseCurrency } from "app/helpers/parse-currency";
 
 const prepareData = (data) => {
     return {
@@ -43,9 +44,11 @@ export const getPlans = async (dataToSend, dispatch) => {
                 logoPath: "bolivar-logo.svg",
                 insuranceName: `Bolivar - ${responseData.opcionAutosDescripcion}`,
                 //qualification: 3,
-                anualPrice: responseData.pagoMensual,
+                totalPrice: responseData.totalPrima,
+                monthPrice: responseData.pagoMensual,
                 descriptionValues: [
-                    { label: "Tipo de cobertura", value: "Todo riesgo"}
+                    { label: "Tipo de cobertura", value: "Todo riesgo"},
+                    { label: (<p>Valor mensual <br/>Diferido a 10 cuotas mensuales</p>), value: `${parseCurrency(responseData.pagoMensual)}COP`, includeInfo: true},
                 ],
                 id: responseData.numerodeliquidacion,
                 redirect: CarsProcessDetailsPlanRouteFunc,

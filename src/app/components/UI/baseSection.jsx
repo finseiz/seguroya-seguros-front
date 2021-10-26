@@ -50,6 +50,7 @@ function BaseSection({ children, title, description, actions, loading=false }) {
                   </div>
                 ):
                 actions.map((action, index) => {
+                  if (action === undefined ) return (<></>)
                   const { content, text, ...props } = action;
                   return (
                     <button

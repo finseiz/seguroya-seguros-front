@@ -9,7 +9,9 @@ import Comments from "./../../../../../components/process/Comments";
 import { actions } from 'app/modules/carsInsurance/redux';
 import { CarsProcessOtpRoute } from 'app/routes/childs/Cars/routes';
 import { createQuote, sendOtp } from '../controller';
-
+import { useFormik } from 'formik';
+import * as Yup from "yup";
+import FormikRadioGroup from 'app/modules/_forms/general/FormikRadioGroup';
 
 export const PlanDetails = () => {
 
@@ -39,18 +41,33 @@ export const PlanDetails = () => {
 
     const selectPlan = useMemo(() => plans.find(plan => plan.id === parseInt(id)), [])
 
-    const onSubmit = async () => {
+    const onSubmit = async ({ selectedPayment }) => {
         setRequestStatus({ loading: true, error: false })
         const response = await createQuote(dataToSend, id)
         if (response) {
             setRequestStatus({ loading: false, error: false })
-            dispatch(actions.setSelectedPlan({...selectPlan, quoteId: response}))
+            dispatch(actions.setSelectedPlan({...selectPlan, quoteId: response, selectedPayment}))
             sendOtp(response);
             history.push(CarsProcessOtpRoute);
         } else {
             setRequestStatus({ loading: false, error: true })
         }
     }
+
+    const formik = useFormik({
+        initialValues: { selectedPayment: "" },
+        validationSchema: Yup.object().shape({ selectedPayment: Yup.string().required("Campo requerido") }),
+        onSubmit
+    })
+
+    const radioOption = ( name, value ) => (
+        <div>
+            <p className="mb-1 plans_sal_plan-value-2"> {
+                parseCurrency(parseInt(value))
+            } </p>
+            <p className=""> {`Pago ${name}`} </p>
+        </div>
+    )
 
     return (
         <div className="container my-5">
@@ -126,36 +143,44 @@ export const PlanDetails = () => {
 
 
                                     {/** Insurance Price */}
-                                    <div className="">
-                                        <p className="mb-1 plans_sal_plan-label-2"> Precio </p>
-                                        <p className="mb-1 plans_sal_plan-value-2"> {parseCurrency(selectPlan.anualPrice)} </p>
-                                    </div>
+                                    <form onSubmit={formik.handleSubmit}>
 
-                                    {/**Insurance Button */}
-                                    {
-                                        requestStatus.loading ?
-                                        (
-                                            <div className="spinner-border" role="status">
-                                                <span className="sr-only"></span>
-                                            </div>
+                                        {/** Insurance Price */}
+                                        <div>
+                                            <p className="mb-1 plans_sal_plan-label-2"> Precios </p>
+                                            
+                                                <FormikRadioGroup
+                                                    formik={formik}
+                                                    field="selectedPayment"
+                                                    options={[
+                                                        { title: radioOption('Anual', selectPlan.totalPrice), value: 'totalPrice'},
+                                                        { title: radioOption('Mensual', selectPlan.monthPrice), value: 'monthPrice'}
+                                                    ]}
+                                                    optionsClass="flex-column"
+                                                />
+                                        </div>                                    
 
-                                        ) :
-                                        (
+                                        {/**Insurance Button */}
+                                        {
+                                            requestStatus.loading ?
+                                            (
+                                                <div className="spinner-border" role="status">
+                                                    <span className="sr-only"></span>
+                                                </div>
 
-                                            <div className="text-center">
-                                                <button
-                                                    type="button"
-                                                    className="btn primary_btn_expand w-100"
-                                                    onClick={onSubmit}
-                                                >
-                                                    Comprar
-                                                </button>
-                                            </div>
-                                        )
-                                    }
+                                            ) :
+                                            (
 
-
-
+                                                <div className="text-center">
+                                                    <button
+                                                        className="btn primary_btn_expand w-100"
+                                                    >
+                                                        Comprar
+                                                    </button>
+                                                </div>
+                                            )
+                                        }
+                                    </form>
 
                                 </div>
 
