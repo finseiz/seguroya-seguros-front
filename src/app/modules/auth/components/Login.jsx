@@ -38,7 +38,7 @@ export const Login = () => {
         <div className="center-flex text-center auth-login-container">
             <form className="w-75" onSubmit={formik.handleSubmit}>
 
-                <div>
+                <div className= "mt-4">
                     <img
                         className="logo"
                         src={toAbsoluteUrl("/media/logos/logo_seguroya_dark.svg")}
@@ -46,7 +46,7 @@ export const Login = () => {
 
                 </div>
 
-                <div className="bg-white rounded mt-5 mx-auto">
+                <div className="bg-white rounded mt-2 mx-auto">
 
                     <p className="auth-title pt-4"> Iniciar sesión </p>
 

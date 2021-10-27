@@ -4,11 +4,12 @@ import { toAbsoluteUrl } from 'theme/helpers/AssetsHelpers';
 import { useHistory } from 'react-router-dom';
 import { parseCurrency } from 'app/helpers/parse-currency';
 import Qualification from '../Qualification';
+import InfoIcon from '@material-ui/icons/Info';
 
 const CarPlan = (props) => {
 
     const { logoPath, insuranceName, id, qualification, descriptionValues,
-        anualPrice, redirect } = props;
+        totalPrice, redirect } = props;
 
     const history = useHistory();
 
@@ -64,7 +65,7 @@ const CarPlan = (props) => {
 
                 <div className="plans__insurance-desc">
                     <p className="plans_plan-label"> Valor prima </p>
-                    <p className="plans_plan-price"> {parseCurrency(anualPrice)} </p>
+                    <p className="plans_plan-price"> {parseCurrency(totalPrice)} </p>
                 </div>
 
                 {/**Insurance Button */}
