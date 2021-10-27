@@ -1,7 +1,7 @@
 import { actions } from "app/modules/auth/_redux/authRedux";
 import { LoginRoute, RegistryRoute } from "app/routes/childs/Auth/routes";
 import { UserPurchasesRoute } from "app/routes/childs/User/routes";
-import { AboutUsRoute, FrequentQuestionsRoute, HomeRoute, OffersRoute } from "app/routes/routes";
+import { AboutUsRoute, FrequentQuestionsRoute, HomeRoute, OffersRoute,SarlaftRoute } from "app/routes/routes";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -16,6 +16,7 @@ function CustomNavbar() {
   const userName = user?.nombres ?? "";
 
   const logout = () => dispatch(actions.logout());
+  
 
   return (
     <div>
@@ -110,6 +111,11 @@ function CustomNavbar() {
                           ¡Bienvenid@, {userName}!
                         </button>
                         <ul className="dropdown-menu" aria-labelledby="userSessionDropD">
+                          <li>
+                            <NavLink to={SarlaftRoute} className="nav-link" activeClassName="active" >
+                              <span className="dropdown-item" > Llenar Sarlaf</span>
+                            </NavLink>
+                          </li>
                           <li><span className="dropdown-item" onClick={() => logout()}>Cerrar sesión</span></li>
                         </ul>
                       </div>

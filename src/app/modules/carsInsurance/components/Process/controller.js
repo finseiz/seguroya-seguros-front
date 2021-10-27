@@ -51,7 +51,7 @@ export const getPlans = async (dataToSend, dispatch) => {
                 logoPath: "bolivar-logo.svg",
                 insuranceName: `Bolivar - ${responseData.opcionAutosDescripcion}`,
                 //qualification: 3,
-                anualPrice: responseData.totalPrima,
+                anualPrice: responseData.pagoMensual,
                 descriptionValues: [
                     { label: "Tipo de cobertura", value: "Todo riesgo"}
                 ],

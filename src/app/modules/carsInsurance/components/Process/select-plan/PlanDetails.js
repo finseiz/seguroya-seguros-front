@@ -9,6 +9,7 @@ import Comments from "./../../../../../components/process/Comments";
 import { actions } from 'app/modules/carsInsurance/redux';
 import { CarsProcessOtpRoute } from 'app/routes/childs/Cars/routes';
 import { createQuote, sendOtp,getDocumentPdf } from '../controller';
+
  
 
 export const PlanDetails = () => {
@@ -114,7 +115,13 @@ export const PlanDetails = () => {
                                 <div className="col-md-4 p-0">
                                     <div className = "sticky-top">
                                         <div className="custom-card bg-white p-4"> 
-                                        
+                                            <div className = "text-right">
+                                                <img
+                                                    className="logo"
+                                                    src={toAbsoluteUrl("/media/logos/logo_seguroya_dark.svg")}
+                                                />                                                
+                                            </div>                                    
+                                           
                                             {
                                                 selectPlan.qualification &&
                                                 (

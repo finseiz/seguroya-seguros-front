@@ -1,6 +1,14 @@
 import { actions } from "../../redux";
-import { getPlansRequest, getQuoteRequest } from "../../repository";
+import { getDiseasesRequest, getPlansRequest, getQuoteRequest, postBeneficiariesInfo } from "../../repository";
 import { sendOtpRequest, verifyOtpRequest } from "app/modules/_general/repositories/otp";
+
+export const getDiseases = async ( ) => {
+    const response = await getDiseasesRequest();
+    if ( response.status === 200 ){
+        return response.body;
+    }
+    return [];
+}
 
 export const getPlans = async (clienteData, dispatch) => {
 
@@ -134,4 +142,39 @@ export const verifyOtp = async ( quoteId, otp ) => {
 
     return false;
 
+}
+
+const prepareDataSendBenInfo = ( quoteId, documentTypes, data) => {
+    return {
+        datos: data.map( ele => ({
+            antiguedad: ele.requestingSeniority,
+            emergenciaMedica: ele.emergency,
+            empresaTrabajo: ele.company,
+            enfermedades: ele.diseaseList,
+            enfermedadesDistintas: ele.otherDisease,
+            eps: ele.eps,
+            estadoCivil: ele.maritalStatus,
+            estatura: ele.height,
+            familiares: ele.familyDisease,
+            hijosMenores: ele.childenOver18,
+            identificacion: {
+                numero: ele.document,
+                tipo: documentTypes.find( type => type["id"] === ele.documentType )
+            },
+            nombre: ele.firstName + " " + ele.surname,
+            ocupacion: ele.occupation,
+            peso: ele.weight,
+            pesoGanado: ele.otherWeight,
+            trabajoRiesgoso: ele.highOccupationRisk
+        }) ),
+        numCotizacion: quoteId
+    }
+}
+
+export const sendBeneficiariesInformation = async (quoteId, documentTypes, data) => {
+    const body = prepareDataSendBenInfo(quoteId, documentTypes, data);
+    const response = await postBeneficiariesInfo(body);
+    if ( response.status === 200)
+        return true;
+    return false;
 }

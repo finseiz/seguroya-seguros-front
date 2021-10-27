@@ -101,6 +101,12 @@ export const KmPlanDetails = () => {
                                 <div className="col-md-4 p-0">
                                     <div className = "sticky-top">
                                         <div className="custom-card bg-white p-4">
+                                            <div className = "text-right">
+                                                <img
+                                                    className="logo"
+                                                    src={toAbsoluteUrl("/media/logos/logo_seguroya_dark.svg")}
+                                                />                                                
+                                            </div>
 
                                             {/** Insurance qualification */}
                                             {

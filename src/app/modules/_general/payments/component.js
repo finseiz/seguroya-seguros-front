@@ -31,7 +31,7 @@ export const Payment = ({ payment:{ name, description, amount }}) => {
             name: name,
             description: description,
             amount: amount,
-            external: "false",
+            external: "true",
             response: "http://192.168.0.4:3000/pagos"
         };
 
@@ -42,7 +42,10 @@ export const Payment = ({ payment:{ name, description, amount }}) => {
     return (
         <>
             {
-                !initialLoading &&
+                initialLoading ?
+                (
+                    <p>Espere...</p>
+                ):
                 (
                     <button
                         className="btn btn-primary primary-button w-100 mt-3"

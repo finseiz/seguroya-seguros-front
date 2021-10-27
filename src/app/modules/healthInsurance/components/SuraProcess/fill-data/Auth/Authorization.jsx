@@ -54,6 +54,11 @@ export const Authorization = ({ }) => {
 
   const actionsButton = [
     {
+      text: "Atras",
+      className: "btn btn-primary primary-button process__process-button px-5 mx-3",
+      onClick: () => history.goBack(),
+    },
+    {
       text: "Continuar",
       className: "btn btn-primary primary-button process__process-button px-5 mx-3",
       onClick: () => {
@@ -61,7 +66,7 @@ export const Authorization = ({ }) => {
         const allTrue = validateAllTrue();
         if (canContinue(values)) {
           if (allTrue) {
-            dispatch(actions.setSuraProgress(4));             
+            dispatch(actions.setSuraProgress(3));             
             sendOtp(selectedPlan.quoteId);          
             history.push(HealthProcessOTPRoute); 
           } else {
