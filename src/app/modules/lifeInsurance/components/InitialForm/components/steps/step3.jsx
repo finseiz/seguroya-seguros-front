@@ -26,8 +26,8 @@ export function Step3({ formik }) {
         showError
         className="mt-4"
         options={[
-          { formikValue: "insuranceType", label: "Seguro de vida ajustado a tus necesidades", value: "eps" },
-          { formikValue: "insuranceType", label: "Seguro de vida con devolución de hasta el 100% del dinero pagado. ", value: "eps-plan" },
+          { formikValue: "insuranceType", label: "Seguro de vida ajustado a tus necesidades", value: "sura" },
+          { formikValue: "insuranceType", label: "Seguro de vida con devolución de hasta el 100% del dinero pagado. ", value: "colmena" },
         ]}
       />
 

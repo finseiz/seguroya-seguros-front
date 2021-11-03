@@ -1,10 +1,14 @@
 import React, { Suspense } from 'react'
 import { Switch, Route } from "react-router-dom";
-import { LifeHomeRoute, LifeProcessRoute } from './routes'
+import { LifeHomeRoute, LifeProcessRoute, SuraLifeProcessRoute } from './routes'
 import LifePage from 'app/pages/lifePage';
 
 const LifeInsuranceRoute = React.lazy(() =>
   import("app/modules/lifeInsurance/lifeInsuranceRoute")
+);
+
+const SuraLifeInsuranceRoute = React.lazy(() =>
+  import("app/modules/lifeInsurance/SuraLifeInsuranceRoute")
 );
 
 /**
@@ -21,6 +25,8 @@ export const LifeRoutes = () => {
             />
 
             <Route path={ LifeProcessRoute } component={LifeInsuranceRoute} />
+
+            <Route path={ SuraLifeProcessRoute } component={SuraLifeInsuranceRoute} />
 
         </Switch>
     )

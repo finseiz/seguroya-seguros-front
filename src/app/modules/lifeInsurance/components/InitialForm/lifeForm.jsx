@@ -7,7 +7,7 @@ import { actions } from "../../redux";
 import { initialSchema, initialValues } from "./helpers/formik";
 import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
 import { ProgressIndicator } from "../../../../components/process/ProgressIndicator";
-import { LifeProcessSelectPlanRoute } from "app/routes/childs/Life/routes";
+import { LifeProcessSelectPlanRoute, SuraLifeInfoRoute } from "app/routes/childs/Life/routes";
 import { getInitialValues } from "./controller";
 
 function LifeForm() {
@@ -31,7 +31,8 @@ function LifeForm() {
         dispatch(actions.setInitialProgress(50));
         formik.setFieldValue("firstsubmit", true);
       }else{
-        history.push(LifeProcessSelectPlanRoute);
+        if ( values.insuranceType === 'sura') history.push(SuraLifeInfoRoute);
+        else history.push(LifeProcessSelectPlanRoute);
       }
       
     },

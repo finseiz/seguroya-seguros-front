@@ -56,7 +56,7 @@ export const getDepartments = ( departments ) => {
 }
 
 export const getCity = ( departments, departmentId ) => {
-    if ( departments["nombre"] && departmentId > -1 ){
+    if ( departments["nombre"] && parseInt(departmentId) > -1 ){
         const { municipios:types } = departments["map"].find( (element) => element.id ===  parseInt(departmentId) )
         return createSelectOptions(types)
     }

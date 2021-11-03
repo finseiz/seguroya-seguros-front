@@ -36,7 +36,6 @@ export const Payment = ({ payment:{ name, description, amount }}) => {
             external: "false",
             response: "http://192.168.0.4:3000/pagos"
         };
-        debugger;
 
         window.ePayco.checkout.open(data);
     }

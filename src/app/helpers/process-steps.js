@@ -1,4 +1,19 @@
 
+export const suraLifeProcessSteps = [
+  {
+    title: "Información",
+  },
+  {
+    title: "Selecciona tu plan",
+  },
+  {
+    title: "Información de asegurabilidad",
+  },
+  {
+    title: "Código de confirmación",
+  },
+]
+
 export const lifeProcessSteps = [
   {
     title: "Información de asegurabilidad",

@@ -14,7 +14,8 @@ const initialState = {
   },
   general: {
     lists: [],
-    departments: {}
+    departments: {},
+    documentTypes: [],
   }
 };
 
@@ -61,6 +62,18 @@ const resetState = () => (dispatch) => {
   dispatch(lifeInsuranceSlice.actions.reset());
 }
 
+const addBeneficiary = (beneficiary) => (dispatch) => {
+  dispatch(lifeInsuranceSlice.actions.addBeneficiary(beneficiary));
+}
+
+const deleteBeneficiary = (index) => (dispatch) => {
+  dispatch(lifeInsuranceSlice.actions.deleteBeneficiary(index));
+}
+
+const updateBeneficiary = (data, index) => (dispatch) => {
+  dispatch(lifeInsuranceSlice.actions.updateBeneficiary({data, index}));
+}
+
 export const actions = {
   addClientData,
   setPlans,
@@ -69,7 +82,10 @@ export const actions = {
   setShortProcess,
   setGeneralValues,
   setBeneficiares,
-  resetState
+  resetState,
+  addBeneficiary,
+  deleteBeneficiary,
+  updateBeneficiary,
 };
 
 export const lifeInsuranceSlice = createSlice({
@@ -104,6 +120,23 @@ export const lifeInsuranceSlice = createSlice({
       const { values, field } = action.payload;
       state.general[field] = values;
     },
-    reset: ( ) => initialState 
+    reset: ( ) => initialState,
+
+    //Sura
+    addBeneficiary: (state, action) => {
+      const beneficiary = action.payload;
+      state.selectedPlan.beneficiaries.push( {...beneficiary, id: beneficiary.document} );
+    },
+    deleteBeneficiary: (state, action) => {
+      const index = action.payload;
+      const aux = [...state.selectedPlan.beneficiaries];
+      aux.splice(index, 1);
+      state.selectedPlan.beneficiaries = aux;
+    },
+    updateBeneficiary: (state, action) => {
+      const { data, index } = action.payload;
+      state.selectedPlan.beneficiaries[index] = {...data, id: data.document};
+    },
+
   },
 });
