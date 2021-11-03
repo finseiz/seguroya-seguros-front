@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect, Switch, Route, useHistory } from "react-router-dom";
 import { Content } from "theme/layout/utils/content";
-import { SuraLifeBeneficiariesRoute, SuraLifeInfoRoute, SuraLifeProcessDetailsPlanRoute, SuraLifeProcessDone, SuraLifeProcessInsurabilityRoute, SuraLifeProcessOTP, SuraLifeSelectPlanRoute } from "app/routes/childs/Life/routes";
+import { LifeHomeRoute, SuraLifeBeneficiariesRoute, SuraLifeInfoRoute, SuraLifeProcessDetailsPlanRoute, SuraLifeProcessDone, SuraLifeProcessInsurabilityRoute, SuraLifeProcessOTP, SuraLifeSelectPlanRoute } from "app/routes/childs/Life/routes";
 import { suraLifeProcessSteps } from "../../helpers/process-steps";
 import { AsideProcess } from "./../../components/process/AsideProcess";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,9 +22,9 @@ function SuraLifeInsuranceRoute() {
   const dispatch = useDispatch();
 
   /** Life Route Protection */
-  // if ( !clientData.email && !(initial === 100) ){
-  //   history.push(LifeHomeRoute)
-  // }
+  if ( !clientData.email && !(initial === 100) ){
+    history.push(LifeHomeRoute)
+  }
 
   return (
 

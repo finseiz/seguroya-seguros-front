@@ -1,17 +1,29 @@
 import * as Yup from "yup";
 
 export const beneficiariesValues = {
-    firstName: "Pedro",
-    middleName: "Pedro",
-    surname: "Pedro",
-    secondSurname: "Pedro",
-    cellphone: "3101111111",
-    birthDate: "1991-03-22",
-    gender: "F",
-    kinship: 3,
-    documentType: 0,
-    identification: "1061589654",
-    participation: 100,
+    // firstName: "Pedro",
+    // middleName: "Pedro",
+    // surname: "Pedro",
+    // secondSurname: "Pedro",
+    // cellphone: "3101111111",
+    // birthDate: "1991-03-22",
+    // gender: "F",
+    // kinship: 3,
+    // documentType: 0,
+    // identification: "1061589654",
+    // participation: 100,
+
+    firstName: "",
+    middleName: "",
+    surname: "",
+    secondSurname: "",
+    cellphone: "",
+    birthDate: "",
+    gender: "",
+    kinship: "",
+    documentType: "",
+    identification: "",
+    participation: "",
 };
 
 

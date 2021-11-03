@@ -1,27 +1,27 @@
 import * as Yup from "yup";
 
 export const beneficiariesValues = {
-    firstName: "Juan",
-    middleName: "David",
-    surname: "Alca",
-    secondSurname: "Lorza",
-    documentType: "C",
-    document: "87851475",
-    kinship: "NI",
-    birthDate: "2000-01-02",
-    gender: "M",
-    participation: 50
+    // firstName: "Juan",
+    // middleName: "David",
+    // surname: "Alca",
+    // secondSurname: "Lorza",
+    // documentType: "C",
+    // document: "87851475",
+    // kinship: "NI",
+    // birthDate: "2000-01-02",
+    // gender: "M",
+    // participation: 50
 
-    // firstName: "",
-    // middleName: "",
-    // surname: "",
-    // secondSurname: "",
-    // documentType: "",
-    // document: "",
-    // kinship: "",
-    // birthDate: "",
-    // gender: "",
-    // participation: ""
+    firstName: "",
+    middleName: "",
+    surname: "",
+    secondSurname: "",
+    documentType: "",
+    document: "",
+    kinship: "",
+    birthDate: "",
+    gender: "",
+    participation: ""
 };
 
 export const beneficiariesSchema = Yup.object().shape({

@@ -82,7 +82,7 @@ export default function CarsInsuranceRoute() {
             payment={{
               name: "Seguro todo riesto",
               description: `Seguro por kilómetro ${selectedPlan.insuranceName}`,
-              amount: selectedPlan['selectedPayment']
+              amount: selectedPlan[selectedPlan.selectedPayment]
             }}
           />}
         />
