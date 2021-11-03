@@ -7,7 +7,9 @@ export function Layout({ children }) {
     /* wrapper */
     <div className="d-flex flex-column">
       {/* header-wrapper */}
-      <CustomNavbar />
+      <div className = "sticky-top " >
+        <CustomNavbar />
+      </div>
       {/* content-wrapper */}
       <div className="page">{children}</div>
       {/* footer-wrapper */}

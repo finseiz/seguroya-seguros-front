@@ -21,12 +21,11 @@ function CustomNavbar() {
   return (
     <div>
 
-      <div className="container-fluid">
+      <div className="container-fluid bg-white">
         <a href="https://api.whatsapp.com/message/QOFDDFAB7GWIE1" target="_blank">
           <div className="whatsapp-contact text-center">
-
             <img
-              src={toAbsoluteUrl("/media/icons/whatsapp.png")}
+              src={toAbsoluteUrl("/media/icons/Aceptado.png")}
               alt="wa-icon"
               className="mx-2 my-1 whatsapp-icon"
             />
@@ -37,7 +36,7 @@ function CustomNavbar() {
 
       <nav className="navbar navbar-expand-lg navbar-light bg-white">
 
-        <div className="container-fluid">
+        <div className="container-fluid"> 
 
           {/* Seguro Ya Brand */}
           <NavLink to="/" className="navbar-brand">

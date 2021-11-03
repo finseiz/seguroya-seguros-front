@@ -42,9 +42,47 @@ function Footer() {
               </li>
             </ul>
           </div>
-          <div className="col-3">
-            <span>Formas de pago</span>
-            <p>Pago seguro en línea con</p>
+          <div className="col-3 row">
+            <span className ="col-12">Formas de pago</span>
+            <p className ="col-12">Pago seguro en línea con</p>            
+            <div className="col-3 mr-2">
+              <img
+                className="logoPay"                 
+                src={toAbsoluteUrl("/media/logos/visa.png")}
+                alt="visa"
+              />
+            </div>
+            <div className="col-3 mr-2"> 
+              <img
+                  className="logoPay"                 
+                  src={toAbsoluteUrl("/media/logos/mastercard.png")}
+                  alt="mastercard"
+              />
+            </div>
+            <div className="col-3 mr-2"> 
+              <img
+                  className="logoPay"                 
+                  src={toAbsoluteUrl("/media/logos/American.png")}
+                  alt="American"
+              />
+            </div>
+            <div className="col-3 mr-2"> 
+              <img
+                  className="logoPay2"                 
+                  src={toAbsoluteUrl("/media/logos/Diners.png")}
+                  alt="Diners"
+              />
+            </div>
+            <div className="col-3"> 
+              <img
+                  className="logoPay"                 
+                  src={toAbsoluteUrl("/media/logos/pse.png")}
+                  alt="pse"
+              />
+            </div>
+
+           
+          
           </div>
           <div className="col-2">
             <span>Contáctanos</span>
