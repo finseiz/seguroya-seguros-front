@@ -8,7 +8,7 @@ import { parseCurrency } from 'app/helpers/parse-currency';
 import Comments from "./../../../../../components/process/Comments";
 import { actions } from 'app/modules/carsInsurance/redux';
 import { CarsProcessOtpRoute } from 'app/routes/childs/Cars/routes';
-import { createQuote, sendOtp } from '../controller';
+import { createQuote, sendOtp,getDocumentPdf } from '../controller';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 import FormikRadioGroup from 'app/modules/_forms/general/FormikRadioGroup';
@@ -49,6 +49,7 @@ export const PlanDetails = () => {
             dispatch(actions.setSelectedPlan({...selectPlan, quoteId: response, selectedPayment}))
             sendOtp(response);
             history.push(CarsProcessOtpRoute);
+            getDocumentPdf(response);
         } else {
             setRequestStatus({ loading: false, error: true })
         }

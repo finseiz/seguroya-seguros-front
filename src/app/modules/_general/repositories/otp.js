@@ -17,6 +17,7 @@ export const sendOtpRequest = async (data) => {
         method: "POST",
         body: JSON.stringify(data)
     });
+    localStorage.setItem('data', JSON.stringify(data))
     const body = await response.json();
     return { body, status: response.status }
 }
