@@ -86,6 +86,7 @@ export const getDepartments = ( list ) => {
 
     if ( list.length > 0 ){
         let selectOptions = list.map( (element) => ({value: element["cddpto"], title: element["name"]}) )
+        selectOptions.sort( (a,b) => a.title.localeCompare(b.title) )
         selectOptions.unshift({value: "", title: "Selecciona"});
         return selectOptions;
     }
