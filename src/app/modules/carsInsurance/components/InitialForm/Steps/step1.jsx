@@ -51,7 +51,8 @@ export function Step1({ formik, countries }) {
         <div className="col p-0 pr-2">
           <FormikSelect
             field="country" formik={formik} label="País"
-            options={countries.map(country => ({ title: country["nombre"], value: country["id"] }))}
+            // options={countries.map(country => ({ title: country["nombre"], value: country["id"] }))}
+            options={[ { title: "Colombia", value: "0" }]}
             disabled = {true}
           />
         </div>
