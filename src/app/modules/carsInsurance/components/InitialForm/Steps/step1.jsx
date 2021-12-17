@@ -19,8 +19,8 @@ export function Step1({ formik, countries }) {
         <div className="col-6 p-0 pr-2">
           <FormikInput field="fullname" formik={formik} label="Nombres" />
         </div>
-
-        <div className="col p-0 pr-2">
+col p-0 pr-2
+        <div className="">
           <FormikInput field="surname" formik={formik} label="Primer apellido" />
         </div>
 

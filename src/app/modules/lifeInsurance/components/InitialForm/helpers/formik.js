@@ -5,7 +5,7 @@ export const initialSchema = Yup.object().shape({
     firstName: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales').required("Campo requerido"),
     middleName: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales'),
     surname: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales').required("Campo requerido"),
-    secondSurname: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales').required("Campo requerido"),
+    secondSurname: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales'),
     documentType: Yup.string().required("Campo requerido"),
     document: Yup.string().min(6).max(10).required("Campo requerido"),
     phone: Yup.number().min(3000000000).max(3999999999).required("Campo requerido"),

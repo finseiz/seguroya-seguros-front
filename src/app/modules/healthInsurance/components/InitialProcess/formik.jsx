@@ -4,7 +4,7 @@ export const healthSchema = Yup.object().shape({
     firstName: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales').required("Campo requerido"),
     middleName: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales'),
     surname: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales').required("Campo requerido"),
-    secondSurname: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales').required("Campo requerido"),
+    secondSurname: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales'),
     documentType: Yup.string().required("Campo requerido"),
     document: Yup.string().required("Campo requerido"),
     occupation: Yup.string().required("Campo requerido"),

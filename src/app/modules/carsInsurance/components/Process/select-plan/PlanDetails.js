@@ -164,7 +164,7 @@ export const PlanDetails = () => {
                                                     field="selectedPayment"
                                                     options={[
                                                         { title: radioOption('Anual', selectPlan.totalPrice), value: 'totalPrice'},
-                                                        { title: radioOption('Mensual', selectPlan.monthPrice), value: 'monthPrice'}
+                                                        { title: radioOption('Mensual aproximado', selectPlan.monthPrice), value: 'monthPrice'}
                                                     ]}
                                                     optionsClass="flex-column"
                                                 />

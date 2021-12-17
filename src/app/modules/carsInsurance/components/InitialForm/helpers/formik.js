@@ -8,10 +8,10 @@ export const CarsSchema = Yup.object().shape({
     identification: Yup.string().required("Campo requerido"),
     country: Yup.number().required("Campo requerido"),
     identificationType: Yup.string().required("Campo requerido"),
-    fullname: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales').required("Campo requerido"),
+    fullname: Yup.string().trim().matches(/^[A-Za-z ]+$/ , 'Evita usar caracteres especiales').required("Campo requerido"),
     licensePlate: Yup.string().required("Campo requerido"),
     surname: Yup.string().trim().matches(/^[A-Za-z]+$/, 'Evita usar caracteres especiales').required("Campo requerido"),
-    secondSurname: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales').required("Campo requerido"),
+    secondSurname: Yup.string().trim().matches(/^[A-Za-z]+$/ , 'Evita usar caracteres especiales'),
     address: Yup.string().required("Campo requerido"),
 
     firstsubmit: Yup.bool().required("Campo requerido").default(false),

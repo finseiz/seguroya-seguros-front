@@ -56,7 +56,7 @@ export const getPlans = async (dataToSend, dispatch) => {
                 monthPrice: responseData.pagoMensual,
                 descriptionValues: [
                     { label: "Tipo de cobertura", value: "Todo riesgo"},
-                    { label: (<p>Valor mensual <br/>Diferido a 10 cuotas mensuales</p>), value: `${parseCurrency(responseData.pagoMensual)}COP`, includeInfo: true},
+                    { label: (<p>Valor mensual aproximado. <br/>Diferido a 10 cuotas mensuales, <br/> financiado por FINESA: </p>), value: `${parseCurrency(responseData.pagoMensual)}COP`, includeInfo: true},
                 ],
                 id: responseData.numerodeliquidacion,
                 redirect: CarsProcessDetailsPlanRouteFunc,
