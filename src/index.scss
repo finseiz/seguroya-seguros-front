@@ -3,16 +3,14 @@
 
 @font-face {
   font-family: 'Montserrat';
-  src: 
-    url('./theme/fonts/Montserrat/Montserrat-Regular.ttf')
-    format('truetype');
+  src:
+    url('./theme/fonts/Montserrat/Montserrat-Regular.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Montserrat';
-  src: 
-    url('./theme/fonts/Montserrat/Montserrat-Bold.ttf')
-    format('truetype');
+  src:
+    url('./theme/fonts/Montserrat/Montserrat-Bold.ttf') format('truetype');
   font-weight: bold;
 }
 
@@ -27,4 +25,8 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.overview__line {
+  height: 70%;
 }

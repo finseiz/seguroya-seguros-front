@@ -56,6 +56,7 @@ function CarsForm() {
   const continueBtn = () => {
     switch (step) {
       case 1:
+        console.log(formik.validateForm().then(value => console.log(value)))
         formik.handleSubmit();
         break;
       case 2:
