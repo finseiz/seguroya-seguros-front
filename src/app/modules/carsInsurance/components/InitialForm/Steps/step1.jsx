@@ -40,6 +40,7 @@ export function Step1({ formik, countries }) {
           </div>
 
           <div className="row">
+
             <div className="col-6 p-0 pr-3">
               <FormikSelect
                 field="identificationType" formik={formik} label="Tipo de documento"
@@ -50,11 +51,56 @@ export function Step1({ formik, countries }) {
             <div className="col-6 p-0">
               <FormikInput field="identification" formik={formik} label="Número de documento" />
             </div>
+            
           </div>
+
+          {
+            !formik.values.isNew && (
+              <>
+                <div className="col p-0">
+                  <FormikInput field="carModel" formik={formik} label="Modelo del vehículo" />
+                </div>
+                <div className="col p-0">
+                  <FormikInput field="protectionDevice" formik={formik} label="Dispositivo de protección" />
+                </div>
+                <div className="col p-0">
+                  <FormikInput field="armorValue" formik={formik} label="Valor blindaje" />
+                </div>
+                <div className="col p-0">
+                  <FormikInput field="insuredValue" formik={formik} label="Valor Asegurado" />
+                </div>
+              </>
+            )
+          }
+
+          {
+            !formik.values.isBorrowerOwner &&
+            (
+              <>
+                <div className="col-6 p-0 pr-3">
+                  <FormikSelect
+                    field="identificationOwnerType" 
+                    formik={formik} 
+                    label="Tipo de documento del propietario"
+                    options={CarsIdentificationsTypes}
+                  />
+                 </div>
+                 <div className="col-6 p-0">
+                  <FormikInput 
+                    field="birthDate" 
+                    formik={formik} 
+                    label="Fecha de nacimiento del propietario" 
+                    type="date" />
+                 </div>
+              </>
+            )
+          }
+
 
         </div>
 
         <div className="col" style={{display:"grid"}}>
+
           <FormikSelect
             field="country" formik={formik} label="Ciudad"
             // options={countries.map(country => ({ title: country["nombre"], value: country["id"] }))}
@@ -68,12 +114,48 @@ export function Step1({ formik, countries }) {
 
           <FormikInput field="discountCode" formik={formik} label="Tengo un código de descuento (Opcional)"/>
 
+          {
+            !formik.values.isNew && (
+              <>
+                <div className="col p-0">
+                  <FormikInput field="carYear" formik={formik} label="Año de auto" />
+                </div>
+                <div className="col p-0">
+                  <FormikInput field="fasecoldaCode" formik={formik} label="Código fasecolda" />
+                </div>
+                <div className="col p-0">
+                  <FormikInput field="accessoryValue" formik={formik} label="Valor de accesorios" />
+                </div>
+                <div className="col p-0">
+                  <FormikInput field="gasSystemValue" formik={formik} label="Valor sistema a gas" />
+                </div>
+              </>
+            )
+          }
+
           <FormikRadioGroup
             formik={formik}
-            field="isNew"
-            label="¿Usted es la persona que aparece en la tarjeta de propiedad?"
+            field="isBorrowerOwner"
+            label="¿El tomador es el mismo conductor?"
             options={PositiveOrNegativeOption}
           />
+
+          { !formik.values.isBorrowerOwner &&
+            (
+              <>
+                <div className="col-6 p-0">
+                  <FormikInput 
+                    field="identificationOwnerNumber" 
+                    formik={formik} 
+                    label="Número de documento del propietario" 
+                    type="date" />
+                 </div>
+              </>
+            )
+          }
+
+
+
         </div>
 
       </div>

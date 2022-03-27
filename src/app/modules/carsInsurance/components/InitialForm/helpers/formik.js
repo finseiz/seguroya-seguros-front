@@ -43,21 +43,36 @@ export const initialValues = {
     // secondSurname: "Castro",
     // address: "Calle 45n",
     
-    cellphone: "",
-    email: "",
-    birthDate: "",
-    // gender: "",
-    identification: "",
-    identificationType: "",
-    names: "",
-    licensePlate: "",
-    surnames: "",
-    // address: "",
     isNew: false,
+    licensePlate: "",
+    city: 0,
+    names: "",
+    surnames: "",
+    email: "",
+    cellphone: "",
+    birthDate: "",
+    identificationType: "",
+    identification: "",
     discountCode: "",
-    personPropertyCard: true,
+    isBorrowerOwner: true,
+
+    // car isn't new field path
+    carYear: '',
+    carModel: '',
+    fasecoldaCode: '',
+    protectionDevice: '',
+    accessoryValue: '',
+    armorValue: '',
+    gasSystemValue: '',
+    insuredValue: '',
+
+    // is the borrower, owner of the car ?
+
+    identificationOwnerType: "",
+    identificationOwnerNumber: "",
+    ownerBirthDate: "",
+
     
-    country: 0,
     firstsubmit: false,
     mostImportant: "",
     dataAuthorization: undefined,
