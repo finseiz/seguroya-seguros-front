@@ -57,5 +57,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "singleQuote": false,
+    "semi": true,
+    "bracketSameLine": false
   }
 }
