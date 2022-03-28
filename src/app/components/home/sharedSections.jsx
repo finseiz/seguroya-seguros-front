@@ -16,13 +16,13 @@ function SharedSections() {
   ];
   return (
     <>
-      <PageContainer className="bg-gray">
+      <PageContainer className="bg-gray justify-content-center">
         <div className=" text-center h-100">
           <div className="row h-100 m-0">
             <div className="col">
-              <h5>Ofertas </h5>
+              <h5>Ofertas</h5>
               <div className="container-fluid">
-                <div className="row m-0">
+                <div className="row m-0" style={{justifyContent: "center"}}>
                   {
                     offers.map(offer => ( 
                       <NavLink to={offer.path} className="m-0">                        
@@ -30,16 +30,21 @@ function SharedSections() {
                           <img
                             src={offer.img}
                             className="home-offer__image"
+                            alt="offer"
                           />
                         </div>
                       </NavLink>
                     ))
                   }
-                  <a href="https://api.whatsapp.com/message/QOFDDFAB7GWIE1" target="_blank">
+                  <a 
+                    href="https://api.whatsapp.com/message/QOFDDFAB7GWIE1" 
+                    target="_blank"
+                    rel="noreferrer">
                     <div className="col-4  mt-4">
                         <img
                           src="/media/offers/of3.jpg"
                           className="home-offer__image"
+                          alt="offer"
                         />
                       </div>
                   </a>

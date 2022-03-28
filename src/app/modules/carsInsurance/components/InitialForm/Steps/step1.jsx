@@ -15,7 +15,7 @@ export function Step1({ formik, countries }) {
     <div className="card-body">
 
       <div className="row">
-        <div className="col" style={{display: "grid", gap: "0.3rem"}}>
+        <div className="col" style={{display: "grid", gap: "1rem"}}>
           <FormikRadioGroup
             formik={formik}
             field="isNew"
@@ -87,7 +87,7 @@ export function Step1({ formik, countries }) {
                  </div>
                  <div className="col-6 p-0">
                   <FormikInput 
-                    field="birthDate" 
+                    field="ownerBirthDate" 
                     formik={formik} 
                     label="Fecha de nacimiento del propietario" 
                     type="date" />
@@ -99,10 +99,10 @@ export function Step1({ formik, countries }) {
 
         </div>
 
-        <div className="col" style={{display:"grid"}}>
+        <div className="col" style={{display:"grid", gap: "1rem"}}>
 
           <FormikSelect
-            field="country" formik={formik} label="Ciudad"
+            field="city" formik={formik} label="Ciudad"
             // options={countries.map(country => ({ title: country["nombre"], value: country["id"] }))}
             options={[{ title: "Colombia", value: "0" }]}
             disabled={true}
@@ -147,8 +147,7 @@ export function Step1({ formik, countries }) {
                   <FormikInput 
                     field="identificationOwnerNumber" 
                     formik={formik} 
-                    label="Número de documento del propietario" 
-                    type="date" />
+                    label="Número de documento del propietario" />
                  </div>
               </>
             )

@@ -34,7 +34,7 @@ export const Offers = () => {
     ], [])
 
     return (
-        <div className="container-fluid text-center ">
+        <div className="container-fluid text-center">
 
             <h1 className="home-pages__title mt-4"> Ofertas </h1>
 

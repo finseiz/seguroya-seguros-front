@@ -6,7 +6,7 @@ import { toAbsoluteUrl } from "theme/helpers";
 function BrandPage() {
   return (
     <section className="container-fluid brand overflow-hidden w-100 m-0">
-      <div className="row h-100 m-0">
+      <div className="row h-100 m-0 justify-content-center">
         <div className="align-self-center text-center">
           <p className="home-msj mx-5">
             Buscamos hacer más fácil y cercano el mundo de los seguros siendo tu
