@@ -3,7 +3,6 @@ import Field from "app/modules/_forms/overview/Field";
 import { Formik } from "formik";
 
 export function Step2({ formik, onEdit }) {
-  const fullname = `${formik.values.names} ${formik.values.surnames}`;
   return (
     <div className="card-body container w-75">
       <div className="row">

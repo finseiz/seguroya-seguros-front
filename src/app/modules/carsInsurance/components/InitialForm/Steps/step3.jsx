@@ -29,7 +29,7 @@ export function Step3({ formik, setCirculation }) {
       setZoneLoading(false);
       setCirculation([...list]);
     });
-  }, [setCirculation, formik.values.insuranceType, formik]);
+  }, [setCirculation, formik.values.insuranceType]);
 
   return (
     <div className="card-body text-center mx-5">

@@ -10,8 +10,8 @@ const initialState = {
   progress: {
     initial: 0,
     /** WARING: If this name change [uniqueProcess], most change carsInsaranceRoute.jsx at processIndicatorName="**" */
-    uniqueProcess: 0
-  }
+    uniqueProcess: 0,
+  },
 };
 
 const setPlans = (data) => (dispatch) => {
@@ -19,20 +19,20 @@ const setPlans = (data) => (dispatch) => {
   dispatch(carsInsuranceSlice.actions.setPlans(action));
 };
 
-const setInitialProgress = ( progress ) => (dispatch) => {
+const setInitialProgress = (progress) => (dispatch) => {
   const action = { data: progress };
   dispatch(carsInsuranceSlice.actions.setInitialProgress(action));
 };
 
-const setUniqueProgress = ( progress ) => (dispatch) => {
+const setUniqueProgress = (progress) => (dispatch) => {
   const action = { data: progress };
   dispatch(carsInsuranceSlice.actions.setUniqueProgress(action));
 };
 
-const setSelectedPlan = ( plan ) => ( dispatch ) => {
+const setSelectedPlan = (plan) => (dispatch) => {
   const action = { plan };
   dispatch(carsInsuranceSlice.actions.setSelectedPlan(action));
-}
+};
 
 const editDataToSend = (data) => (dispatch) => {
   dispatch(carsInsuranceSlice.actions.editDataToSend(data));
@@ -49,7 +49,7 @@ export const actions = {
   setSelectedPlan,
   setUniqueProgress,
   editDataToSend,
-  restartState
+  restartState,
 };
 
 export const carsInsuranceSlice = createSlice({
@@ -80,8 +80,8 @@ export const carsInsuranceSlice = createSlice({
       };
     },
     reset: (state, action) => {
-      state = initialState
-      return initialState
+      state = initialState;
+      return initialState;
     },
   },
 });

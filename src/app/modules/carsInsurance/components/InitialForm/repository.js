@@ -1,25 +1,28 @@
-import { makeRequest } from "app/const"
+import { makeRequest } from "app/const";
 
-const baseURL = "sbs/"
-const boliarURL = "segurosbolivar/"
+const baseURL = "sbs/";
+const bolivarURL = "segurosbolivar/";
 
-const getCountriesPath = baseURL + "paises"
-const getCirculationZoneByKmPath = baseURL + "zonas-circulacion"
+const getCountriesPath = baseURL + "paises";
+const getCirculationZoneByKmPath = baseURL + "zonas-circulacion";
 
-const getBolivarCities = boliarURL + "listaCiudades"
+const getBolivarCities = bolivarURL + "listaCiudades";
 
 export const getCountriesRequest = async () => {
-    const response = await makeRequest({path: getCountriesPath, method: "GET" })
-    return response.json()
-}
+  const response = await makeRequest({ path: getCountriesPath, method: "GET" });
+  return response.json();
+};
 
-export const getCirculationZoneByKmRequest = async () => { 
-    const response = await makeRequest({path: getCirculationZoneByKmPath, method: "GET"} )
-    return response.json()
-}
+export const getCirculationZoneByKmRequest = async () => {
+  const response = await makeRequest({
+    path: getCirculationZoneByKmPath,
+    method: "GET",
+  });
+  return response.json();
+};
 
-export const getBolivarCitiesRequest = async () => { 
-    const response = await makeRequest({path: getBolivarCities, method: "GET"} )
-    const body = await response.json();
-    return { body, status: response.status}
-}
+export const getBolivarCitiesRequest = async () => {
+  const response = await makeRequest({ path: getBolivarCities, method: "GET" });
+  const body = await response.json();
+  return { body, status: response.status };
+};
