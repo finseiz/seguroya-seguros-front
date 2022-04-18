@@ -15,19 +15,6 @@ export const getPlansRequest = async (data) => {
   return { body, status: response.status };
 };
 
-// allianz...
-const getAllianzPlansPath = `allianz/cotizacion`;
-
-export const getAllianzPlansRequest = async (data) => {
-  const response = await makeRequest({
-    path: getAllianzPlansPath,
-    method: "POST",
-    body: JSON.stringify(data),
-  });
-  const body = await response.json();
-  return { body, status: response.status };
-};
-//TODO: Test allianz --------->
 export const createQuoteRequest = async (data) => {
   const response = await makeRequest({
     path: quotePath,
@@ -37,3 +24,18 @@ export const createQuoteRequest = async (data) => {
   const body = await response.json();
   return { body, status: response.status };
 };
+
+// allianz...
+const getAllianzPlansPath = `allianz/cotizacion`;
+
+export const getAllianzPlansRequest = async (data) => {
+  console.log("BURNNNN", data);
+  const response = await makeRequest({
+    path: getAllianzPlansPath,
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+  const body = await response.json();
+  return { body, status: response.status };
+};
+//TODO: Test allianz --------->

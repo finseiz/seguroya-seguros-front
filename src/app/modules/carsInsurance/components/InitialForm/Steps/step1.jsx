@@ -87,7 +87,7 @@ export function Step1({ formik, countries }) {
               </div>
               <div className="col p-0">
                 <FormikInput
-                  field="armorValue"
+                  field="shieldingValue"
                   formik={formik}
                   label="Valor blindaje"
                 />
@@ -102,7 +102,7 @@ export function Step1({ formik, countries }) {
             </>
           )}
 
-          {!formik.values.isBorrowerOwner && (
+          {!formik.values.isHolderDriver && (
             <>
               <div className="col p-0">
                 <FormikSelect
@@ -195,12 +195,12 @@ export function Step1({ formik, countries }) {
 
           <FormikRadioGroup
             formik={formik}
-            field="isBorrowerOwner"
+            field="isHolderDriver"
             label="¿El tomador es el mismo conductor?"
             options={PositiveOrNegativeOption}
           />
 
-          {!formik.values.isBorrowerOwner && (
+          {!formik.values.isHolderDriver && (
             <>
               <div className="col p-0">
                 <FormikInput

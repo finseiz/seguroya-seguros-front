@@ -86,52 +86,6 @@ export const getPlans = async (dataToSend, dispatch) => {
   return [];
 };
 
-export const getAllianzPlans = async (dataToSend, dispatch) => {
-  console.log("allianz data to send", dataToSend);
-  const body = prepareData(dataToSend);
-  const response = await getAllianzPlansRequest(body);
-
-  if (response.status === 200) {
-    const quoteId = response.body.idConsulta;
-    const data = response.body.data;
-
-    const plans = data.map((plan) => {
-      const { responseData } = plan;
-
-      return {
-        logoPath: "allianz-logo.svg",
-        insuranceName: `Allianz - ${responseData.packages}`,
-        //qualification: 3,
-        totalPrice: responseData.totalPrima,
-        monthPrice: responseData.pagoMensual,
-        descriptionValues: [
-          { label: "Tipo de cobertura", value: "Todo riesgo" },
-          {
-            label: (
-              <p>
-                Valor mensual <br />
-                Diferido a 10 cuotas mensuales
-              </p>
-            ),
-            value: `${parseCurrency(responseData.pagoMensual)}COP`,
-            includeInfo: true,
-          },
-        ],
-        id: responseData.quotationNumber,
-        redirect: CarsProcessDetailsPlanRouteFunc,
-        data: { ...plan },
-      };
-    });
-
-    dispatch(actions.setPlans(plans));
-    dispatch(actions.editDataToSend({ quoteId }));
-  } else {
-    throw new Error("No fue posible recuperar los planes");
-  }
-
-  return [];
-};
-
 const prepareQuoteData = (data, planId) => {
   return {
     celTomador: data.cellphone,
@@ -145,52 +99,6 @@ const prepareQuoteData = (data, planId) => {
     placaVeh: data.licensePlate,
     sexoConductor: data.gender,
   };
-};
-
-const prepareAllianzQuoteData = (data) => {
-  return {
-    firstBill: "NO_BANCARIO",
-    holderDocNumber: data.holderDocNumber,
-    holderDocType: data.holderDocType,
-    holderDriver: true,
-    holderOwner: data.holderOwner,
-    isHolderDriver: data.isHolderDriver,
-    isHolderOwner: data.isHolderOwner,
-    isNewOwner: data.isNewOwner,
-    newOwner: data.isNewOwner,
-    ownerDocNumber: data.ownerDocNumber,
-    ownerDocType: data.ownerDocType,
-    riskData: {
-      accessoriesValue: data.accessoriesValue || 0,
-      circulationAreaDaneCode: data.circulationAreaDaneCode || 0,
-      gasSystemValue: data.gasSystemValue || "0",
-      insuredValue: data.insuredValue || 0,
-      isNewVehicle: data.isNewVehicle || true,
-      newVehicle: data.newVehicle || true,
-      ownerBornDate: data.ownerBornDate || "string",
-      ownerSex: data.ownerSex,
-      protectionDeviceCode: data.protectionDeviceCode || "CAZADOR",
-      repowered: data.repowered || true,
-      shieldingValue: data.shieldingValue || 0,
-    },
-    successive: "NO_BANCARIO",
-    vehicleFasecoldaCode: data.vehicleFasecoldaCode || 0,
-    vehiclePlate: data.vehiclePlate,
-    vehicleYear: data.vehicleYear,
-  };
-};
-
-export const createAllianzQuote = async (state) => {
-  const data = prepareAllianzQuoteData(state);
-
-  const response = await getAllianzPlansRequest(data);
-
-  if (response.status === 200) {
-    const quoteId = response.body.responseData.quotationNumber;
-    return quoteId;
-  }
-
-  return undefined;
 };
 
 export const createQuote = async (state, planId) => {
@@ -246,4 +154,131 @@ export const verifyOtp = async (quoteId, otp) => {
   }
 
   return false;
+};
+
+// ALLIANZ CONTROLLER
+
+const prepareAllianzData = (data) => {
+  // Due to the specific id Enum class
+  // checks this field and apply the value that match the api.
+
+  let identificationType = "";
+
+  if (data.identificationType === "Cedula") {
+    identificationType = "CEDULA_CIUDADANIA";
+  } else if (data.identificationType === "Cedula_Extranjeria") {
+    identificationType = "CEDULA_EXTRANJERIA";
+  } else {
+    identificationType = data.identificationType;
+  }
+
+  console.log("DATA COMES", data.ownerBirthDate || data.birthDate);
+
+  return {
+    firstBill: "NO_BANCARIO",
+    holderDocNumber: data.identification,
+    holderDocType: identificationType,
+    holderDriver: true,
+    holderOwner: data.isHolderDriver,
+    isHolderDriver: data.isHolderDriver,
+    isHolderOwner: data.isHolderOwner,
+    isNewOwner: data.isNewOwner || true,
+    newOwner: data.isNewOwner || true,
+    ownerDocNumber: data.identidicationOwnerNumber || data.identification,
+    ownerDocType: data.identificationOwnerType || identificationType,
+    riskData: {
+      accessoriesValue: data.accessoryValue || 0,
+      // circulationAreaDaneCode: Number(data.circulationZone) || 0,
+      circulationAreaDaneCode: 76001,
+      gasSystemValue: data.gasSystemValue || "0",
+      insuredValue: Number(data.insuredValue) || 0,
+      isNewVehicle: data.isNew || false,
+      newVehicle: data.isNew || false,
+      ownerBornDate: data.ownerBirthDate || data.birthDate,
+      ownerSex: data.gender,
+      protectionDeviceCode: "CAZADOR",
+      repowered: data.repowered || true,
+      shieldingValue: Number(data.shieldingValue) || 0,
+    },
+    successive: "NO_BANCARIO",
+    vehicleFasecoldaCode: Number(data.fasecoldaCode),
+    vehiclePlate: data.licensePlate,
+    vehicleYear: Number(data.carYear),
+  };
+};
+
+//  {
+//   firstBill: "NO_BANCARIO",
+//   holderDocNumber: "1002802174",
+//   holderDocType: "CEDULA_CIUDADANIA",
+//   holderDriver: true,
+//   holderOwner: true,
+//   isHolderDriver: true,
+//   isNewOwner: true,
+//   newOwner: true,
+//   ownerDocNumber: "1002802174",
+//   ownerDocType: "CEDULA_CIUDADANIA",
+//   riskData: {
+//     accessoriesValue: "0",
+//     circulationAreaDaneCode: 76001,
+//     gasSystemValue: "0",
+//     insuredValue: 0,
+//     isNewVehicle: false,
+//     newVehicle: false,
+//     ownerBornDate: "1994-04-17",
+//     ownerSex: "M",
+//     protectionDeviceCode: "CAZADOR",
+//     repowered: true,
+//     shieldingValue: 0,
+//   },
+//   successive: "NO_BANCARIO",
+//   vehicleFasecoldaCode: 5806047,
+//   vehiclePlate: "UGV495",
+//   vehicleYear: 2015,
+// };
+
+export const getAllianzPlans = async (dataToSend, dispatch) => {
+  console.log("allianz data to send", dataToSend);
+
+  // const body = prepareAllianzData(dataToSend);
+  const body = prepareAllianzData(dataToSend);
+  const response = await getAllianzPlansRequest(body);
+
+  if (response.status === 200) {
+    const quoteId = response.body.idConsulta;
+    const data = response.body.data;
+
+    const plans = data.packages.map((plan) => {
+      return {
+        id: plan.packageId,
+        logoPath: "allianz-logo.svg",
+        insuranceName: `Allianz - ${plan.packageName}`,
+        //qualification: 3,
+        coverages: plan.coverages,
+        payments: plan.payments,
+        descriptionValues: [
+          { label: "Tipo de cobertura", value: "Todo riesgo" },
+          {
+            label: (
+              <p>
+                Valor mensual <br />
+                Diferido a 10 cuotas mensuales
+              </p>
+            ),
+            value: `${parseCurrency(plan.coverages[1].premiumValue)}COP`,
+            includeInfo: true,
+          },
+        ],
+        redirect: CarsProcessDetailsPlanRouteFunc,
+        data: { ...plan },
+      };
+    });
+
+    dispatch(actions.setPlans(plans));
+    dispatch(actions.editDataToSend({ quoteId }));
+  } else {
+    throw new Error("No fue posible recuperar los planes");
+  }
+
+  return [];
 };

@@ -1,10 +1,16 @@
 import { CarsProcessDetailsPlanRouteFunc } from "app/routes/childs/Cars/routes";
+import { AllianzCarsProcessDetailsPlanRouteFunc } from "app/routes/childs/Cars/routes";
+import { allianzResponze } from "./burnData/allianzResponse";
 
-export const allianzPlans = [
-  {
-    id: 1,
+const plans = allianzResponze.packages;
+
+const allianzPlansMap = plans.map((plan) => {
+  return {
+    id: plan.packageId,
     logoPath: "allianz_logo.svg",
-    insuranceName: "Allianz - Auto Oro",
+    insuranceName: `Allianz - ${plan.packageName}`,
+    coverages: plan.coverages,
+    payments: plan.payments,
     qualification: 5,
     descriptionValues: [
       { label: "Tipo de cobertura", value: "Todo riesgo" },
@@ -15,57 +21,16 @@ export const allianzPlans = [
             Diferido a 10 cuotas mensuales
           </p>
         ),
-        value: `800000COP`,
+        value: `${plan.payments[1].premiumValue}COP`,
         includeInfo: true,
       },
     ],
-    totalPrice: 2000000,
-    redirect: CarsProcessDetailsPlanRouteFunc,
-  },
-  {
-    id: 2,
-    recommended: true,
-    logoPath: "allianz_logo.svg",
-    insuranceName: "Allianz - Auto Oro",
-    qualification: 4.5,
-    descriptionValues: [
-      { label: "Tipo de cobertura", value: "Todo riesgo" },
-      {
-        label: (
-          <p>
-            Valor mensual <br />
-            Diferido a 10 cuotas mensuales
-          </p>
-        ),
-        value: `800000COP`,
-        includeInfo: true,
-      },
-    ],
-    totalPrice: 2000000,
-    redirect: CarsProcessDetailsPlanRouteFunc,
-  },
-  {
-    id: 3,
-    logoPath: "allianz_logo.svg",
-    insuranceName: "Allianz - Auto Oro",
-    qualification: 5,
-    descriptionValues: [
-      { label: "Tipo de cobertura", value: "Todo riesgo" },
-      {
-        label: (
-          <p>
-            Valor mensual <br />
-            Diferido a 10 cuotas mensuales
-          </p>
-        ),
-        value: `800000COP`,
-        includeInfo: true,
-      },
-    ],
-    totalPrice: 2000000,
-    redirect: CarsProcessDetailsPlanRouteFunc,
-  },
-];
+    totalPrice: plan.coverages[0].insuredValue,
+    redirect: AllianzCarsProcessDetailsPlanRouteFunc,
+  };
+});
+
+export const allianzPlans = allianzPlansMap;
 
 export const bolivarPlans = [
   {

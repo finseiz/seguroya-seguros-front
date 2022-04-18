@@ -28,9 +28,9 @@ export default function CarsInsuranceKmRoute() {
   const history = useHistory();
 
   /** Health Route Protection */
-  // if ( !email && !(initial === 100) ){
-  //     history.push(CarsHomeRoute)
-  // }
+  if (!email && !(initial === 100)) {
+    history.push(CarsHomeRoute);
+  }
 
   return (
     <Switch>

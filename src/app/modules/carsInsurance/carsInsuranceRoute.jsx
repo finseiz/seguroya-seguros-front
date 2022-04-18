@@ -3,6 +3,7 @@ import { AsideProcess } from "app/components/process/AsideProcess";
 import {
   CarsHomeRoute,
   CarsProcessDetailsPlanRoute,
+  AllianzCarsProcessDetailsPlanRoute,
   CarsProcessDoneRoute,
   CarsProcessOtpRoute,
   CarsProcessSarlaftRoute,
@@ -13,6 +14,7 @@ import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { Content } from "theme/layout/utils/content";
 import { SelectCarsPlan } from "./components/Process/select-plan/SelectCarsPlan";
 import { PlanDetails } from "./components/Process/select-plan/PlanDetails";
+import { AllianzPlanDetails } from "./components/Process/select-plan/AllianzPlanDetails";
 import { ConfirmationCode } from "../_general/OTP";
 import { carsProcessSteps } from "app/helpers/process-steps";
 import { SarlaftForm } from "../_general/sarlaft-form/SarlaftForm";
@@ -32,8 +34,8 @@ export default function CarsInsuranceRoute() {
   const history = useHistory();
 
   /** Health Route Protection */
-  // if ( !email && !(initial === 100) ){
-  //   history.push(CarsHomeRoute)
+  // if (!email && !(initial === 100)) {
+  //   history.push(CarsHomeRoute);
   // }
 
   return (
@@ -48,6 +50,12 @@ export default function CarsInsuranceRoute() {
         exact={true}
         path={CarsProcessDetailsPlanRoute}
         component={PlanDetails}
+      />
+
+      <Route
+        exact={true}
+        path={AllianzCarsProcessDetailsPlanRoute}
+        component={AllianzPlanDetails}
       />
 
       <Content

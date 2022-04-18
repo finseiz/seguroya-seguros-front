@@ -5,7 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Qualification from "app/components/process/Qualification";
 import { parseCurrency } from "app/helpers/parse-currency";
-import Comments from "./../../../../../components/process/Comments";
+import Comments from "../../../../../components/process/Comments";
 import { actions } from "app/modules/carsInsurance/redux";
 import { CarsProcessOtpRoute } from "app/routes/childs/Cars/routes";
 import { createQuote, sendOtp, getDocumentPdf } from "../controller";
@@ -15,13 +15,13 @@ import FormikRadioGroup from "app/modules/_forms/general/FormikRadioGroup";
 
 import { bolivarPlans, allianzPlans } from "../burnPlans";
 
-export const PlanDetails = () => {
+export const AllianzPlanDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   // const { plans ,dataToSend } = useSelector((state) => state.carsInsurance);
   const { dataToSend } = useSelector((state) => state.carsInsurance);
 
-  const concatPlans = [...bolivarPlans];
+  const concatPlans = [...bolivarPlans, ...allianzPlans];
 
   const plans = concatPlans;
 
@@ -51,11 +51,6 @@ export const PlanDetails = () => {
       "Programa de reposición especial, en caso de perdida total.",
       "Descuentos con proveedores para comprar vehiculo nuevos.",
     ],
-    []
-  );
-
-  const allianzBenefits = useMemo(
-    () => ["Beneficio 1", "Beneficio 2", "Beneficio 3"],
     []
   );
 

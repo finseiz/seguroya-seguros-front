@@ -23,7 +23,7 @@ export const CarsSchema = Yup.object().shape({
     is: false,
     then: Yup.string().required("Campo requerido"),
   }),
-  armorValue: Yup.string().when("isNew", {
+  shieldingValue: Yup.string().when("isNew", {
     is: false,
     then: Yup.string().required("Campo requerido"),
   }),
@@ -37,7 +37,7 @@ export const CarsSchema = Yup.object().shape({
   }),
 
   // is borrower the owner
-  isBorrowerOwner: Yup.boolean(),
+  isHolderDriver: Yup.boolean(),
   identificationOwnerType: Yup.string().when("isBorrowerOwner", {
     is: false,
     then: Yup.string().required("Campo requerido"),
@@ -110,7 +110,7 @@ export const initialValues = {
   identificationType: "",
   identification: "",
   discountCode: "",
-  isBorrowerOwner: true,
+  isHolderDriver: true,
 
   // car isn't new field path
   carYear: "",
@@ -118,7 +118,7 @@ export const initialValues = {
   fasecoldaCode: "",
   protectionDevice: "",
   accessoryValue: "",
-  armorValue: "",
+  shieldingValue: "",
   gasSystemValue: "",
   insuredValue: "",
 
