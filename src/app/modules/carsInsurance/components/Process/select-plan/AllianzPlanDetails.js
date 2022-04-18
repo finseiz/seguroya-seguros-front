@@ -21,7 +21,7 @@ export const AllianzPlanDetails = () => {
   // const { plans ,dataToSend } = useSelector((state) => state.carsInsurance);
   const { dataToSend } = useSelector((state) => state.carsInsurance);
 
-  const concatPlans = [...bolivarPlans, ...allianzPlans];
+  const concatPlans = [...allianzPlans];
 
   const plans = concatPlans;
 
@@ -34,22 +34,23 @@ export const AllianzPlanDetails = () => {
 
   const benefits = useMemo(
     () => [
-      "Cobertura de responsabilidad civil extracontractual: si tienes algún accidente con otro vehículo y causas lesiones en otra persona o daños a un bien material, tendrás un valor asegurado de $4.000.000.000. CUBIERTO AL 100%",
-      "Cobertura por pérdida total por hurto o por accidente. CUBIERTO AL 100%",
-      "Cobertura por pérdida parcial por daños y por hurto. Deducible UNICO de $800.000 pesos",
-      "Asistencias técnicas como conductor elegido, grúa, carro taller y pequeños accesorios.",
+      "Si tienes un accidente contra otro vehículo, un bien material, una o varias personas, tienes una protección del 80%.",
+      "Si tienes un accidente y tu carro tiene un daño superior al 75% del valor del vehículo tienes una protección de $2’000.000 y el valor a pagar es $300.000.",
+      "Si te roban tu vehículo y se considera perdido totalmente tienes una protección de $2’000.000.",
+      "Si tienes un accidente y tu carro tiene un daño inferior al 75% del valor del vehículo (ej. puertas, el parabrisas, etc.), el valor a pagar es $300.000.",
+      "Tienes 10 conductores elegidos en el año.",
     ],
     []
   );
 
   const benefitsPlus = useMemo(
     () => [
-      "La oficina móvil reacciona en caso de accidente sin heridos ni fallecidos para agilizar los temas del seguro.",
-      "Conductor profesional para cuando necesites realizar una diligencias en tu carro y no puedas hacerlo.",
-      "Valet parking exclusivo.",
-      "Posibilidad de hacer diligencias que tu no puedes realizar.",
-      "Programa de reposición especial, en caso de perdida total.",
-      "Descuentos con proveedores para comprar vehiculo nuevos.",
+      "Conductor Elegido.",
+      "Conductor de viaje ",
+      "Emergencias y urgencias por accidente de tránsito.",
+      "Asistencia de grúa.",
+      "Asistencia vial básica (cerrajería, desvarada por gasolina, cambio de llanta).",
+      "Consulta médica domiciliaria: Asegurado y cónyuge",
     ],
     []
   );
@@ -97,6 +98,15 @@ export const AllianzPlanDetails = () => {
     </div>
   );
 
+  const getPlansPaymentsOptions = () => {
+    const payments = selectPlan.payments;
+
+    return payments.map((payment) => ({
+      title: radioOption(payment.paymentId.toLowerCase(), payment.premiumValue),
+      value: payment.paymentId,
+    }));
+  };
+
   return (
     <div className="container my-5">
       <div className="mx-3">
@@ -112,7 +122,7 @@ export const AllianzPlanDetails = () => {
                   <div>
                     <img
                       src={toAbsoluteUrl(`/media/logos/${selectPlan.logoPath}`)}
-                      alt="logotype seguros bolivar"
+                      alt="logotype allianz"
                     />
                   </div>
 
@@ -121,6 +131,14 @@ export const AllianzPlanDetails = () => {
                     {selectPlan.insuranceName}
                   </div>
 
+                  <div className="mt-4">
+                    <strong>Tipo de riesgo: </strong>
+                    {selectPlan.detail.riskTypeDesc}
+                  </div>
+
+                  <div className="mt-4">
+                    <strong>Beneficios: </strong>
+                  </div>
                   {/** INsurance benefits */}
                   <ul className="plan_sel_benefits">
                     {benefits.map((benefit, i) => (
@@ -132,7 +150,7 @@ export const AllianzPlanDetails = () => {
 
                   <b>
                     {" "}
-                    <p> Valores agregados </p>{" "}
+                    <p> Ventajas exclusivas </p>{" "}
                   </b>
 
                   {/** INsurance benefits */}
@@ -190,22 +208,7 @@ export const AllianzPlanDetails = () => {
                         <FormikRadioGroup
                           formik={formik}
                           field="selectedPayment"
-                          options={[
-                            {
-                              title: radioOption(
-                                "Anual",
-                                selectPlan.totalPrice
-                              ),
-                              value: "totalPrice",
-                            },
-                            {
-                              title: radioOption(
-                                "Mensual",
-                                selectPlan.monthPrice
-                              ),
-                              value: "monthPrice",
-                            },
-                          ]}
+                          options={getPlansPaymentsOptions()}
                           optionsClass="flex-column"
                         />
                       </div>

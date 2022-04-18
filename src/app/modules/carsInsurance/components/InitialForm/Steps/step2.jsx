@@ -3,6 +3,7 @@ import Field from "app/modules/_forms/overview/Field";
 import { Formik } from "formik";
 
 export function Step2({ formik, onEdit }) {
+  console.log(formik.values);
   return (
     <div className="card-body container w-75">
       <div className="row">
@@ -39,12 +40,15 @@ export function Step2({ formik, onEdit }) {
             formik={formik}
             onEdit={onEdit}
           />
-          <Field
-            form="discountCode"
-            name="Código descuento"
-            formik={formik}
-            onEdit={onEdit}
-          />
+
+          {formik.values.discountCoude && (
+            <Field
+              form="discountCode"
+              name="Código descuento"
+              formik={formik}
+              onEdit={onEdit}
+            />
+          )}
         </div>
 
         <div className="overview__line"></div>
@@ -57,21 +61,37 @@ export function Step2({ formik, onEdit }) {
             formik={formik}
             onEdit={onEdit}
           />
-          <Field form="brand" name="Marca" formik={formik} onEdit={onEdit} />
-          <Field
-            form="carModel"
-            name="Modelo"
-            formik={formik}
-            onEdit={onEdit}
-          />
-          <Field form="status" name="Estado" formik={formik} onEdit={onEdit} />
-          <Field form="type" name="Tipo" formik={formik} onEdit={onEdit} />
-          <Field
-            form="city"
-            name="Ciudad de circulación"
-            formik={formik}
-            onEdit={onEdit}
-          />
+
+          {formik.values.brand && (
+            <Field form="brand" name="Marca" formik={formik} onEdit={onEdit} />
+          )}
+          {formik.values.carModel && (
+            <Field
+              form="carModel"
+              name="Modelo"
+              formik={formik}
+              onEdit={onEdit}
+            />
+          )}
+          {formik.values.status && (
+            <Field
+              form="status"
+              name="Estado"
+              formik={formik}
+              onEdit={onEdit}
+            />
+          )}
+          {formik.values.type && (
+            <Field form="type" name="Tipo" formik={formik} onEdit={onEdit} />
+          )}
+          {formik.values.city && (
+            <Field
+              form="city"
+              name="Ciudad de circulación"
+              formik={formik}
+              onEdit={onEdit}
+            />
+          )}
         </div>
       </div>
     </div>

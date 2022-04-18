@@ -7,6 +7,7 @@ const plans = allianzResponze.packages;
 const allianzPlansMap = plans.map((plan) => {
   return {
     id: plan.packageId,
+    detail: allianzResponze,
     logoPath: "allianz_logo.svg",
     insuranceName: `Allianz - ${plan.packageName}`,
     coverages: plan.coverages,
