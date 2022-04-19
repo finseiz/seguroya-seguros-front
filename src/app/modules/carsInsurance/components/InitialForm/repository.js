@@ -2,6 +2,7 @@ import { makeRequest } from "app/const";
 
 const baseURL = "sbs/";
 const bolivarURL = "segurosbolivar/";
+const municipiosURL = "ubicacion/municipios";
 
 const getCountriesPath = baseURL + "paises";
 const getCirculationZoneByKmPath = baseURL + "zonas-circulacion";
@@ -23,6 +24,12 @@ export const getCirculationZoneByKmRequest = async () => {
 
 export const getBolivarCitiesRequest = async () => {
   const response = await makeRequest({ path: getBolivarCities, method: "GET" });
+  const body = await response.json();
+  return { body, status: response.status };
+};
+
+export const getMunicipiosRequest = async () => {
+  const response = await makeRequest({ path: municipiosURL, method: "GET" });
   const body = await response.json();
   return { body, status: response.status };
 };

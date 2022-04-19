@@ -34,13 +34,6 @@ export function Step2({ formik, onEdit }) {
             onEdit={onEdit}
           />
           <Field form="email" name="Correo" formik={formik} onEdit={onEdit} />
-          <Field
-            form="licensePlate"
-            name="Placa"
-            formik={formik}
-            onEdit={onEdit}
-          />
-
           {formik.values.discountCoude && (
             <Field
               form="discountCode"

@@ -172,8 +172,6 @@ const prepareAllianzData = (data) => {
     identificationType = data.identificationType;
   }
 
-  console.log("DATA COMES", data.ownerBirthDate || data.birthDate);
-
   return {
     firstBill: "NO_BANCARIO",
     holderDocNumber: data.identification,
@@ -189,7 +187,7 @@ const prepareAllianzData = (data) => {
     riskData: {
       accessoriesValue: data.accessoryValue || 0,
       // circulationAreaDaneCode: Number(data.circulationZone) || 0,
-      circulationAreaDaneCode: 76001,
+      circulationAreaDaneCode: Number(data.city) || 76001,
       gasSystemValue: data.gasSystemValue || "0",
       insuredValue: Number(data.insuredValue) || 0,
       isNewVehicle: data.isNew || false,

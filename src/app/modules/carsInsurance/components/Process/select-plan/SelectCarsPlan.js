@@ -9,13 +9,13 @@ import AllianzCarPlan from "app/components/process/plans/allianzCarPlans";
 import { allianzPlans, bolivarPlans } from "../burnPlans";
 
 export const SelectCarsPlan = () => {
-  const { dataToSend } = useSelector((state) => state.carsInsurance);
+  const { plans, dataToSend } = useSelector((state) => state.carsInsurance);
   const [request, setRequest] = useState({ loading: false, error: false });
   const dispatch = useDispatch();
 
   // burn info
 
-  const plans = [...bolivarPlans];
+  //const plans = [...bolivarPlans];
   // console.log(
   //   "🚀 ~ file: SelectCarsPlan.js ~ line 85 ~ SelectCarsPlan ~ unifiedPlans",
   //   plans
@@ -25,20 +25,20 @@ export const SelectCarsPlan = () => {
     console.log("data to send", dataToSend);
     console.log("planes****", plans);
 
-    // if (plans.length === 0) {
-    //   setRequest({ loading: false, error: false });
-    //   // getPlans(dataToSend, dispatch)
-    //   //   .then((_) => {
-    //   //     setRequest({ loading: false, error: false });
-    //   //   })
-    //   //   .catch((_) => setRequest({ loading: false, error: true }));
+    if (plans.length === 0) {
+      setRequest({ loading: false, error: false });
+      getPlans(dataToSend, dispatch)
+        .then((_) => {
+          setRequest({ loading: false, error: false });
+        })
+        .catch((_) => setRequest({ loading: false, error: true }));
 
-    //   getAllianzPlans(dataToSend, dispatch)
-    //     .then((_) => {
-    //       setRequest({ loading: false, error: false });
-    //     })
-    //     .catch((_) => setRequest({ loading: false, error: true }));
-    // }
+      // getAllianzPlans(dataToSend, dispatch)
+      //   .then((_) => {
+      //     setRequest({ loading: false, error: false });
+      //   })
+      //   .catch((_) => setRequest({ loading: false, error: true }));
+    }
   }, []);
 
   return (

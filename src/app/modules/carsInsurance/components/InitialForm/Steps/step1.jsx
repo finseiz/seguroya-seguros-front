@@ -2,13 +2,26 @@ import FormikInput from "app/modules/_forms/general/FormikInput";
 import FormikRadioGroup from "app/modules/_forms/general/FormikRadioGroup";
 import FormikSelect from "app/modules/_forms/general/FormikSelect";
 import { PositiveOrNegativeOption } from "app/helpers/radio-options";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CarsIdentificationsTypes } from "app/helpers/selet-options";
 import { genderRadioTypes } from "app/helpers/radio-options";
+import { getMunicipios } from "../controller";
 
 export function Step1({ formik, countries }) {
+  const [municipios, setMunicipios] = useState([]);
+
   useEffect(() => {
     formik.setFieldValue("firstsubmit", false);
+  }, []);
+
+  useEffect(() => {
+    getMunicipios().then((data) => {
+      const municipiosOptions = data.body.map((city) => {
+        return { title: city.nombre, value: city.id };
+      });
+      municipiosOptions.sort((a, b) => a.title.localeCompare(b.title));
+      setMunicipios([...municipiosOptions]);
+    });
   }, []);
 
   return (
@@ -129,10 +142,7 @@ export function Step1({ formik, countries }) {
             field="city"
             formik={formik}
             label="Ciudad"
-            options={[
-              { title: "Popayán", value: "0" },
-              { title: "Cáli", value: "1" },
-            ]}
+            options={municipios}
             disabled={true}
           />
 
