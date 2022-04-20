@@ -6,7 +6,10 @@ import {
   getAllianzPlansRequest,
 } from "./repository";
 import { bolivarPlan } from "app/helpers/select-plan";
-import { CarsProcessDetailsPlanRouteFunc } from "app/routes/childs/Cars/routes";
+import {
+  CarsProcessDetailsPlanRouteFunc,
+  AllianzCarsProcessDetailsPlanRouteFunc,
+} from "app/routes/childs/Cars/routes";
 import {
   sendOtpRequest,
   verifyOtpRequest,
@@ -238,18 +241,19 @@ const prepareAllianzData = (data) => {
 export const getAllianzPlans = async (dataToSend, dispatch) => {
   console.log("allianz data to send", dataToSend);
 
-  // const body = prepareAllianzData(dataToSend);
   const body = prepareAllianzData(dataToSend);
   const response = await getAllianzPlansRequest(body);
 
   if (response.status === 200) {
-    const quoteId = response.body.idConsulta;
-    const data = response.body.data;
+    console.log("ALLIANZ BODYY", response.body);
+    const quoteId = response.body.quotationNumber;
 
-    const plans = data.packages.map((plan) => {
+    const data = response.body.packages;
+
+    const plans = data.map((plan) => {
       return {
         id: plan.packageId,
-        logoPath: "allianz-logo.svg",
+        logoPath: "allianz_logo.svg",
         insuranceName: `Allianz - ${plan.packageName}`,
         //qualification: 3,
         coverages: plan.coverages,
@@ -263,16 +267,17 @@ export const getAllianzPlans = async (dataToSend, dispatch) => {
                 Diferido a 10 cuotas mensuales
               </p>
             ),
-            value: `${parseCurrency(plan.coverages[1].premiumValue)}COP`,
+            value: `${parseCurrency(plan.coverages[0].insuredValue)}COP`,
             includeInfo: true,
           },
         ],
-        redirect: CarsProcessDetailsPlanRouteFunc,
-        data: { ...plan },
+        totalPrice: plan.coverages[0].insuredValue,
+        redirect: AllianzCarsProcessDetailsPlanRouteFunc,
+        data: { ...data },
       };
     });
 
-    dispatch(actions.setPlans(plans));
+    dispatch(actions.setAllianzPlans(plans));
     dispatch(actions.editDataToSend({ quoteId }));
   } else {
     throw new Error("No fue posible recuperar los planes");

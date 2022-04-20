@@ -6,10 +6,13 @@ import { Loading } from "app/components/process/messages/Loading";
 import { ErrorMessage } from "app/components/process/messages/Erros";
 import CarPlan from "app/components/process/plans/CarPlans";
 import AllianzCarPlan from "app/components/process/plans/allianzCarPlans";
-import { allianzPlans, bolivarPlans } from "../burnPlans";
+// import { allianzPlans, bolivarPlans } from "../burnPlans";
 
 export const SelectCarsPlan = () => {
-  const { plans, dataToSend } = useSelector((state) => state.carsInsurance);
+  const { allianzPlans, plans, dataToSend } = useSelector(
+    (state) => state.carsInsurance
+  );
+
   const [request, setRequest] = useState({ loading: false, error: false });
   const dispatch = useDispatch();
 
@@ -23,21 +26,23 @@ export const SelectCarsPlan = () => {
 
   useEffect(() => {
     console.log("data to send", dataToSend);
-    console.log("planes****", plans);
+    // console.log("planes****", plans);
+    // if (plans.length === 0) {
+    //   setRequest({ loading: false, error: false });
+    //   getPlans(dataToSend, dispatch)
+    //     .then((_) => {
+    //       setRequest({ loading: false, error: false });
+    //     })
+    //     .catch((_) => setRequest({ loading: false, error: true }));
+    // }
 
-    if (plans.length === 0) {
-      setRequest({ loading: false, error: false });
-      getPlans(dataToSend, dispatch)
+    if (allianzPlans.length === 0) {
+      setRequest({ loading: true, error: false });
+      getAllianzPlans(dataToSend, dispatch)
         .then((_) => {
           setRequest({ loading: false, error: false });
         })
         .catch((_) => setRequest({ loading: false, error: true }));
-
-      // getAllianzPlans(dataToSend, dispatch)
-      //   .then((_) => {
-      //     setRequest({ loading: false, error: false });
-      //   })
-      //   .catch((_) => setRequest({ loading: false, error: true }));
     }
   }, []);
 
@@ -55,8 +60,8 @@ export const SelectCarsPlan = () => {
             style={{ gap: "1.5rem" }}
             className="row justify-content-between mt-5"
           >
-            {plans.length &&
-              plans.map((plan, i) => <CarPlan key={i} index={i} {...plan} />)}
+            {/* {plans.length &&
+              plans.map((plan, i) => <CarPlan key={i} index={i} {...plan} />)} */}
 
             {allianzPlans.length &&
               allianzPlans.map((plan, i) => (

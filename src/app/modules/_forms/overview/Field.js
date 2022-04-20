@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
 
 const Field = ({ name, form, formik, onEdit, combined }) => {
-  console.log("field values", formik.values);
-
   const fieldValue = () => {
     if (!form && combined) {
       const fields = combined.split(",");

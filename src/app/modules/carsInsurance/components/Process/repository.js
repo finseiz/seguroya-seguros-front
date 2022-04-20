@@ -29,7 +29,6 @@ export const createQuoteRequest = async (data) => {
 const getAllianzPlansPath = `allianz/cotizacion`;
 
 export const getAllianzPlansRequest = async (data) => {
-  console.log("BURNNNN", data);
   const response = await makeRequest({
     path: getAllianzPlansPath,
     method: "POST",

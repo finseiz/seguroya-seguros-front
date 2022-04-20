@@ -23,7 +23,7 @@ export function Step3({ formik, setCirculation }) {
 
   useEffect(() => {
     setZoneLoading(true);
-    formik.setFieldValue("circulationZone", "");
+    // formik.setFieldValue("circulationZone", "");
     getCirculationZone(formik.values.insuranceType).then((list) => {
       setCirculationZone(list);
       setZoneLoading(false);

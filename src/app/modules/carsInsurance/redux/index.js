@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   dataToSend: {},
   plans: [],
+  allianzPlans: [],
   data: {
     cities: [],
   },
@@ -17,6 +18,11 @@ const initialState = {
 const setPlans = (data) => (dispatch) => {
   const action = { data };
   dispatch(carsInsuranceSlice.actions.setPlans(action));
+};
+
+const setAllianzPlans = (data) => (dispatch) => {
+  const action = { data };
+  dispatch(carsInsuranceSlice.actions.setAllianzPlans(action));
 };
 
 const setInitialProgress = (progress) => (dispatch) => {
@@ -44,6 +50,7 @@ const restartState = () => (dispatch) => {
 
 export const actions = {
   setPlans,
+  setAllianzPlans,
 
   setInitialProgress,
   setSelectedPlan,
@@ -59,6 +66,10 @@ export const carsInsuranceSlice = createSlice({
     setPlans: (state, action) => {
       const { data } = action.payload;
       state.plans = data;
+    },
+    setAllianzPlans: (state, action) => {
+      const { data } = action.payload;
+      state.allianzPlans = data;
     },
     setInitialProgress: (state, action) => {
       const { data } = action.payload;
