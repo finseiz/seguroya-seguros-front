@@ -98,9 +98,9 @@ export const initialValues = {
   // secondSurname: "Castro",
   // address: "Calle 45n",
 
-  isNew: true,
+  isNew: false,
   licensePlate: "",
-  city: 0,
+  city: 76001,
   names: "",
   surnames: "",
   gender: "",

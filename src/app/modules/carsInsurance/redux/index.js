@@ -13,11 +13,17 @@ const initialState = {
     /** WARING: If this name change [uniqueProcess], most change carsInsaranceRoute.jsx at processIndicatorName="**" */
     uniqueProcess: 0,
   },
+  doneMessage: "",
 };
 
 const setPlans = (data) => (dispatch) => {
   const action = { data };
   dispatch(carsInsuranceSlice.actions.setPlans(action));
+};
+
+const setDoneMessage = (data) => (dispatch) => {
+  const action = { data };
+  dispatch(carsInsuranceSlice.actions.setDoneMessage(action));
 };
 
 const setAllianzPlans = (data) => (dispatch) => {
@@ -51,7 +57,7 @@ const restartState = () => (dispatch) => {
 export const actions = {
   setPlans,
   setAllianzPlans,
-
+  setDoneMessage,
   setInitialProgress,
   setSelectedPlan,
   setUniqueProgress,
@@ -89,6 +95,10 @@ export const carsInsuranceSlice = createSlice({
         ...state.dataToSend,
         ...newData,
       };
+    },
+    setDoneMessage: (state, action) => {
+      const { data } = action.payload;
+      state.doneMessage = data;
     },
     reset: (state, action) => {
       state = initialState;

@@ -28,6 +28,7 @@ export default function CarsInsuranceRoute() {
   const {
     dataToSend: { email },
     selectedPlan,
+    doneMessage,
     progress: { initial },
   } = useSelector((state) => state.carsInsurance);
   const dispatch = useDispatch();
@@ -123,9 +124,11 @@ export default function CarsInsuranceRoute() {
           path={CarsProcessDoneRoute}
           component={() => (
             <ProcessDone
-              bottomMessage="Continúe con el pago para finalizar tu seguro"
+              bottomMessage={
+                doneMessage || "Continúe con el pago para finalizar tu seguro"
+              }
               payment={{
-                name: "Seguro todo riesto",
+                name: "Seguro todo riesgo",
                 description: `Seguro por kilómetro ${selectedPlan.insuranceName}`,
                 amount: selectedPlan[selectedPlan.selectedPayment],
               }}
