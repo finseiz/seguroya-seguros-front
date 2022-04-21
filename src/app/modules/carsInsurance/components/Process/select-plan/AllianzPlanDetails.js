@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { WhatsAppContainer } from "app/components/process/WhatsAppContainer";
 import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
 import { useHistory, useParams } from "react-router-dom";
@@ -13,17 +13,17 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import FormikRadioGroup from "app/modules/_forms/general/FormikRadioGroup";
 
-import { bolivarPlans, allianzPlans } from "../burnPlans";
+import { allianzPlans } from "../burnPlans";
 
 export const AllianzPlanDetails = () => {
   const { id } = useParams();
-  const dispatch = useDispatch();
-  // const { plans ,dataToSend } = useSelector((state) => state.carsInsurance);
-  const { dataToSend } = useSelector((state) => state.carsInsurance);
+  // const dispatch = useDispatch();
+  // const { allianzPlans , dataToSend } = useSelector((state) => state.carsInsurance);
 
+  //burnway---
   const concatPlans = [...allianzPlans];
-
   const plans = concatPlans;
+  //endburn---
 
   const [requestStatus, setRequestStatus] = useState({
     loading: false,
@@ -62,19 +62,19 @@ export const AllianzPlanDetails = () => {
 
   const onSubmit = async ({ selectedPayment }) => {
     setRequestStatus({ loading: true, error: false });
-    const response = await createQuote(dataToSend, id);
-    if (response) {
+    // const response = await createQuote(dataToSend, id);
+    if (true) {
       setRequestStatus({ loading: false, error: false });
-      dispatch(
-        actions.setSelectedPlan({
-          ...selectPlan,
-          quoteId: response,
-          selectedPayment,
-        })
-      );
-      sendOtp(response);
+      // dispatch(
+      //   actions.setSelectedPlan({
+      //     ...selectPlan,
+      //     quoteId: response,
+      //     selectedPayment,
+      //   })
+      // );
+      // sendOtp(response);
       history.push(CarsProcessOtpRoute);
-      getDocumentPdf(response);
+      // getDocumentPdf(response);
     } else {
       setRequestStatus({ loading: false, error: true });
     }
@@ -87,6 +87,10 @@ export const AllianzPlanDetails = () => {
     }),
     onSubmit,
   });
+
+  useEffect(() => {
+    console.log("SELECTED PLAN", selectPlan);
+  }, []);
 
   const radioOption = (name, value) => (
     <div>
@@ -105,6 +109,25 @@ export const AllianzPlanDetails = () => {
       title: radioOption(payment.paymentId.toLowerCase(), payment.premiumValue),
       value: payment.paymentId,
     }));
+  };
+
+  const renderCoverages = () => {
+    const coverages = selectPlan.coverages;
+    if (!coverages) return;
+
+    return coverages.map((coverage) => (
+      <div className="coverage-card card p-2" key={coverage.coverageId}>
+        <p className="coverage-card-title">{coverage.coverageName}</p>
+        <p>
+          <strong>Deductible: </strong>
+          {parseCurrency(coverage.deductible)}
+        </p>
+        <p>
+          <strong>Valor: </strong>
+          {parseCurrency(coverage.insuredValue)}
+        </p>
+      </div>
+    ));
   };
 
   return (
@@ -161,6 +184,11 @@ export const AllianzPlanDetails = () => {
                       </li>
                     ))}
                   </ul>
+
+                  <div className="plans_sel_plan-name mb-4">Coverturas</div>
+                  <section className="coverage-grid">
+                    {renderCoverages()}
+                  </section>
 
                   {/* <Comments commentList={commets} /> */}
                 </div>

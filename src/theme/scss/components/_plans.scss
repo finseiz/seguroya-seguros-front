@@ -1,14 +1,13 @@
-
-.plans_insurance-logo-space{
+.plans_insurance-logo-space {
     margin: 0.5rem 3rem;
     text-align: center;
 }
 
-.plans_insurance-logo{
+.plans_insurance-logo {
     width: 85%;
 }
 
-.plans__insurance-desc{
+.plans__insurance-desc {
     margin: 1rem 2rem;
 }
 
@@ -19,13 +18,13 @@
     margin-bottom: 2rem;
 }
 
-.plans_plan-name{
+.plans_plan-name {
     font-weight: bold;
     font-size: 18px;
     line-height: 25px;
 }
 
-.plans_plan-label{
+.plans_plan-label {
     font-weight: bold;
     font-size: 12px;
     line-height: 16px;
@@ -33,74 +32,74 @@
     margin-top: 0.6rem;
 }
 
-.plans_plan-value{
+.plans_plan-value {
     font-weight: normal;
     font-size: 20px;
     line-height: 27px;
 }
 
-.plans_plan-health-value{
+.plans_plan-health-value {
     font-size: 14px;
 }
 
-.plans_plan-qualification{
+.plans_plan-qualification {
     font-weight: bold;
     font-size: 16px;
     color: #000000;
 }
 
-.plans_plan-price{
+.plans_plan-price {
     font-weight: bold;
     font-size: 25px;
     line-height: 34px;
     color: $dark-blue;
 }
 
-.plans_sel_plan-name{
+.plans_sel_plan-name {
     font-weight: bold;
     font-size: 30px;
     line-height: 41px;
     color: $dark-blue;
 }
 
-ul.plan_sel_benefits{
+ul.plan_sel_benefits {
     padding-left: 1rem;
 }
 
-li.plan_sel_benefit-item{
+li.plan_sel_benefit-item {
     font-size: 16px;
     line-height: 22px;
 }
 
 
-.plans_sel_plan-comment{
+.plans_sel_plan-comment {
     font-weight: bold;
     font-size: 18px;
     line-height: 25px;
     color: $dark-blue;
 }
 
-.plans_sel_plan-comment-label{
+.plans_sel_plan-comment-label {
     font-weight: bold;
     font-size: 16px;
     line-height: 22px;
     color: #000000;
 }
 
-.plans_sal_plan-comment-item{
+.plans_sal_plan-comment-item {
     font-size: 16px;
     line-height: 22px;
     color: #000000;
 }
 
-.plans_sal_plan-label-2{
+.plans_sal_plan-label-2 {
     font-weight: bold;
     font-size: 13px;
     line-height: 18px;
     color: $dark-blue;
 }
 
-.plans_sal_plan-value-2{
+.plans_sal_plan-value-2 {
     font-weight: bold;
     font-size: 28px;
     line-height: 38px;
@@ -108,7 +107,7 @@ li.plan_sel_benefit-item{
 }
 
 // PENDING to delete
-.plans_sal_container-details{
+.plans_sal_container-details {
     padding-top: 4rem;
     padding-bottom: 4rem;
 
@@ -116,7 +115,25 @@ li.plan_sel_benefit-item{
     padding-right: 2rem;
 }
 
-.plan-sal_container-desc{
+.plan-sal_container-desc {
     width: 65%;
     padding-right: 3rem;
+}
+
+
+//COVERAGES...
+.coverage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+
+    .coverage-card {
+        border-radius: 10px;
+
+        &-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: $dark-blue;
+        }
+    }
 }

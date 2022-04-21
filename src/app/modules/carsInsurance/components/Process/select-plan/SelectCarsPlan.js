@@ -6,26 +6,31 @@ import { Loading } from "app/components/process/messages/Loading";
 import { ErrorMessage } from "app/components/process/messages/Erros";
 import CarPlan from "app/components/process/plans/CarPlans";
 import AllianzCarPlan from "app/components/process/plans/allianzCarPlans";
-// import { allianzPlans, bolivarPlans } from "../burnPlans";
+import { bolivarPlans } from "../burnPlans";
 
 export const SelectCarsPlan = () => {
-  const { allianzPlans, plans, dataToSend } = useSelector(
+  const { allianzPlans, dataToSend } = useSelector(
     (state) => state.carsInsurance
   );
 
   const [request, setRequest] = useState({ loading: false, error: false });
+  const [allianzRequest, setAllianzRequest] = useState({
+    loading: false,
+    error: false,
+  });
   const dispatch = useDispatch();
 
   // burn info
 
-  //const plans = [...bolivarPlans];
+  const plans = [...bolivarPlans];
   // console.log(
   //   "🚀 ~ file: SelectCarsPlan.js ~ line 85 ~ SelectCarsPlan ~ unifiedPlans",
   //   plans
   // );
 
   useEffect(() => {
-    console.log("data to send", dataToSend);
+    // BOLIVAR PLANS
+    // console.log("data to send", dataToSend);
     // console.log("planes****", plans);
     // if (plans.length === 0) {
     //   setRequest({ loading: false, error: false });
@@ -36,13 +41,17 @@ export const SelectCarsPlan = () => {
     //     .catch((_) => setRequest({ loading: false, error: true }));
     // }
 
+    setRequest({ loading: false, error: false });
+    // setAllianzRequest({ loading: false, error: false });
+
+    // ALLIANZ PLANS
     if (allianzPlans.length === 0) {
-      setRequest({ loading: true, error: false });
+      setAllianzRequest({ loading: true, error: false });
       getAllianzPlans(dataToSend, dispatch)
         .then((_) => {
-          setRequest({ loading: false, error: false });
+          setAllianzRequest({ loading: false, error: false });
         })
-        .catch((_) => setRequest({ loading: false, error: true }));
+        .catch((_) => setAllianzRequest({ loading: false, error: true }));
     }
   }, []);
 
@@ -50,7 +59,6 @@ export const SelectCarsPlan = () => {
     <div className="container my-5">
       <div className="mx-3">
         <WhatsAppContainer />
-
         {request.error ? (
           <ErrorMessage />
         ) : request.loading ? (
@@ -60,9 +68,21 @@ export const SelectCarsPlan = () => {
             style={{ gap: "1.5rem" }}
             className="row justify-content-between mt-5"
           >
-            {/* {plans.length &&
-              plans.map((plan, i) => <CarPlan key={i} index={i} {...plan} />)} */}
-
+            {plans.length &&
+              plans.map((plan, i) => <CarPlan key={i} index={i} {...plan} />)}
+          </div>
+        )}
+      </div>
+      <div className="mx-3">
+        {allianzRequest.error ? (
+          <ErrorMessage />
+        ) : allianzRequest.loading ? (
+          <Loading />
+        ) : (
+          <div
+            style={{ gap: "1.5rem" }}
+            className="row justify-content-between mt-5"
+          >
             {allianzPlans.length &&
               allianzPlans.map((plan, i) => (
                 <AllianzCarPlan key={i} index={i} {...plan} />
