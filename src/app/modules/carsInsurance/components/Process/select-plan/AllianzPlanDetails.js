@@ -17,12 +17,14 @@ import { allianzPlans } from "../burnPlans";
 
 export const AllianzPlanDetails = () => {
   const { id } = useParams();
-  // const dispatch = useDispatch();
-  // const { allianzPlans , dataToSend } = useSelector((state) => state.carsInsurance);
+  const dispatch = useDispatch();
+  const { allianzPlans, dataToSend } = useSelector(
+    (state) => state.carsInsurance
+  );
 
   //burnway---
-  const concatPlans = [...allianzPlans];
-  const plans = concatPlans;
+  // const concatPlans = [...allianzPlans];
+  // const plans = concatPlans;
   //endburn---
 
   const [requestStatus, setRequestStatus] = useState({
@@ -56,8 +58,8 @@ export const AllianzPlanDetails = () => {
   );
 
   const selectPlan = useMemo(
-    () => plans.find((plan) => plan.id === parseInt(id)),
-    [id, plans]
+    () => allianzPlans.find((plan) => plan.id === parseInt(id)),
+    [id, allianzPlans]
   );
 
   const onSubmit = async ({ selectedPayment }) => {
@@ -65,13 +67,12 @@ export const AllianzPlanDetails = () => {
     // const response = await createQuote(dataToSend, id);
     if (true) {
       setRequestStatus({ loading: false, error: false });
-      // dispatch(
-      //   actions.setSelectedPlan({
-      //     ...selectPlan,
-      //     quoteId: response,
-      //     selectedPayment,
-      //   })
-      // );
+      dispatch(
+        actions.setSelectedPlan({
+          ...selectPlan,
+          selectedPayment,
+        })
+      );
       // sendOtp(response);
       history.push(CarsProcessOtpRoute);
       // getDocumentPdf(response);
@@ -154,10 +155,10 @@ export const AllianzPlanDetails = () => {
                     {selectPlan.insuranceName}
                   </div>
 
-                  <div className="mt-4">
+                  {/* <div className="mt-4">
                     <strong>Tipo de riesgo: </strong>
-                    {selectPlan.detail.riskTypeDesc}
-                  </div>
+                    {selectPlan.riskTypeDesc}
+                  </div> */}
 
                   <div className="mt-4">
                     <strong>Beneficios: </strong>

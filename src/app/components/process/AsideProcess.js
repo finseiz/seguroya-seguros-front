@@ -11,6 +11,8 @@ export const AsideProcess = (props) => {
     (state) => state[insuranceName]
   );
 
+  console.log("selectedPlan", selectedPlan);
+
   const processIndicator = progress[processIndicatorName];
   return (
     <div className="container my-4">
