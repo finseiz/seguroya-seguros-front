@@ -3,38 +3,38 @@ import * as Yup from "yup";
 export const CarsSchema = Yup.object().shape({
   isNew: Yup.boolean(),
   // conditional pathway when car is not new
-  carYear: Yup.string().when("isNew", {
-    is: false,
-    then: Yup.string().required("Campo requerido"),
-  }),
-  carModel: Yup.string().when("isNew", {
-    is: false,
-    then: Yup.string().required("Campo requerido"),
-  }),
-  fasecoldaCode: Yup.string().when("isNew", {
-    is: false,
-    then: Yup.string().required("Campo requerido"),
-  }),
-  protectionDevice: Yup.string().when("isNew", {
-    is: false,
-    then: Yup.string().required("Campo requerido"),
-  }),
-  accessoryValue: Yup.string().when("isNew", {
-    is: false,
-    then: Yup.string().required("Campo requerido"),
-  }),
-  shieldingValue: Yup.string().when("isNew", {
-    is: false,
-    then: Yup.string().required("Campo requerido"),
-  }),
-  gasSystemValue: Yup.string().when("isNew", {
-    is: false,
-    then: Yup.string().required("Campo requerido"),
-  }),
-  insuredValue: Yup.string().when("isNew", {
-    is: false,
-    then: Yup.string().required("Campo requerido"),
-  }),
+  // carYear: Yup.string().when("isNew", {
+  //   is: false,
+  //   then: Yup.string().required("Campo requerido"),
+  // }),
+  // carModel: Yup.string().when("isNew", {
+  //   is: false,
+  //   then: Yup.string().required("Campo requerido"),
+  // }),
+  // fasecoldaCode: Yup.string().when("isNew", {
+  //   is: false,
+  //   then: Yup.string().required("Campo requerido"),
+  // }),
+  // protectionDevice: Yup.string().when("isNew", {
+  //   is: false,
+  //   then: Yup.string().required("Campo requerido"),
+  // }),
+  // accessoryValue: Yup.string().when("isNew", {
+  //   is: false,
+  //   then: Yup.string().required("Campo requerido"),
+  // }),
+  // shieldingValue: Yup.string().when("isNew", {
+  //   is: false,
+  //   then: Yup.string().required("Campo requerido"),
+  // }),
+  // gasSystemValue: Yup.string().when("isNew", {
+  //   is: false,
+  //   then: Yup.string().required("Campo requerido"),
+  // }),
+  // insuredValue: Yup.string().when("isNew", {
+  //   is: false,
+  //   then: Yup.string().required("Campo requerido"),
+  // }),
 
   // is borrower the owner
   isHolderDriver: Yup.boolean(),
@@ -113,14 +113,14 @@ export const initialValues = {
   isHolderDriver: true,
 
   // car isn't new field path
-  carYear: "",
-  carModel: "",
-  fasecoldaCode: "",
-  protectionDevice: "",
-  accessoryValue: "",
-  shieldingValue: "",
-  gasSystemValue: "",
-  insuredValue: "",
+  //carYear: "",
+  //carModel: "",
+  //fasecoldaCode: "",
+  //protectionDevice: "",
+  //accessoryValue: "",
+  //shieldingValue: "",
+  //gasSystemValue: "",
+  //insuredValue: "",
 
   // is the borrower, owner of the car ?
 

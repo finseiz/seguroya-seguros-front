@@ -82,7 +82,7 @@ export function Step1({ formik, countries }) {
             </div>
           </div>
 
-          {!formik.values.isNew && (
+          {/* {!formik.values.isNew && (
             <>
               <div className="col p-0">
                 <FormikInput
@@ -113,7 +113,7 @@ export function Step1({ formik, countries }) {
                 />
               </div>
             </>
-          )}
+          )} */}
 
           {!formik.values.isHolderDriver && (
             <>
@@ -170,7 +170,7 @@ export function Step1({ formik, countries }) {
             label="Tengo un código de descuento (Opcional)"
           />
 
-          {!formik.values.isNew && (
+          {/* {!formik.values.isNew && (
             <>
               <div className="col p-0">
                 <FormikInput
@@ -201,7 +201,7 @@ export function Step1({ formik, countries }) {
                 />
               </div>
             </>
-          )}
+          )} */}
 
           <FormikRadioGroup
             formik={formik}

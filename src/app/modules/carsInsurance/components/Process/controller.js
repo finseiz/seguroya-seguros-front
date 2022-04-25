@@ -180,9 +180,9 @@ const prepareAllianzData = (data) => {
     holderDocNumber: data.identification,
     holderDocType: identificationType,
     holderDriver: true,
-    holderOwner: data.isHolderDriver,
-    isHolderDriver: data.isHolderDriver,
-    isHolderOwner: data.isHolderOwner,
+    holderOwner: data.isHolderDriver || true,
+    isHolderDriver: data.isHolderDriver || true,
+    isHolderOwner: data.isHolderOwner || true,
     isNewOwner: data.isNewOwner || true,
     newOwner: data.isNewOwner || true,
     ownerDocNumber: data.identidicationOwnerNumber || data.identification,
@@ -202,9 +202,9 @@ const prepareAllianzData = (data) => {
       shieldingValue: Number(data.shieldingValue) || 0,
     },
     successive: "NO_BANCARIO",
-    vehicleFasecoldaCode: Number(data.fasecoldaCode),
+    vehicleFasecoldaCode: Number(data.fasecoldaCode) || 0,
     vehiclePlate: data.licensePlate,
-    vehicleYear: Number(data.carYear),
+    vehicleYear: Number(data.carYear) || 1901,
   };
 };
 
@@ -267,11 +267,11 @@ export const getAllianzPlans = async (dataToSend, dispatch) => {
                 Diferido a 10 cuotas mensuales
               </p>
             ),
-            value: `${parseCurrency(plan.coverages[0].insuredValue)}COP`,
+            value: `${parseCurrency(plan.payments[1].premiumValue)}COP`,
             includeInfo: true,
           },
         ],
-        totalPrice: plan.coverages[0].insuredValue,
+        totalPrice: plan.payments[0].premiumValue,
         redirect: AllianzCarsProcessDetailsPlanRouteFunc,
         data: { ...data },
       };

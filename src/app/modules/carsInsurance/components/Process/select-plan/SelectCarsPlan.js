@@ -85,7 +85,7 @@ export const SelectCarsPlan = () => {
           >
             {allianzPlans.length &&
               allianzPlans.map((plan, i) => (
-                <AllianzCarPlan key={i} index={i} {...plan} />
+                <AllianzCarPlan key={plan.packageId} index={i} {...plan} />
               ))}
           </div>
         )}
