@@ -9,6 +9,7 @@ import {
   CarsProcessSarlaftRoute,
   CarsProcessSelectPlanRoute,
   CarsProcessSheduleAppointmentRoute,
+  AllianzCarsProcessDoneRoute,
 } from "app/routes/childs/Cars/routes";
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { Content } from "theme/layout/utils/content";
@@ -28,16 +29,16 @@ export default function CarsInsuranceRoute() {
   const {
     dataToSend: { email },
     selectedPlan,
-    doneMessage,
     progress: { initial },
   } = useSelector((state) => state.carsInsurance);
   const dispatch = useDispatch();
+
   const history = useHistory();
 
   /** Health Route Protection */
-  // if (!email && !(initial === 100)) {
-  //   history.push(CarsHomeRoute);
-  // }
+  if (!email && !(initial === 100)) {
+    history.push(CarsHomeRoute);
+  }
 
   return (
     <Switch>
@@ -110,7 +111,12 @@ export default function CarsInsuranceRoute() {
           path={CarsProcessSarlaftRoute}
           component={() => (
             <SarlaftForm
-              redirectRoute={CarsProcessDoneRoute}
+              redirectRoute={
+                selectedPlan?.insuranceName.split(" ")[0].toLowerCase() ===
+                "allianz"
+                  ? AllianzCarsProcessDoneRoute
+                  : CarsProcessDoneRoute
+              }
               onLoad={() => {
                 dispatch(actions.setUniqueProgress(3));
               }}
@@ -124,14 +130,22 @@ export default function CarsInsuranceRoute() {
           path={CarsProcessDoneRoute}
           component={() => (
             <ProcessDone
-              bottomMessage={
-                doneMessage || "Continúe con el pago para finalizar tu seguro"
-              }
+              bottomMessage={"Continúe con el pago para finalizar tu seguro"}
               payment={{
                 name: "Seguro todo riesgo",
                 description: `Seguro por kilómetro ${selectedPlan.insuranceName}`,
                 amount: selectedPlan[selectedPlan.selectedPayment],
               }}
+            />
+          )}
+        />
+
+        <Route
+          exact={true}
+          path={AllianzCarsProcessDoneRoute}
+          component={() => (
+            <ProcessDone
+              bottomMessage={"Te llamaremos pronto para concluir el proceso"}
             />
           )}
         />

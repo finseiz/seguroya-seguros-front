@@ -22,6 +22,7 @@ export const CarsProcessSheduleAppointmentRoute =
   CarsProcessRoute + "/schedule-date";
 
 export const CarsProcessDoneRoute = CarsProcessRoute + "/done";
+export const AllianzCarsProcessDoneRoute = CarsProcessRoute + "/allianz-done";
 
 // Kilimeter insurance ----------------------------------------------------------------
 
