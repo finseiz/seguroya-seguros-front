@@ -93,19 +93,6 @@ export default function CarsInsuranceRoute() {
           )}
         />
 
-        {/* <Route
-          exact={true}
-          path={CarsProcessDoneRoute}
-          component={() => (
-            <ConfirmationCode
-              email={email}
-              onSubmit={(otp) => verifyOtp(selectedPlan.quoteId, otp)}
-              redirectRoute={CarsProcessSarlaftRoute}
-              messageIndex={1}
-            />
-          )}
-        /> */}
-
         <Route
           exact={true}
           path={CarsProcessSarlaftRoute}
