@@ -15,6 +15,7 @@ export const AllianzCarsProcessDetailsPlanRouteFunc = (id) =>
   CarsProcessRoute + `/${id}/allianz-details`;
 
 export const CarsProcessOtpRoute = CarsProcessRoute + "/otp";
+export const AllianzCarsProcessOtpRoute = CarsProcessRoute + "/allianz-otp";
 
 export const CarsProcessSarlaftRoute = CarsProcessRoute + "/sarlaft/form";
 

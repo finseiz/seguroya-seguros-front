@@ -27,10 +27,21 @@ export const createQuoteRequest = async (data) => {
 
 // allianz...
 const getAllianzPlansPath = `allianz/cotizacion`;
+const saveAllianzQuotePath = `allianz/cotizacion/save`;
 
 export const getAllianzPlansRequest = async (data) => {
   const response = await makeRequest({
     path: getAllianzPlansPath,
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+  const body = await response.json();
+  return { body, status: response.status };
+};
+
+export const saveAllianzQuoteRequest = async (data) => {
+  const response = await makeRequest({
+    path: saveAllianzQuotePath,
     method: "POST",
     body: JSON.stringify(data),
   });

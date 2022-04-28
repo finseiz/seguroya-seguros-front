@@ -8,7 +8,7 @@ import { parseCurrency } from "app/helpers/parse-currency";
 import Comments from "../../../../../components/process/Comments";
 import { actions } from "app/modules/carsInsurance/redux";
 import { CarsProcessOtpRoute } from "app/routes/childs/Cars/routes";
-import { createQuote, sendOtp, getDocumentPdf } from "../controller";
+import { saveAllianzQuote, sendAllianzOtp } from "../controller";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import FormikRadioGroup from "app/modules/_forms/general/FormikRadioGroup";
@@ -18,7 +18,7 @@ import { allianzPlans } from "../burnPlans";
 export const AllianzPlanDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { allianzPlans, dataToSend } = useSelector(
+  const { allianzPlans, dataToSend, selectedPlan } = useSelector(
     (state) => state.carsInsurance
   );
 
@@ -64,18 +64,22 @@ export const AllianzPlanDetails = () => {
 
   const onSubmit = async ({ selectedPayment }) => {
     setRequestStatus({ loading: true, error: false });
-    // const response = await createQuote(dataToSend, id);
-    if (true) {
-      setRequestStatus({ loading: false, error: false });
-      dispatch(
-        actions.setSelectedPlan({
-          ...selectPlan,
-          selectedPayment,
-        })
-      );
-      // sendOtp(response);
+
+    setRequestStatus({ loading: false, error: false });
+    dispatch(
+      actions.setSelectedPlan({
+        ...selectPlan,
+        selectedPayment,
+      })
+    );
+    const response = await saveAllianzQuote(
+      dataToSend,
+      selectedPlan.transactionNumber
+    );
+
+    if (response.status === 200) {
+      sendAllianzOtp(selectedPlan.transactionNumber);
       history.push(CarsProcessOtpRoute);
-      // getDocumentPdf(response);
     } else {
       setRequestStatus({ loading: false, error: true });
     }
@@ -88,10 +92,6 @@ export const AllianzPlanDetails = () => {
     }),
     onSubmit,
   });
-
-  useEffect(() => {
-    console.log("SELECTED PLAN", selectPlan);
-  }, []);
 
   const radioOption = (name, value) => (
     <div>

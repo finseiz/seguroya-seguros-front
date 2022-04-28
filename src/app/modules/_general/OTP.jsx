@@ -50,10 +50,10 @@ export const ConfirmationCode = ({
   const submitOtp = async () => {
     if (onSubmit) {
       setLoading(true);
-      // const redirect = await onSubmit(formik.values["otp"]);
+      const redirect = await onSubmit(formik.values["otp"]);
 
       // *** set redirect.
-      if (true) {
+      if (redirect) {
         history.push(redirectRoute);
       } else {
         setOpenModal(false);

@@ -10,6 +10,7 @@ import {
   CarsProcessSelectPlanRoute,
   CarsProcessSheduleAppointmentRoute,
   AllianzCarsProcessDoneRoute,
+  AllianzCarsProcessOtpRoute,
 } from "app/routes/childs/Cars/routes";
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { Content } from "theme/layout/utils/content";
@@ -86,7 +87,22 @@ export default function CarsInsuranceRoute() {
           component={() => (
             <ConfirmationCode
               email={email}
-              onSubmit={(otp) => verifyOtp(selectedPlan.quoteId, otp)}
+              onSubmit={(otp) => verifyOtp(selectedPlan.quoteId, otp, 3)}
+              redirectRoute={CarsProcessSarlaftRoute}
+              messageIndex={1}
+            />
+          )}
+        />
+
+        <Route
+          exact={true}
+          path={AllianzCarsProcessOtpRoute}
+          component={() => (
+            <ConfirmationCode
+              email={email}
+              onSubmit={(otp) =>
+                verifyOtp(selectedPlan.transactionNumber, otp, 5)
+              }
               redirectRoute={CarsProcessSarlaftRoute}
               messageIndex={1}
             />

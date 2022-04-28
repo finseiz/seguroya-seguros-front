@@ -9,7 +9,7 @@ import AllianzCarPlan from "app/components/process/plans/allianzCarPlans";
 import { bolivarPlans } from "../burnPlans";
 
 export const SelectCarsPlan = () => {
-  const { allianzPlans, dataToSend } = useSelector(
+  const { plans, allianzPlans, dataToSend } = useSelector(
     (state) => state.carsInsurance
   );
 
@@ -17,12 +17,12 @@ export const SelectCarsPlan = () => {
   const [allianzRequest, setAllianzRequest] = useState({
     loading: false,
     error: false,
+    insurance: "",
   });
   const dispatch = useDispatch();
 
   // burn info
-
-  const plans = [...bolivarPlans];
+  // const plans = [...bolivarPlans];
   // console.log(
   //   "🚀 ~ file: SelectCarsPlan.js ~ line 85 ~ SelectCarsPlan ~ unifiedPlans",
   //   plans
@@ -30,39 +30,47 @@ export const SelectCarsPlan = () => {
 
   useEffect(() => {
     // BOLIVAR PLANS
-    // console.log("data to send", dataToSend);
-    // console.log("planes****", plans);
-    // if (plans.length === 0) {
-    //   setRequest({ loading: false, error: false });
-    //   getPlans(dataToSend, dispatch)
-    //     .then((_) => {
-    //       setRequest({ loading: false, error: false });
-    //     })
-    //     .catch((_) => setRequest({ loading: false, error: true }));
-    // }
-
-    setRequest({ loading: false, error: false });
-    // setAllianzRequest({ loading: false, error: false });
-
+    if (plans.length === 0) {
+      setRequest({ loading: true, error: false, insurance: "bolivar" });
+      getPlans(dataToSend, dispatch)
+        .then((_) => {
+          setRequest({ loading: false, error: false, insurance: "bolivar" });
+        })
+        .catch((_) =>
+          setRequest({ loading: false, error: true, insurance: "bolivar" })
+        );
+    }
+    // setRequest({ loading: false, error: false });
     // ALLIANZ PLANS
     if (allianzPlans.length === 0) {
-      setAllianzRequest({ loading: true, error: false });
+      setAllianzRequest({ loading: true, error: false, insurance: "allianz" });
       getAllianzPlans(dataToSend, dispatch)
         .then((_) => {
-          setAllianzRequest({ loading: false, error: false });
+          setAllianzRequest({
+            loading: false,
+            error: false,
+            insurance: "allianz",
+          });
         })
-        .catch((_) => setAllianzRequest({ loading: false, error: true }));
+        .catch((_) =>
+          setAllianzRequest({
+            loading: false,
+            error: true,
+            insurance: "allianz",
+          })
+        );
     }
   }, []);
 
+  console.log("hello");
   return (
     <div className="container my-5">
       <div className="mx-3">
         <WhatsAppContainer />
         {request.error ? (
-          <ErrorMessage />
+          <ErrorMessage insurance={request.insurance} />
         ) : request.loading ? (
-          <Loading />
+          <Loading insurance={request.insurance} />
         ) : (
           <div
             style={{ gap: "1.5rem" }}

@@ -4,6 +4,7 @@ import {
   createQuoteRequest,
   getPlansRequest,
   getAllianzPlansRequest,
+  saveAllianzQuoteRequest,
 } from "./repository";
 import { bolivarPlan } from "app/helpers/select-plan";
 import {
@@ -124,6 +125,13 @@ export const sendOtp = async (qouteId) => {
   });
 };
 
+export const sendAllianzOtp = async (qouteId) => {
+  await sendOtpRequest({
+    idAseguradora: 5, // Allianz ID
+    numCotizacion: qouteId,
+  });
+};
+
 export const getDocumentPdf = async (id) => {
   getDocumentaPdf(id)
     .then((response) => response.blob())
@@ -145,9 +153,9 @@ export const getDocumentPdf = async (id) => {
     });
 };
 
-export const verifyOtp = async (quoteId, otp) => {
+export const verifyOtp = async (quoteId, otp, idInsurer) => {
   const response = await verifyOtpRequest({
-    idAseguradora: 3, // Seguros Bolivar ID
+    idAseguradora: idInsurer, // Seguros Bolivar ID
     numCotizacion: quoteId,
     otp,
   });
@@ -208,36 +216,6 @@ const prepareAllianzData = (data) => {
   };
 };
 
-//  {
-//   firstBill: "NO_BANCARIO",
-//   holderDocNumber: "1002802174",
-//   holderDocType: "CEDULA_CIUDADANIA",
-//   holderDriver: true,
-//   holderOwner: true,
-//   isHolderDriver: true,
-//   isNewOwner: true,
-//   newOwner: true,
-//   ownerDocNumber: "1002802174",
-//   ownerDocType: "CEDULA_CIUDADANIA",
-//   riskData: {
-//     accessoriesValue: "0",
-//     circulationAreaDaneCode: 76001,
-//     gasSystemValue: "0",
-//     insuredValue: 0,
-//     isNewVehicle: false,
-//     newVehicle: false,
-//     ownerBornDate: "1994-04-17",
-//     ownerSex: "M",
-//     protectionDeviceCode: "CAZADOR",
-//     repowered: true,
-//     shieldingValue: 0,
-//   },
-//   successive: "NO_BANCARIO",
-//   vehicleFasecoldaCode: 5806047,
-//   vehiclePlate: "UGV495",
-//   vehicleYear: 2015,
-// };
-
 export const getAllianzPlans = async (dataToSend, dispatch) => {
   console.log("allianz data to send", dataToSend);
 
@@ -245,7 +223,6 @@ export const getAllianzPlans = async (dataToSend, dispatch) => {
   const response = await getAllianzPlansRequest(body);
 
   if (response.status === 200) {
-    console.log("ALLIANZ BODYY", response.body);
     const quoteId = response.body.quotationNumber;
 
     const data = response.body.packages;
@@ -253,6 +230,7 @@ export const getAllianzPlans = async (dataToSend, dispatch) => {
     const plans = data.map((plan) => {
       return {
         id: plan.packageId,
+        transactionNumber: response.body.transactionNumber,
         logoPath: "allianz_logo.svg",
         insuranceName: `Allianz - ${plan.packageName}`,
         //qualification: 3,
@@ -273,7 +251,7 @@ export const getAllianzPlans = async (dataToSend, dispatch) => {
         ],
         totalPrice: plan.payments[0].premiumValue,
         redirect: AllianzCarsProcessDetailsPlanRouteFunc,
-        data: { ...data },
+        data: { ...response.body },
       };
     });
 
@@ -284,4 +262,66 @@ export const getAllianzPlans = async (dataToSend, dispatch) => {
   }
 
   return [];
+};
+
+const prepareAllianzQuoteData = (data) => {
+  // Due to the specific id Enum class
+  // checks this field and apply the value that match the api.
+
+  let identificationType = "";
+
+  if (data.identificationType === "Cedula") {
+    identificationType = "CEDULA_CIUDADANIA";
+  } else if (data.identificationType === "Cedula_Extranjeria") {
+    identificationType = "CEDULA_EXTRANJERIA";
+  } else {
+    identificationType = data.identificationType;
+  }
+
+  return {
+    holderBirthDate: data.birthDate,
+    holderCellphone: data.cellphone,
+    holderEmail: data.email,
+    holderNames: data.names,
+    holderSurnames: data.surnames,
+    originalRequest: {
+      firstBill: "NO_BANCARIO",
+      holderDocNumber: data.identification,
+      holderDocType: identificationType,
+      holderDriver: true,
+      holderOwner: data.isHolderDriver || true,
+      isHolderDriver: data.isHolderDriver || true,
+      isHolderOwner: data.isHolderOwner || true,
+      isNewOwner: data.isNewOwner || true,
+      newOwner: data.isNewOwner || true,
+      ownerDocNumber: data.identidicationOwnerNumber || data.identification,
+      ownerDocType: data.identificationOwnerType || identificationType,
+      riskData: {
+        accessoriesValue: data.accessoryValue || 0,
+        // circulationAreaDaneCode: Number(data.circulationZone) || 0,
+        circulationAreaDaneCode: Number(data.city) || 76001,
+        gasSystemValue: data.gasSystemValue || "0",
+        insuredValue: Number(data.insuredValue) || 0,
+        isNewVehicle: data.isNew || false,
+        newVehicle: data.isNew || false,
+        ownerBornDate: data.ownerBirthDate || data.birthDate,
+        ownerSex: data.gender,
+        protectionDeviceCode: "CAZADOR",
+        repowered: data.repowered || true,
+        shieldingValue: Number(data.shieldingValue) || 0,
+      },
+      successive: "NO_BANCARIO",
+      vehicleFasecoldaCode: Number(data.fasecoldaCode) || 0,
+      vehiclePlate: data.licensePlate,
+      vehicleYear: Number(data.carYear) || 1901,
+    },
+  };
+};
+
+export const saveAllianzQuote = async (dataToSend, transactionNum) => {
+  const body = prepareAllianzQuoteData(dataToSend);
+  const finalData = { ...body, transactionNumber: transactionNum };
+  const response = await saveAllianzQuoteRequest(finalData);
+
+  return response;
 };
