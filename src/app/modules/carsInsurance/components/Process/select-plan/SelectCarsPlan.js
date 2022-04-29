@@ -13,11 +13,15 @@ export const SelectCarsPlan = () => {
     (state) => state.carsInsurance
   );
 
-  const [request, setRequest] = useState({ loading: false, error: false });
+  const [request, setRequest] = useState({
+    loading: false,
+    error: false,
+    insurance: "bolivar",
+  });
   const [allianzRequest, setAllianzRequest] = useState({
     loading: false,
     error: false,
-    insurance: "",
+    insurance: "allianz",
   });
   const dispatch = useDispatch();
 
@@ -62,7 +66,6 @@ export const SelectCarsPlan = () => {
     }
   }, []);
 
-  console.log("hello");
   return (
     <div className="container my-5">
       <div className="mx-3">
@@ -83,9 +86,9 @@ export const SelectCarsPlan = () => {
       </div>
       <div className="mx-3">
         {allianzRequest.error ? (
-          <ErrorMessage />
+          <ErrorMessage insurance={allianzRequest.insurance} />
         ) : allianzRequest.loading ? (
-          <Loading />
+          <Loading insurance={allianzRequest.insurance} />
         ) : (
           <div
             style={{ gap: "1.5rem" }}

@@ -7,7 +7,7 @@ import Qualification from "app/components/process/Qualification";
 import { parseCurrency } from "app/helpers/parse-currency";
 import Comments from "../../../../../components/process/Comments";
 import { actions } from "app/modules/carsInsurance/redux";
-import { CarsProcessOtpRoute } from "app/routes/childs/Cars/routes";
+import { AllianzCarsProcessOtpRoute } from "app/routes/childs/Cars/routes";
 import { saveAllianzQuote, sendAllianzOtp } from "../controller";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -79,7 +79,7 @@ export const AllianzPlanDetails = () => {
 
     if (response.status === 200) {
       sendAllianzOtp(selectedPlan.transactionNumber);
-      history.push(CarsProcessOtpRoute);
+      history.push(AllianzCarsProcessOtpRoute);
     } else {
       setRequestStatus({ loading: false, error: true });
     }
