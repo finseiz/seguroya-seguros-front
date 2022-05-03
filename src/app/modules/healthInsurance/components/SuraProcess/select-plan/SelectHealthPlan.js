@@ -24,8 +24,6 @@ export const SelectSuraHealthPlan = () => {
     }
   }, []);
 
-  const endPlan = [...plans[2]];
-
   return (
     <div className="container my-5">
       <div className="mx-3">
@@ -36,14 +34,20 @@ export const SelectSuraHealthPlan = () => {
         ) : request.loading ? (
           <Loading />
         ) : (
-          <div className="row justify-content-between mt-3">
-            {plans.length &&
-              endPlan.length &&
-              endPlan.map((plan, i) => (
-                <Fragment key={i}>
-                  <SuraPlan index={i} {...plan} />
-                </Fragment>
-              ))}
+          // <div className="row justify-content-between mt-3">
+          //   {plans.length &&
+          //     plans.map((plan, i) => (
+          //       <Fragment key={i}>
+          //         <SuraPlan index={i} {...plan} />
+          //       </Fragment>
+          //     ))}
+          // </div>
+          <div className="row justify-content-center mt-3">
+            {plans.length && (
+              <Fragment>
+                <SuraPlan {...plans[1]} />
+              </Fragment>
+            )}
           </div>
         )}
       </div>
