@@ -65,7 +65,6 @@ export const AllianzPlanDetails = () => {
   const onSubmit = async ({ selectedPayment }) => {
     setRequestStatus({ loading: true, error: false });
 
-    setRequestStatus({ loading: false, error: false });
     dispatch(
       actions.setSelectedPlan({
         ...selectPlan,
@@ -73,18 +72,19 @@ export const AllianzPlanDetails = () => {
       })
     );
 
-    if (selectedPlan) {
-      const response = await saveAllianzQuote(
-        dataToSend,
-        selectedPlan.transactionNumber
-      );
+    const extendData = {
+      ...dataToSend,
+      transactionNumber: selectedPlan.transactionNumber,
+    };
 
-      if (response.status === 200) {
-        sendAllianzOtp(selectedPlan.transactionNumber);
-        history.push(AllianzCarsProcessOtpRoute);
-      } else {
-        setRequestStatus({ loading: false, error: true });
-      }
+    if (extendData.transactionNumber) {
+      console.log("DATA TO SEND", extendData);
+      await saveAllianzQuote(extendData);
+
+      sendAllianzOtp(extendData.transactionNumber);
+      history.push(AllianzCarsProcessOtpRoute);
+    } else {
+      setRequestStatus({ loading: false, error: true });
     }
   };
 
@@ -252,7 +252,10 @@ export const AllianzPlanDetails = () => {
                         </div>
                       ) : (
                         <div className="text-center">
-                          <button className="btn primary_btn_expand w-100">
+                          <button
+                            type="submit"
+                            className="btn primary_btn_expand w-100"
+                          >
                             Comprar
                           </button>
                         </div>

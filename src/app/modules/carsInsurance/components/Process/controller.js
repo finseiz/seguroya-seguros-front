@@ -13,6 +13,7 @@ import {
 } from "app/routes/childs/Cars/routes";
 import {
   sendOtpRequest,
+  sendAllianzOtpRequest,
   verifyOtpRequest,
 } from "app/modules/_general/repositories/otp";
 import { getDocumentaPdf } from "app/modules/_general/repositories/document";
@@ -126,7 +127,7 @@ export const sendOtp = async (qouteId) => {
 };
 
 export const sendAllianzOtp = async (qouteId) => {
-  await sendOtpRequest({
+  await sendAllianzOtpRequest({
     idAseguradora: 5, // Allianz ID
     numCotizacion: qouteId,
   });
@@ -315,13 +316,13 @@ const prepareAllianzQuoteData = (data) => {
       vehiclePlate: data.licensePlate,
       vehicleYear: Number(data.carYear) || 1901,
     },
+    transactionNumber: data.transactionNumber,
   };
 };
 
-export const saveAllianzQuote = async (dataToSend, transactionNum) => {
+export const saveAllianzQuote = async (dataToSend) => {
   const body = prepareAllianzQuoteData(dataToSend);
-  const finalData = { ...body, transactionNumber: transactionNum };
-  const response = await saveAllianzQuoteRequest(finalData);
+  const response = await saveAllianzQuoteRequest(body);
 
   return response;
 };
