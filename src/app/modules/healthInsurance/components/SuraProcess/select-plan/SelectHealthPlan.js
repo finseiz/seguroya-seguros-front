@@ -24,6 +24,8 @@ export const SelectSuraHealthPlan = () => {
     }
   }, []);
 
+  console.log("PLANS", plans);
+
   return (
     <div className="container my-5">
       <div className="mx-3">
@@ -45,7 +47,7 @@ export const SelectSuraHealthPlan = () => {
           <div className="row justify-content-center mt-3">
             {plans.length && (
               <Fragment>
-                <SuraPlan {...plans[1]} />
+                <SuraPlan {...plans[2]} />
               </Fragment>
             )}
           </div>
