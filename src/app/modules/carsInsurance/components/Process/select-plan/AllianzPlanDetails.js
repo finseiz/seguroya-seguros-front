@@ -72,16 +72,19 @@ export const AllianzPlanDetails = () => {
         selectedPayment,
       })
     );
-    const response = await saveAllianzQuote(
-      dataToSend,
-      selectedPlan.transactionNumber
-    );
 
-    if (response.status === 200) {
-      sendAllianzOtp(selectedPlan.transactionNumber);
-      history.push(AllianzCarsProcessOtpRoute);
-    } else {
-      setRequestStatus({ loading: false, error: true });
+    if (selectedPlan) {
+      const response = await saveAllianzQuote(
+        dataToSend,
+        selectedPlan.transactionNumber
+      );
+
+      if (response.status === 200) {
+        sendAllianzOtp(selectedPlan.transactionNumber);
+        history.push(AllianzCarsProcessOtpRoute);
+      } else {
+        setRequestStatus({ loading: false, error: true });
+      }
     }
   };
 
