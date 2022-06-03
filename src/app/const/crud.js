@@ -1,12 +1,12 @@
 import { URL } from ".";
 
 /**
- * 
- * @requires @param {string} path - path petition   
+ *
+ * @requires @param {string} path - path petition
  * @requires @param {string} method - "GET" or "POST"
  * @param {object} headers - Headers()
- * @param  {...any} others 
- * @returns 
+ * @param  {...any} others
+ * @returns
  */
 export function makeRequest({ path, method, headers, ...others }) {
   const timeout = 4000;
@@ -14,18 +14,34 @@ export function makeRequest({ path, method, headers, ...others }) {
   const id = setTimeout(() => controller.abort(), timeout);
   let config = {
     method,
-    headers: headers ? 
-      {...headers, 'Content-Type': 'application/json' } : 
-      { 'Content-Type': 'application/json' },
+    headers: headers
+      ? { ...headers, "Content-Type": "application/json" }
+      : { "Content-Type": "application/json" },
     ...others,
   };
   let myRequest = new Request(URL + path, config);
   return fetch(myRequest);
 }
 
+const bolivarURL = "https://api-conecta.segurosbolivar.com/prod";
+export function makeBolivarRequest({ path, method, headers, ...others }) {
+  const timeout = 4000;
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+  let config = {
+    method,
+    headers: headers
+      ? { ...headers, "Content-Type": "application/json" }
+      : { "Content-Type": "application/json" },
+    ...others,
+  };
+  let myRequest = new Request(bolivarURL + path, config);
+  return fetch(myRequest);
+}
+
 /**
  * Use for add query params from an object - communly for added in path
- * Example: 
+ * Example:
  * Recived: {name: "David", age: 12}
  * Return: "?name=David&age=12"
  * @requires @param {object} filters  - Object of query params {key: value}

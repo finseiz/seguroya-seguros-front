@@ -6,7 +6,6 @@ import { Loading } from "app/components/process/messages/Loading";
 import { ErrorMessage } from "app/components/process/messages/Erros";
 import CarPlan from "app/components/process/plans/CarPlans";
 import AllianzCarPlan from "app/components/process/plans/allianzCarPlans";
-import { bolivarPlans } from "../burnPlans";
 
 export const SelectCarsPlan = () => {
   const { plans, allianzPlans, dataToSend } = useSelector(

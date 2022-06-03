@@ -1,4 +1,4 @@
-import { makeRequest } from "app/const";
+import { makeRequest, makeBolivarRequest } from "app/const";
 
 const baseURL = "segurosbolivar/";
 
@@ -6,10 +6,13 @@ const getPlansPath = baseURL + "liquidacion";
 const quotePath = baseURL + "cotizacion";
 
 export const getPlansRequest = async (data) => {
-  const response = await makeRequest({
+  const response = await makeBolivarRequest({
     path: getPlansPath,
     method: "POST",
     body: JSON.stringify(data),
+    headers: {
+      "x-api-key": "ylKFdr3Twg4eoT8FUFfdq2YHV8ACVZrea1wq9gMd",
+    },
   });
   const body = await response.json();
   return { body, status: response.status };
