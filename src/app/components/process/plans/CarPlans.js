@@ -18,6 +18,8 @@ const CarPlan = (props) => {
     redirect,
   } = props;
 
+  console.log("props", props);
+
   const history = useHistory();
 
   return (

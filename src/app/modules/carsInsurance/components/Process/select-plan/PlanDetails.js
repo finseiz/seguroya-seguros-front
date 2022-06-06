@@ -13,17 +13,12 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import FormikRadioGroup from "app/modules/_forms/general/FormikRadioGroup";
 
-import { bolivarPlans, allianzPlans } from "../burnPlans";
+// import { bolivarPlans, allianzPlans } from "../burnPlans";
 
 export const PlanDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  // const { plans ,dataToSend } = useSelector((state) => state.carsInsurance);
-  const { dataToSend } = useSelector((state) => state.carsInsurance);
-
-  const concatPlans = [...bolivarPlans];
-
-  const plans = concatPlans;
+  const { plans, dataToSend } = useSelector((state) => state.carsInsurance);
 
   const [requestStatus, setRequestStatus] = useState({
     loading: false,
@@ -51,11 +46,6 @@ export const PlanDetails = () => {
       "Programa de reposición especial, en caso de perdida total.",
       "Descuentos con proveedores para comprar vehiculo nuevos.",
     ],
-    []
-  );
-
-  const allianzBenefits = useMemo(
-    () => ["Beneficio 1", "Beneficio 2", "Beneficio 3"],
     []
   );
 

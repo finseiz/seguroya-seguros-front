@@ -65,6 +65,8 @@ export const SelectCarsPlan = () => {
     }
   }, []);
 
+  console.log("set plans??", plans);
+
   return (
     <div className="container my-5">
       <div className="mx-3">
