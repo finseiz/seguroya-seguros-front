@@ -36,13 +36,14 @@ const prepareData = (data) => {
     // opcionPA: data.includeAccessories ? "S" : "N",
     opcionPA: "N",
     // periodoFact: data.payment,
-    periodoFact: "12",
+    periodoFact: 12,
     placaVehiculo: data.licensePlate,
     // sumaAccesorios: data.accesoriesSum,
     sumaAccesorios: 0,
     tipoDocumentoTomador: getCarTypId(data.identificationType),
     // tipoInspeccion: data.inspectionType
     tipoInspeccion: "VIRTUAL",
+    claveAsesor: 38867,
   };
 };
 

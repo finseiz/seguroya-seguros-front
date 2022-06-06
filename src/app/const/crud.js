@@ -23,7 +23,7 @@ export function makeRequest({ path, method, headers, ...others }) {
   return fetch(myRequest);
 }
 
-const bolivarURL = "https://api-conecta.segurosbolivar.com/prod";
+const bolivarURL = "https://api-conecta.segurosbolivar.com/prod/";
 export function makeBolivarRequest({ path, method, headers, ...others }) {
   const timeout = 4000;
   const controller = new AbortController();

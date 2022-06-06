@@ -13,8 +13,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import FormikRadioGroup from "app/modules/_forms/general/FormikRadioGroup";
 
-import { allianzPlans } from "../burnPlans";
-
 export const AllianzPlanDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
