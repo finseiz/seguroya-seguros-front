@@ -15,12 +15,12 @@
 .brand {
   height: 80vh;
   background-image: linear-gradient(#0e1f7480, #0e1f7480),
-    url("../images/brand-01.jpg");
+    url("../images/brand-02.jpeg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-color: $bg-primary;
-  background-position-y: 30%;
+  background-position-y: 55%;
   position: relative;
   margin: 0;
   width: 100%;
@@ -37,7 +37,7 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
 }
 
-.home-msj-2{
+.home-msj-2 {
   font-weight: bold;
   font-size: 18px;
   line-height: 25px;
@@ -67,41 +67,41 @@
   border-right: 1px solid #EBEBF2;
   border-radius: 2px;
 
-  &:last-child{
+  &:last-child {
     border-right: none;
   }
 }
 
-.home-pages__{
+.home-pages__ {
 
-  &title{
+  &title {
     font-family: Como;
     font-weight: bold;
     color: $light-blue;
     font-size: 2.5rem;
   }
 
-  &content{
+  &content {
     color: $dark-blue;
     font-size: 1rem;
   }
-  
+
 }
 
-.home-offer__{
+.home-offer__ {
 
-  &image-container{
+  &image-container {
     max-width: 23rem;
     border-radius: 10px;
   }
 
-  &image{
+  &image {
     max-width: 23rem;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
   }
 
-  &text{
+  &text {
     color: $light-gray;
     font-size: 0.9rem;
   }

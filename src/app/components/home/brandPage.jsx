@@ -16,9 +16,7 @@ function BrandPage() {
             <div className="card w-50">
               <div className="card-body">
                 <div className="home-msj-2 mb-4">
-                  <p className="m-0">
-                    ¡Estamos listos para ayudarte!
-                  </p>
+                  <p className="m-0">¡Estamos listos para ayudarte!</p>
                   <p className="m-0">
                     Selecciona una opción para cotizar TU SEGURO
                   </p>
@@ -58,7 +56,7 @@ function BrandPage() {
                         <strong>Salud</strong>
                       </NavLink>
                     </div>
-                    <div className="col">
+                    {/* <div className="col">
                       <div className="small-icon">
                         <img
                           src={toAbsoluteUrl("/media/icons/card-01.svg")}
@@ -66,7 +64,7 @@ function BrandPage() {
                         />
                       </div>
                       <strong>SOAT</strong>
-                    </div>
+                    </div> */}
                     {/* <div className="col">
                       <div className="small-icon">
                         <img

@@ -41,7 +41,15 @@ function CustomNavbar() {
       </div>
 
       <nav className="navbar navbar-expand-lg navbar-light bg-white">
-        <div className="container-fluid">
+        <div
+          style={{
+            display: "grid",
+            alignItems: "center",
+            gridAutoFlow: "column",
+            justifyContent: "unset",
+          }}
+          className="container-fluid"
+        >
           {/* Seguro Ya Brand */}
           <NavLink to="/" className="navbar-brand">
             <img src={toAbsoluteUrl("/media/logos/logo_seguroya_dark.svg")} />{" "}
@@ -61,9 +69,27 @@ function CustomNavbar() {
           </button>
 
           {/* Items */}
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <div className="mr-auto">
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <div
+            className="navbar-elements nav-win collapse navbar-collapse"
+            id="navbarSupportedContent"
+          >
+            <div
+              style={{
+                display: "grid",
+                width: "100%",
+                justifyContent: "center",
+              }}
+              className=""
+            >
+              <ul
+                style={{
+                  display: "grid",
+                  gridAutoFlow: "column",
+                  gap: "1rem",
+                  fontSize: "1.2rem",
+                }}
+                className="navbar-nav me-auto mb-2 mb-lg-0"
+              >
                 <li className="nav-item">
                   <NavLink
                     to={HomeRoute}
@@ -119,7 +145,7 @@ function CustomNavbar() {
             </div>
 
             <div>
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0 justify-content-end">
                 {isAuthenticated ? (
                   <div>
                     <div className="dropdown">

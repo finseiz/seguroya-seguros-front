@@ -1,21 +1,19 @@
-
-
-.nav-link{
+.nav-link {
     color: $dark-blue !important;
     font-weight: 500;
 }
 
-.nav-link.active{
+.nav-link.active {
     color: $light-blue !important;
     font-weight: 500;
 }
 
-.whatsapp-contact{
+.whatsapp-contact {
     font-weight: 600;
     font-size: 0.8rem
 }
 
-.whatsapp-icon{
+.whatsapp-icon {
     max-width: 20px;
 }
 
@@ -27,15 +25,27 @@
     border-radius: 10px;
 }
 
-.dropdown__icon{
+.dropdown__icon {
     width: 1.5rem;
     margin-right: 0.7rem;
 }
 
-.state-icon{
+.state-icon {
     max-width: 30px;
 }
 
-.state-icon-min{
+.state-icon-min {
     max-width: 20px;
+}
+
+div.navbar-elements.nav-win {
+    display: grid !important;
+    grid-auto-flow: column;
+}
+
+@media (max-width: 992px) {
+    div.navbar-elements.nav-win {
+        display: none !important;
+        grid-auto-flow: column;
+    }
 }
