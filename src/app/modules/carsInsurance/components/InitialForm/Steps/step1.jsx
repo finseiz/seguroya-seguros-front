@@ -1,39 +1,39 @@
 import FormikInput from "app/modules/_forms/general/FormikInput";
 import FormikRadioGroup from "app/modules/_forms/general/FormikRadioGroup";
 import FormikSelect from "app/modules/_forms/general/FormikSelect";
-import { PositiveOrNegativeOption } from "app/helpers/radio-options";
+// import { PositiveOrNegativeOption } from "app/helpers/radio-options";
 import { useEffect, useState } from "react";
 import { CarsIdentificationsTypes } from "app/helpers/selet-options";
 import { genderRadioTypes } from "app/helpers/radio-options";
-import { getMunicipios } from "../controller";
+// import { getMunicipios } from "../controller";
 
 export function Step1({ formik, countries }) {
-  const [municipios, setMunicipios] = useState([]);
+  // const [municipios, setMunicipios] = useState([]);
 
   useEffect(() => {
     formik.setFieldValue("firstsubmit", false);
   }, []);
 
-  useEffect(() => {
-    getMunicipios().then((data) => {
-      const municipiosOptions = data.body.map((city) => {
-        return { title: city.nombre, value: city.id };
-      });
-      municipiosOptions.sort((a, b) => a.title.localeCompare(b.title));
-      setMunicipios([...municipiosOptions]);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getMunicipios().then((data) => {
+  //     const municipiosOptions = data.body.map((city) => {
+  //       return { title: city.nombre, value: city.id };
+  //     });
+  //     municipiosOptions.sort((a, b) => a.title.localeCompare(b.title));
+  //     setMunicipios([...municipiosOptions]);
+  //   });
+  // }, []);
 
   return (
     <div className="card-body">
       <div className="row">
         <div className="col" style={{ display: "grid", gap: "1rem" }}>
-          <FormikRadioGroup
+          {/* <FormikRadioGroup
             formik={formik}
             field="isNew"
             label="¿Este vehículo es nuevo?"
             options={PositiveOrNegativeOption}
-          />
+          /> */}
 
           <FormikInput
             field="licensePlate"
@@ -138,13 +138,13 @@ export function Step1({ formik, countries }) {
         </div>
 
         <div className="col" style={{ display: "grid", gap: "1rem" }}>
-          <FormikSelect
+          {/* <FormikSelect
             field="city"
             formik={formik}
             label="Ciudad"
             options={municipios}
             disabled={true}
-          />
+          /> */}
 
           <div className="col-6 p-0 pr-2">
             <FormikRadioGroup
@@ -203,12 +203,12 @@ export function Step1({ formik, countries }) {
             </>
           )} */}
 
-          <FormikRadioGroup
+          {/* <FormikRadioGroup
             formik={formik}
             field="isHolderDriver"
             label="¿El tomador es el mismo conductor?"
             options={PositiveOrNegativeOption}
-          />
+          /> */}
 
           {!formik.values.isHolderDriver && (
             <>

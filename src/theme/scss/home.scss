@@ -13,7 +13,7 @@
 }
 
 .brand {
-  height: 80vh;
+  height: 85vh;
   background-image: linear-gradient(#0e1f7480, #0e1f7480),
     url("../images/brand-02.jpeg");
   background-position: center;
@@ -25,6 +25,16 @@
   margin: 0;
   width: 100%;
   text-align: center;
+}
+
+// .card {
+//   background-color: #ffffffd0 !important;
+// }
+
+@media (min-width:920px) {
+  .brand {
+    background-position-y: 10%;
+  }
 }
 
 .home-msj {

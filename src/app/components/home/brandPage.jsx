@@ -2,7 +2,6 @@ import { CarsHomeRoute } from "app/routes/childs/Cars/routes";
 import { LifeHomeRoute } from "app/routes/childs/Life/routes";
 import { NavLink } from "react-router-dom";
 import { toAbsoluteUrl } from "theme/helpers";
-
 function BrandPage() {
   return (
     <section className="container-fluid brand overflow-hidden w-100 m-0">
@@ -12,7 +11,7 @@ function BrandPage() {
             Buscamos hacer más fácil y cercano el mundo de los seguros siendo tu
             asesor digital 24/7
           </p>
-          <div className="d-flex justify-content-center mt-5">
+          <div className="d-flex justify-content-center mt-5 ">
             <div className="card w-50">
               <div className="card-body">
                 <div className="home-msj-2 mb-4">

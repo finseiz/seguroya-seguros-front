@@ -9,36 +9,29 @@ import {
 } from "app/modules/_general/repositories/otp";
 
 const prepareDataToSend = (values) => {
-  // const getSurnames = values.surnames.split(" ");
-  console.log("value to be sended", values);
+  const getSurnames = values.surnames.split(" ");
   return {
-    name: values.names,
-    first_name: values.names,
-    second_name: values.surnames,
-    id_number: Number(values.identification),
-    id_type: values.identificationType,
-    gender:
-      values.gender === "M"
-        ? "Masculino"
-        : values.gender === "F"
-        ? "Femenino"
-        : "",
-    birth_date: formatGeneralDate(values.birthDate),
-    address: "direccion",
+    nombres: values.names,
+    celular: values.cellphone,
     email: values.email,
-    phone: values.cellphone,
-    country: 1,
-    traffic_city: parseInt(values.circulationZone) || "2",
-    code_fasecolda: "05801206",
-    plate_car: values.licensePlate,
-    car_year: values.carYear || 2010,
+    fechaNacimeinto: formatGeneralDate(values.birthDate),
+    genero: values.gender,
+    infoDocumento: {
+      documento: values.identification,
+      // idPais: parseInt(values.country),
+      idPais: 0,
+      tipoDocumento: values.identificationType,
+    },
+    placa: values.licensePlate,
+    primerApellido: getSurnames[0],
+    segundoApellido: getSurnames[1] ? getSurnames[1] : "",
+    zonaCirculacion: parseInt(values.circulationZone),
   };
 };
 
 export const getPlans = async (reduxFormValues, dispatch) => {
   try {
     const data = prepareDataToSend(reduxFormValues);
-    console.log("🚀 ~ file: controller.js ~ line 41 ~ getPlans ~ data", data);
     const { costs, policy } = await getPlansRequest(data);
     dispatch(
       actions.setPlans(

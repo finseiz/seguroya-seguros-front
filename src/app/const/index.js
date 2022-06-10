@@ -1,6 +1,6 @@
 import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
 
-export { makeRequest, makeBolivarRequest } from "./crud";
+export { makeRequest, makeBolivarRequest, makeSbsRequest } from "./crud";
 
 //export const URL = "http://34.95.140.147:8080/api/";
 export const URL = "http://104.154.49.185:8080/api/";

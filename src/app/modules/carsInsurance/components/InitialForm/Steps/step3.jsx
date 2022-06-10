@@ -25,6 +25,10 @@ export function Step3({ formik, setCirculation }) {
     setZoneLoading(true);
     // formik.setFieldValue("circulationZone", "");
     getCirculationZone(formik.values.insuranceType).then((list) => {
+      console.log(
+        "🚀 ~ file: step3.jsx ~ line 28 ~ getCirculationZone ~ list",
+        list
+      );
       setCirculationZone(list);
       setZoneLoading(false);
       setCirculation([...list]);
@@ -80,6 +84,7 @@ export function Step3({ formik, setCirculation }) {
 
       {!zoneLoading ? (
         formik.values.insuranceType === "km" ? (
+          // <div></div>
           <FormikSelect
             formik={formik}
             className="w-50 m-auto"

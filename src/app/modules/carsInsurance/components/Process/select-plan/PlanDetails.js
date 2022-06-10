@@ -193,13 +193,13 @@ export const PlanDetails = () => {
                               ),
                               value: "totalPrice",
                             },
-                            {
-                              title: radioOption(
-                                "Mensual",
-                                selectPlan.monthPrice
-                              ),
-                              value: "monthPrice",
-                            },
+                            // {
+                            //   title: radioOption(
+                            //     "Mensual",
+                            //     selectPlan.monthPrice
+                            //   ),
+                            //   value: "monthPrice",
+                            // },
                           ]}
                           optionsClass="flex-column"
                         />

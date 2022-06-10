@@ -27,6 +27,12 @@ export function Step2({ formik, onEdit }) {
             formik={formik}
             onEdit={onEdit}
           />
+        </div>
+
+        <div className="overview__line"></div>
+
+        <div className="col" style={{ display: "grid" }}>
+          <p className="text-left inital-from__title mt-3 px-4"> </p>
           <Field
             form="cellphone"
             name="Celular"
@@ -42,12 +48,6 @@ export function Step2({ formik, onEdit }) {
               onEdit={onEdit}
             />
           )}
-        </div>
-
-        <div className="overview__line"></div>
-
-        <div className="col" style={{ display: "grid" }}>
-          <p className="text-left inital-from__title mt-3 px-4"> Tu Carro</p>
           <Field
             form="licensePlate"
             name="Placa"

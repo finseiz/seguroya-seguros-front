@@ -23,6 +23,22 @@ export function makeRequest({ path, method, headers, ...others }) {
   return fetch(myRequest);
 }
 
+const sbsURL = "https://sbsqa-policy-businesslayer.sxkm.co/";
+export function makeSbsRequest({ path, method, headers, ...others }) {
+  const timeout = 4000;
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+  let config = {
+    method,
+    headers: headers
+      ? { ...headers, "Content-Type": "application/json" }
+      : { "Content-Type": "application/json" },
+    ...others,
+  };
+  let myRequest = new Request(sbsURL + path, config);
+  return fetch(myRequest);
+}
+
 const bolivarURL = "https://api-conecta.segurosbolivar.com/prod/";
 export function makeBolivarRequest({ path, method, headers, ...others }) {
   const timeout = 4000;

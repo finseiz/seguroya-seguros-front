@@ -38,7 +38,8 @@ export const getCirculationZone = async (userSelection) => {
     return [];
   } else if (userSelection === "km") {
     try {
-      const list = await getCirculationZoneByKmRequest();
+      // const list = await getCirculationZoneByKmRequest();
+      const list = [{ nombre: "Cali", id: 2 }];
       list.unshift({ nombre: "Selecciona", id: "" });
       return list;
     } catch (error) {
