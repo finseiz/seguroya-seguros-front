@@ -146,7 +146,7 @@ export function Step1({ formik, countries }) {
             disabled={true}
           /> */}
 
-          <div className="col-6 p-0 pr-2">
+          <div className="col p-0 pr-2">
             <FormikRadioGroup
               formik={formik}
               field="gender"

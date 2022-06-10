@@ -16,16 +16,11 @@
 @font-face {
   font-family: "Como";
   src: url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.eot");
-  src: url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.eot?#iefix")
-      format("embedded-opentype"),
-    url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.woff2")
-      format("woff2"),
-    url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.woff")
-      format("woff"),
-    url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.ttf")
-      format("truetype"),
-    url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.svg#Como")
-      format("svg");
+  src: url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.eot?#iefix") format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.woff2") format("woff2"),
+    url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.woff") format("woff"),
+    url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.ttf") format("truetype"),
+    url("//db.onlinewebfonts.com/t/02d58cc9c5a387653a789cb74d393706.svg#Como") format("svg");
 }
 
 .page {
@@ -109,7 +104,7 @@ select.form-select {
   color: $dark-blue-2;
   font-style: normal;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 0.95rem;
   line-height: 16px;
 }
 
@@ -139,7 +134,7 @@ button.radio {
   border: 0;
 }
 
-.row{
+.row {
   margin: 0 0 0 0;
   display: flex;
   flex-wrap: wrap;
@@ -154,25 +149,25 @@ button.radio {
   color: #FFFFFF;
 }
 
-.w-90{
+.w-90 {
   width: 90%;
 }
 
-.invalid-msj{
+.invalid-msj {
   width: 100%;
   margin-top: 0.25rem;
   font-size: 80%;
   color: #dc3545;
 }
 
-.radio-label{
+.radio-label {
   font-weight: bold;
   font-size: 12px;
   line-height: 16px;
   color: #333333;
 }
 
-.center-flex{
+.center-flex {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -185,23 +180,23 @@ button.radio {
   line-height: 22px;
 }
 
-.background{
+.background {
 
-  &-life{
+  &-life {
     background-position: top;
     background-repeat: no-repeat;
     width: 100%;
     background-image: url("../images/life-back.png");
   }
 
-  &-cars{
+  &-cars {
     background-position: top;
     background-repeat: no-repeat;
     width: 100%;
     background-image: url("../images/cars-back.png");
   }
 
-  &-health{
+  &-health {
     background-position: top;
     background-repeat: no-repeat;
     width: 100%;
@@ -209,27 +204,28 @@ button.radio {
   }
 }
 
-.logo{
+.logo {
   width: 40%;
 }
-.logoFooter{
+
+.logoFooter {
   width: 90%;
 }
 
-.logoPay{
+.logoPay {
   width: 50px;
 }
 
-.logoPay2{
+.logoPay2 {
   width: 70px;
 }
 
-.styleFont{
+.styleFont {
   color: #001166 !important;
   font-weight: 700;
 }
 
-.styleFontRed{
+.styleFontRed {
   color: #FF5F00 !important;
   font-weight: 700;
 }
@@ -240,18 +236,18 @@ button.radio {
 }
 
 
-.styleFontligth{
+.styleFontligth {
   color: #001166 !important;
   font-weight: 400;
   font-size: small;
 }
 
-.styleFontMedium{
+.styleFontMedium {
   color: #001166 !important;
   font-weight: 500;
 }
 
-.styleTitleligth{
+.styleTitleligth {
   color: #9E9E9E !important;
   font-weight: 400;
   font-size: small;

@@ -77,14 +77,14 @@ export function Step2({ formik, onEdit }) {
           {formik.values.type && (
             <Field form="type" name="Tipo" formik={formik} onEdit={onEdit} />
           )}
-          {formik.values.city && (
+          {/* {formik.values.city && (
             <Field
               form="city"
               name="Ciudad de circulación"
               formik={formik}
               onEdit={onEdit}
             />
-          )}
+          )} */}
         </div>
       </div>
     </div>

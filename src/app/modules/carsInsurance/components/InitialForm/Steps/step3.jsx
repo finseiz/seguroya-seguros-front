@@ -37,7 +37,10 @@ export function Step3({ formik, setCirculation }) {
 
   return (
     <div className="card-body text-center mx-5">
-      <p className="text-left inital-from__title mt-2 text-center">
+      <p
+        style={{ color: "rgb(0, 17, 102)", fontSize: "1.2rem" }}
+        className="text-left inital-from__title mt-2 text-center"
+      >
         Formulario de perfilamiento del cliente de Seguro de Autos (aplica
         términos y condiciones)
       </p>
@@ -81,7 +84,8 @@ export function Step3({ formik, setCirculation }) {
           },
         ]}
       />
-
+      <br />
+      <br />
       {!zoneLoading ? (
         formik.values.insuranceType === "km" ? (
           // <div></div>
