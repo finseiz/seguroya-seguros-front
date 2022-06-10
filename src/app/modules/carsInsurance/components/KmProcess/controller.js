@@ -39,22 +39,31 @@ export const getPlans = async (reduxFormValues, dispatch) => {
   try {
     const data = prepareDataToSend(reduxFormValues);
     console.log("🚀 ~ file: controller.js ~ line 41 ~ getPlans ~ data", data);
-    const { costs, policy } = await getPlansRequest(data);
+    const responseData = await getPlansRequest(data);
+    console.log(
+      "🚀 ~ file: controller.js ~ line 43 ~ getPlans ~ responseData",
+      responseData
+    );
+    // console.log(
+    //   "🚀 ~ file: controller.js ~ line 43 ~ getPlans ~ packages",
+    //   packages
+    // );
     dispatch(
       actions.setPlans(
-        costs.map((plan) => ({
+        responseData.data.packages.map((plan) => ({
           logoPath: "sbs-logo.png",
           insuranceName: "SBS - Auto",
           //qualification: 3,
           anualPrice: plan.total_cost,
           descriptionValues: bolivarPlan(plan.cost_by_km, plan.package),
           redirect: CarsKmProcessDetailsPlanRouteFunc,
-          carId: policy.car_id,
+          carId: plan.id,
+          coverage: responseData.data.rate_coverage,
         }))
       )
     );
 
-    return costs;
+    return responseData;
   } catch (error) {
     return undefined;
   }

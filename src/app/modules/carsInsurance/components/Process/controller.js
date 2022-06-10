@@ -54,7 +54,6 @@ export const getPlans = async (dataToSend, dispatch) => {
   if (response.status === 200) {
     const quoteId = response.body.idConsulta;
     const data = response.body.data;
-    console.log("🚀 ~ file: controller.js ~ line 57 ~ getPlans ~ data", data);
 
     const plans = data.map((plan) => {
       const { responseData } = plan;
@@ -97,7 +96,7 @@ const prepareQuoteData = (data, planId) => {
   return {
     celTomador: data.cellphone,
     ciuTomador: data.circulationZone,
-    dirTomador: data.address,
+    dirTomador: data.address || "Av El Dorado 68B-31",
     fecNacConductor: data.birthDate,
     idConsulta: data.quoteId,
     mailTomador: data.email,
