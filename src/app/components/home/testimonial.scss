@@ -1,0 +1,42 @@
+.testimonial-wrapper {
+  display: grid;
+  gap: 1rem;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.testimonial {
+  display: grid;
+  gap: 1rem;
+  justify-self: center;
+  max-width: 80%;
+  padding: 1rem;
+  background: white;
+  border-radius: 1rem;
+
+
+  &-header {
+    color: var(--primary);
+    display: grid;
+    gap: 0.5rem;
+    align-items: center;
+    grid-auto-flow: column;
+    justify-items: center;
+    justify-content: space-evenly;
+  }
+
+  &-avatar {
+    background: var(--primary);
+    width: 80px;
+    height: 80px;
+    border-radius: 3rem;
+  }
+
+  &-name {
+    font-size: 1.4rem;
+  }
+
+  &-text {
+    color: black;
+  }
+}

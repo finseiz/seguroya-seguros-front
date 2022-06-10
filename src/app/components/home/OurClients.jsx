@@ -1,56 +1,48 @@
 import React from "react";
-import { Carousel } from "react-bootstrap";
-import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
+// import { Carousel } from "react-bootstrap";
+// import { toAbsoluteUrl } from "theme/helpers/AssetsHelpers";
 import "./testimonial.scss";
 
 export const OurClients = () => {
-  return <></>;
+  const cards = [
+    {
+      image:
+        "https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=",
+      name: "Vanessa Martinez",
+      text: "Haber adquerido una póliza de salud, fue la mejor inversión que pude haber hecho, por mi bienestar",
+      id: 1,
+    },
+    {
+      image:
+        "https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=",
+      name: "Pedro García",
+      text: "Encontré un seguro de vida, que se ajusta a mi necesidad y presupuesto",
+      id: 2,
+    },
+    {
+      image:
+        "https://media.istockphoto.com/vectors/user-icon-flat-isolated-on-white-background-user-symbol-vector-vector-id1300845620?k=20&m=1300845620&s=612x612&w=0&h=f4XTZDAv7NPuZbG0habSpU0sNgECM0X7nbKzTUta3n8=",
+      name: "Julio González.",
+      text: "El seguro por kilómetros, me permite pagar solo lo que realmente consumo, excelente e innovador producto",
+      id: 3,
+    },
+  ];
 
-  //   return (
-  //     <Carousel>
-  //       <Carousel.Item>
-  //         <Slider
-  //           text="“Haber adquerido una póliza de salud, fue la mejor inversión que pude haber hecho, por mi bienestar” "
-  //           name="Vanessa Martínez"
-  //         />
-  //       </Carousel.Item>
-  //       <Carousel.Item>
-  //         <Slider
-  //           text='"Encontré un seguro de vida, que se ajusta a mi necesidad y presupuesto"'
-  //           name="Pedro García."
-  //         />
-  //       </Carousel.Item>
-  //       <Carousel.Item>
-  //         <Slider
-  //           text="“El seguro por kilómetros, me permite pagar solo lo que realmente consumo, excelente e innovador producto” "
-  //           name="Julio González."
-  //         />
-  //       </Carousel.Item>
-  //     </Carousel>
-  //   );
-};
-
-const Slider = ({ text, name }) => {
-  return (
-    <div className="container">
-      <div className="row m-0">
-        <div className="col-3">
-          <div className="profile-image">
-            <img
-              src={toAbsoluteUrl("/media/icons/persona-white.svg")}
-              style={{ maxWidth: "8rem" }}
-              alt="author_photo"
-            />
-          </div>
+  const renderTestimonial = (items) => {
+    return items.map((item) => (
+      <div key={item.id} className="testimonial">
+        <div class="testimonial-header">
+          <img className="testimonial-avatar" src={item.image} alt="avatar" />
+          <h2 className="testimonial-name">{item.name}</h2>
         </div>
-        <div className="col-9 text-left">
-          <p>{text}</p>
-
-          <p>
-            <strong> {name} </strong>
-          </p>
-        </div>
+        <p className="testimonial-text">{item.text}</p>
       </div>
-    </div>
+    ));
+  };
+
+  return (
+    <>
+      <div className="testimonial-wrapper">{renderTestimonial(cards)}</div>
+    </>
   );
 };
